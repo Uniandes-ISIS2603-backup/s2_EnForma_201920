@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>co.edu.uniandes.csw</groupId>
-    <artifactId>sXXX_ZZZ</artifactId>
+    <artifactId>s2_enforma</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>sXXX_ZZZ</name>
+    <name>s2_enforma</name>
  
     <modules>
-        <module>sXXX_ZZZ-back</module>
-        <module>sXXX_ZZZ-api</module>
+        <module>s2_enforma-back</module>
+        <module>s2_enforma-api</module>
     </modules>
     
     <repositories>
