@@ -19,6 +19,7 @@ public class UsuarioEntity  extends BaseEntity implements Serializable
  private Integer edad;
  private Double peso;
  private String objetivos;
+ 
 
     /**
      * @return the nombre
