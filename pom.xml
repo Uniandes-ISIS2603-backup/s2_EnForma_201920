@@ -10,7 +10,10 @@
     <packaging>pom</packaging>
     <name>s2_enforma</name>
  
-    <modules></modules>
+    <modules>
+        <module>s2_enforma-back</module>
+        <module>s2_enforma-api</module>
+    </modules>
     
     <repositories>
         <repository>
