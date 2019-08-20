@@ -44,7 +44,6 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     public Date getFecha() {
         return fecha;
     }
-    
 
     /**
      * @param fecha the fecha to set
