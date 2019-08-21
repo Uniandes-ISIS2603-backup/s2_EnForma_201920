@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -15,8 +17,14 @@ import javax.ejb.Stateless;
 @Stateless
 public class DomicilioPersistence 
 {
-    public DomicilioEntity create(DomicilioEntity usuario)
+    @PersistenceContext (unitName = "DomicilioPU")
+    protected EntityManager em; 
+    
+    public DomicilioEntity create(DomicilioEntity domicilio)
     {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        //throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        em.persist(domicilio);
+        return domicilio;
+        
     }
 }
