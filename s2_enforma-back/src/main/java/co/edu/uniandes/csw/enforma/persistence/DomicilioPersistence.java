@@ -23,6 +23,7 @@ public class DomicilioPersistence
     public DomicilioEntity create(DomicilioEntity domicilio)
     {
         
+        
         //throw new java.lang.UnsupportedOperationException("Not supported yet.");
         em.persist(domicilio);
         return domicilio;
