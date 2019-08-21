@@ -21,7 +21,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Estudiante
+ * @author Juan sebastian Clavijo
  */
 @RunWith(Arquillian.class)
 public class DomicilioPersistenceTest extends DomicilioPersistence
