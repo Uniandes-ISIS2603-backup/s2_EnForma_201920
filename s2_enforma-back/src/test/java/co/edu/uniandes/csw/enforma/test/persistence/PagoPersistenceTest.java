@@ -16,9 +16,10 @@ import org.junit.runner.RunWith;
 import co.edu.uniandes.csw.enforma.persistence.PagoPersistence;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import reactor.util.Assert;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+import org.junit.Assert;
+
 /**
  *
  * @author Estudiante
@@ -51,7 +52,7 @@ public class PagoPersistenceTest {
         PodamFactory factory= new PodamFactoryImpl();
         PagoEntity pago= factory.manufacturePojo(PagoEntity.class);
         PagoEntity r= pp.create(pago);
-        Assert.notNull(r);
+        Assert.assertNotNull(r);
         
         PagoEntity entity= em.find(PagoEntity.class, r.getId());
         
