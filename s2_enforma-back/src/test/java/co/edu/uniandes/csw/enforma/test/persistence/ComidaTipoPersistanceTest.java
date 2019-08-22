@@ -5,7 +5,12 @@
  */
 package co.edu.uniandes.csw.enforma.test.persistence;
 
+import co.edu.uniandes.csw.enforma.entities.ComidaTipo;
+import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistance;
+import javax.inject.Inject;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
