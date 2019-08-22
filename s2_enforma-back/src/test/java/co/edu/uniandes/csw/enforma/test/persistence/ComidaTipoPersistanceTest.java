@@ -48,6 +48,7 @@ public class ComidaTipoPersistanceTest {
     public void createTest()
     {
         // Falta crear las comidas tipo
+<<<<<<< Updated upstream
       //  ComidaTipoEntity comidaTipo = new ComidaTipoEntity();
 
        // comidaTipo.setCalorias(50);
@@ -65,5 +66,8 @@ public class ComidaTipoPersistanceTest {
        ComidaTipoEntity entity = em.find(ComidaTipoEntity.class, result.getId());
        
        Assert.assertEquals(comidaTipo.getCalorias(), entity.getCalorias());
+=======
+       ComidaTipo result = ep
+>>>>>>> Stashed changes
     }
 }
