@@ -5,23 +5,41 @@
  */
 package co.edu.uniandes.csw.enforma.persistence;
 
-import co.edu.uniandes.csw.enforma.entities.ComidaTipo;
+import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Estudiante
+ * @author Jose Manuel Flórez
  */
 
 @Stateless
 
+
 public class ComidaTipoPersistance {
     
+    private static final Logger LOGGER = Logger.getLogger(ComidaTipoPersistance.class.getName());
     
+    @PersistenceContext (unitName = "ComidasTipoPU")
     
-    public ComidaTipo create(ComidaTipo comidaTipo)
+    protected EntityManager em;
+    
+    public ComidaTipoEntity create(ComidaTipoEntity comidaTipo)
     {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        LOGGER.log(Level.INFO, "Creando una comida tipo nueva");
+        em.persist(comidaTipo);
+          LOGGER.log(Level.INFO, "Comida Tipo creada");
+        return comidaTipo;
+        
+        
+        //throw new java.lang.UnsupportedOperationException("Not supported yet.");
+    
     }
+    
     
 }

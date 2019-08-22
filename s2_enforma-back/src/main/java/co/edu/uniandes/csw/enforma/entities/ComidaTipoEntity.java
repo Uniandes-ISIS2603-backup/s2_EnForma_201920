@@ -13,7 +13,7 @@ import javax.persistence.Entity;
  * @author Estudiante: Jose Manuel Flórez Castro Código:
  */
 @Entity
-public class ComidaTipo extends BaseEntity implements Serializable
+public class ComidaTipoEntity extends BaseEntity implements Serializable
 {
 
     
