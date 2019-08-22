@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UsuarioPersistence
 {
-    @PersistenceContext (unitName = "UniversidadPU")
+    @PersistenceContext (unitName = "enformaPU")
     protected EntityManager em;
      
     public UsuarioEntity create(UsuarioEntity usuario)
