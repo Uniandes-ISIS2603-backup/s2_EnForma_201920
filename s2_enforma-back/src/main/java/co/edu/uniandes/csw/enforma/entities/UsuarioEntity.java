@@ -75,8 +75,5 @@ public class UsuarioEntity  extends BaseEntity implements Serializable
     public void setObjetivos(String objetivos) {
         this.objetivos = objetivos;
     }
- 
-
-    
     
 }
