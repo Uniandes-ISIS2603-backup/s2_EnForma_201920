@@ -25,7 +25,7 @@ public class ComidaTipoPersistance {
     
     private static final Logger LOGGER = Logger.getLogger(ComidaTipoPersistance.class.getName());
     
-    @PersistenceContext (unitName = "ComidasTipoPU")
+    @PersistenceContext (unitName = "enFormaPU")
     
     protected EntityManager em;
     
