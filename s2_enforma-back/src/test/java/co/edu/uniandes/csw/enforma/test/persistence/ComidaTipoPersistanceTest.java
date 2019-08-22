@@ -31,6 +31,7 @@ public class ComidaTipoPersistanceTest {
     @Deployment
     public static JavaArchive createDeployement ()
     {
+        // esto sirve para que 
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(ComidaTipoEntity.class)
                 .addClass(ComidaTipoPersistance.class)
@@ -39,7 +40,7 @@ public class ComidaTipoPersistanceTest {
     }
     
     @Inject
-    private ComidaTipoPersistance comidaTipoPersistence;
+    ComidaTipoPersistance comidaTipoPersistence;
     
     @PersistenceContext
     private EntityManager em;
