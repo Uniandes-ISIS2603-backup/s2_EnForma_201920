@@ -10,8 +10,9 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author Elina Jaimes
+ * @author ev.jaimes
  */
+
 @Entity
 public class PagoEntity extends BaseEntity implements Serializable
 {

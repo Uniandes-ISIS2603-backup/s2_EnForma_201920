@@ -29,6 +29,6 @@ public class ComidaTipoPersistanceTest {
     public void createTest()
     {
         // Falta crear las comidas tipo
-       ComidaTipo result = ep
+       ComidaTipo result = ep;
     }
 }
