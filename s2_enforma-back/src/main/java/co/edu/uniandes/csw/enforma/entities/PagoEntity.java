@@ -20,6 +20,14 @@ public class PagoEntity extends BaseEntity implements Serializable
 
     private Double monto;
     private Integer numeroTarjeta;
+    
+    
+    public PagoEntity()
+    {
+    
+    }
+    
+    
 
     /**
      * @return the monto

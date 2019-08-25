@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -16,8 +20,42 @@ import javax.ejb.Stateless;
 @Stateless
 public class PagoPersistence {
 
+    @PersistenceContext(unitName="enformaPU")
+    protected EntityManager em;
+    
+    
     public PagoEntity create (PagoEntity pago)
     {
-        throw new java.lang.UnsupportedOperationException("Not supported yet");
+        em.persist(pago);
+        return pago;
     }
+    
+    
+    public PagoEntity find(Long pagoID)
+    {
+        return em.find(PagoEntity.class, pagoID);
+    }
+    
+    
+    public List<PagoEntity> findAll()
+    {
+        // Se crea un query para buscar todas los pagos en la base de datos.
+        TypedQuery<PagoEntity> query = em.createQuery("select u from PagoEntity u", PagoEntity.class);
+        // Note que en el query se hace uso del método getResultList() que obtiene una lista de pagos.
+        return query.getResultList();
+    }
+    
+    public PagoEntity update(PagoEntity pago)
+    {
+        //Es equivalente a un comando de SQL que permite actualizar la info
+        return em.merge(pago);
+    }
+    
+    
+    public void delete(Long pagoID)
+    {
+        PagoEntity d= em.find(PagoEntity.class, pagoID);
+        em.remove(d);
+    }
+    
 }
