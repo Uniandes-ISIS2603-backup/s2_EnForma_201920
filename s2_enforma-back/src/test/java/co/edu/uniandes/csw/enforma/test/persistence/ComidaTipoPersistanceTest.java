@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,7 +33,6 @@ public class ComidaTipoPersistanceTest {
     @Deployment
     public static JavaArchive createDeployement ()
     {
-        // esto sirve para que 
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(ComidaTipoEntity.class)
                 .addClass(ComidaTipoPersistance.class)
@@ -40,7 +41,7 @@ public class ComidaTipoPersistanceTest {
     }
     
     @Inject
-    ComidaTipoPersistance comidaTipoPersistence;
+    private ComidaTipoPersistance comidaTipoPersistence;
     
     @PersistenceContext
     private EntityManager em;
@@ -48,15 +49,8 @@ public class ComidaTipoPersistanceTest {
     @Test
     public void createTest()
     {
-        // Falta crear las comidas tipo
-<<<<<<< HEAD
-       ComidaTipo result = ep;
-=======
-<<<<<<< Updated upstream
-      //  ComidaTipoEntity comidaTipo = new ComidaTipoEntity();
+       
 
-       // comidaTipo.setCalorias(50);
-       // comidaTipo.setMenu("Carne, arroz con papas a la francesa y jugo de lulo");
 
         
         PodamFactory factory = new PodamFactoryImpl();
@@ -70,9 +64,5 @@ public class ComidaTipoPersistanceTest {
        ComidaTipoEntity entity = em.find(ComidaTipoEntity.class, result.getId());
        
        Assert.assertEquals(comidaTipo.getCalorias(), entity.getCalorias());
-=======
-       ComidaTipo result = ep
->>>>>>> Stashed changes
->>>>>>> master
     }
 }
