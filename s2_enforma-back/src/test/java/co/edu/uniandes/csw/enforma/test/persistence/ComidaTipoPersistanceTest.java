@@ -9,7 +9,7 @@ package co.edu.uniandes.csw.enforma.test.persistence;
 
 
 import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
-import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistance;
+import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,13 +35,13 @@ public class ComidaTipoPersistanceTest {
     {
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(ComidaTipoEntity.class)
-                .addClass(ComidaTipoPersistance.class)
+                .addClass(ComidaTipoPersistence.class)
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
     @Inject
-    private ComidaTipoPersistance comidaTipoPersistence;
+    private ComidaTipoPersistence comidaTipoPersistence;
     
     @PersistenceContext
     private EntityManager em;
