@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,6 +127,33 @@ public class DomicilioPersistence
             result = sameIdD.get(0);
         }
         LOGGER.log(Level.INFO, "Saliendo de consultar ldomicilios por id ", idD);
+        return result;
+    }
+    
+     /**
+     * Busca si hay algun domicilio con el id del domicilio que se envía de argumento
+     *
+     * @param date: date Domicilio del domicilio que se está buscando
+     * @return null si no existe ningun domicilio con el idD del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public DomicilioEntity findByDate(Date date) {
+        LOGGER.log(Level.INFO, "Consultando domicilios por fecha ", date);
+        // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":date" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From DomicilioEntity e where e.fecha = :date", DomicilioEntity.class);
+        // Se remplaza el placeholder ":idD" con el valor del argumento 
+        query = query.setParameter("date", date);
+        // Se invoca el query se obtiene la lista resultado
+        List<DomicilioEntity> sameDate = query.getResultList();
+        DomicilioEntity result;
+        if (sameDate == null) {
+            result = null;
+        } else if (sameDate.isEmpty()) {
+            result = null;
+        } else {
+            result = sameDate.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar los domicilios por fecha ", date);
         return result;
     }
    

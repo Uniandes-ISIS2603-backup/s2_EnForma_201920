@@ -136,6 +136,8 @@ public class DomicilioPersistenceTest
        DomicilioEntity newEntity = dp.find(entity.getId());
        Assert.assertNotNull(newEntity);
        Assert.assertEquals(entity.getLugarEntrega(), newEntity.getLugarEntrega());
+       Assert.assertNotEquals(entity.getCosto(), newEntity.getIdDomicilio());
+       Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
     }
     
         /**
@@ -171,13 +173,27 @@ public class DomicilioPersistenceTest
      * Prueba para consultar un domicilio por idDomicilio
      */
     @Test
-    public void findBookByIdDomicilioTest() {
+    public void findDomicilioByIdDomicilioTest() {
         DomicilioEntity entity = data.get(0);
         DomicilioEntity newEntity = dp.findByIdDomicilio(entity.getIdDomicilio());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getIdDomicilio(), newEntity.getIdDomicilio());
 
         newEntity = dp.findByIdDomicilio(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     /**
+     * Prueba para consultar un domicilio por idDomicilio
+     */
+    @Test
+    public void findDomicilioByDateTest() {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity newEntity = dp.findByDate(entity.getFecha());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+
+        newEntity = dp.findByDate(null);
         Assert.assertNull(newEntity);
     }
 }
