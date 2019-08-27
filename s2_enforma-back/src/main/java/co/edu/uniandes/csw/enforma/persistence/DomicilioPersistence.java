@@ -101,5 +101,32 @@ public class DomicilioPersistence
         LOGGER.log(Level.INFO, "Saliendo de actualizar el domicilio con id = {0}", domicilioEntity.getId());
         return em.merge(domicilioEntity);
     }
+    
+     /**
+     * Busca si hay algun domicilio con el id del domicilio que se envía de argumento
+     *
+     * @param idD: id Domicilio del domicilio que se está buscando
+     * @return null si no existe ningun domicilio con el idD del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public DomicilioEntity findByIdDomicilio(String idD) {
+        LOGGER.log(Level.INFO, "Consultando domicilios por idDomicilio ", idD);
+        // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":idD" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From DomicilioEntity e where e.idDomicilio = :idD", DomicilioEntity.class);
+        // Se remplaza el placeholder ":idD" con el valor del argumento 
+        query = query.setParameter("idD", idD);
+        // Se invoca el query se obtiene la lista resultado
+        List<DomicilioEntity> sameIdD = query.getResultList();
+        DomicilioEntity result;
+        if (sameIdD == null) {
+            result = null;
+        } else if (sameIdD.isEmpty()) {
+            result = null;
+        } else {
+            result = sameIdD.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar ldomicilios por id ", idD);
+        return result;
+    }
    
 }

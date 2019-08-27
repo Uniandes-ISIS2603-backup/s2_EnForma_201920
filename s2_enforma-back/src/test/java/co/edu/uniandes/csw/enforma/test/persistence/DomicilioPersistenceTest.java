@@ -166,5 +166,18 @@ public class DomicilioPersistenceTest
 
         Assert.assertEquals(newEntity.getIdDomicilio(), resp.getIdDomicilio());
     }
+    
+     /**
+     * Prueba para consultar un domicilio por idDomicilio
+     */
+    @Test
+    public void findBookByIdDomicilioTest() {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity newEntity = dp.findByIdDomicilio(entity.getIdDomicilio());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getIdDomicilio(), newEntity.getIdDomicilio());
 
+        newEntity = dp.findByIdDomicilio(null);
+        Assert.assertNull(newEntity);
+    }
 }
