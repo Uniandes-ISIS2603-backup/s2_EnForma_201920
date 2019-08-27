@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class DomicilioPersistence 
 {
-    @PersistenceContext (unitName = "DomicilioPU")
+    @PersistenceContext (unitName = "enformaPU")
     protected EntityManager em; 
     
     public DomicilioEntity create(DomicilioEntity domicilio)
