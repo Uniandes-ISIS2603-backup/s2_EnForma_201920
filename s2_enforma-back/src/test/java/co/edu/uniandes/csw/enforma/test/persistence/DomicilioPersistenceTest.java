@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -24,7 +25,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Juan sebastian Clavijo
  */
 @RunWith(Arquillian.class)
-public class DomicilioPersistenceTest extends DomicilioPersistence
+public class DomicilioPersistenceTest 
 {
     @Deployment
     public static JavaArchive createDeployment()
@@ -38,6 +39,9 @@ public class DomicilioPersistenceTest extends DomicilioPersistence
     
     @Inject
     DomicilioPersistence dp;
+    
+    @PersistenceContext
+    EntityManager em;
     
     
     @Test
