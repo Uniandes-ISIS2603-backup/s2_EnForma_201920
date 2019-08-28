@@ -5,9 +5,13 @@
  */
 package co.edu.uniandes.csw.enforma.entities;
 
+import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -18,6 +22,8 @@ public class DomicilioEntity extends BaseEntity implements Serializable
 {
         private String idDomicilio;
         
+        @Temporal(TemporalType.DATE)
+        @PodamStrategyValue(DateStrategy.class)
         private Date fecha;
         
         private String lugarEntrega;

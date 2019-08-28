@@ -21,11 +21,11 @@ import javax.persistence.PersistenceContext;
 @Stateless
 
 
-public class ComidaTipoPersistance {
+public class ComidaTipoPersistence {
     
-    private static final Logger LOGGER = Logger.getLogger(ComidaTipoPersistance.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ComidaTipoPersistence.class.getName());
     
-    @PersistenceContext (unitName = "enFormaPU")
+    @PersistenceContext (unitName = "enformaPU")
     
     protected EntityManager em;
     
