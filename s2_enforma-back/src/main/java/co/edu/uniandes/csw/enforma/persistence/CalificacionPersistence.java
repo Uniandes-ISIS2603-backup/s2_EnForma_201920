@@ -22,6 +22,8 @@ public class CalificacionPersistence
     
     public CalificacionEntity create(CalificacionEntity calificacion)
     {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        //throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        em.persist(calificacion);
+        return calificacion;
     }
 }

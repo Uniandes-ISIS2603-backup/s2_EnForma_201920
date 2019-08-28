@@ -14,7 +14,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import reactor.util.Assert;
+import org.junit.Assert;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -23,7 +23,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Jimmy Pepinosa
  */
 @RunWith(Arquillian.class)
-public class CalificacionPersistenceTest 
+public class CalificacionPersistenceTest extends CalificacionPersistence
 {
     @Deployment
     public static JavaArchive createDeployment()
@@ -44,8 +44,10 @@ public class CalificacionPersistenceTest
         CalificacionEntity calificacion = factory.manufacturePojo(CalificacionEntity.class);
         CalificacionEntity result =cp.create(calificacion);
         
-        Assert.notNull(result);
+        Assert.assertNotNull(result);
         
+        CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         
+        Assert.assertEquals(calificacion.getPuntaje(), entity.getPuntaje());
     }
 }
