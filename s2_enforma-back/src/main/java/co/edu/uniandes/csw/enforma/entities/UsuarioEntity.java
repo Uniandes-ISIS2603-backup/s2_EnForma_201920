@@ -20,6 +20,9 @@ public class UsuarioEntity  extends BaseEntity implements Serializable
  private Double peso;
  private String objetivos;
 
+ public UsuarioEntity(){
+    
+}
     /**
      * @return the nombre
      */
