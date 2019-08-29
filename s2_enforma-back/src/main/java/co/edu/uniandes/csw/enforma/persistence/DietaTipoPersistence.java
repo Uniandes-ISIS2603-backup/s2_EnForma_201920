@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +30,26 @@ public class DietaTipoPersistence {
     }
     
     
+    public List<DietaTipoEntity> findAll() {
+        TypedQuery query = em.createQuery("select u from DietaTipoEntity u", DietaTipoEntity.class);
+        return query.getResultList();
+    }
+    
+    
+    
+    
+    public DietaTipoEntity find(Long dietaId){
+        return em.find(DietaTipoEntity.class, dietaId);
+    }
+    
+    
+    public DietaTipoEntity update(DietaTipoEntity dietaTipoEntity){
+        return em.merge(dietaTipoEntity);
+    }
+    
+    public void delete(Long dietaId){
+        DietaTipoEntity entity = em.find(DietaTipoEntity.class, dietaId);
+        em.remove(entity);
+    }
     
 }
