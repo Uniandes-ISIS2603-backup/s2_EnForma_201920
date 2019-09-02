@@ -142,7 +142,7 @@ public class QuejasYReclamosPersistenceTest
         QuejasYReclamosEntity newEntity = qrp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
-        Assert.assertEquals(entity.getAsusnto(), newEntity.getAsunto());
+        Assert.assertEquals(entity.getAsusnto(), newEntity.getAsusnto());
         Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
     }
     
