@@ -193,7 +193,6 @@ public class TarjetaPrepagoPersistenceTest
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getSaldo(), newEntity.getSaldo(),0.001);
 
-      
     }
     
      /**
@@ -205,8 +204,6 @@ public class TarjetaPrepagoPersistenceTest
         TarjetaPrepagoEntity newEntity = tpp.findByPoints(entity.getPuntos());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getPuntos(), newEntity.getPuntos(),0.001);
-
-        
     }
     
 }
