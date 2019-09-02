@@ -105,7 +105,7 @@ public class CalificacionPersistenceTest
     {
         PodamFactory factory = new PodamFactoryImpl();
         CalificacionEntity calificacion = factory.manufacturePojo(CalificacionEntity.class);
-        CalificacionEntity result =cp.create(calificacion);
+        CalificacionEntity result = cp.create(calificacion);
         
         Assert.assertNotNull(result);
         

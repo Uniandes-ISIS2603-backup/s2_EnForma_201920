@@ -20,6 +20,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     private String comentario;
 
     /**
+     * Devuelve el puntaje de la calificacion
      * @return the puntaje
      */
     public Integer getPuntaje() 
@@ -28,6 +29,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     }
 
     /**
+     * Modifica el puntaje de calificacion
      * @param puntaje the puntaje to set
      */
     public void setPuntaje(Integer puntaje) 
@@ -36,6 +38,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     }
 
     /**
+     * Devuelve el comentario de la calificacion
      * @return the comentario
      */
     public String getComentario() 
@@ -44,12 +47,13 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     }
 
     /**
+     * Modifica el comentario de la calificacion
      * @param comentario the comentario to set
      */
     public void setComentario(String comentario) 
     {
         this.comentario = comentario;
     }
-    
+     
     
 }

@@ -36,7 +36,7 @@ public class CalificacionPersistence
     /**
      * Devuelve todas las calificaciones de la base de datos
      * @return una lista con todas las calificaciones que encuentre en la base datos, 
-     * "select u from AuthorEntity u" es como un "select * from AuthorEntity;" - "SELECT * FROM table_name" en SQL.
+     * "select u from QuejasYReclamosEntity u" es como un "select * from QuejasYReclamosEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<CalificacionEntity> findAll()
     {
@@ -47,7 +47,7 @@ public class CalificacionPersistence
     }
     
     /**
-     * Busca si hay alguna calificacion con el id que se eniva
+     * Busca si hay alguna calificacion con el id que se envia
      * @param calificacionId id correspondiente a la calificacion buscada
      * @return la calificacion buscada
      */
@@ -80,7 +80,7 @@ public class CalificacionPersistence
      */
     public void delete(Long calificacionId)
     {
-        // Se hace uso de mismo método que esta explicado en public CalificacionEntity find(Long id) para obtener la acalificacion a borrar.
+        // Se hace uso del mismo método que esta explicado en public CalificacionEntity find(Long id) para obtener la calificacion a borrar.
         CalificacionEntity calificacionEntity = em.find(CalificacionEntity.class, calificacionId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
         EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
