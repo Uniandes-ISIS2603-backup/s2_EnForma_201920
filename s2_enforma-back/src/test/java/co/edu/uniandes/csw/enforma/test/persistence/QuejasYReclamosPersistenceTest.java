@@ -109,7 +109,70 @@ public class QuejasYReclamosPersistenceTest
         Assert.assertNotNull(result);
         
         QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
-        //Assert.assertEquals(quejasYReclamos.get)
+        Assert.assertEquals(quejasYReclamos.getAsusnto(), entity.getAsusnto());
+    }
+    
+    /**
+     * Prueba para consultar la lista de quejas y reclamos
+     */
+    public void getQuejasYReclamosTest()
+    {
+        List<QuejasYReclamosEntity> list = qrp.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for(QuejasYReclamosEntity ent : list)
+        {
+            boolean encontrada = false;
+            for(QuejasYReclamosEntity entity : data)
+            {
+                if(ent.getId().equals(entity.getId()))
+                {
+                    encontrada = true;
+                }
+            }
+            Assert.assertTrue(encontrada);
+        }
+    }
+    
+    /**
+     * Prueba para consultar una queja o reclamo
+     */
+    public void getQuejaOReclamo()
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = qrp.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getId(), newEntity.getId());
+        Assert.assertEquals(entity.getAsusnto(), newEntity.getAsunto());
+        Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
+    }
+    
+    /**
+     * Prueba para actualizar una queja o reclamo
+     */
+    public void updateQuejasYReclamos()
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        
+        newEntity.setId(entity.getId());
+        
+        qrp.update(newEntity);
+        
+        QuejasYReclamosEntity resp = em.find(QuejasYReclamosEntity.class, entity.getId());
+        
+        Assert.assertEquals(newEntity.getId(), resp.getId());
+    }
+    
+    /**
+     * Prueba para eliminar una queja o reclamo
+     */
+    public void deleteQuejasYReclamos()
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        qrp.delete(entity.getId());
+        QuejasYReclamosEntity deleted = em.find(QuejasYReclamosEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }

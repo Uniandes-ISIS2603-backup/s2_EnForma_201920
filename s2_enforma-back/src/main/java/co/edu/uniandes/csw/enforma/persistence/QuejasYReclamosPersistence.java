@@ -65,7 +65,7 @@ public class QuejasYReclamosPersistence
      * @param quejasYReclamos la queja o reclamo que viene con el o los nuevos cambios
      * @return una queja o reclamo con los cambios aplicados
      */
-    public QuejasYReclamosEntity updte(QuejasYReclamosEntity quejasYReclamos)
+    public QuejasYReclamosEntity update(QuejasYReclamosEntity quejasYReclamos)
     {
         /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
           *la queja o reclamo con los cambios, esto es similar a 
