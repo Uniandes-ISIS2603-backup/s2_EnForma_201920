@@ -23,7 +23,6 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
-import co.edu.uniandes.csw.enforma.persistence.CascaraPersistence;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -38,7 +37,7 @@ public class CascaraLogic {
 
     private static final Logger LOGGER = Logger.getLogger(CascaraLogic.class.getName());
 
-    @Inject
-    private CascaraPersistence cascaraPersistence;
+    //@Inject
+    //private CascaraPersistence cascaraPersistence;
 
 }
