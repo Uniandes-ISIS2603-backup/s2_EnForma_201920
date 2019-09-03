@@ -41,17 +41,17 @@ public class UsuarioPersistence
         return query.getResultList();
     }
     
-    public UsuarioEntity update(UsuarioEntity pago)
+    public UsuarioEntity update(UsuarioEntity usuario)
     {
         //Es equivalente a un comando de SQL que permite actualizar la info
-        return em.merge(pago);
+        return em.merge(usuario);
     }
     
     
-    public void delete(Long pagoID)
+    public void delete(Long usuarioId)
     {
-        UsuarioEntity d= em.find(UsuarioEntity.class, pagoID);
-        em.remove(d);
+        UsuarioEntity u = em.find(UsuarioEntity.class, usuarioId);
+        em.remove(u);
     }
     
 }
