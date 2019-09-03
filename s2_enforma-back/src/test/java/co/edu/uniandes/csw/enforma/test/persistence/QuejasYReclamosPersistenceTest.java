@@ -136,7 +136,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para consultar una queja o reclamo
      */
-    public void getQuejaOReclamo()
+    public void getQuejaOReclamoTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
         QuejasYReclamosEntity newEntity = qrp.find(entity.getId());
@@ -149,7 +149,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para actualizar una queja o reclamo
      */
-    public void updateQuejasYReclamos()
+    public void updateQuejasYReclamosTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
@@ -167,7 +167,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para eliminar una queja o reclamo
      */
-    public void deleteQuejasYReclamos()
+    public void deleteQuejasYReclamosTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
         qrp.delete(entity.getId());
