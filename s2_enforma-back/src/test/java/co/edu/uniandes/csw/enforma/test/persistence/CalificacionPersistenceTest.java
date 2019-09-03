@@ -139,6 +139,7 @@ public class CalificacionPersistenceTest
     /**
      * Prueba para consultar una calificacion
      */
+    @Test
     public void getCalificacionTest()
     {
         CalificacionEntity entity = data.get(0);

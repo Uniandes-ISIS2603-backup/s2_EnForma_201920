@@ -115,6 +115,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para consultar la lista de quejas y reclamos
      */
+    @Test
     public void getQuejasYReclamosTest()
     {
         List<QuejasYReclamosEntity> list = qrp.findAll();
@@ -136,6 +137,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para consultar una queja o reclamo
      */
+    @Test
     public void getQuejaOReclamoTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
@@ -149,6 +151,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para actualizar una queja o reclamo
      */
+    @Test
     public void updateQuejasYReclamosTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
@@ -167,6 +170,7 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para eliminar una queja o reclamo
      */
+    @Test
     public void deleteQuejasYReclamosTest()
     {
         QuejasYReclamosEntity entity = data.get(0);
