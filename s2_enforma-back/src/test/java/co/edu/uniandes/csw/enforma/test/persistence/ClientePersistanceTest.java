@@ -104,7 +104,6 @@ public class ClientePersistanceTest
        
     }
     
-
     @Test
     public void getUsuarioListTest()
     {
@@ -135,11 +134,12 @@ public class ClientePersistanceTest
         Assert.assertEquals(usuario.getEdad(), newEntity.getEdad());
         Assert.assertEquals(usuario.getObjetivos(), newEntity.getObjetivos());
         Assert.assertEquals(usuario.getPeso(), newEntity.getPeso());
-        
-        
+        Assert.assertEquals(usuario.getGluten(), newEntity.getGluten());
+        Assert.assertEquals(usuario.getLactosa(), newEntity.getLactosa());
+        Assert.assertEquals(usuario.getUserName(), newEntity.getUserName());
+        Assert.assertEquals(usuario.getContrasenia(), newEntity.getContrasenia()); 
     }
-    
-
+   
     @Test
     public void updateCalificacionTest()
     {
@@ -160,8 +160,4 @@ public class ClientePersistanceTest
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
-            
-
-    
 }

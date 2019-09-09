@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Paula Sofía Vargas 
+ * @author Sofía Vargas 
  */
 @Stateless
 public class ClientePersistence

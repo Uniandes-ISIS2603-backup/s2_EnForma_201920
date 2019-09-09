@@ -25,11 +25,21 @@ public class ClienteLogic
    public ClienteEntity crearUsuario(ClienteEntity usuario) throws BusinessLogicException
    {
        if(usuario.getNombre() == null)
-           throw new BusinessLogicException("El nombre del usuario está vacio.");
-       if(usuario.getEdad() == null)
-           throw new BusinessLogicException("La edad del usuario está vacio.");
-        if(usuario.getObjetivos() == null)
-           throw new BusinessLogicException("Los objetivos del usuario están vacio.");
+           throw new BusinessLogicException("El nombre del cliente está vacio.");
+       if(usuario.getEdad() <= 0)
+           throw new BusinessLogicException("La edad del cliente no puede ser menor o igual a cero.");
+       if(usuario.getObjetivos() == null)
+           throw new BusinessLogicException("Los objetivos del cliente están vacio.");
+        if(usuario.getPeso() <= 0.0)
+           throw new BusinessLogicException("El peso del cliente tiene que ser mayor a cero.");
+       if(usuario.getGluten() == null)
+           throw new BusinessLogicException("El gluten no puede ser null.");
+       if(usuario.getLactosa() == null)
+           throw new BusinessLogicException("La lactosa no puede ser null.");
+       if(usuario.getUserName() == null)
+           throw new BusinessLogicException("El userName no puede ser vacio.");
+       if(usuario.getContrasenia() == null)
+           throw new BusinessLogicException("La contraseña no puede ser nula.");
        
        usuario = persistence.create(usuario);
        return usuario;
