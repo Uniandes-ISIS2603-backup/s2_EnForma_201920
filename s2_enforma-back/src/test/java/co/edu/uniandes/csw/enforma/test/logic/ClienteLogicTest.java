@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.enforma.test.logic;
 
-import co.edu.uniandes.csw.enforma.ejb.UsuarioLogic;
-import co.edu.uniandes.csw.enforma.entities.UsuarioEntity;
+import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.enforma.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,12 +27,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Sofia Vargas
  */
 @RunWith(Arquillian.class)
-public class UsuarioLogicTest 
+public class ClienteLogicTest 
 {
     private final PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private UsuarioLogic usuarioLogic;
+    private ClienteLogic usuarioLogic;
     
     @PersistenceContext
     private EntityManager em;
@@ -41,9 +41,9 @@ public class UsuarioLogicTest
     public static JavaArchive createDevelopment()
     {
          return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(UsuarioEntity.class.getPackage())
-                .addPackage(UsuarioLogic.class.getPackage())
-                 .addPackage(UsuarioPersistence.class.getPackage()) 
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClienteLogic.class.getPackage())
+                 .addPackage(ClientePersistence.class.getPackage()) 
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -51,11 +51,11 @@ public class UsuarioLogicTest
     @Test
     public void createUsuarioTest() throws BusinessLogicException
     {
-        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
-        UsuarioEntity result = usuarioLogic.crearUsuario(newEntity);
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        ClienteEntity result = usuarioLogic.crearUsuario(newEntity);
         Assert.assertNotNull(result);
         
-        UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());
+        ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(entity.getNombre(), result.getNombre());
         
         
@@ -64,9 +64,9 @@ public class UsuarioLogicTest
     @Test(expected = BusinessLogicException.class)
     public void createUsuarioNombreNullTest() throws BusinessLogicException
     {
-        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         newEntity.setNombre(null);
-        UsuarioEntity result = usuarioLogic.crearUsuario(newEntity);
+        ClienteEntity result = usuarioLogic.crearUsuario(newEntity);
     }
     
 }

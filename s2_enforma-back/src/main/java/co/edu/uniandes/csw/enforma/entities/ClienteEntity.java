@@ -13,14 +13,14 @@ import javax.persistence.Entity;
  * @author Paula Sofía Vargas Peña
  */
 @Entity
-public class UsuarioEntity  extends BaseEntity implements Serializable
+public class ClienteEntity  extends BaseEntity implements Serializable
 {
  private String nombre;
  private Integer edad;
  private Double peso;
  private String objetivos;
 
- public UsuarioEntity(){
+ public ClienteEntity(){
     
 }
     /**

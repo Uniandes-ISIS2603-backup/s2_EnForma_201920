@@ -5,9 +5,9 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
-import co.edu.uniandes.csw.enforma.entities.UsuarioEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.enforma.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -16,13 +16,13 @@ import javax.inject.Inject;
  * @author Sofía Vargas
  */
 @Stateless
-public class UsuarioLogic 
+public class ClienteLogic 
 {
     @Inject 
-    private UsuarioPersistence persistence;
+    private ClientePersistence persistence;
     
     
-   public UsuarioEntity crearUsuario(UsuarioEntity usuario) throws BusinessLogicException
+   public ClienteEntity crearUsuario(ClienteEntity usuario) throws BusinessLogicException
    {
        if(usuario.getNombre() == null)
            throw new BusinessLogicException("El nombre del usuario está vacio.");
