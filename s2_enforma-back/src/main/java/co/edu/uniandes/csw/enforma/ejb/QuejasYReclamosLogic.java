@@ -21,7 +21,7 @@ public class QuejasYReclamosLogic
     @Inject 
     QuejasYReclamosPersistence persistence;
     
-    public QuejasYReclamosEntity createCalificacion(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
+    public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
         if(quejaReclamo.getAsusnto() == null)
         {

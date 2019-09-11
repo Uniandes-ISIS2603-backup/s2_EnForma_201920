@@ -52,7 +52,18 @@ public class QuejasYReclamosLogicTest
     public void createQuejasYReclamosLogicTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        QuejasYReclamosEntity result = quejasYReclamosLogic.createCalificacion(newEntity);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
         Assert.assertNotNull(result);
+        
+        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getAsusnto());
+        Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionPuntajeNull() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setAsusnto(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
 }
