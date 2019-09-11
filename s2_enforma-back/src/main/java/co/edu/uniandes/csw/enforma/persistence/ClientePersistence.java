@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.enforma.persistence;
 
-import co.edu.uniandes.csw.enforma.entities.UsuarioEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,34 +14,34 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Paula Sofía Vargas 
+ * @author Sofía Vargas 
  */
 @Stateless
-public class UsuarioPersistence
+public class ClientePersistence
 {
     @PersistenceContext (unitName = "enformaPU")
     protected EntityManager em;
      
-    public UsuarioEntity create(UsuarioEntity usuarioEntity)
+    public ClienteEntity create(ClienteEntity usuarioEntity)
     {
         em.persist(usuarioEntity);
         return usuarioEntity;
     }
     
-    public UsuarioEntity find(Long usuarioId)
+    public ClienteEntity find(Long usuarioId)
     {
-        return em.find(UsuarioEntity.class, usuarioId);
+        return em.find(ClienteEntity.class, usuarioId);
     }
     
-    public List<UsuarioEntity> findAll()
+    public List<ClienteEntity> findAll()
     {
         // Se crea un query para buscar todas los pagos en la base de datos.
-        TypedQuery<UsuarioEntity> query = em.createQuery("select u from UsuarioEntity u", UsuarioEntity.class);
+        TypedQuery<ClienteEntity> query = em.createQuery("select u from UsuarioEntity u", ClienteEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de pagos.
         return query.getResultList();
     }
     
-    public UsuarioEntity update(UsuarioEntity usuario)
+    public ClienteEntity update(ClienteEntity usuario)
     {
         //Es equivalente a un comando de SQL que permite actualizar la info
         return em.merge(usuario);
@@ -50,7 +50,7 @@ public class UsuarioPersistence
     
     public void delete(Long usuarioId)
     {
-        UsuarioEntity u = em.find(UsuarioEntity.class, usuarioId);
+        ClienteEntity u = em.find(ClienteEntity.class, usuarioId);
         em.remove(u);
     }
     

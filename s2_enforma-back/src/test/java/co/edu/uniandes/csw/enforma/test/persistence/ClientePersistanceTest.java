@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.enforma.test.persistence;
 
-import co.edu.uniandes.csw.enforma.entities.UsuarioEntity;
-import co.edu.uniandes.csw.enforma.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,10 +29,10 @@ import java.util.ArrayList;
  * @author Sofía Vargas
  */
 @RunWith(Arquillian.class)
-public class UsuarioPersistanceTest 
+public class ClientePersistanceTest 
 {
     @Inject
-    UsuarioPersistence up;
+    ClientePersistence up;
     
     @PersistenceContext
     private EntityManager em;
@@ -40,14 +40,14 @@ public class UsuarioPersistanceTest
     @Inject
     UserTransaction utx;
     
-    private List<UsuarioEntity> data = new ArrayList<>();
+    private List<ClienteEntity> data = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(UsuarioEntity.class.getPackage())
-                .addPackage(UsuarioPersistence.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClientePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -83,7 +83,7 @@ public class UsuarioPersistanceTest
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) 
         {
-            UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             data.add(entity);
         }
@@ -93,27 +93,26 @@ public class UsuarioPersistanceTest
     public void createUsuarioTest()
     {
        PodamFactory factory = new PodamFactoryImpl();
-       UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
-       UsuarioEntity result = up.create(usuario);
+       ClienteEntity usuario = factory.manufacturePojo(ClienteEntity.class);
+       ClienteEntity result = up.create(usuario);
        Assert.assertNotNull(result);
        
-       UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());
+       ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
        
        Assert.assertEquals(usuario.getNombre(),entity.getNombre());
        
        
     }
     
-
     @Test
     public void getUsuarioListTest()
     {
-        List<UsuarioEntity> list = up.findAll();
+        List<ClienteEntity> list = up.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for(UsuarioEntity ent : list)
+        for(ClienteEntity ent : list)
         {
             boolean  encontrada = false;
-            for(UsuarioEntity entity : data)
+            for(ClienteEntity entity : data)
             {
                 if(ent.getId().equals(entity.getId()))
                 {
@@ -127,41 +126,38 @@ public class UsuarioPersistanceTest
   
     public void getUsuarioTest()
     {
-        UsuarioEntity usuario = data.get(0);
-        UsuarioEntity newEntity = up.find(usuario.getId());
+        ClienteEntity usuario = data.get(0);
+        ClienteEntity newEntity = up.find(usuario.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(usuario.getId(), newEntity.getId());
         Assert.assertEquals(usuario.getNombre(), newEntity.getNombre());
         Assert.assertEquals(usuario.getEdad(), newEntity.getEdad());
         Assert.assertEquals(usuario.getObjetivos(), newEntity.getObjetivos());
         Assert.assertEquals(usuario.getPeso(), newEntity.getPeso());
-        
-        
+        Assert.assertEquals(usuario.getGluten(), newEntity.getGluten());
+        Assert.assertEquals(usuario.getLactosa(), newEntity.getLactosa());
+        Assert.assertEquals(usuario.getUserName(), newEntity.getUserName());
+        Assert.assertEquals(usuario.getContrasenia(), newEntity.getContrasenia()); 
     }
-    
-
+   
     @Test
     public void updateCalificacionTest()
     {
-        UsuarioEntity entity = data.get(0);
+        ClienteEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         newEntity.setId(entity.getId());
         up.update(newEntity);
-        UsuarioEntity resp = em.find(UsuarioEntity.class, entity.getId());
+        ClienteEntity resp = em.find(ClienteEntity.class, entity.getId());
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
     @Test
     public void deleteUsuarioTest()
     {
-        UsuarioEntity entity = data.get(0);
+        ClienteEntity entity = data.get(0);
         up.delete(entity.getId());
-        UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
-            
-
-    
 }
