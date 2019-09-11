@@ -36,7 +36,7 @@ public class ClientePersistence
     public List<ClienteEntity> findAll()
     {
         // Se crea un query para buscar todas los pagos en la base de datos.
-        TypedQuery<ClienteEntity> query = em.createQuery("select u from UsuarioEntity u", ClienteEntity.class);
+        TypedQuery<ClienteEntity> query = em.createQuery("select u from ClienteEntity u", ClienteEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de pagos.
         return query.getResultList();
     }

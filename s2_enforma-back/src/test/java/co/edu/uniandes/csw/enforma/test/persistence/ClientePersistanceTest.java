@@ -38,7 +38,7 @@ public class ClientePersistanceTest
     private EntityManager em;
     
     @Inject
-    UserTransaction utx;
+    private UserTransaction utx;
     
     private List<ClienteEntity> data = new ArrayList<>();
     
@@ -72,7 +72,7 @@ public class ClientePersistanceTest
     
     private void clearData() 
     {
-        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
     
      /**
@@ -90,7 +90,7 @@ public class ClientePersistanceTest
     }    
     
      @Test
-    public void createUsuarioTest()
+    public void createClienteTest()
     {
        PodamFactory factory = new PodamFactoryImpl();
        ClienteEntity usuario = factory.manufacturePojo(ClienteEntity.class);
@@ -105,7 +105,7 @@ public class ClientePersistanceTest
     }
     
     @Test
-    public void getUsuarioListTest()
+    public void getClienteListTest()
     {
         List<ClienteEntity> list = up.findAll();
         Assert.assertEquals(data.size(), list.size());
@@ -124,7 +124,7 @@ public class ClientePersistanceTest
     }
     
   
-    public void getUsuarioTest()
+    public void getClienteTest()
     {
         ClienteEntity usuario = data.get(0);
         ClienteEntity newEntity = up.find(usuario.getId());
@@ -153,7 +153,7 @@ public class ClientePersistanceTest
     }
     
     @Test
-    public void deleteUsuarioTest()
+    public void deleteClienteTest()
     {
         ClienteEntity entity = data.get(0);
         up.delete(entity.getId());

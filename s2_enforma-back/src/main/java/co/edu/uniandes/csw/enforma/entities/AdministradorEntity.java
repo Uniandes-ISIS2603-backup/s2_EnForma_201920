@@ -10,6 +10,7 @@ import javax.persistence.Entity;
  *
  * @author Elina Jaimes
  */
+@Entity
 public class AdministradorEntity extends BaseEntity implements Serializable {
     
     

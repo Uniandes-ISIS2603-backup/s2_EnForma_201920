@@ -22,7 +22,7 @@ public class ClienteLogic
     private ClientePersistence persistence;
     
     
-   public ClienteEntity crearUsuario(ClienteEntity usuario) throws BusinessLogicException
+   public ClienteEntity crearCliente(ClienteEntity usuario) throws BusinessLogicException
    {
        if(usuario.getNombre() == null)
            throw new BusinessLogicException("El nombre del cliente está vacio.");
