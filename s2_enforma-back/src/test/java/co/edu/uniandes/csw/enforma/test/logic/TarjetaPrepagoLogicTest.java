@@ -10,6 +10,8 @@ import co.edu.uniandes.csw.enforma.entities.TarjetaPrepagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.TarjetaPrepagoPersistence;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -43,16 +45,25 @@ public class TarjetaPrepagoLogicTest
     @Inject
     private TarjetaPrepagoLogic tarjetaPrepagoLogic;
     
+    @PersistenceContext
+    EntityManager em;
+    
     @Test
     public void createTarjetaPrepagoTest() throws BusinessLogicException
     {
         TarjetaPrepagoEntity newEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
         TarjetaPrepagoEntity result = tarjetaPrepagoLogic.createTarjetaPrepago(newEntity);
         Assert.assertNotNull(result);
+        
+        TarjetaPrepagoEntity entity = em.find(TarjetaPrepagoEntity.class, result.getId());
+        Assert.assertEquals(entity.getIdTarjetaPrepago(), result.getIdTarjetaPrepago());
+        Assert.assertEquals(entity.getPuntos(), result.getPuntos(), 0.001);
+        Assert.assertEquals(entity.getSaldo(), result.getSaldo(), 0.001);
+        
     }
     
     @Test (expected = BusinessLogicException.class)
-    public void createTarjetaPrepagoIdNull() throws BusinessLogicException
+    public void createTarjetaPrepagoIdNullTest() throws BusinessLogicException
     {
         TarjetaPrepagoEntity newEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
         newEntity.setIdTarjetaPrepago(null);
