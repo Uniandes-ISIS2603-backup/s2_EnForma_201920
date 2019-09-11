@@ -55,8 +55,10 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
         Assert.assertNotNull(result);
         
-        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getAsusnto());
+        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
+        Assert.assertEquals(entity.getId(), result.getId());
         Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
     }
     
     @Test(expected = BusinessLogicException.class)
