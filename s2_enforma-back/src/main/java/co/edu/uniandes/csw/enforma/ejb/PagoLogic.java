@@ -31,7 +31,7 @@ public class PagoLogic {
      
      public PagoEntity crearPago(PagoEntity pago) throws BusinessLogicException
      {
-         if(pago.getMonto()<0)
+         if(pago.getMonto()<=0)
          {
              throw new BusinessLogicException("El valor del pago es inválido");
          }
