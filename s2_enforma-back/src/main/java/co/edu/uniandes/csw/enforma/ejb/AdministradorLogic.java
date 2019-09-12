@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.enforma.ejb;
-
 import co.edu.uniandes.csw.enforma.entities.AdministradorEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
