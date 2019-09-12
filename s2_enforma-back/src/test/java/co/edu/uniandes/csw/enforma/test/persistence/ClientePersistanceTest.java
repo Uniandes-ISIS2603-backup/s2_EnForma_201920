@@ -98,10 +98,7 @@ public class ClientePersistanceTest
        Assert.assertNotNull(result);
        
        ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
-       
        Assert.assertEquals(usuario.getNombre(),entity.getNombre());
-       
-       
     }
     
     @Test

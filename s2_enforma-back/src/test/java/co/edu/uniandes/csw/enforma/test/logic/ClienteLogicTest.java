@@ -55,27 +55,7 @@ public class ClienteLogicTest
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
-       /**
-     * Configuración inicial de la prueba.
-     */
-    @Before
-    public void configTest() 
-{
-        try {
-            utx.begin();
-            clearData();
-            insertData();
-            utx.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                utx.rollback();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
+   
     @Test
     public void createClienteTest() throws BusinessLogicException
     {
@@ -84,9 +64,9 @@ public class ClienteLogicTest
         Assert.assertNotNull(result);
         
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
-        Assert.assertEquals(entity.getNombre(), result.getNombre());
-        
-        
+        Assert.assertEquals(entity.getNombre(), result.getNombre()); 
+        Assert.assertEquals(entity.getEdad(), result.getEdad()); 
+       
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -96,17 +76,7 @@ public class ClienteLogicTest
         newEntity.setNombre(null);
         ClienteEntity result = usuarioLogic.crearCliente(newEntity);
     }
+     
     
-
-    public void insertData()
-    {
-        
-    }
-        
-  
-    public void clearData()
-    {
-        
-    }
 }
     
