@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamDoubleValue;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -17,7 +19,11 @@ public class ClienteEntity  extends BaseEntity implements Serializable
 {
 
  private String nombre;
+ 
+ @PodamIntValue(minValue = 1)
  private Integer edad;
+ 
+ @PodamDoubleValue(minValue = 1.0)
  private Double peso;
  private String objetivos;
  private Boolean gluten;
