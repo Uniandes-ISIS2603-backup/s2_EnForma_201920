@@ -42,6 +42,11 @@ public class TarjetaPrepagoLogic
             throw new BusinessLogicException("El saldo no puede ser menor a cero");
         else if(tarjetaPrepago.getPuntos() < 0)
             throw new BusinessLogicException("Los puntos no pueden ser negativos");
+        else if(tarjetaPrepago.getIdTarjetaPrepago() == null)
+            throw new BusinessLogicException("El numero de la tarjeta no puede ser nulo");
+        else if(tarjetaPrepago.getIdTarjetaPrepago().equals(""))
+            throw new BusinessLogicException("El numero de la tarjeta no puede ser vacío");
+        
         
         tarjetaPrepago = persistence.create(tarjetaPrepago);
         return tarjetaPrepago;
