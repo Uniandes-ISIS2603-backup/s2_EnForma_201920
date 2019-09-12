@@ -97,6 +97,15 @@ public class TarjetaPrepagoLogicTest
             em.persist(entity);
             data.add(entity);
         }
+        data.get(2).setSaldo(0.0);
+        data.get(2).setPuntos(0.0);
+        
+        double valor = (Math.random()+1) *100;
+        data.get(0).setSaldo(valor);
+        data.get(0).setPuntos(valor);  
+        data.get(1).setSaldo(valor);
+        data.get(1).setPuntos(valor);
+        
     }
     
     @Test
@@ -203,4 +212,127 @@ public class TarjetaPrepagoLogicTest
         Assert.assertEquals(entity.getSaldo(), resultEntity.getSaldo(), 0.001);
         Assert.assertEquals(entity.getPuntos(), resultEntity.getPuntos(),0.001);
     }
+    
+     /**
+     * Prueba para actualizar una tarjeta prepago
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void updateTarjetaPrepagoTest() throws BusinessLogicException 
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+        pojoEntity.setId(entity.getId());
+        tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
+        TarjetaPrepagoEntity resp = em.find(TarjetaPrepagoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getSaldo(), resp.getSaldo(),0.001);
+        Assert.assertEquals(pojoEntity.getPuntos(), resp.getPuntos(), 0.001);
+        Assert.assertEquals(pojoEntity.getIdTarjetaPrepago(), resp.getIdTarjetaPrepago());
+    }
+    
+     /**
+     * Prueba para actualizar una tarjeta prepago con saldo inválido.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateTarjetaPrepagoConSaldoInvalidoTest() throws BusinessLogicException 
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+        double valor = (Math.random()) * (-100);
+        pojoEntity.setSaldo(valor);
+        pojoEntity.setId(entity.getId());
+        tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
+    }
+    
+        
+     /**
+     * Prueba para actualizar una tarjeta prepago con puntos invalidos.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateTarjetaPrepagoConPuntosInvalidoTest() throws BusinessLogicException 
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+        double valor = (Math.random()) * (-100);
+        pojoEntity.setPuntos(valor);
+        pojoEntity.setId(entity.getId());
+        tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para actualizar una tarjeta prepago con numero invalido 2 (cadena null).
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateTarjetaPrepagoConNumeroInvalidoTest() throws BusinessLogicException 
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+        pojoEntity.setIdTarjetaPrepago(null);
+        pojoEntity.setId(entity.getId());
+        tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para actualizar una tarjeta prepago con numero invalido 2 (cadena vacía).
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateTarjetaPrepagoConNumeroInvalidoTest2() throws BusinessLogicException 
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+        pojoEntity.setIdTarjetaPrepago("");
+        pojoEntity.setId(entity.getId());
+        tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para eliminar una tarjeta prepago.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void deleteTarjetaPrepagoTest() throws BusinessLogicException 
+    {
+       TarjetaPrepagoEntity entity = data.get(2);
+       tarjetaPrepagoLogic.deleteTarjetaPrepago(entity.getId());
+       TarjetaPrepagoEntity deleted = em.find(TarjetaPrepagoEntity.class, entity.getId());
+       Assert.assertNull(deleted);
+    }
+    
+    /**
+     * Prueba para eliminar una tarjeta prepago con saldo 
+     * @throws BusinessLogicException 
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void deleteTarjetaPrepagoWithSaldoTest() throws BusinessLogicException
+    {
+        TarjetaPrepagoEntity entity = data.get(0);
+        double valor = (Math.random()+1) *100;
+        entity.setSaldo(valor);
+        tarjetaPrepagoLogic.deleteTarjetaPrepago(entity.getId());
+    }
+    
+    /**
+     * Prueba para eliminar una tarjeta prepago con puntos
+     * @throws BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void deleteTarjetaPrepagoWithPuntosTest() throws BusinessLogicException
+    {
+        TarjetaPrepagoEntity entity = data.get(1);
+        double valor = (Math.random()+1) *100;
+        entity.setPuntos(valor);
+        tarjetaPrepagoLogic.deleteTarjetaPrepago(entity.getId());
+    }
+    
 }

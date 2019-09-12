@@ -101,6 +101,10 @@ public class TarjetaPrepagoLogic
         {
             throw new BusinessLogicException("Los puntos no puede ser negativos");
         }
+        else if(!validateNUMTARJETA(tarjetaPrepagoEntity.getIdTarjetaPrepago()))
+        {
+            throw new BusinessLogicException("El numero de la tarjeta no puede ser null ni cadena vacía");
+        }
         TarjetaPrepagoEntity newEntity = persistence.update(tarjetaPrepagoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la tarjeta prepago con id = {0}", tarjetaPrepagoEntity.getId());
         return newEntity;
@@ -110,15 +114,19 @@ public class TarjetaPrepagoLogic
      * Eliminar una tarjeta prepago por ID
      *
      * @param tpId El ID de la tarjeta a eliminar
-     * @throws BusinessLogicException si la tarjeta tiene saldo disponible
+     * @throws BusinessLogicException si la tarjeta tiene saldo o puntos disponibles
      */
-    public void deletetarjetaPrepago(Long tpId) throws BusinessLogicException 
+    public void deleteTarjetaPrepago(Long tpId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la tarjeta prepago con id = {0}", tpId);
         TarjetaPrepagoEntity tp = getTarjetaPrepago(tpId);
         if (tp.getSaldo() > 0 ) 
         {
             throw new BusinessLogicException("No se puede borrar la tarjeta prepago con id = " + tpId + " porque tiene saldo mayor a 0");
+        }
+        else if(tp.getPuntos() > 0)
+        {
+            throw new BusinessLogicException("No se puede borrar la tarjeta prepago con id = " + tpId + " porque tiene puntos mayor a 0");
         }
         persistence.delete(tpId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la tarjeta prepago con id = {0}", tpId);
@@ -144,5 +152,15 @@ public class TarjetaPrepagoLogic
     private boolean validatePUNTOS(double puntos) 
     {
         return !(puntos < 0);
+    }
+    
+    /**
+     * Verifica que el numero de la tarjeta no sea null ni cadena vacia
+     * @param num
+     * @return true si el numero es valido
+     */
+    private boolean validateNUMTARJETA(String num)
+    {
+        return !(num == null || num.isEmpty());
     }
 }
