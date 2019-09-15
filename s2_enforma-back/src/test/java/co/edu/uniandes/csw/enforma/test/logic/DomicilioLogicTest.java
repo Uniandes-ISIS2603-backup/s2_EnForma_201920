@@ -9,12 +9,18 @@ import co.edu.uniandes.csw.enforma.ejb.DomicilioLogic;
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -27,6 +33,21 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class DomicilioLogicTest 
 {
+    private PodamFactory factory = new PodamFactoryImpl();
+    
+    @Inject
+    private DomicilioLogic domicilioLogic;
+
+    @PersistenceContext
+    EntityManager em;  
+    
+    @Inject
+    private UserTransaction utx;
+    
+    private List<DomicilioEntity> data = new ArrayList<DomicilioEntity>();
+    
+    
+    
     @Deployment
     public static JavaArchive createDeployment()
     {
@@ -38,25 +59,216 @@ public class DomicilioLogicTest
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-    private PodamFactory factory = new PodamFactoryImpl();
+     /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() 
+    {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
     
-    @Inject
-    private DomicilioLogic domicilioLogic;
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() 
+    {
+        em.createQuery("delete from DomicilioEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() 
+    {
+        for (int i = 0; i < 3; i++) {
+            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+
+          
     
+    /**
+     * prueba para crear un domicilio
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createDomicilioTest() throws BusinessLogicException
     {
         DomicilioEntity newEntity = factory.manufacturePojo(DomicilioEntity.class);
         DomicilioEntity result = domicilioLogic.createDomicilio(newEntity);
         Assert.assertNotNull(result);
+        
+        DomicilioEntity entity = em.find(DomicilioEntity.class, result.getId());
+        Assert.assertEquals(entity.getCosto(), result.getCosto(), 0.001);
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
+        Assert.assertEquals(entity.getLugarEntrega(), result.getLugarEntrega());
+        Assert.assertEquals(entity.getIdDomicilio(), result.getIdDomicilio());
     }
     
+    /**
+     * Prueba para crear un domicilio con un lugar de entra invalido
+     * @throws BusinessLogicException 
+     */
     @Test (expected = BusinessLogicException.class)
-    public void createDomicilioLugarEntregaNull() throws BusinessLogicException
+    public void createDomicilioLugarEntregaNullTest() throws BusinessLogicException
     {
         DomicilioEntity newEntity = factory.manufacturePojo(DomicilioEntity.class);
         newEntity.setLugarEntrega(null);
         DomicilioEntity result = domicilioLogic.createDomicilio(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un domicilio con un costo negativo
+     * @throws BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createDomicilioCostoNegativoTest() throws BusinessLogicException
+    {
+        DomicilioEntity newEntity = factory.manufacturePojo(DomicilioEntity.class);
+        newEntity.setCosto(-50);
+        DomicilioEntity result = domicilioLogic.createDomicilio(newEntity);
+    }
+    
+     /**
+     * Prueba para crear un domicilio con una fecha invalida
+     * @throws BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createDomicilioFechaInvalidaTest() throws BusinessLogicException
+    {
+        DomicilioEntity newEntity = factory.manufacturePojo(DomicilioEntity.class);
+        newEntity.setFecha(null);
+        DomicilioEntity result = domicilioLogic.createDomicilio(newEntity);
+    }
+    
+     /**
+     * Prueba para consultar la lista de domicilios.
+     */
+    @Test
+    public void getDomiciliosTest() {
+        List<DomicilioEntity> list = domicilioLogic.getDomicilios();
+        Assert.assertEquals(data.size(), list.size());
+        for (DomicilioEntity entity : list) {
+            boolean found = false;
+            for (DomicilioEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+     /**
+     * Prueba para consultar un domicilio.
+     */
+    @Test
+    public void getDomicilioTest()
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity resultEntity = domicilioLogic.getDomicilio(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getFecha(), resultEntity.getFecha());
+        Assert.assertEquals(entity.getCosto(), resultEntity.getCosto(), 0.001);
+        Assert.assertEquals(entity.getIdDomicilio(), resultEntity.getIdDomicilio());
+    }
+    
+    
+    /**
+     * Prueba para actualizar un domicilio
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void updateDomicilioTest() throws BusinessLogicException 
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
+        pojoEntity.setId(entity.getId());
+        domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
+        DomicilioEntity resp = em.find(DomicilioEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getFecha(), resp.getFecha());
+        Assert.assertEquals(pojoEntity.getCosto(), resp.getCosto(), 0.001);
+        Assert.assertEquals(pojoEntity.getIdDomicilio(), resp.getIdDomicilio());
+    }
+    
+     /**
+     * Prueba para actualizar un domicilio con fecha inválida.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateDomicilioConFECHAInvalidaTest() throws BusinessLogicException 
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
+        pojoEntity.setFecha(null);
+        pojoEntity.setId(entity.getId());
+        domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
+    }
+    
+        
+     /**
+     * Prueba para actualizar un domicilio con precio inválido.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateDomicilioConPRECIOInvalidoTest() throws BusinessLogicException 
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
+        pojoEntity.setCosto(-245);
+        pojoEntity.setId(entity.getId());
+        domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para actualizar un domicilio con precio inválido.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateDomicilioConLUGARInvalidoTest() throws BusinessLogicException 
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
+        pojoEntity.setLugarEntrega(null);
+        pojoEntity.setId(entity.getId());
+        domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
+    }
+    
+     /**
+     * Prueba para actualizar un domicilio con precio inválido 2.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateDomicilioConLUGARInvalidoTest2() throws BusinessLogicException 
+    {
+        DomicilioEntity entity = data.get(0);
+        DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
+        pojoEntity.setLugarEntrega("");
+        pojoEntity.setId(entity.getId());
+        domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
     }
     
 }

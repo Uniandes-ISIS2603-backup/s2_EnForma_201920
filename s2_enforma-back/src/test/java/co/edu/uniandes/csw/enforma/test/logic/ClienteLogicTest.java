@@ -9,14 +9,18 @@ import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
 import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -36,6 +40,10 @@ public class ClienteLogicTest
     
     @PersistenceContext
     private EntityManager em;
+    @Inject
+    private UserTransaction utx;
+
+    private List<ClienteEntity> data = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDevelopment()
@@ -47,26 +55,28 @@ public class ClienteLogicTest
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+   
     @Test
-    public void createUsuarioTest() throws BusinessLogicException
+    public void createClienteTest() throws BusinessLogicException
     {
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
-        ClienteEntity result = usuarioLogic.crearUsuario(newEntity);
+        ClienteEntity result = usuarioLogic.crearCliente(newEntity);
         Assert.assertNotNull(result);
         
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
-        Assert.assertEquals(entity.getNombre(), result.getNombre());
-        
-        
+        Assert.assertEquals(entity.getNombre(), result.getNombre()); 
+        Assert.assertEquals(entity.getEdad(), result.getEdad()); 
+       
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void createUsuarioNombreNullTest() throws BusinessLogicException
+    public void createClienteNombreNullTest() throws BusinessLogicException
     {
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         newEntity.setNombre(null);
-        ClienteEntity result = usuarioLogic.crearUsuario(newEntity);
+        ClienteEntity result = usuarioLogic.crearCliente(newEntity);
     }
+     
     
 }
+    
