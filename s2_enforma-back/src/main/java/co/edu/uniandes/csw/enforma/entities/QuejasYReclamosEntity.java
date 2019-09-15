@@ -29,7 +29,7 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
-    private Date date;
+    private Date fecha;
     
     @PodamExclude
     @OneToOne
@@ -79,14 +79,14 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
      * @return the date
      */
     public Date getDate() {
-        return date;
+        return fecha;
     }
 
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.fecha = date;
     }
     
 }

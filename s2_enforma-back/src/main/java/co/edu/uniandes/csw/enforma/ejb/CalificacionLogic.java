@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
-import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
@@ -28,13 +27,14 @@ public class CalificacionLogic
     @Inject
     private CalificacionPersistence calificacionPersistence;
     
-    @Inject
-    private ClientePersistence clientePersistence;
+    //@Inject
+    //private ClientePersistence clientePersistence;
     
     public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la calificacion");
-        if(calificacion.getPuntaje() == null || clientePersistence.find(calificacion.getUsuario().getId())== null)
+        //if(calificacion.getPuntaje() == null || clientePersistence.find(calificacion.getUsuario().getId())== null)
+        if(calificacion.getPuntaje() == null )
         {
             throw new BusinessLogicException("El puntaje de la calificacion esta sin marcar");
         }

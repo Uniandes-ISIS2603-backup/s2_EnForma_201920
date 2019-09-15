@@ -29,7 +29,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
-    private Date date;
+    private Date fecha;
     
     @PodamExclude
     @OneToOne
@@ -76,17 +76,17 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     }
      
      /**
-     * @return the date
+     * @return the fecha
      */
-    public Date getDate() {
-        return date;
+    public Date getFecha() {
+        return fecha;
     }
 
     /**
-     * @param date the date to set
+     * @param fecha the fecha to set
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setfecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     /**
