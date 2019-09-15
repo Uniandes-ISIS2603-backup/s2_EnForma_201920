@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +21,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class QuejasYReclamosPersistence 
 {
+    private static final Logger LOGGER = Logger.getLogger(QuejasYReclamosPersistence.class.getName());
+    
     @PersistenceContext(unitName = "enformaPU")
     protected EntityManager em;
     
@@ -29,7 +33,9 @@ public class QuejasYReclamosPersistence
      */
     public QuejasYReclamosEntity create(QuejasYReclamosEntity quejasYReclamos)
     {
+        LOGGER.log(Level.INFO,"Creando una quejaYReclamo nueva");
         em.persist(quejasYReclamos);
+        LOGGER.log(Level.INFO,"QuejaYReclamo Creada");
         return quejasYReclamos;
     }
     
@@ -40,6 +46,7 @@ public class QuejasYReclamosPersistence
      */
     public List<QuejasYReclamosEntity> findAll()
     {
+        LOGGER.log(Level.INFO, "Consultando todas las quejas y reclamow");
         // Se crea un query para buscar todas las quejas y relcamos en la base de datos.
         TypedQuery query = em.createQuery("select u from QuejasYReclamosEntity u", QuejasYReclamosEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de quejas y reclamos.
@@ -53,6 +60,7 @@ public class QuejasYReclamosPersistence
      */
     public QuejasYReclamosEntity find(Long quejasYReclamosId)
     {
+        LOGGER.log(Level.INFO, "Consultando la queja y reclamos con id={0}", quejasYReclamosId);
         /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
          *el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
          *Suponga que es algo similar a "select * from QuejasYReclamosEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
@@ -67,6 +75,7 @@ public class QuejasYReclamosPersistence
      */
     public QuejasYReclamosEntity update(QuejasYReclamosEntity quejasYReclamos)
     {
+        LOGGER.log(Level.INFO, "Actualizando la queja y relcamos con Id={0}", quejasYReclamos.getId());
         /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
           *la queja o reclamo con los cambios, esto es similar a 
           *"UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
@@ -80,6 +89,7 @@ public class QuejasYReclamosPersistence
      */
     public void delete(Long quejasYReclamosId)
     {
+        LOGGER.log(Level.INFO, "Borrando el autor con el Id={0}", quejasYReclamosId);
         // Se hace uso del mismo método que esta explicado en public QuejasYReclamosEntity find(Long id) para obtener la queja o reclamo a borrar.
         QuejasYReclamosEntity quejasYReclamosEntity = em.find(QuejasYReclamosEntity.class, quejasYReclamosId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
