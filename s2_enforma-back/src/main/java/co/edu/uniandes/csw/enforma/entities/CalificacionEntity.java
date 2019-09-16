@@ -31,13 +31,13 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
-    @PodamExclude
-    @OneToOne
-    private ClienteEntity usuario;
-    
-    @PodamExclude
-    @ManyToOne
-    private DietaTipoEntity dietaTipo;
+//    @PodamExclude
+//    @OneToOne
+//    private ClienteEntity usuario;
+//
+//    @PodamExclude
+//    @ManyToOne
+//    private DietaTipoEntity dietaTipo;
 
     /**
      * Devuelve el puntaje de la calificacion
@@ -89,31 +89,31 @@ public class CalificacionEntity extends BaseEntity implements Serializable
         this.fecha = fecha;
     }
 
-    /**
-     * @return the usuario
-     */
-    public ClienteEntity getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(ClienteEntity usuario) {
-        this.usuario = usuario;
-    }
-
-    /**
-     * @return the dietaTipo
-     */
-    public DietaTipoEntity getDietaTipo() {
-        return dietaTipo;
-    }
-
-    /**
-     * @param dietaTipo the dietaTipo to set
-     */
-    public void setDietaTipo(DietaTipoEntity dietaTipo) {
-        this.dietaTipo = dietaTipo;
-    }
+//    /**
+//     * @return the usuario
+//     */
+//    public ClienteEntity getUsuario() {
+//        return usuario;
+//    }
+//
+//    /**
+//     * @param usuario the usuario to set
+//     */
+//    public void setUsuario(ClienteEntity usuario) {
+//        this.usuario = usuario;
+//    }
+//
+//    /**
+//     * @return the dietaTipo
+//     */
+//    public DietaTipoEntity getDietaTipo() {
+//        return dietaTipo;
+//    }
+//
+//    /**
+//     * @param dietaTipo the dietaTipo to set
+//     */
+//    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+//        this.dietaTipo = dietaTipo;
+//    }
 }

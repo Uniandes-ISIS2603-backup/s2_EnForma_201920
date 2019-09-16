@@ -31,13 +31,13 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
-    @PodamExclude
-    @OneToOne
-    private DomicilioEntity domicilio;
-    
-    @PodamExclude
-    @ManyToOne
-    private ClienteEntity usuario;
+//    @PodamExclude
+//    @OneToOne
+//    private DomicilioEntity domicilio;
+//    
+//    @PodamExclude
+//    @ManyToOne
+//    private ClienteEntity usuario;
 
     /**
      * Devuelve la descripcion de la queja o reclamo
