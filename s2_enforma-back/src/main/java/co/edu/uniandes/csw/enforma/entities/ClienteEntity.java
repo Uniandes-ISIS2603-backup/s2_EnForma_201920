@@ -14,85 +14,28 @@ import uk.co.jemos.podam.common.PodamIntValue;
  *
  * @author Paula Sofía Vargas Peña
  */
-@Entity
-public class ClienteEntity  extends BaseEntity implements Serializable
+
+@Entity 
+public class ClienteEntity extends BaseEntity implements Serializable
 {
 
  private String nombre;
- 
+    
  @PodamIntValue(minValue = 1)
  private Integer edad;
  
  @PodamDoubleValue(minValue = 1.0)
  private Double peso;
+ 
  private String objetivos;
  private Boolean gluten;
  private Boolean lactosa;
  private String userName;
  private String contrasenia;
- 
- 
- 
+
  public ClienteEntity(){
     
 }
-    /**
-     * @return the gluten
-     */
-    public Boolean getGluten() {
-        return gluten;
-    }
-
-    /**
-     * @param gluten the gluten to set
-     */
-    public void setGluten(Boolean gluten) {
-        this.gluten = gluten;
-    }
-
-    /**
-     * @return the lactosa
-     */
-    public Boolean getLactosa() {
-        return lactosa;
-    }
-
-    /**
-     * @param lactosa the lactosa to set
-     */
-    public void setLactosa(Boolean lactosa) {
-        this.lactosa = lactosa;
-    }
-
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    /**
-     * @return the contrasenia
-     */
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    /**
-     * @param contrasenia the contrasenia to set
-     */
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
-
     /**
      * @return the nombre
      */
@@ -148,7 +91,61 @@ public class ClienteEntity  extends BaseEntity implements Serializable
     public void setObjetivos(String objetivos) {
         this.objetivos = objetivos;
     }
-    
-    
-    
+
+    /**
+     * @return the gluten
+     */
+    public Boolean getGluten() {
+        return gluten;
+    }
+
+    /**
+     * @param gluten the gluten to set
+     */
+    public void setGluten(Boolean gluten) {
+        this.gluten = gluten;
+    }
+
+    /**
+     * @return the lactosa
+     */
+    public Boolean getLactosa() {
+        return lactosa;
+    }
+
+    /**
+     * @param lactosa the lactosa to set
+     */
+    public void setLactosa(Boolean lactosa) {
+        this.lactosa = lactosa;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * @return the contrasenia
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    /**
+     * @param contrasenia the contrasenia to set
+     */
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+   
 }
