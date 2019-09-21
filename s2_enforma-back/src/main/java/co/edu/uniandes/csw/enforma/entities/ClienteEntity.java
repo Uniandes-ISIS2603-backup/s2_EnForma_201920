@@ -30,6 +30,12 @@ public class ClienteEntity  extends BaseEntity implements Serializable
  private Boolean lactosa;
  private String userName;
  private String contrasenia;
+ 
+ 
+ 
+ public ClienteEntity(){
+    
+}
     /**
      * @return the gluten
      */
@@ -87,9 +93,6 @@ public class ClienteEntity  extends BaseEntity implements Serializable
     }
 
 
- public ClienteEntity(){
-    
-}
     /**
      * @return the nombre
      */
@@ -145,5 +148,7 @@ public class ClienteEntity  extends BaseEntity implements Serializable
     public void setObjetivos(String objetivos) {
         this.objetivos = objetivos;
     }
+    
+    
     
 }
