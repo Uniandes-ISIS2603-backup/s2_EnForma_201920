@@ -20,6 +20,8 @@ public class PagoEntity extends BaseEntity implements Serializable
 
     private Double monto;
     private Integer numeroTarjeta;
+    private Boolean esPrepago;
+    private String estadoPago;
     
     
     public PagoEntity()
@@ -55,5 +57,33 @@ public class PagoEntity extends BaseEntity implements Serializable
      */
     public void setNumeroTarjeta(Integer numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
+    }
+
+    /**
+     * @return the esPrepago
+     */
+    public Boolean getEsPrepago() {
+        return esPrepago;
+    }
+
+    /**
+     * @param esPrepago the esPrepago to set
+     */
+    public void setEsPrepago(Boolean esPrepago) {
+        this.esPrepago = esPrepago;
+    }
+
+    /**
+     * @return the estadoPago
+     */
+    public String getEstadoPago() {
+        return estadoPago;
+    }
+
+    /**
+     * @param estadoPago the estadoPago to set
+     */
+    public void setEstadoPago(String estadoPago) {
+        this.estadoPago = estadoPago;
     }
 }
