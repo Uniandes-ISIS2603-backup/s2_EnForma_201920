@@ -3,33 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.enforma.entities;
+package co.edu.uniandes.csw.enforma.dtos;
 
+import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import java.io.Serializable;
-import javax.persistence.Entity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author ev.jaimes
+ * @author Elina Jaimes
  */
-
-@Entity
-public class PagoEntity extends BaseEntity implements Serializable
-{
-
-
+public class PagoDTO implements Serializable{
+    
+    private Long id;
     private Double monto;
     private Integer numeroTarjeta;
     private Boolean esPrepago;
     private String estadoPago;
     
-    
-    public PagoEntity()
-    {
-    
+    public PagoDTO(){
+        
     }
-    
-    
+        
+    public PagoDTO(PagoEntity pagoEntity)
+    {
+        if(pagoEntity!=null)
+        {
+            this.id=pagoEntity.getId();
+            this.monto=pagoEntity.getMonto();
+            this.esPrepago=pagoEntity.getEsPrepago();
+            this.estadoPago=pagoEntity.getEstadoPago();
+            this.numeroTarjeta=pagoEntity.getNumeroTarjeta();
+        }
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * @return the monto
@@ -86,4 +107,10 @@ public class PagoEntity extends BaseEntity implements Serializable
     public void setEstadoPago(String estadoPago) {
         this.estadoPago = estadoPago;
     }
+    
+     @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+    
 }

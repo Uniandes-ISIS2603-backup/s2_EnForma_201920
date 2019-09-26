@@ -112,6 +112,8 @@ public class CalificacionPersistenceTest
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         
         Assert.assertEquals(calificacion.getPuntaje(), entity.getPuntaje());
+        Assert.assertEquals(calificacion.getComentario(), entity.getComentario());
+        Assert.assertEquals(calificacion.getFecha(), entity.getFecha());
     }
     
     /**
@@ -148,6 +150,7 @@ public class CalificacionPersistenceTest
         Assert.assertEquals(entity.getId(), newEntity.getId());
         Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());
         Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
     }
     
     /**
@@ -167,6 +170,9 @@ public class CalificacionPersistenceTest
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
+        Assert.assertEquals(newEntity.getPuntaje(), resp.getPuntaje());
+        Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
+        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
     }
     
     /**

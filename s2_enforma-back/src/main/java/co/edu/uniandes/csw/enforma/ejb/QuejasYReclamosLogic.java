@@ -8,6 +8,9 @@ package co.edu.uniandes.csw.enforma.ejb;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.QuejasYReclamosPersistence;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -18,10 +21,12 @@ import javax.inject.Inject;
 @Stateless
 public class QuejasYReclamosLogic 
 {
-    @Inject 
-    QuejasYReclamosPersistence persistence;
+    private static Logger LOGGER = Logger.getLogger(QuejasYReclamosLogic.class.getName());
     
-    public QuejasYReclamosEntity createCalificacion(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
+    @Inject 
+    private QuejasYReclamosPersistence persistence;
+    
+    public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
         if(quejaReclamo.getAsusnto() == null)
         {
@@ -36,4 +41,40 @@ public class QuejasYReclamosLogic
         quejaReclamo = persistence.create(quejaReclamo);
         return quejaReclamo;
     }
+    
+    public List<QuejasYReclamosEntity> getQuejasYReclamos()
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos las quejas y reclamos");
+        List<QuejasYReclamosEntity> quejasYReclamos = persistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos las quejas y reclamos");
+        return quejasYReclamos;
+    }
+    
+    public QuejasYReclamosEntity getQuejaOReclamo(Long quejaOReclamoId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la queja o reclamo con id = {0}", quejaOReclamoId);
+        QuejasYReclamosEntity quejasYReclamosEntity = persistence.find(quejaOReclamoId);
+        if (quejasYReclamosEntity == null) 
+        {
+            LOGGER.log(Level.SEVERE, "La queja o reclamo con el id = {0} no existe", quejaOReclamoId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la queja o reclamo = {0}", quejaOReclamoId);
+        return quejasYReclamosEntity;
+    }
+    
+    public QuejasYReclamosEntity updateQuejasYReclamos(QuejasYReclamosEntity quejasYReclamosEntity)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0}", quejasYReclamosEntity.getId());
+        QuejasYReclamosEntity newEntity = persistence.update(quejasYReclamosEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la queja o reclamo con id = {0}", quejasYReclamosEntity.getId());
+        return newEntity;
+    }
+    
+    public void deleteQuejasYreclamos(Long quejasYReclamosId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la queja o reclamo con id = {0}", quejasYReclamosId);
+        persistence.delete(quejasYReclamosId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0}", quejasYReclamosId);
+    }
+    
 }

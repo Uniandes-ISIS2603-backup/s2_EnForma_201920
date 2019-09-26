@@ -54,5 +54,18 @@ public class CalificacionLogicTest
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
+        
+        CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
+        Assert.assertEquals(entity.getId(), result.getId());
+        Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
+        Assert.assertEquals(entity.getComentario(), result.getComentario());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionPuntajeNull() throws BusinessLogicException
+    {
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setPuntaje(null);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
     }
 }

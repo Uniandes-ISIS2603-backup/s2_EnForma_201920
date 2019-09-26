@@ -5,8 +5,16 @@
  */
 package co.edu.uniandes.csw.enforma.entities;
 
+import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -18,6 +26,18 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     private Integer puntaje;
     
     private String comentario;
+    
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
+    private Date fecha;
+    
+//    @PodamExclude
+//    @OneToOne
+//    private ClienteEntity usuario;
+//
+//    @PodamExclude
+//    @ManyToOne
+//    private DietaTipoEntity dietaTipo;
 
     /**
      * Devuelve el puntaje de la calificacion
@@ -55,5 +75,45 @@ public class CalificacionEntity extends BaseEntity implements Serializable
         this.comentario = comentario;
     }
      
-    
+     /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setfecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+//    /**
+//     * @return the usuario
+//     */
+//    public ClienteEntity getUsuario() {
+//        return usuario;
+//    }
+//
+//    /**
+//     * @param usuario the usuario to set
+//     */
+//    public void setUsuario(ClienteEntity usuario) {
+//        this.usuario = usuario;
+//    }
+//
+//    /**
+//     * @return the dietaTipo
+//     */
+//    public DietaTipoEntity getDietaTipo() {
+//        return dietaTipo;
+//    }
+//
+//    /**
+//     * @param dietaTipo the dietaTipo to set
+//     */
+//    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+//        this.dietaTipo = dietaTipo;
+//    }
 }

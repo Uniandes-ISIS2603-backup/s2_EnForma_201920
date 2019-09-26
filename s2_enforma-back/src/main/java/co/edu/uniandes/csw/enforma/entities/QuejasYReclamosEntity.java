@@ -5,8 +5,16 @@
  */
 package co.edu.uniandes.csw.enforma.entities;
 
+import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -18,6 +26,18 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     private String descripcion;
     
     private String asusnto;
+    
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
+    private Date fecha;
+    
+//    @PodamExclude
+//    @OneToOne
+//    private DomicilioEntity domicilio;
+//    
+//    @PodamExclude
+//    @ManyToOne
+//    private ClienteEntity usuario;
 
     /**
      * Devuelve la descripcion de la queja o reclamo
@@ -55,5 +75,18 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
         this.asusnto = asusnto;
     }
     
+     /**
+     * @return the date
+     */
+    public Date getDate() {
+        return fecha;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.fecha = date;
+    }
     
 }

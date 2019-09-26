@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -52,7 +52,20 @@ public class QuejasYReclamosLogicTest
     public void createQuejasYReclamosLogicTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        QuejasYReclamosEntity result = quejasYReclamosLogic.createCalificacion(newEntity);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
         Assert.assertNotNull(result);
+        
+        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
+        Assert.assertEquals(entity.getId(), result.getId());
+        Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionPuntajeNull() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setAsusnto(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
 }
