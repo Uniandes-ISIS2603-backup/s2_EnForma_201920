@@ -170,9 +170,9 @@ public class CalificacionPersistenceTest
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
-        Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());
-        Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
-        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+        Assert.assertEquals(newEntity.getPuntaje(), resp.getPuntaje());
+        Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
+        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
     }
     
     /**

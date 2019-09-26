@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,60 @@ public class QuejasYReclamosPersistence
          *Suponga que es algo similar a "select * from QuejasYReclamosEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
          */
         return em.find(QuejasYReclamosEntity.class, quejasYReclamosId);
+    }
+    
+        /**
+     * Busca si hay alguna queja o reclamo con el asunto de la queja o reclamo que se envía de argumento
+     *
+     * @param asunto: asunto de la queja o reclamo que se está buscando
+     * @return null si no existe ninguna queja o reclamo con el asunto del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public QuejasYReclamosEntity findByAsuntoQuejasYReclamos(String asunto) {
+        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por asunto", asunto);
+        // Se crea un query para buscar calificaciones con el puntjae que recibe el método como argumento. ":asunto" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.asunto = :asunto", QuejasYReclamosEntity.class);
+        // Se remplaza el placeholder ":asunto" con el valor del argumento 
+        query = query.setParameter("asunto", asunto);
+        // Se invoca el query se obtiene la lista resultado
+        List<QuejasYReclamosEntity> sameAsunto = query.getResultList();
+        QuejasYReclamosEntity result;
+        if (sameAsunto == null) {
+            result = null;
+        } else if (sameAsunto.isEmpty()) {
+            result = null;
+        } else {
+            result = sameAsunto.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar asunto por quejas y reclamos ", asunto);
+        return result;
+    }
+    
+    /**
+     * Busca si hay alguna queja o reclamo con la fecha de la queja o reclamo que se envía de argumento
+     *
+     * @param fecha: fecha de la queja o reclamo que se está buscando
+     * @return null si no existe ninguna queja o reclamo con la fecha del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public QuejasYReclamosEntity findByFecha(Date fecha) {
+        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por fecha ", fecha);
+        // Se crea un query para buscar quejas y reclamos por la fecha que recibe el método como argumento. ":fecha" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.fecha = :fecha", QuejasYReclamosEntity.class);
+        // Se remplaza el placeholder ":fecha" con el valor del argumento 
+        query = query.setParameter("fecha", fecha);
+        // Se invoca el query se obtiene la lista resultado
+        List<QuejasYReclamosEntity> sameDate = query.getResultList();
+        QuejasYReclamosEntity result;
+        if (sameDate == null) {
+            result = null;
+        } else if (sameDate.isEmpty()) {
+            result = null;
+        } else {
+            result = sameDate.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por fecha ", fecha);
+        return result;
     }
     
     /**

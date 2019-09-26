@@ -157,4 +157,88 @@ public class ClientePersistanceTest
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    
+     @Test
+    public void findClienteByNombreTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByNombre(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+
+        newEntity = up.findByNombre(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByUserNameTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByUserName(entity.getUserName());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getUserName(), newEntity.getUserName());
+
+        newEntity = up.findByUserName(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByObjetivosTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByObjetivos(entity.getObjetivos());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getObjetivos(), newEntity.getObjetivos());
+
+        newEntity = up.findByObjetivos(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByEdadTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByEdad(entity.getEdad());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getEdad(), newEntity.getEdad());
+
+        newEntity = up.findByEdad(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByPesoTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByPeso(entity.getPeso());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getPeso(), newEntity.getPeso());
+
+        newEntity = up.findByPeso(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByGlutenTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByGluten(entity.getGluten());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getGluten(), newEntity.getGluten());
+
+        newEntity = up.findByGluten(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     @Test
+    public void findClienteByLactosaTest() 
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = up.findByLactosa(entity.getLactosa());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getLactosa(), newEntity.getLactosa());
+
+        newEntity = up.findByLactosa(null);
+        Assert.assertNull(newEntity);
+    }
 }
