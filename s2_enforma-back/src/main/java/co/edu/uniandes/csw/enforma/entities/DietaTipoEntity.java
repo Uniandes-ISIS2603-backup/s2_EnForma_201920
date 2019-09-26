@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -16,11 +17,22 @@ import javax.persistence.Entity;
 public class DietaTipoEntity extends BaseEntity implements Serializable {
     
     private String nombre;
+    
+    @PodamIntValue(minValue = 3 )
     private Integer caloriasMax;
+    
+    @PodamIntValue(minValue = 1, maxValue = 2)
     private Integer caloriasMin;
+    
+    @PodamIntValue(minValue = 1)
     private Integer cantidadGrasa;
+    
+    @PodamIntValue(minValue = 1)
     private Integer cantidadAzucar;
+    
+    @PodamIntValue(minValue = 1)
     private Integer cantidadFibra;
+    
     private Boolean tieneGluten;
     private Boolean tieneLactosa;
 
