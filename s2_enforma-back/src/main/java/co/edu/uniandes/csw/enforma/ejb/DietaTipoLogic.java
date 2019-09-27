@@ -31,39 +31,36 @@ public class DietaTipoLogic {
     {
        if(dietaTipo.getNombre()==null){
            throw new BusinessLogicException("El nombre de la Dieta está vacío.");
-       }
-       
+       } 
        if(dietaTipo.getCantidadGrasa()==null){
            throw new BusinessLogicException("La cantidad de grasa de la Dieta está vacío.");
        }
-       
        if(dietaTipo.getCantidadAzucar()==null){
            throw new BusinessLogicException("La cantidad de azucar de la Dieta está vacío.");
        }
-       
        if(dietaTipo.getCantidadFibra()==null){
            throw new BusinessLogicException("La cantidad de fibra de la Dieta está vacío.");
        }
-       
        if(dietaTipo.getCaloriasMax()==null){
            throw new BusinessLogicException("Las calorías máximas de la Dieta está vacío.");
        }
-       
        if(dietaTipo.getCaloriasMin()==null){
            throw new BusinessLogicException("Las calorias mínimas de la Dieta está vacío.");
        }
-       
        if(dietaTipo.getCaloriasMin()<=0){
-           throw new BusinessLogicException("Las calorías mínimas no pueden ser menores a cero.");
+           throw new BusinessLogicException("Las calorías mínimas no pueden ser menores o iguales a cero.");
        }
-       
        if(dietaTipo.getCaloriasMax()<=0){
-           throw new BusinessLogicException("Las calorías máximas no pueden ser menores a cero.");
+           throw new BusinessLogicException("Las calorías máximas no pueden ser menores o iguales a cero.");
        }
-       
-       
-       if(dietaTipo.getCaloriasMin()>= dietaTipo.getCaloriasMax()){
-           throw new BusinessLogicException("Las calorías mínimas no pueden ser mayores a las calorías máximas.");
+       if(dietaTipo.getCantidadAzucar()<=0){
+           throw new BusinessLogicException("La cantidad de azucar no puede ser menor o igual a cero.");
+       }
+       if(dietaTipo.getCantidadFibra()<=0){
+           throw new BusinessLogicException("La cantidad de fibra no puede ser menor o igual a cero.");
+       }
+       if(dietaTipo.getCantidadGrasa()<=0){
+           throw new BusinessLogicException("La cantidad de grasa no puede ser menor o igual a cero.");
        }
        
         
