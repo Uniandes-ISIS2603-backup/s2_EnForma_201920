@@ -191,9 +191,62 @@ public class ComidaTipoPersistanceTest {
     }
      
      
+     /**
+     * Prueba para consultar una ComidaTipo por MomentoDelDia.
+     */
+    @Test
+    public void findComidaTipoByMomentoDelDiaTest() {
+        ComidaTipoEntity entity = data.get(0);
+        ComidaTipoEntity newEntity = comidaTipoPersistence.findByMomentoDelDia(entity.getMomentoDelDia());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getMomentoDelDia(), newEntity.getMomentoDelDia());
+
+        newEntity = comidaTipoPersistence.findByMomentoDelDia(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     /**
+     * Prueba para consultar una ComidaTipo por Calorias.
+     */
+    @Test
+    public void findComidaTipoByCaloriasTest() {
+        ComidaTipoEntity entity = data.get(0);
+        ComidaTipoEntity newEntity = comidaTipoPersistence.findByCalorias(entity.getCalorias());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCalorias(), newEntity.getCalorias());
+
+        newEntity = comidaTipoPersistence.findByCalorias(null);
+        Assert.assertNull(newEntity);
+    }
     
     
+      /**
+     * Prueba para consultar una ComidaTipo por Menu.
+     */
+    @Test
+    public void findComidaTipoByMenuTest() {
+        ComidaTipoEntity entity = data.get(0);
+        ComidaTipoEntity newEntity = comidaTipoPersistence.findByMenu(entity.getMenu());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getMenu(), newEntity.getMenu());
+
+        newEntity = comidaTipoPersistence.findByMenu(null);
+        Assert.assertNull(newEntity);
+    }
     
+      /**
+     * Prueba para consultar una ComidaTipo por Nombre.
+     */
+    @Test
+    public void findComidaTipoByNombreTest() {
+        ComidaTipoEntity entity = data.get(0);
+        ComidaTipoEntity newEntity = comidaTipoPersistence.findByNombre(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+
+        newEntity = comidaTipoPersistence.findByNombre(null);
+        Assert.assertNull(newEntity);
+    }
     
     
 }

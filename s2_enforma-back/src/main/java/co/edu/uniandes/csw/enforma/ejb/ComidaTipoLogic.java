@@ -43,31 +43,37 @@ public class ComidaTipoLogic {
     {
         LOGGER.log(Level.INFO, "inicia proceso de creación de Comida Tipo");
         
-        if(comidaTipo.getMenu() ==null|| comidaTipo.getMenu().isEmpty())
+        if(comidaTipo.getMenu() ==null || comidaTipo.getMenu().isEmpty())
         {
-              throw new BusinessLogicException("el menpu de la comida tipo está vacío");
+              throw new BusinessLogicException("el menpu de la comida tipo está vacío, no es posible crearlo");
         
         }
         
         if(comidaTipo.getNombre()==null || comidaTipo.getNombre().isEmpty())
         {
-            throw new BusinessLogicException("el nombre de la comida tipo está vacío");
+            throw new BusinessLogicException("el nombre de la comida tipo está vacío, no es posible crearlo");
         
         }
         
         if(comidaTipo.getCalorias() == null)
         {
-            throw new BusinessLogicException("Las calorías son nulas");
+            throw new BusinessLogicException("Las calorías son nulas, no es posible crearlo");
         }
         
         if(comidaTipo.getCalorias() < 100 )
         {
-            throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comida");
+            throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comida, no es posible crearlo");
         }
         
         if(persistenceComidaTipo.find(comidaTipo.getId())!=null)
         {
-            throw new BusinessLogicException("La comida tipo que intentamos crear ya existe");
+            throw new BusinessLogicException("La comida tipo que intentamos crear ya existe, no es posible crearlo");
+        }
+        
+         if(comidaTipo.getMomentoDelDia() ==null || comidaTipo.getMomentoDelDia().isEmpty())
+        {
+                 throw new BusinessLogicException("el momento del día de la comida tipo es vacío, no es posible crearlo");
+        
         }
         
          comidaTipo = persistenceComidaTipo.create(comidaTipo);
@@ -142,6 +148,12 @@ public class ComidaTipoLogic {
             throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comidano es posible actializar comida Tipo con id = " + comidaTipoId);
         }
         
+        if(comidaTipoEntity.getMomentoDelDia() ==null || comidaTipoEntity.getMomentoDelDia().isEmpty())
+        {
+                 throw new BusinessLogicException("el momento del día de la comida tipo es vacío, no es posible actializar comida Tipo con id = " + comidaTipoId);
+        
+        }
+        
         
        ComidaTipoEntity newComidaTipo = persistenceComidaTipo.update(comidaTipoEntity);
          
@@ -152,6 +164,13 @@ public class ComidaTipoLogic {
      }
      
   
+     
+     /**
+      * Eliminar una comida Tipo por ID
+      * 
+      * @param comidaTipoId
+      * @throws BusinessLogicException
+      */
      public void deleteComidaTipo (Long comidaTipoId) throws BusinessLogicException
      {
          LOGGER.log(Level.INFO, "inicia el proceso de borrar una ComidaTipocon id = {0} ", comidaTipoId);

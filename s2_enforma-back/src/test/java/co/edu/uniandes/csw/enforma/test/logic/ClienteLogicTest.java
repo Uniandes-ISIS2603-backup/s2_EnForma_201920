@@ -244,7 +244,6 @@ public class ClienteLogicTest
         clienteLogic.updateCliente(pojoEntity.getId(), pojoEntity);
         ClienteEntity result = em.find(ClienteEntity.class, entity.getId());
         
-        Assert.assertEquals(pojoEntity.getId(), result.getId());
        Assert.assertEquals(pojoEntity.getId(), result.getId()); 
        Assert.assertEquals(pojoEntity.getNombre(), result.getNombre()); 
         Assert.assertEquals(pojoEntity.getEdad(), result.getEdad());
@@ -322,19 +321,6 @@ public class ClienteLogicTest
         newEntity.setId(entity.getId());
         clienteLogic.updateCliente(newEntity.getId(), newEntity);
     }
-    
-       /**
-     * Prueba para actualizar un cliente con objetivos vacios
-     * @throws BusinessLogicException
-     */
-    @Test(expected = Exception.class)
-    public void updateClienteObjetivosNullTest() throws BusinessLogicException
-    {
-        ClienteEntity entity = data.get(0);
-        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
-        newEntity.setObjetivos(null);
-        newEntity.setId(entity.getId());
-        clienteLogic.updateCliente(newEntity.getId(), newEntity);
-    }
+
 }
     
