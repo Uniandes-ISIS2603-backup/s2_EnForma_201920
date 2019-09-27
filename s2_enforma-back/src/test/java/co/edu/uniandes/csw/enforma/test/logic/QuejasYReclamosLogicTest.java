@@ -20,6 +20,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -43,7 +44,7 @@ public class QuejasYReclamosLogicTest
     @Inject
     private UserTransaction utx;
     
-    private List<QuejasYReclamosEntity> data = new ArrayList<>();
+    private List<QuejasYReclamosEntity> data = new ArrayList<QuejasYReclamosEntity>();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -56,6 +57,48 @@ public class QuejasYReclamosLogicTest
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+         /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() 
+    {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() 
+    {
+        em.createQuery("delete from QuejasYReclamosEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() 
+    {
+        for (int i = 0; i < 3; i++) {
+            QuejasYReclamosEntity entity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+    
+    
     @Test 
     public void createQuejasYReclamosLogicTest() throws BusinessLogicException
     {
@@ -65,15 +108,32 @@ public class QuejasYReclamosLogicTest
         
         QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
         Assert.assertEquals(entity.getId(), result.getId());
-        Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
         Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void createCalificacionPuntajeNull() throws BusinessLogicException
+    public void createQuejasYReclamosAsuntoNull() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setAsusnto(null);
+        newEntity.setAsunto(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createQuejasYReclamosDescripcionNull() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setDescripcion(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createQuejasYReclamosFechaNull() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setFecha(null);
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
     
@@ -105,13 +165,13 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity result = quejasYReclamosLogic.getQuejaOReclamo(entity.getId());
         Assert.assertNotNull(result);
         Assert.assertEquals(entity.getId(), result.getId());
-        Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
         Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
-        Assert.assertEquals(entity.getDate(), result.getDate());
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
     @Test
-    public void updateQuejasYReclamosTest()
+    public void updateQuejasYReclamosTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity entity = data.get(0);
         QuejasYReclamosEntity pojoEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
@@ -121,17 +181,57 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
         
          Assert.assertEquals(pojoEntity.getId(), result.getId());
-         Assert.assertEquals(entity.getAsusnto(), result.getAsusnto());
+         Assert.assertEquals(entity.getAsunto(), result.getAsunto());
          Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
-         Assert.assertEquals(pojoEntity.getDate(), result.getDescripcion());
+         Assert.assertEquals(pojoEntity.getFecha(), result.getDescripcion());
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosAsuntoNullTest() throws BusinessLogicException
+    public void updateQuejasYReclamosAsuntoNullTest1() throws BusinessLogicException
     {
         QuejasYReclamosEntity entity = data.get(0);
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setId(null);
+        newEntity.setAsunto(null);
+        newEntity.setId(entity.getId());
+        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateQuejasYReclamosAsuntoNullTest2() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setAsunto("");
+        newEntity.setId(entity.getId());
+        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateQuejasYReclamosDescripcionNullTest1() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setDescripcion(null);
+        newEntity.setId(entity.getId());
+        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateQuejasYReclamosDescripcionNullTest2() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setDescripcion("");
+        newEntity.setId(entity.getId());
+        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void updateQuejasYReclamosFechaNullTest() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setFecha(null);
         newEntity.setId(entity.getId());
         quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
     }

@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.enforma.ejb;
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.CalificacionPersistence;
-import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +38,10 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("El puntaje de la calificacion esta sin marcar");
         }
+        if(calificacion.getFecha() == null )
+        {
+            throw new BusinessLogicException("La fecha de la calificacion es null");
+        }
         
         calificacionPersistence.create(calificacion);
         LOGGER.log(Level.INFO, "Termian el proceso de creacion de la calificacion");
@@ -64,9 +68,14 @@ public class CalificacionLogic
         return calificacionEntity;
     }
     
-    public CalificacionEntity updateCalificacion(CalificacionEntity calificacionEntity)
+    public CalificacionEntity updateCalificacion(CalificacionEntity calificacionEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0}", calificacionEntity.getId());
+
+        if(!validateFecha(calificacionEntity.getFecha()))
+        {
+            throw new BusinessLogicException("La fecha es invalida");
+        }
         CalificacionEntity newEntity  = calificacionPersistence.update(calificacionEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0}", calificacionEntity.getId());
         return newEntity;
@@ -77,6 +86,11 @@ public class CalificacionLogic
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la calificacion con id = {0}", calificacionId);
         calificacionPersistence.delete(calificacionId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la calificacion con id = {0}", calificacionId);
+    }
+    
+    private boolean validateFecha(Date fecha)
+    {
+        return !(fecha == null || fecha.toString().isEmpty());
     }
     
 }

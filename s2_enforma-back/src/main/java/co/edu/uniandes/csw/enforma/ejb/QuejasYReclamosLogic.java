@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.enforma.ejb;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.QuejasYReclamosPersistence;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class QuejasYReclamosLogic
     
     public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
-        if(quejaReclamo.getAsusnto() == null)
+        if(quejaReclamo.getAsunto() == null)
         {
             throw new BusinessLogicException("El asunto de la queja o reclamo esta vacio");
         }
@@ -36,6 +37,11 @@ public class QuejasYReclamosLogic
         if(quejaReclamo.getDescripcion() == null)
         {
             throw new BusinessLogicException("La descripcion de la queja o reclamo esta vacia");
+        }
+        
+        if(quejaReclamo.getFecha() == null)
+        {
+            throw new BusinessLogicException("La fecha de la queja o reclamo esta vacia");
         }
         
         quejaReclamo = persistence.create(quejaReclamo);
@@ -62,9 +68,21 @@ public class QuejasYReclamosLogic
         return quejasYReclamosEntity;
     }
     
-    public QuejasYReclamosEntity updateQuejasYReclamos(QuejasYReclamosEntity quejasYReclamosEntity)
+    public QuejasYReclamosEntity updateQuejasYReclamos(QuejasYReclamosEntity quejasYReclamosEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0}", quejasYReclamosEntity.getId());
+        if(!validateAsunto(quejasYReclamosEntity.getAsunto()))
+        {
+            throw new BusinessLogicException("El asunto es invalido");
+        }
+        if(!validateDescripcion(quejasYReclamosEntity.getDescripcion()))
+        {
+            throw new BusinessLogicException("La descripcion es invalida");
+        }
+        if(!validateFecha(quejasYReclamosEntity.getFecha()))
+        {
+            throw new BusinessLogicException("La fecha es invalida");
+        }
         QuejasYReclamosEntity newEntity = persistence.update(quejasYReclamosEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la queja o reclamo con id = {0}", quejasYReclamosEntity.getId());
         return newEntity;
@@ -77,4 +95,18 @@ public class QuejasYReclamosLogic
         LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0}", quejasYReclamosId);
     }
     
+    private boolean validateAsunto(String asunto)
+    {
+        return!(asunto == null || asunto.isEmpty());
+    }
+    
+    private boolean validateDescripcion(String descripcion)
+    {
+        return!(descripcion == null || descripcion.isEmpty());
+    }
+    
+    private boolean validateFecha(Date fecha)
+    {
+        return !(fecha == null || fecha.toString().isEmpty());
+    }
 }

@@ -109,7 +109,7 @@ public class QuejasYReclamosPersistenceTest
         Assert.assertNotNull(result);
         
         QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
-        Assert.assertEquals(quejasYReclamos.getAsusnto(), entity.getAsusnto());
+        Assert.assertEquals(quejasYReclamos.getAsunto(), entity.getAsunto());
     }
     
     /**
@@ -144,7 +144,7 @@ public class QuejasYReclamosPersistenceTest
         QuejasYReclamosEntity newEntity = qrp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
-        Assert.assertEquals(entity.getAsusnto(), newEntity.getAsusnto());
+        Assert.assertEquals(entity.getAsunto(), newEntity.getAsunto());
         Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
     }
     

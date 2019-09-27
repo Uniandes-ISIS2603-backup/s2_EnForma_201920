@@ -25,7 +25,7 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
 {
     private String descripcion;
     
-    private String asusnto;
+    private String asunto;
     
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
@@ -59,34 +59,34 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
 
     /**
      * Devuelve el asunto de la queja o reclamo
-     * @return the asusnto
+     * @return the asunto
      */
-    public String getAsusnto() 
+    public String getAsunto() 
     {
-        return asusnto;
+        return asunto;
     }
 
     /**
      * Modifica el asunto de la queja o reclamo
-     * @param asusnto the asusnto to set
+     * @param asunto the asunto to set
      */
-    public void setAsusnto(String asusnto) 
+    public void setAsunto(String asunto) 
     {
-        this.asusnto = asusnto;
+        this.asunto = asunto;
     }
     
      /**
      * @return the date
      */
-    public Date getDate() {
+    public Date getFecha() {
         return fecha;
     }
 
     /**
-     * @param date the date to set
+     * @param fecha the fecha to set
      */
-    public void setDate(Date date) {
-        this.fecha = date;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
 }

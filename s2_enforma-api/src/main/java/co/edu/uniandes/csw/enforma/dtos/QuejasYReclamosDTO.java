@@ -43,8 +43,8 @@ public class QuejasYReclamosDTO implements Serializable
         {
             this.id = quejasYReclamosEntity.getId();
             this.descripcion = quejasYReclamosEntity.getDescripcion();
-            this.asusnto = quejasYReclamosEntity.getAsusnto();
-            this.fecha = quejasYReclamosEntity.getDate();
+            this.asusnto = quejasYReclamosEntity.getAsunto();
+            this.fecha = quejasYReclamosEntity.getFecha();
             
             
             
@@ -56,9 +56,9 @@ public class QuejasYReclamosDTO implements Serializable
     {
         QuejasYReclamosEntity quejasYReclamosEntity = new QuejasYReclamosEntity();
         quejasYReclamosEntity.setId(this.getId());
-        quejasYReclamosEntity.setAsusnto(this.getAsusnto());
+        quejasYReclamosEntity.setAsunto(this.getAsusnto());
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
-        quejasYReclamosEntity.setDate(this.getFecha());
+        quejasYReclamosEntity.setFecha(this.getFecha());
         
         
         return quejasYReclamosEntity;

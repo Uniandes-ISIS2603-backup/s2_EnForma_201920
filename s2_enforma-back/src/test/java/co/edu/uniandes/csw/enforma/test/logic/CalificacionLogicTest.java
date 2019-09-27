@@ -20,6 +20,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -56,6 +57,48 @@ public class CalificacionLogicTest
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+         /**
+     * Configuración inicial de la prueba.
+     */
+    @Before
+    public void configTest() 
+    {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() 
+    {
+        em.createQuery("delete from CalificacionEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() 
+    {
+        for (int i = 0; i < 3; i++) {
+            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+    
     @Test
     public void createCalificacionTest() throws BusinessLogicException
     {
@@ -67,6 +110,7 @@ public class CalificacionLogicTest
         Assert.assertEquals(entity.getId(), result.getId());
         Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
         Assert.assertEquals(entity.getComentario(), result.getComentario());
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -74,6 +118,14 @@ public class CalificacionLogicTest
     {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setPuntaje(null);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionFechaNull() throws BusinessLogicException
+    {
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setfecha(null);
         CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
     }
     
@@ -111,7 +163,7 @@ public class CalificacionLogicTest
     }
     
     @Test
-    public void updateCalificacionTest()
+    public void updateCalificacionTest() throws BusinessLogicException
     {
         CalificacionEntity entity = data.get(0);
         CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
@@ -126,14 +178,13 @@ public class CalificacionLogicTest
          Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
     }
     
-    @Test(expected = BusinessLogicException.class)
-    public void updateCalificacionPuntajeNullTest() throws BusinessLogicException
+     @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionFechaNullTest() throws BusinessLogicException
     {
         CalificacionEntity entity = data.get(0);
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        newEntity.setId(null);
+        newEntity.setfecha(null);
         newEntity.setId(entity.getId());
         calificacionLogic.updateCalificacion(newEntity);
     }
-    
 }
