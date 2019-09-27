@@ -76,7 +76,7 @@ public class QuejasYReclamosPersistence
      * @return null si no existe ninguna queja o reclamo con el asunto del argumento. Si
      * existe alguno devuelve el primero.
      */
-    public QuejasYReclamosEntity findByAsuntoQuejasYReclamos(String asunto) {
+    public QuejasYReclamosEntity findByAsunto(String asunto) {
         LOGGER.log(Level.INFO, "Consultando quejas y reclamos por asunto", asunto);
         // Se crea un query para buscar calificaciones con el puntjae que recibe el método como argumento. ":asunto" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.asunto = :asunto", QuejasYReclamosEntity.class);

@@ -187,5 +187,29 @@ public class CalificacionPersistenceTest
         Assert.assertNull(deleted);
     }
 
-            
+     /**
+     * Prueba para consultar una calificacion por puntaje
+     */
+    @Test
+    public void findCalificacionByPuntajeTest() {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity newEntity = cp.findByPuntaje(entity.getPuntaje());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());
+    }
+    
+     /**
+     * Prueba para consultar una calificacion por fecha
+     */
+    @Test
+    public void findCalificacionByFechaTest() {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity newEntity = cp.findByFecha(entity.getFecha());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+
+        newEntity = cp.findByFecha(null);
+        Assert.assertNull(newEntity);
+    } 
+    
 }

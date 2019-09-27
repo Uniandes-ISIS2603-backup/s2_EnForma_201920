@@ -179,4 +179,32 @@ public class QuejasYReclamosPersistenceTest
         Assert.assertNull(deleted);
     }
     
+     /**
+     * Prueba para consultar una queja o reclamo por asunto
+     */
+    @Test
+    public void findQuejasYReclamosByAsuntoTest() {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = qrp.findByAsunto(entity.getAsunto());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getAsunto(), newEntity.getAsunto());
+
+        newEntity = qrp.findByAsunto(null);
+        Assert.assertNull(newEntity);
+    }
+    
+     /**
+     * Prueba para consultar una queja o reclamo por fecha
+     */
+    @Test
+    public void findQuejasYReclamosByFechaTest() {
+        QuejasYReclamosEntity entity = data.get(0);
+        QuejasYReclamosEntity newEntity = qrp.findByFecha(entity.getFecha());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+
+        newEntity = qrp.findByFecha(null);
+        Assert.assertNull(newEntity);
+    }
+    
 }

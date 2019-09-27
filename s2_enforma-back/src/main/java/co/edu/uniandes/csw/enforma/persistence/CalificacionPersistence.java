@@ -76,7 +76,7 @@ public class CalificacionPersistence
      * @return null si no existe ninguna calificacion con el puntaje del argumento. Si
      * existe alguno devuelve el primero.
      */
-    public CalificacionEntity findByPuntajeCalificacion(int puntaje) {
+    public CalificacionEntity findByPuntaje(int puntaje) {
         LOGGER.log(Level.INFO, "Consultando calificaciones por puntaje", puntaje);
         // Se crea un query para buscar calificaciones con el puntjae que recibe el método como argumento. ":puntjae" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From CalificacionEntity e where e.puntaje = :puntaje", CalificacionEntity.class);

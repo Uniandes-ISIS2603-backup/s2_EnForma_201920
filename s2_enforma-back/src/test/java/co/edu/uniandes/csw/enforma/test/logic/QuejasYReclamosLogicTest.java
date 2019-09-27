@@ -181,9 +181,9 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
         
          Assert.assertEquals(pojoEntity.getId(), result.getId());
-         Assert.assertEquals(entity.getAsunto(), result.getAsunto());
-         Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
-         Assert.assertEquals(pojoEntity.getFecha(), result.getDescripcion());
+         Assert.assertEquals(pojoEntity.getAsunto(), result.getAsunto());
+         Assert.assertEquals(pojoEntity.getDescripcion(), result.getDescripcion());
+         Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
     }
     
     @Test(expected = BusinessLogicException.class)
