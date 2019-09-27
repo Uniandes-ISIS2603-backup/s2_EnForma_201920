@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -16,7 +17,10 @@ import javax.persistence.Entity;
 public class ComidaTipoEntity extends BaseEntity implements Serializable
 {
 
+    private String momentoDelDia;
     
+    
+    @PodamIntValue (minValue = 100)
     private Integer calorias;
     
     
@@ -64,6 +68,20 @@ public class ComidaTipoEntity extends BaseEntity implements Serializable
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the momentoDelDia
+     */
+    public String getMomentoDelDia() {
+        return momentoDelDia;
+    }
+
+    /**
+     * @param momentoDelDia the momentoDelDia to set
+     */
+    public void setMomentoDelDia(String momentoDelDia) {
+        this.momentoDelDia = momentoDelDia;
     }
     
 

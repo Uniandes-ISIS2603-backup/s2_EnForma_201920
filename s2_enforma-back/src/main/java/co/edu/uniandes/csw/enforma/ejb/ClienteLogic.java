@@ -27,6 +27,7 @@ public class ClienteLogic
     private ClientePersistence persistence;
     
     
+    
    public ClienteEntity crearCliente(ClienteEntity cliente) throws BusinessLogicException
    {
        if(cliente.getNombre() == null)
@@ -115,4 +116,5 @@ public class ClienteLogic
         return newEntity;
         
     }
+
 }

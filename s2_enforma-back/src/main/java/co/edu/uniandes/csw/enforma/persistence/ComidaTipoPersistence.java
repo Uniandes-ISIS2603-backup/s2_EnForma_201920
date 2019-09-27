@@ -14,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 
 /**
@@ -108,6 +109,114 @@ public class ComidaTipoPersistence {
         em.remove(comidaTipoEntity);
     }
     
+    /**
+     * Busca si hay alguna ComidaTipo por el momento del día que se envía de argumento
+     *
+     * @param momentoDelDia: momento del día de la comidaTipo que se está buscando
+     * @return null si no existe ninguna ComidaTipo con el momentoDelDia del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public ComidaTipoEntity findByMomentoDelDia(String momentoDelDia) {
+        LOGGER.log(Level.INFO, "Consultando libros por momentoDelDia ", momentoDelDia);
+        // Se crea un query para buscar ComidaTipo con el momentoDelDia que recibe el método como argumento. ":momentoDelDia" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.momentoDelDia = :momentoDelDia", ComidaTipoEntity.class);
+        // Se remplaza el placeholder ":momentoDelDia" con el valor del argumento 
+        query = query.setParameter("momentoDelDia", momentoDelDia);
+        // Se invoca el query se obtiene la lista resultado
+        List<ComidaTipoEntity> sameMomentoDelDia = query.getResultList();
+        ComidaTipoEntity result;
+        if (sameMomentoDelDia == null) {
+            result = null;
+        } else if (sameMomentoDelDia.isEmpty()) {
+            result = null;
+        } else {
+            result = sameMomentoDelDia.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por momentoDelDia ", momentoDelDia);
+        return result;
+    }
     
+    
+        /**
+     * Busca si hay alguna ComidaTipo por el calorias que se envía de argumento
+     *
+     * @param calorias: momento del día de la comidaTipo que se está buscando
+     * @return null si no existe ningun ComidaTipo con el calorias del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public ComidaTipoEntity findByCalorias(Integer calorias) {
+        LOGGER.log(Level.INFO, "Consultando libros por calorias ", calorias);
+        // Se crea un query para buscar ComidasTipo con el calorias que recibe el método como argumento. ":calorias" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.calorias = :calorias", ComidaTipoEntity.class);
+        // Se remplaza el placeholder ":calorias" con el valor del argumento 
+        query = query.setParameter("calorias", calorias);
+        // Se invoca el query se obtiene la lista resultado
+        List<ComidaTipoEntity> sameCalorias = query.getResultList();
+        ComidaTipoEntity result;
+        if (sameCalorias == null) {
+            result = null;
+        } else if (sameCalorias.isEmpty()) {
+            result = null;
+        } else {
+            result = sameCalorias.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por calorias ", calorias);
+        return result;
+    }
+    
+        /**
+     * Busca si hay alguna ComidaTipo por el menú que se envía de argumento
+     *
+     * @param menu: menu de la comidaTipo que se está buscando
+     * @return null si no existe ninguna ComidaTipo con el menu del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public ComidaTipoEntity findByMenu(String menu) {
+        LOGGER.log(Level.INFO, "Consultando libros por menu ", menu);
+        // Se crea un query para buscar libros con el menu que recibe el método como argumento. ":menu" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.menu = :menu", ComidaTipoEntity.class);
+        // Se remplaza el placeholder ":menu" con el valor del argumento 
+        query = query.setParameter("menu", menu);
+        // Se invoca el query se obtiene la lista resultado
+        List<ComidaTipoEntity> sameMenu = query.getResultList();
+        ComidaTipoEntity result;
+        if (sameMenu == null) {
+            result = null;
+        } else if (sameMenu.isEmpty()) {
+            result = null;
+        } else {
+            result = sameMenu.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por menu ", menu);
+        return result;
+    }
+    
+    
+         /**
+     * Busca si hay alguna ComidaTipo por el nombre que se envía de argumento
+     *
+     * @param nombre: nombre de la comidaTipo que se está buscando
+     * @return null si no existe ningun libro con el nombre del argumento. Si
+     * existe alguno devuelve el primero.
+     */
+    public ComidaTipoEntity findByNombre(String nombre) {
+        LOGGER.log(Level.INFO, "Consultando libros por nombre ", nombre);
+        // Se crea un query para buscar libros con el nombre que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.nombre = :nombre", ComidaTipoEntity.class);
+        // Se remplaza el placeholder ":nombre" con el valor del argumento 
+        query = query.setParameter("nombre", nombre);
+        // Se invoca el query se obtiene la lista resultado
+        List<ComidaTipoEntity> sameNombre = query.getResultList();
+        ComidaTipoEntity result;
+        if (sameNombre == null) {
+            result = null;
+        } else if (sameNombre.isEmpty()) {
+            result = null;
+        } else {
+            result = sameNombre.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por nombre ", nombre);
+        return result;
+    }
     
 }

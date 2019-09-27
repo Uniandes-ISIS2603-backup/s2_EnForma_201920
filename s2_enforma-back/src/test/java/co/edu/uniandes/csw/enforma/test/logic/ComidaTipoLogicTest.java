@@ -124,15 +124,22 @@ public class ComidaTipoLogicTest
         Assert.assertNotNull(result);
                 
     }
-    
-    @Test (expected = BusinessLogicException.class)
-    public void createComidaTipoNombreNullTest () throws BusinessLogicException
+
+
+
+     /**
+     *  Prueba para crear una Comida Tipo con nombre vacío
+     * 
+     * @throws BusinessLogicException 
+     */    @Test (expected = BusinessLogicException.class)
+    public void crearComidaTipoConMomentoDelDiaVacioTest () throws BusinessLogicException
     {
         ComidaTipoEntity newEntidad = factory.manufacturePojo(ComidaTipoEntity.class);
-        newEntidad.setNombre(null);
+        newEntidad.setMomentoDelDia("");
         ComidaTipoEntity result = comidaTipoLogic.createComidaTipo(newEntidad);
         
     }
+    
     
      
     /**
