@@ -241,4 +241,6 @@ public class ClientePersistanceTest
         newEntity = up.findByLactosa(null);
         Assert.assertNull(newEntity);
     }
+    
+    
 }
