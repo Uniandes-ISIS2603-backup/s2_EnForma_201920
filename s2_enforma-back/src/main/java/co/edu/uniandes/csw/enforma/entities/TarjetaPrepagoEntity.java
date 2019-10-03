@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 
 /**
@@ -21,6 +23,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     
     private double puntos;
     
+    private List<PagoEntity> pagos = new ArrayList<PagoEntity>();
     
     /**
      * @return idTarjetaPrepago
@@ -70,6 +73,22 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
         this.puntos = puntos;
     }
     
+    /**
+     * da los pagos asociados a la tarjeta
+     * @return pagos
+     */
+    public List<PagoEntity> getPagos()
+    {
+        return pagos;
+    }
     
+    /**
+     * modifica los pagos de la tarjeta
+     * @param pagos 
+     */
+    public void setPagos(List<PagoEntity> pagos)
+    {
+        this.pagos = pagos;
+    }
     
 }
