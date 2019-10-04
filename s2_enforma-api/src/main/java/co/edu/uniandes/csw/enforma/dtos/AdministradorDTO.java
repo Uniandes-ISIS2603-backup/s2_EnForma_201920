@@ -102,4 +102,14 @@ public class AdministradorDTO implements Serializable{
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
+    
+     public AdministradorEntity toEntity() 
+    {
+        AdministradorEntity administradorEntity = new AdministradorEntity();
+        administradorEntity.setId(this.getId());
+        administradorEntity.setNombre(this.getNombre());
+        administradorEntity.setUsername(this.getUsername());
+        administradorEntity.setContrasena(this.getContrasena());
+        return administradorEntity;
+    }
 }
