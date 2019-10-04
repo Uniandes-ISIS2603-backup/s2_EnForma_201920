@@ -133,4 +133,17 @@ public class PagoDTO implements Serializable{
         this.orden = orden;
     }
     
+     public PagoEntity toEntity() 
+    {
+        PagoEntity pagoEntity = new PagoEntity();
+        pagoEntity.setId(this.getId());
+        pagoEntity.setMonto(this.getMonto());
+        pagoEntity.setNumeroTarjeta(this.getNumeroTarjeta());
+        pagoEntity.setEsPrepago(this.getEsPrepago());
+        pagoEntity.setEstadoPago(this.getEstadoPago());
+        pagoEntity.setOrden(this.getOrden().toEntity());
+        
+        return pagoEntity;
+    }
+    
 }
