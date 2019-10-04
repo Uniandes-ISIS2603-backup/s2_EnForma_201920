@@ -39,7 +39,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      * @param clienteEntity Entidad ClienteEntity desde la cual se va a crear el
      * nuevo objeto.
      *
-     */
+     *
     public ClienteDetailDTO(ClienteEntity clienteEntity)
     {
         super(clienteEntity);
@@ -56,7 +56,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
                 quejas.add(new QuejasYReclamosDTO(entityQuejasYReclamos));
             }
         }
-    }
+    }/
 
     /**
      * Convierte un objeto ClienteDetailDTO a ClienteEntity incluyendo los
@@ -64,7 +64,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @return Nueva objeto ClienteEntity.
      *
-     */
+     *
     @Override
     public ClienteEntity toEntity() 
     {
@@ -86,7 +86,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
             clienteEntity.setQuejasYReclamos(quejasEntity);
         }
         return clienteEntity;
-    }
+    }/
 
     /**
      * Obtiene la lista de libros del cliente
