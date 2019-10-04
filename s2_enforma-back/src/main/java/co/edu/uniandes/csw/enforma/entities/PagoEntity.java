@@ -7,6 +7,10 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -23,6 +27,13 @@ public class PagoEntity extends BaseEntity implements Serializable
     private Boolean esPrepago;
     private String estadoPago;
     
+    @PodamExclude
+    @ManyToOne
+    private TarjetaPrepagoEntity tarjetaPrepago;
+    
+    @PodamExclude
+    @OneToOne
+    private DomicilioEntity orden;
     
     public PagoEntity()
     {
@@ -85,5 +96,33 @@ public class PagoEntity extends BaseEntity implements Serializable
      */
     public void setEstadoPago(String estadoPago) {
         this.estadoPago = estadoPago;
+    }
+
+    /**
+     * @return the tarjetaPrepago
+     */
+    public TarjetaPrepagoEntity getTarjetaPrepago() {
+        return tarjetaPrepago;
+    }
+
+    /**
+     * @param tarjetaPrepago the tarjetaPrepago to set
+     */
+    public void setTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago) {
+        this.tarjetaPrepago = tarjetaPrepago;
+    }
+
+    /**
+     * @return the orden
+     */
+    public DomicilioEntity getOrden() {
+        return orden;
+    }
+
+    /**
+     * @param orden the orden to set
+     */
+    public void setOrden(DomicilioEntity orden) {
+        this.orden = orden;
     }
 }
