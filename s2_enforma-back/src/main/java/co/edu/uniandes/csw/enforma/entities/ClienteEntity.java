@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
- * @author Paula Sofía Vargas Peña
+ * @author Sofía Vargas
  */
 
 @Entity 

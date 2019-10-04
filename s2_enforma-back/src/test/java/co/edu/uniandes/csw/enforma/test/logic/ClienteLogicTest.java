@@ -117,6 +117,7 @@ public class ClienteLogicTest
         Assert.assertEquals(entity.getObjetivos(), result.getObjetivos());
         Assert.assertEquals(entity.getGluten(), result.getGluten());
         Assert.assertEquals(entity.getLactosa(), result.getLactosa());
+        
          
     }
     /**
