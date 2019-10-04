@@ -14,6 +14,38 @@ import java.io.Serializable;
  */
 public class ClienteDTO implements Serializable 
 {
+  
+ private Long id;
+ private String nombre;
+ private Integer edad;
+ private Double peso; 
+ private String objetivos;
+ private Boolean gluten;
+ private Boolean lactosa;
+ private String userName;
+ private String contrasenia;
+
+public ClienteDTO()
+{
+}
+
+
+public ClienteDTO(ClienteEntity clienteEntity) 
+{
+        if (clienteEntity != null)
+       {
+            this.id = clienteEntity.getId();
+            this.nombre = clienteEntity.getNombre();
+            this.edad = clienteEntity.getEdad();
+            this.peso = clienteEntity.getPeso();
+            this.objetivos = clienteEntity.getObjetivos();
+            this.lactosa = clienteEntity.getLactosa();
+            this.gluten = clienteEntity.getGluten();
+            this.contrasenia = clienteEntity.getContrasenia();
+            this.userName = clienteEntity.getUserName();
+             
+        }
+    }
 
     /**
      * @return the nombre
@@ -126,38 +158,7 @@ public class ClienteDTO implements Serializable
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
- private Long id;
- private String nombre;
- private Integer edad;
- private Double peso; 
- private String objetivos;
- private Boolean gluten;
- private Boolean lactosa;
- private String userName;
- private String contrasenia;
-
-public ClienteDTO()
-{
-}
-
-
-public ClienteDTO(ClienteEntity clienteEntity) 
-{
-        if (clienteEntity != null)
-       {
-            this.id = clienteEntity.getId();
-            this.nombre = clienteEntity.getNombre();
-            this.edad = clienteEntity.getEdad();
-            this.peso = clienteEntity.getPeso();
-            this.objetivos = clienteEntity.getObjetivos();
-            this.lactosa = clienteEntity.getLactosa();
-            this.gluten = clienteEntity.getGluten();
-            this.contrasenia = clienteEntity.getContrasenia();
-            this.userName = clienteEntity.getUserName();
-             
-        }
-    }
-
+ 
     /**
      * Convierte un objeto AuthorDTO a AuthorEntity.
      *
