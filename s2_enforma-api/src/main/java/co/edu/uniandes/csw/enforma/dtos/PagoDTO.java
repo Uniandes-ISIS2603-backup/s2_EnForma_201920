@@ -22,6 +22,8 @@ public class PagoDTO implements Serializable{
     private Boolean esPrepago;
     private String estadoPago;
     
+    
+    
     public PagoDTO(){
         
     }

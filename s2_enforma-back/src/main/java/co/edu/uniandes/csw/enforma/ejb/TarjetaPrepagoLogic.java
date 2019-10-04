@@ -36,6 +36,7 @@ public class TarjetaPrepagoLogic
      */
     public TarjetaPrepagoEntity createTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago) throws BusinessLogicException
     {
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la tarjeta prepago");
         if(tarjetaPrepago.getId() == null)
             throw new BusinessLogicException("El id de la tarjeta no pude ser vacío");
         else if(tarjetaPrepago.getSaldo() < 0)
@@ -48,7 +49,8 @@ public class TarjetaPrepagoLogic
             throw new BusinessLogicException("El numero de la tarjeta no puede ser vacío");
         
         
-        tarjetaPrepago = persistence.create(tarjetaPrepago);
+        persistence.create(tarjetaPrepago);
+        LOGGER.log(Level.INFO, "Termina proceso de creación de la tarjeta prepago");
         return tarjetaPrepago;
     }
     

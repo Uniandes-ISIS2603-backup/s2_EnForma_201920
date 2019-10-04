@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.enforma.test.logic;
 
 import co.edu.uniandes.csw.enforma.ejb.TarjetaPrepagoLogic;
+import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.entities.TarjetaPrepagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.TarjetaPrepagoPersistence;
@@ -46,6 +47,8 @@ public class TarjetaPrepagoLogicTest
     
     private List<TarjetaPrepagoEntity> data = new ArrayList<TarjetaPrepagoEntity>();
     
+    private List<PagoEntity> pagosData = new ArrayList<PagoEntity>();
+    
     @Deployment
     public static JavaArchive createDeployment()
     {
@@ -84,6 +87,7 @@ public class TarjetaPrepagoLogicTest
     private void clearData() 
     {
         em.createQuery("delete from TarjetaPrepagoEntity").executeUpdate();
+        em.createQuery("delete from PagoEntity").executeUpdate();
     }
 
     /**
@@ -97,6 +101,14 @@ public class TarjetaPrepagoLogicTest
             em.persist(entity);
             data.add(entity);
         }
+        for(int i = 0; i < 3; i++)
+        {
+            PagoEntity pagos = factory.manufacturePojo(PagoEntity.class);
+            em.persist(pagos);
+            pagosData.add(pagos);
+
+        }
+        
         data.get(2).setSaldo(0.0);
         data.get(2).setPuntos(0.0);
         
@@ -119,6 +131,7 @@ public class TarjetaPrepagoLogicTest
         Assert.assertEquals(entity.getIdTarjetaPrepago(), result.getIdTarjetaPrepago());
         Assert.assertEquals(entity.getPuntos(), result.getPuntos(), 0.001);
         Assert.assertEquals(entity.getSaldo(), result.getSaldo(), 0.001);
+       // Assert.assertEquals(entity.getPagos(), result.getPagos());
         
     }
     

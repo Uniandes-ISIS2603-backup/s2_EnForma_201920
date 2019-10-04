@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -23,6 +25,8 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     
     private double puntos;
     
+    @PodamExclude
+    @OneToMany
     private List<PagoEntity> pagos = new ArrayList<PagoEntity>();
     
     /**

@@ -51,7 +51,7 @@ public class AdministradorLogicTest {
 //Le decimos lo que vamos a probar. 
     @Deployment
     public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class).addClass(AdministradorEntity.class).addClass(AdministradorPersistence.class).addClass(AdministradorLogic.class).addAsManifestResource("META-INF/persistence.xml", "persistence.xml").addAsManifestResource("META-INF/beans.xml", "beans.xml");
+        return ShrinkWrap.create(JavaArchive.class).addPackage(AdministradorEntity.class.getPackage()).addPackage(AdministradorPersistence.class.getPackage()).addClass(AdministradorLogic.class).addAsManifestResource("META-INF/persistence.xml", "persistence.xml").addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
     @Before
