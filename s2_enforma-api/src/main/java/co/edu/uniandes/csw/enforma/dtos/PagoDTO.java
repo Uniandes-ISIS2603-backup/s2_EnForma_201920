@@ -22,7 +22,7 @@ public class PagoDTO implements Serializable{
     private Boolean esPrepago;
     private String estadoPago;
     
-    
+    private DomicilioDTO orden;
     
     public PagoDTO(){
         
@@ -37,6 +37,10 @@ public class PagoDTO implements Serializable{
             this.esPrepago=pagoEntity.getEsPrepago();
             this.estadoPago=pagoEntity.getEstadoPago();
             this.numeroTarjeta=pagoEntity.getNumeroTarjeta();
+            if(pagoEntity.getOrden()!=null)
+            {
+                orden=new DomicilioDTO(pagoEntity.getOrden());
+            }
         }
     }
 
@@ -113,6 +117,20 @@ public class PagoDTO implements Serializable{
      @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the orden
+     */
+    public DomicilioDTO getOrden() {
+        return orden;
+    }
+
+    /**
+     * @param orden the orden to set
+     */
+    public void setOrden(DomicilioDTO orden) {
+        this.orden = orden;
     }
     
 }
