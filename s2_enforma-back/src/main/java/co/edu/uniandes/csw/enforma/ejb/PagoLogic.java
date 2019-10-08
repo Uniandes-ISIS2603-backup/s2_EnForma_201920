@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
+import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import co.edu.uniandes.csw.enforma.persistence.PagoPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,9 +34,12 @@ public class PagoLogic {
      @Inject
      private PagoPersistence persistence;
      
+     @Inject
+     private DomicilioPersistence domicilioPersistence;
      
      
-     public PagoEntity crearPago(PagoEntity pago) throws BusinessLogicException
+     
+     public PagoEntity crearPago(Long domId, PagoEntity pago) throws BusinessLogicException
      {
          LOGGER.log(Level.INFO, "Inicia proceso de creación del pago");
          if(pago.getMonto()<=0)
@@ -45,6 +50,12 @@ public class PagoLogic {
          {
              throw new BusinessLogicException("El numero de Tarjeta del pago es inválido");
          }
+         if(domicilioPersistence.find(domId)==null)
+             {
+                throw new BusinessLogicException("El id del domicilio es inválido");
+             }
+         DomicilioEntity domi= domicilioPersistence.find(domId);
+         pago.setOrden(domi);
          pago=persistence.create(pago);
           LOGGER.log(Level.INFO, "Termina proceso de creación del pago");
          return pago;
@@ -61,12 +72,13 @@ public class PagoLogic {
     /**
      * Busca un pago por ID
      *
+     * @param domicilioId
      * @param pagosId El id del pago a buscar
      * @return El pago encontrado, null si no lo encuentra.
      */
-    public PagoEntity getPago(Long pagosId) {
+    public PagoEntity getPago(Long domicilioId, Long pagosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el pago con id = {0}", pagosId);
-        PagoEntity pagoEntity = persistence.find(pagosId);
+        PagoEntity pagoEntity = persistence.find(domicilioId,pagosId);
         if (pagoEntity == null) {
             LOGGER.log(Level.SEVERE, "El pago con el id = {0} no existe", pagosId);
         }
@@ -82,13 +94,15 @@ public class PagoLogic {
      * @return La entidad del pago luego de actualizarla
      * @throws BusinessLogicException Si el IBN de la actualización es inválido
      */
-    public PagoEntity updatePago(Long pagosId, PagoEntity pagoEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el pago con id = {0}", pagosId);
+    public PagoEntity updatePago(Long domicioId, PagoEntity pagoEntity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el pago con id de domicilio = {0}", domicioId);
         
         if(pagoEntity.getMonto()<=0 || pagoEntity.getNumeroTarjeta()==0 || pagoEntity.getNumeroTarjeta()==null)
         {
             throw new BusinessLogicException("Error para actualizar el pago");
         }
+        DomicilioEntity domi= domicilioPersistence.find(domicioId);
+        pagoEntity.setOrden(domi);
         PagoEntity newEntity = persistence.update(pagoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el pago con id = {0}", pagoEntity.getId());
         return newEntity;
@@ -100,8 +114,12 @@ public class PagoLogic {
      * @param pagosId El ID del pago a eliminar
      * @throws BusinessLogicException si el pago tiene autores asociados
      */
-    public void deletePago(Long pagosId) throws BusinessLogicException {
+    public void deletePago(Long idDomi,Long pagosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el pago con id = {0}", pagosId);
+        PagoEntity old= getPago(idDomi, pagosId);
+        if (old == null) {
+            throw new BusinessLogicException("El review con id = " + idDomi + " no esta asociado a el libro con id = " + pagosId);
+        }
         persistence.delete(pagosId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el pago con id = {0}", pagosId);
     }
