@@ -32,28 +32,28 @@ public class AdministradorResource {
      private static final Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
 
     @Inject
-    private AdministradorLogic pagoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    private AdministradorLogic administradorLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
     
     /**
-     * Crea un nuevo pago con la informacion que se recibe en el cuerpo de
+     * Crea un nuevo administrador con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
      * la base de datos.
      *
-     * @param pago {@link AdministradorDTO} - el pago que se desea
+     * @param administrador {@link AdministradorDTO} - el administrador que se desea
      * guardar.
-     * @return JSON {@link AdministradorDTO} - el pago guardada con el atributo
+     * @return JSON {@link AdministradorDTO} - el administrador guardada con el atributo
      * id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera cuando ya existe el pago.
+     * Error de lógica que se genera cuando ya existe el administrador.
      */
     @POST
-    public AdministradorDTO createAdministrador(AdministradorDTO pago) throws BusinessLogicException 
+    public AdministradorDTO createAdministrador(AdministradorDTO administrador) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", pago);
+        LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", administrador);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        AdministradorEntity pagoEntity = pago.toEntity();
+        AdministradorEntity administradorEntity = administrador.toEntity();
         // Invoca la lógica para crear la editorial nueva
-        AdministradorEntity nuevoAdministradorEntity = pagoLogic.crearAdministrador(pagoEntity);
+        AdministradorEntity nuevoAdministradorEntity = administradorLogic.crearAdministrador(administradorEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         AdministradorDTO nuevoAdministradorDTO = new AdministradorDTO(nuevoAdministradorEntity);
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", nuevoAdministradorDTO);

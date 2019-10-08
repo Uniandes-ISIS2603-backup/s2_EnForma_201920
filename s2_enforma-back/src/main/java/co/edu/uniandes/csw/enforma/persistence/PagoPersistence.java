@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,9 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PagoPersistence {
 
+    private static final Logger LOGGER = Logger.getLogger(PagoPersistence.class.getName());
+
+    
     @PersistenceContext(unitName="enformaPU")
     protected EntityManager em;
     
@@ -31,9 +36,23 @@ public class PagoPersistence {
     }
     
     
-    public PagoEntity find(Long pagoID)
+    public PagoEntity find(Long domiId, Long pagoID)
     {
-        return em.find(PagoEntity.class, pagoID);
+         LOGGER.log(Level.INFO, "Consultando el pago con id = {0} del domicilio con id = " + domiId, pagoID);
+        TypedQuery<PagoEntity> q = em.createQuery("select p from PagoEntity p where (p.orden.id = :domiid) and (p.id = :pagosId)", PagoEntity.class);
+        q.setParameter("domiid", domiId);
+        q.setParameter("pagosId", pagoID);
+        List<PagoEntity> results = q.getResultList();
+        PagoEntity pago = null;
+        if (results == null) {
+            pago = null;
+        } else if (results.isEmpty()) {
+            pago = null;
+        } else if (results.size() >= 1) {
+            pago = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar el pago con id = {0} del libro con id =" + domiId, pagoID);
+        return pago;
     }
     
     
