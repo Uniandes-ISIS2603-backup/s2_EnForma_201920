@@ -271,4 +271,18 @@ public class DomicilioLogicTest
         domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
     }
     
+     /**
+     * Prueba para eliminar un domicilio
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void deleteDomicilioTest() throws BusinessLogicException 
+    {
+       DomicilioEntity entity = data.get(2);
+       domicilioLogic.deleteDomicilio(entity.getId());
+       DomicilioEntity deleted = em.find(DomicilioEntity.class, entity.getId());
+       Assert.assertNull(deleted);
+    }
+    
 }
