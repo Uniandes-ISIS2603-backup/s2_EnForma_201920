@@ -151,14 +151,14 @@ public class DomicilioResource
      */
     @DELETE
     @Path("{domicilioId: \\d+}")
-    public void deleteReview(@PathParam("domicilioId") Long domicilioId) throws BusinessLogicException 
+    public void deleteDomicilio(@PathParam("domicilioId") Long domicilioId) throws BusinessLogicException 
     {
         DomicilioEntity entity = domicilioLogic.getDomicilio(domicilioId);
         if (entity == null) 
         {
             throw new WebApplicationException("El recurso /domicilio/" + domicilioId + " no existe.", 404);
         }
-        //domicilioLogic.deleteDomicilio(domicilioId);
+        domicilioLogic.deleteDomicilio(domicilioId);
     }
     
     

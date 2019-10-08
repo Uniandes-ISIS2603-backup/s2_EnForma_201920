@@ -66,7 +66,7 @@ public class TarjetaPrepagoPersistence
         return em.find(TarjetaPrepagoEntity.class, tarjetaPrepagoId);
     }
     
-        /**
+     /**
      *
      * Borra un domicilio de la base de datos recibiendo como argumento el id
      * del domicilio

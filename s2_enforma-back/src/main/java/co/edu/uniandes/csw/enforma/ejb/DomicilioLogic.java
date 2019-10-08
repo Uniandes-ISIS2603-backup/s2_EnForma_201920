@@ -105,6 +105,21 @@ public class DomicilioLogic
         return newEntity;
     }
     
+     /**
+     * Eliminar un domicilio por ID
+     *
+     * @param dId El ID del domicilio a eliminar
+     * @throws BusinessLogicException si el domicilio tiene fecha invalida
+     */
+    public void deleteDomicilio(Long dId) throws BusinessLogicException 
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el domicilio con id = {0}", dId);
+        DomicilioEntity dp = getDomicilio(dId);
+
+        persistence.delete(dId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el domicilio con id = {0}", dId);
+    }
+    
     
      /**
      * Verifica que la fecha no sea invalida.
