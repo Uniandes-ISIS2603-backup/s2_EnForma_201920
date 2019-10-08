@@ -5,7 +5,11 @@
  */
 package co.edu.uniandes.csw.enforma.test.persistence;
 
+import co.edu.uniandes.csw.enforma.ejb.PagoLogic;
+import co.edu.uniandes.csw.enforma.ejb.TarjetaPrepagoLogic;
+import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.entities.TarjetaPrepagoEntity;
+import co.edu.uniandes.csw.enforma.persistence.PagoPersistence;
 import co.edu.uniandes.csw.enforma.persistence.TarjetaPrepagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +39,12 @@ public class TarjetaPrepagoPersistenceTest
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(TarjetaPrepagoEntity.class)
-                .addClass(TarjetaPrepagoPersistence.class)
+                .addPackage(TarjetaPrepagoEntity.class.getPackage())
+                .addPackage(TarjetaPrepagoPersistence.class.getPackage())
+                .addPackage(TarjetaPrepagoLogic.class.getPackage())
+                .addPackage(PagoEntity.class.getPackage())
+                .addPackage(PagoPersistence.class.getPackage())
+                .addPackage(PagoLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
