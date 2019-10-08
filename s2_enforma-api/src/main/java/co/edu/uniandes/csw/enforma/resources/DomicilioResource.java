@@ -77,7 +77,7 @@ public class DomicilioResource
     @GET
     public List<DomicilioDTO> getDomicilios() 
     {
-        LOGGER.log(Level.INFO, "DomicilioResource getDomicilios");
+        LOGGER.log(Level.INFO, "DomicilioResource getDomicilios: input: void");
         List<DomicilioDTO> listaDTOs = listEntity2DTO(domicilioLogic.getDomicilios());
         LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDTOs);
         return listaDTOs;
@@ -87,20 +87,20 @@ public class DomicilioResource
      * Busca y devuelve el domicilio con el ID recibido en la URL, relativa a un
      * domicilio.
      *
-     * @param domicilioId El ID del domicilio que se busca
+     * @param domiciliosId El ID del domicilio que se busca
      * @return {@link DomicilioDTO} - El domicilio encontrado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el domicilio.
      */
     @GET
-    @Path("{domicilioId: \\d+}")
-    public DomicilioDTO getDomicilio(@PathParam("booksId") Long domicilioId) throws BusinessLogicException 
+    @Path("{domiciliosId: \\d+}")
+    public DomicilioDTO getDomicilio(@PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "DomicilioResource getDomicilio: input: {0}", domicilioId);
-        DomicilioEntity entity = domicilioLogic.getDomicilio(domicilioId);
+        LOGGER.log(Level.INFO, "DomicilioResource getDomicilio: input: {0}", domiciliosId);
+        DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domicilioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
         }
         DomicilioDTO domicilioDTO = new DomicilioDTO(entity);
         LOGGER.log(Level.INFO, "DomicilioResource getDomicilio: output: {0}", domicilioDTO);
@@ -111,7 +111,7 @@ public class DomicilioResource
      * Actualiza un domicilio con la informacion que se recibe en el cuerpo de la
      * petición y se regresa el objeto actualizado.
      *
-     * @param domicilioId El ID del domicilio que se va a actualizar
+     * @param domiciliosId El ID del domicilio que se va a actualizar
      * @param domicilio {@link DomicilioDTO} - el domicilio que se desea guardar.
      * @return JSON {@link DomicilioDTO} - El domicilio actualizada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
@@ -120,21 +120,21 @@ public class DomicilioResource
      * Error de lógica que se genera cuando no se encuentra el domicilio.
      */
     @PUT
-    @Path("{domicilioId: \\d+}")
-    public DomicilioDTO updateDomicilio(@PathParam("domicilioId") Long domicilioId, DomicilioDTO domicilio) throws BusinessLogicException
+    @Path("{domiciliosId: \\d+}")
+    public DomicilioDTO updateDomicilio(@PathParam("domiciliosId") Long domiciliosId, DomicilioDTO domicilio) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "DomicilioResource updateDomicilio: input: domicilioId: {0} , domicilio:{1}", new Object[]{domicilioId, domicilio});
-        if (domicilioId.equals(domicilio.getId())) 
+        LOGGER.log(Level.INFO, "DomicilioResource updateDomicilio: input: domiciliosId: {0} , domicilio:{1}", new Object[]{domiciliosId, domicilio});
+        if (domiciliosId.equals(domicilio.getId())) 
         {
             throw new BusinessLogicException("Los ids del domicilio no coinciden.");
         }
-        DomicilioEntity entity = domicilioLogic.getDomicilio(domicilioId);
+        DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domicilioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
 
         }
-        DomicilioDTO domicilioDTO = new DomicilioDTO(domicilioLogic.updateDomicilio(domicilioId, domicilio.toEntity())); 
+        DomicilioDTO domicilioDTO = new DomicilioDTO(domicilioLogic.updateDomicilio(domiciliosId, domicilio.toEntity())); 
         LOGGER.log(Level.INFO, "DomicilioResource updateDomicilio: output:{0}", domicilioDTO);
         return domicilioDTO;
 
@@ -143,22 +143,22 @@ public class DomicilioResource
      /**
      * Borra el domicilio con el id asociado recibido en la URL.
      *
-     * @param domicilioId El ID del domicilio que se va a eliminar.
+     * @param domiciliosId El ID del domicilio que se va a eliminar.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando no se puede eliminar el domicilio.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra lel domicilio.
      */
     @DELETE
-    @Path("{domicilioId: \\d+}")
-    public void deleteDomicilio(@PathParam("domicilioId") Long domicilioId) throws BusinessLogicException 
+    @Path("{domiciliosId: \\d+}")
+    public void deleteDomicilio(@PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException 
     {
-        DomicilioEntity entity = domicilioLogic.getDomicilio(domicilioId);
+        DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domicilioId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
         }
-        domicilioLogic.deleteDomicilio(domicilioId);
+        domicilioLogic.deleteDomicilio(domiciliosId);
     }
     
     
