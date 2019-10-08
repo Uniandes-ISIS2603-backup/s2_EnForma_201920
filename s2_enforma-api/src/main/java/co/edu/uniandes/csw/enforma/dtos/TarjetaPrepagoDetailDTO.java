@@ -65,7 +65,7 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
             List<PagoEntity> pagosEntity = new ArrayList<>();
             for(PagoDTO dtoPago : pagos)
             {
-              //  pagosEntity.add(dtoPago.toEntity());
+                pagosEntity.add(dtoPago.toEntity());
             }
             tarjetaPrepagoEntity.setPagos(pagosEntity);
         }
