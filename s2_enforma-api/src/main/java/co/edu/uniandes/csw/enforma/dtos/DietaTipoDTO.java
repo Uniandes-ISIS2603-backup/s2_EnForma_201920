@@ -24,7 +24,7 @@ public class DietaTipoDTO implements Serializable{
     private Boolean tieneGluten;
     private Boolean tieneLactosa;
     
-    private ClienteDTO clientes;
+    private ClienteDTO cliente;
     private AdministradorDTO administrador;
     
     public DietaTipoDTO(){
@@ -48,7 +48,16 @@ public class DietaTipoDTO implements Serializable{
             this.tieneGluten = dietaTipoEntity.getTieneGluten();
             this.tieneLactosa = dietaTipoEntity.getTieneLactosa();
             
-            
+//            if (dietaTipoEntity.getCliente() != null) {
+//                this.cliente = new ClienteDTO(dietaTipoEntity.getCliente());
+//            } else {
+//                this.cliente = null;
+//            }
+//            if (dietaTipoEntity.getAdministrador() != null) {
+//                this.administrador = new AdministradorDTO(dietaTipoEntity.getAdministrador());
+//            } else {
+//                this.administrador = null;
+//            }
             
             
         }
@@ -200,21 +209,31 @@ public class DietaTipoDTO implements Serializable{
         dietaTipoEntity.setTieneGluten(this.getTieneGluten());
         dietaTipoEntity.setTieneLactosa(this.getTieneLactosa());
         
+//        if (this.cliente != null) {
+//            dietaTipoEntity.setCliente(this.cliente.toEntity());
+//        }
+//        
+//        if (this.administrador != null) {
+//            dietaTipoEntity.setAdministrador(this.administrador.toEntity());
+//        }
+        
+        
+        
         return dietaTipoEntity;
     }
 
     /**
-     * @return the clientes
+     * @return the cliente
      */
-    public ClienteDTO getClientes() {
-        return clientes;
+    public ClienteDTO getCliente() {
+        return cliente;
     }
 
     /**
-     * @param clientes the clientes to set
+     * @param cliente the cliente to set
      */
-    public void setClientes(ClienteDTO clientes) {
-        this.clientes = clientes;
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
 
     /**
