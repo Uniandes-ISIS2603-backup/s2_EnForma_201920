@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @cliente Estudiante
+ * @cliente Sofia Vargas
  */
 public class ClienteDetailDTO extends ClienteDTO implements Serializable 
 {
@@ -41,6 +41,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      * nuevo objeto.
      *
      *
+    
     public ClienteDetailDTO(ClienteEntity clienteEntity)
     {
         super(clienteEntity);
@@ -58,6 +59,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
             }
         }
     }/
+    
 
     /**
      * Convierte un objeto ClienteDetailDTO a ClienteEntity incluyendo los

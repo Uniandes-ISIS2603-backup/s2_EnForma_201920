@@ -16,7 +16,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Sofía Vargas 
+ * @author Sofia Vargas 
  */
 @Stateless
 public class ClientePersistence
@@ -53,14 +53,7 @@ public class ClientePersistence
         //Es equivalente a un comando de SQL que permite actualizar la info
         return em.merge(usuario);
     }
-    
-    
-    public void delete(Long usuarioId)
-    {
-        ClienteEntity u = em.find(ClienteEntity.class, usuarioId);
-        em.remove(u);
-    }
-    
+      
     public ClienteEntity findByUserName(String user) 
     {
         LOGGER.log(Level.INFO, "Consultando cliente por userName ", user);
@@ -230,5 +223,22 @@ public class ClientePersistence
         return result; 
     }
     
-        
+      /**
+     * Borra una cliente de la base de datos recibiendo como argumento el id del cliente
+     *
+     * @param clientesId: id correspondiente al cliente a borrar.
+     */
+    public void delete(Long clientesId)
+    {
+
+        LOGGER.log(Level.INFO, "Borrando el cliente con id={0}", clientesId);
+        // Se hace uso de mismo método que esta explicado en public ClienteEntity find(Long id) para obtener la cliente a borrar.
+        ClienteEntity clienteEntity = em.find(ClienteEntity.class, clientesId);
+        /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
+        EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
+        Es similar a "delete from ClienteEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
+        em.remove(clienteEntity);
+    }
+    
+    
 }

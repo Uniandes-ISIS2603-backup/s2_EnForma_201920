@@ -21,9 +21,9 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
 {
     private String idTarjetaPrepago;
     
-    private double saldo;
+    private Double saldo;
     
-    private double puntos;
+    private Double puntos;
     
     @PodamExclude
     @OneToMany

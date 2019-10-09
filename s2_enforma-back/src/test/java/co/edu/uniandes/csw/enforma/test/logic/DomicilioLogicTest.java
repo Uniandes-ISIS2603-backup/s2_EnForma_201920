@@ -118,7 +118,6 @@ public class DomicilioLogicTest
         Assert.assertEquals(entity.getCosto(), result.getCosto(), 0.001);
         Assert.assertEquals(entity.getFecha(), result.getFecha());
         Assert.assertEquals(entity.getLugarEntrega(), result.getLugarEntrega());
-        Assert.assertEquals(entity.getIdDomicilio(), result.getIdDomicilio());
     }
     
     /**
@@ -187,7 +186,6 @@ public class DomicilioLogicTest
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getFecha(), resultEntity.getFecha());
         Assert.assertEquals(entity.getCosto(), resultEntity.getCosto(), 0.001);
-        Assert.assertEquals(entity.getIdDomicilio(), resultEntity.getIdDomicilio());
     }
     
     
@@ -207,7 +205,6 @@ public class DomicilioLogicTest
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getFecha(), resp.getFecha());
         Assert.assertEquals(pojoEntity.getCosto(), resp.getCosto(), 0.001);
-        Assert.assertEquals(pojoEntity.getIdDomicilio(), resp.getIdDomicilio());
     }
     
      /**

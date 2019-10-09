@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
+import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
+import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import java.util.List;
@@ -17,7 +20,7 @@ import java.util.logging.Level;
 
 /**
  *
- * @author Sofía Vargas
+ * @cliente Sofia Vargas
  */
 @Stateless
 public class ClienteLogic 
@@ -116,5 +119,31 @@ public class ClienteLogic
         return newEntity;
         
     }
+    
+    /**
+     * Elimina una instancia de Cliente de la base de datos.
+     *
+     * @param clientesId Identificador de la instancia a eliminar.
+     * @throws BusinessLogicException si el autor tiene libros asociados.
+     */
+    public void deleteCliente(Long clienteId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
+        
+//        List<QuejasYReclamosEntity> quejas  = getCliente(clienteId).getQuejasYReclamos();
+//        if(quejas != null && !quejas.isEmpty())
+//        {
+//            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
+//        }
+//        List<DomicilioEntity> domicilios  = getCliente(clienteId).getDomicilios();
+//        if(quejas != null && !quejas.isEmpty())
+//        {
+//            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
+//        }
+//       
+        persistence.delete(clienteId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
+    }
+
 
 }
