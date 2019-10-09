@@ -12,8 +12,8 @@ insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (1
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
 
 
-insert into ClienteEntity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('Juan', 25, 86.5, 'Tonificar', 0, 1, 'Jjuan', '987654321');
-insert into ClienteEntity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('María', 20, 62.5, 'bajar de peso', 0, 0, 'mmaria', '123456789'); 
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (100, 'Juan', 25, 86.5, 'Tonificar', 0, 1, 'Jjuan', '987654321');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (200, 'María', 20, 62.5, 'bajar de peso', 0, 0, 'mmaria', '123456789'); 
 
 
 insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (100, 'Detox', 25, 20, 50, 50, 50, 1, 0);

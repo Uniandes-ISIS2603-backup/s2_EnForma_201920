@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
@@ -35,6 +37,14 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
     
     private Boolean tieneGluten;
     private Boolean tieneLactosa;
+    
+    @PodamExclude
+    @ManyToOne
+    private ClienteEntity cliente;
+    
+    @PodamExclude
+    @ManyToOne
+    private AdministradorEntity administrador;
 
     /**
      * @return the nombre
@@ -146,6 +156,34 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
      */
     public void setTieneLactosa(Boolean tieneLactosa) {
         this.tieneLactosa = tieneLactosa;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public AdministradorEntity getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(AdministradorEntity administrador) {
+        this.administrador = administrador;
     }
     
     
