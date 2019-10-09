@@ -154,13 +154,7 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      *
      * @throws co.edu.uniandes.csw.pagostore.exceptions.BusinessLogicException
      */
-    @Test(expected = BusinessLogicException.class)
-    public void createPagoTestConNullTarjeta() throws BusinessLogicException {
-        PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
-        newEntity.setOrden(dataDomicilio.get(1));
-        newEntity.setNumeroTarjeta(null);
-        pagoLogica.crearPago(newEntity.getOrden().getId(),newEntity);
-    }
+    
     
      @Test
     public void getPagosTest() {

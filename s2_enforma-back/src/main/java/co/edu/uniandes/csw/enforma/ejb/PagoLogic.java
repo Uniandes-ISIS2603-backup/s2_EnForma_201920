@@ -46,7 +46,7 @@ public class PagoLogic {
          {
              throw new BusinessLogicException("El valor del pago es inválido");
          }
-         if(pago.getNumeroTarjeta()==null || pago.getNumeroTarjeta()<=0)
+         if(pago.getNumeroTarjeta()<=0)
          {
              throw new BusinessLogicException("El numero de Tarjeta del pago es inválido");
          }
