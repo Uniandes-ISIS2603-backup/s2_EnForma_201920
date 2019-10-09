@@ -5,8 +5,8 @@ delete from TarjetaPrepagoEntity;
 
 
 
-insert into DomicilioEntity (id, lugarEntrega, costo) values (100, 'b', 36.96 );
-insert into DomicilioEntity (id, lugarEntrega, costo) values (200, 'a', 40.2 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (100, '2019-01-29 19:27:39', 'b', 36.96 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (200, '2019-05-20 20:30:39', 'a', 40.2 );
 
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );

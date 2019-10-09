@@ -27,7 +27,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
         
         private String lugarEntrega;
         
-        private double costo;
+        private Double costo;
 
 
     /**
