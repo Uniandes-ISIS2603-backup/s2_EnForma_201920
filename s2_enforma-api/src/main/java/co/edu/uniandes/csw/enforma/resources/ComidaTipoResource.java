@@ -31,7 +31,7 @@ import javax.ws.rs.PathParam;
  * @author Jose Manuel Flórez
  */
 
-@Path("ComidaTipo")
+@Path("ComidasTipo")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
