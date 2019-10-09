@@ -38,8 +38,8 @@ public class ComidaTipoPersistanceTest {
     public static JavaArchive createDeployement ()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ComidaTipoEntity.class)
-                .addClass(ComidaTipoPersistence.class)
+                .addPackage(ComidaTipoEntity.class.getPackage())
+                .addPackage(ComidaTipoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }

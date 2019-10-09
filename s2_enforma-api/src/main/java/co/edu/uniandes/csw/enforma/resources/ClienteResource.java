@@ -94,9 +94,9 @@ public class ClienteResource
         if (clienteEntity == null) {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }
-      //  ClienteDetailDTO clienteDetailDTO = new ClienteDetailDTO(clienteEntity);
-       // LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", clienteDetailDTO);
-        return null; // clienteDetailDTO;
+       ClienteDetailDTO clienteDetailDTO = new ClienteDetailDTO(clienteEntity);
+      LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", clienteDetailDTO);
+        return clienteDetailDTO;
     }
     
     /**
@@ -123,7 +123,7 @@ public class ClienteResource
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }
         ClienteDetailDTO detailDTO = null;
-               // detailDTO = new ClienteDetailDTO(clienteLogic.updateCliente(clientesId, cliente.toEntity()));
+        detailDTO = new ClienteDetailDTO(clienteLogic.updateCliente(clientesId, cliente.toEntity()));
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO);
         return detailDTO;
     }

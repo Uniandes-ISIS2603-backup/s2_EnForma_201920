@@ -17,32 +17,29 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ComidaTipoDTO implements Serializable
 {
     
-    private long idComidaTipoDTO;
+    private Long id;
    
     private String menu;
     private String momentoDelDia;
     private Integer calorias;
     private String nombre;
     
+     
+ 
+    // relación  muchos  a uno nistrador
+    private AdministradorDTO administrador;
+
     
-    /*
-    *Relación a un Administrador DTO 
-    * dado que tiene cardinalidad 1.
-    */
-      private AdministradorDTO administrador;
-    
-      /*
-    *Relación a un Administrador DTO 
-    * dado que tiene cardinalidad 1.
-    */
+    // relación  muchos a uno DietaTipo
     private DietaTipoDTO dietaTipo;
-      
+    
+    
     /**
      *  El constructor por defecto 
      */
     public ComidaTipoDTO()
     {
-        
+     
     }
     
     
@@ -55,18 +52,28 @@ public class ComidaTipoDTO implements Serializable
     {
         if(comidaTipoEntity != null)
         {
+            this.id = comidaTipoEntity.getId();
             this.menu = comidaTipoEntity.getMenu();
             this.momentoDelDia = comidaTipoEntity.getMomentoDelDia();
             this.nombre = comidaTipoEntity.getNombre();
             this.calorias = comidaTipoEntity.getCalorias();
-                    
-        
+                
+            if (comidaTipoEntity.getAdministrador() != null) 
+            {
+                this.administrador = new AdministradorDTO(comidaTipoEntity.getAdministrador());
+            }
+            if(comidaTipoEntity.getDietaTipo() != null)
+            {
+            this.dietaTipo = new DietaTipoDTO(comidaTipoEntity.getDietaTipo());
+            } 
         }
+        
         else
         {
-            this.dietaTipo = null;
             this.administrador = null;
+            this.dietaTipo = null;
         }
+    
         
     }
     
@@ -83,9 +90,18 @@ public class ComidaTipoDTO implements Serializable
         comidaTipoEntity.setNombre(this.getNombre());
         comidaTipoEntity.setMomentoDelDia(this.getMomentoDelDia());
         comidaTipoEntity.setMenu(this.getMenu());
+        comidaTipoEntity.setId(id);
+        if(this.administrador != null)
+        {
+            comidaTipoEntity.setAdministrador(this.administrador.toEntity());
+        }
+        if(this.dietaTipo != null)
+        {
+            comidaTipoEntity.setDietaTipo(this.dietaTipo.toEntity());
+        }
         
-        
-      return comidaTipoEntity ;
+      return comidaTipoEntity;
+      
     }
 
     /**
@@ -156,6 +172,20 @@ public class ComidaTipoDTO implements Serializable
      @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
     
