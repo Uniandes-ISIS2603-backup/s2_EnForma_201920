@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -28,6 +29,10 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany
     private List<PagoEntity> pagos = new ArrayList<PagoEntity>();
+    
+    @PodamExclude
+    @OneToOne
+    private ClienteEntity cliente;
     
     /**
      * @return idTarjetaPrepago
@@ -93,6 +98,24 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     public void setPagos(List<PagoEntity> pagos)
     {
         this.pagos = pagos;
+    }
+    
+    /**
+     * da el cliente
+     * @return cliente
+     */
+    public ClienteEntity getCliente()
+    {
+        return cliente;
+    }
+    
+    /**
+     * modifica el cliente
+     * @param cliente
+     */
+    public void setCliente(ClienteEntity cliente)
+    {
+        this.cliente = cliente;
     }
     
 }

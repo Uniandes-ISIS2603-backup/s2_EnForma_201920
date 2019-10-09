@@ -18,7 +18,9 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  * @author juan sebastián clavijo
  */
 @Entity
-public class DomicilioEntity extends BaseEntity implements Serializable {
+public class DomicilioEntity extends BaseEntity implements Serializable 
+{
+        
 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
