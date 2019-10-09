@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Sof{ia Vargas
+ * @author Sofia Vargas
  */
 public class ClienteDTO implements Serializable 
 {

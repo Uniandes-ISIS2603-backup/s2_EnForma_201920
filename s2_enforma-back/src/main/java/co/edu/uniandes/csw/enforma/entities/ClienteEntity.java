@@ -8,14 +8,16 @@ package co.edu.uniandes.csw.enforma.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamDoubleValue;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
- * @author Sofía Vargas
+ * @author Sofia Vargas
  */
 
 @Entity 
@@ -35,21 +37,21 @@ public class ClienteEntity extends BaseEntity implements Serializable
  private String userName;
  private String contrasenia;
  
- // @PodamExclude
- // @OneToOne(mappedBy = "cliente"))
-// private DietaTipoEntity dietaTipo;
- 
 // @PodamExclude
+// @OneToOne(mappedBy = "cliente")
+//private DietaTipoEntity dietaTipo;
+// 
+//@PodamExclude
 //@ManyToMany(mappedBy = "cliente")
- //private List<DomicilioEntity> domicilios;
- 
- // @PodamExclude
- //@ManyToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+// private List<DomicilioEntity> domicilios;
+// 
+// @PodamExclude
+// @ManyToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 // private List<QuejasYReclamosEntity> quejas;
- 
- // @PodamExclude
- // @OneToOne(mappedBy = "cliente", fetch=FetchType.LAZY)
- //private TarjetaPrepagoEntity tarjetaPrepago;
+// 
+// @PodamExclude
+// @OneToOne
+// private TarjetaPrepagoEntity tarjetaPrepago;
  
 
  public ClienteEntity(){
@@ -166,60 +168,62 @@ public class ClienteEntity extends BaseEntity implements Serializable
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    /**
-     * @return the dietaTipo
-     */
-   // public DietaTipoEntity getDietaTipo() {
-     //   return dietaTipo;
-    //}
-
-    /**
-     * @param dietaTipo the dietaTipo to set
-     */
-   // public void setDietaTipo(DietaTipoEntity dietaTipo) {
-    //    this.dietaTipo = dietaTipo;
-   // }
-
-    /**
-     * @return the domicilios
-     */
-   // public List<DomicilioEntity> getDomicilios() 
-   // {
-     //   return domicilios;
-   // }
-
-    /**
-     * @param domicilio the domicilios to set
-     */
-   // public void setDomicilios(List<DomicilioEntity> domicilios) {
-   //     this.domicilios = domicilios;
-   // }
-
-    /**
-     * @return the quejas
-     */
-   // public List<QuejasYReclamosEntity> getQuejasYReclamos() {
-   //     return quejas;
-   // }
-
-    /**
-     * @param quejas the quejas to set
-     */
-   // public void setQuejasYReclamos(List<QuejasYReclamosEntity> quejas) {
-    //    this.quejas = quejas;
-    //}
-
-    /**
-     * @return the tarjetaPrepago
-     */
-  //  public TarjetaPrepagoEntity getTarjetaPrepago() {
-    //    return tarjetaPrepago;
-    //}
-
-    /**
-     * @param tarjetaPrepago the tarjetaPrepago to set
-     */
-   // public void setTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago) {
-     //   this.tarjetaPrepago = tarjetaPrepago;
-    //}
+//    /**
+//     * @return the dietaTipo
+//     */
+//    public DietaTipoEntity getDietaTipo() {
+//        return dietaTipo;
+//    }
+//
+//    /**
+//     * @param dietaTipo the dietaTipo to set
+//     */
+//    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+//       this.dietaTipo = dietaTipo;
+//    }
+//
+//    /**
+//     * @return the domicilios
+//     */
+//    public List<DomicilioEntity> getDomicilios() 
+//    {
+//        return domicilios;
+//    }
+//
+//    /**
+//     * @param domicilio the domicilios to set
+//     */
+//   public void setDomicilios(List<DomicilioEntity> domicilios) {
+//        this.domicilios = domicilios;
+//    }
+//
+//    /**
+//     * @return the quejas
+//     */
+//    public List<QuejasYReclamosEntity> getQuejasYReclamos() {
+//        return quejas;
+//   }
+//
+//    /**
+//     * @param quejas the quejas to set
+//     */
+//    public void setQuejasYReclamos(List<QuejasYReclamosEntity> quejas)
+//   {
+//        this.quejas = quejas;
+//    }
+//
+//    /**
+//     * @return the tarjetaPrepago
+//     */
+//    public TarjetaPrepagoEntity getTarjetaPrepago() {
+//        return tarjetaPrepago;
+//    }
+//
+//    /**
+//     * @param tarjetaPrepago the tarjetaPrepago to set
+//     */
+//    public void setTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago)
+//    {
+//      this.tarjetaPrepago = tarjetaPrepago;
+//    }
 }
