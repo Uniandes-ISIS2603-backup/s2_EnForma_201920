@@ -18,3 +18,7 @@ insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, u
 
 insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (100, 'Detox', 25, 20, 50, 50, 50, 1, 0);
 insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (200, 'Dieta2', 30, 50, 20, 90, 50, 0, 0);
+
+insert into AdministradorEntity (nombre, contrasena, username) values ('Arri Ondricek', '09231yb370', 'Arri');
+insert into AdministradorEntity (nombre, contrasena, username) values ('Brandise Nary', '16144yv107', 'Brandise');
+insert into AdministradorEntity (nombre, contrasena, username) values ('Karel Tellenbrook', '97237ke365', 'Karel');
