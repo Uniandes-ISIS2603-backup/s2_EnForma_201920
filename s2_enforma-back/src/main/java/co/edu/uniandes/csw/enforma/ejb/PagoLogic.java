@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import co.edu.uniandes.csw.enforma.persistence.PagoPersistence;
+import co.edu.uniandes.csw.enforma.persistence.TarjetaPrepagoPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,7 @@ public class PagoLogic {
      
      @Inject
      private DomicilioPersistence domicilioPersistence;
+     
      
      
      
