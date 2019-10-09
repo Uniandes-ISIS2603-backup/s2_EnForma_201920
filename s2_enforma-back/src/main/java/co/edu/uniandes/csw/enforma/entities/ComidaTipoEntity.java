@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
@@ -16,7 +18,14 @@ import uk.co.jemos.podam.common.PodamIntValue;
 @Entity
 public class ComidaTipoEntity extends BaseEntity implements Serializable
 {
-
+    //Relaciones
+    @PodamExclude
+    @ManyToOne
+    private DietaTipoEntity dietaTipo;
+    
+    @PodamExclude
+    @ManyToOne
+    private AdministradorEntity administrador;
     private String momentoDelDia;
     
     
@@ -82,6 +91,34 @@ public class ComidaTipoEntity extends BaseEntity implements Serializable
      */
     public void setMomentoDelDia(String momentoDelDia) {
         this.momentoDelDia = momentoDelDia;
+    }
+
+    /**
+     * @return the dietaTipo
+     */
+    public DietaTipoEntity getDietaTipo() {
+        return dietaTipo;
+    }
+
+    /**
+     * @param dietaTipo the dietaTipo to set
+     */
+    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+        this.dietaTipo = dietaTipo;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public AdministradorEntity getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(AdministradorEntity administrador) {
+        this.administrador = administrador;
     }
     
 

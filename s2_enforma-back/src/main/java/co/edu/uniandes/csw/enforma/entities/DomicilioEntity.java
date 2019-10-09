@@ -21,14 +21,14 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 public class DomicilioEntity extends BaseEntity implements Serializable 
 {
         
-        @Temporal(TemporalType.DATE)
-        @PodamStrategyValue(DateStrategy.class)
-        private Date fecha;
-        
-        private String lugarEntrega;
-        
-        private Double costo;
 
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
+    private Date fecha;
+
+    private String lugarEntrega;
+
+    private Double costo;
 
     /**
      * @return the fecha
