@@ -30,7 +30,6 @@ import javax.ws.rs.WebApplicationException;
  * @author Elina Jaimes
  */
 
-@Path("pagos")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

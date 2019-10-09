@@ -31,10 +31,16 @@ public class AdministradorEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,orphanRemoval = true)
     private List<ComidaTipoEntity> comidasTipo;
     
+    
+    
+*/
+    
+    
     public AdministradorEntity()
     {
     }
-*/
+    
+    
     /**
      * @return the nombre
      */

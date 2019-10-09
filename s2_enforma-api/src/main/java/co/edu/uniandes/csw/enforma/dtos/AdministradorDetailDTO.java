@@ -17,31 +17,40 @@ import java.util.List;
  */
 public class AdministradorDetailDTO extends AdministradorDTO implements Serializable {
 
-// relación  uno o muchos reviews 
-    private List<DietaTipoDTO> reviews;
+// relación  uno o muchos DietaTipo 
+    private List<DietaTipoDTO> dietas;
 
-    // relación  cero o muchos author
-    private List<ComidaTipoDTO> authors;
+    // relación  cero o muchos ComidaTipo
+    private List<ComidaTipoDTO> comidas;
 
   
 
+    
+    
+    
+    public AdministradorDetailDTO()
+    {
+        super();
+    }
+    
+    
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param bookEntity La entidad de la cual se construye el DTO
+     * @param administradorEntity La entidad de la cual se construye el DTO
      */
-    public AdministradorDetailDTO(AdministradorEntity bookEntity) {
-        super(bookEntity);
-        if (bookEntity != null) {
-            reviews = new ArrayList<>();
-//            for (DietaTipoEntity entityDietaTipo : bookEntity.getDietaTipos()) {
-//                reviews.add(new DietaTipoDTO(entityDietaTipo));
-//            }
-        }
-//        if (bookEntity.getComidaTipos() != null) {
-//            authors = new ArrayList<>();
-//            for (ComidaTipoEntity entityComidaTipo : bookEntity.getComidaTipos()) {
-//                authors.add(new ComidaTipoDTO(entityComidaTipo));
+    public AdministradorDetailDTO(AdministradorEntity administradorEntity) {
+        super(administradorEntity);
+//        if (administradorEntity != null) {
+//            dietas = new ArrayList<>();
+////            for (DietaTipoEntity entityDietaTipo : administradorEntity.getDietaTipos()) {
+////                dietas.add(new DietaTipoDTO(entityDietaTipo));
+////            }
+//        }
+//        if (administradorEntity.getComidaTipos() != null) {
+//            comidas = new ArrayList<>();
+//            for (ComidaTipoEntity entityComidaTipo : administradorEntity.getComidaTipos()) {
+//                comidas.add(new ComidaTipoDTO(entityComidaTipo));
 //            }
 //        }
     }
@@ -53,22 +62,22 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      */
     @Override
     public AdministradorEntity toEntity() {
-        AdministradorEntity bookEntity = super.toEntity();
-//        if (reviews != null) {
-//            List<DietaTipoEntity> reviewsEntity = new ArrayList<>();
-//            for (DietaTipoDTO dtoDietaTipo : getDietaTipos()) {
-//                reviewsEntity.add(dtoDietaTipo.toEntity());
+        AdministradorEntity administradorEntity = super.toEntity();
+//        if (dietas != null) {
+//            List<DietaTipoEntity> dietasEntity = new ArrayList<>();
+//            for (DietaTipoDTO dtoDietaTipo : dietas) {
+//                dietasEntity.add(dtoDietaTipo.toEntity());
 //            }
-//            bookEntity.setDietaTipos(reviewsEntity);
+//            administradorEntity.setDietaTipo(dietasEntity);
 //        }
-//        if (authors != null) {
-//            List<ComidaTipoEntity> authorsEntity = new ArrayList<>();
-//            for (ComidaTipoDTO dtoComidaTipo : authors) {
-//                authorsEntity.add(dtoComidaTipo.toEntity());
+//        if (comidas != null) {
+//            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
+//            for (ComidaTipoDTO dtoComidaTipo : comidas) {
+//                comidasEntity.add(dtoComidaTipo.toEntity());
 //            }
-//            bookEntity.setComidaTipos(authorsEntity);
+//            administradorEntity.setComidasTipo(comidasEntity);
 //        }
-        return bookEntity;
+        return administradorEntity;
     }
 
     /**
@@ -77,16 +86,16 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      * @return Lista de DTOs de Reseñas
      */
     public List<DietaTipoDTO> getDietaTipos() {
-        return reviews;
+        return dietas;
     }
 
     /**
      * Modifica las reseñas de este libro.
      *
-     * @param reviews Las nuevas reseñas
+     * @param dietas Las nuevas reseñas
      */
-    public void setDietaTipos(List<DietaTipoDTO> reviews) {
-        this.reviews = reviews;
+    public void setDietaTipos(List<DietaTipoDTO> dietas) {
+        this.dietas = dietas;
     }
 
     /**
@@ -95,16 +104,16 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      * @return DTO de Autores
      */
     public List<ComidaTipoDTO> getComidaTipos() {
-        return authors;
+        return comidas;
     }
 
     /**
      * Modifica los autores del libro
      *
-     * @param authors Lista de autores
+     * @param comidas Lista de autores
      */
-    public void setComidaTipos(List<ComidaTipoDTO> authors) {
-        this.authors = authors;
+    public void setComidaTipos(List<ComidaTipoDTO> comidas) {
+        this.comidas = comidas;
     }
 
     
