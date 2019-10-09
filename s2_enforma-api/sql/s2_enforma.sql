@@ -1,21 +1,20 @@
-delete from AdministradorEntity;
-delete from CalificacionEntity;
 delete from ClienteEntity;
-delete from ComidaTipoEntity;
 delete from DietaTipoEntity;
 delete from DomicilioEntity;
-delete from PagoEntity;
-delete from QuejasYReclamosEntity;
 delete from TarjetaPrepagoEntity;
 
 
 
-insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (100, '4/7/1965', 12.12 );
-insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (200, '10/7/1965', 20.12 );
+insert into DomicilioEntity (id, lugarEntrega, costo) values (100, 'b', 36.96 );
+insert into DomicilioEntity (id, lugarEntrega, costo) values (200, 'a', 40.2 );
 
-insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
-insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
+insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
+insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
 
 
-insert into ClienteEmtity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('Juan', 25, 86.5, 'Tonificar', false, true, 'Jjuan', '987654321');
-insert into ClienteEmtity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('María', 20, 62.5, 'bajar de peso', false, false, 'mmaria', '123456789'); 
+insert into ClienteEntity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('Juan', 25, 86.5, 'Tonificar', 0, 1, 'Jjuan', '987654321');
+insert into ClienteEntity (nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values ('María', 20, 62.5, 'bajar de peso', 0, 0, 'mmaria', '123456789'); 
+
+
+insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (100, 'Detox', 25, 20, 50, 50, 50, 1, 0);
+insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (200, 'Dieta2', 30, 50, 20, 90, 50, 0, 0);
