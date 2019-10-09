@@ -136,7 +136,6 @@ public class DomicilioPersistenceTest
        DomicilioEntity newEntity = dp.find(entity.getId());
        Assert.assertNotNull(newEntity);
        Assert.assertEquals(entity.getLugarEntrega(), newEntity.getLugarEntrega());
-       Assert.assertNotEquals(entity.getCosto(), newEntity.getIdDomicilio());
        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
     }
     
@@ -166,7 +165,7 @@ public class DomicilioPersistenceTest
 
         DomicilioEntity resp = em.find(DomicilioEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getIdDomicilio(), resp.getIdDomicilio());
+        Assert.assertEquals(newEntity.getLugarEntrega(), resp.getLugarEntrega());
     }
     
      /**
@@ -175,9 +174,9 @@ public class DomicilioPersistenceTest
     @Test
     public void findDomicilioByIdDomicilioTest() {
         DomicilioEntity entity = data.get(0);
-        DomicilioEntity newEntity = dp.findByIdDomicilio(entity.getIdDomicilio());
+        DomicilioEntity newEntity = dp.findByIdDomicilio(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getIdDomicilio(), newEntity.getIdDomicilio());
+        Assert.assertEquals(entity.getLugarEntrega(), newEntity.getLugarEntrega());
 
         newEntity = dp.findByIdDomicilio(null);
         Assert.assertNull(newEntity);

@@ -20,7 +20,6 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class DomicilioEntity extends BaseEntity implements Serializable 
 {
-        private String idDomicilio;
         
         @Temporal(TemporalType.DATE)
         @PodamStrategyValue(DateStrategy.class)
@@ -30,19 +29,6 @@ public class DomicilioEntity extends BaseEntity implements Serializable
         
         private double costo;
 
-    /**
-     * @return the idDomicilio
-     */
-    public String getIdDomicilio() {
-        return idDomicilio;
-    }
-
-    /**
-     * @param idDomicilio the idDomicilio to set
-     */
-    public void setIdDomicilio(String idDomicilio) {
-        this.idDomicilio = idDomicilio;
-    }
 
     /**
      * @return the fecha
