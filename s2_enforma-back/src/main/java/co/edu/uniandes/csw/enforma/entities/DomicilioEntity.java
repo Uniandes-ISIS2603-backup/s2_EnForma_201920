@@ -9,8 +9,11 @@ import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -20,8 +23,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class DomicilioEntity extends BaseEntity implements Serializable 
 {
-        
-
+ 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
@@ -29,7 +31,24 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private String lugarEntrega;
 
     private Double costo;
-
+    
+    @PodamExclude
+    @OneToOne
+    private QuejasYReclamosEntity queja;
+    
+    @PodamExclude
+    @OneToOne
+    private PagoEntity pago;
+    
+    @PodamExclude
+    @OneToOne
+    private ComidaTipoEntity comidaTipo;
+    
+    @PodamExclude
+    @ManyToOne
+    private ClienteEntity cliente;
+    
+    
     /**
      * @return the fecha
      */
@@ -71,4 +90,61 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     public void setCosto(double costo) {
         this.costo = costo;
     }
+    
+    /**
+     * @return the queja
+     */
+    public QuejasYReclamosEntity getQueja() {
+        return queja;
+    }
+
+    /**
+     * @param queja the queja to set
+     */
+    public void setQueja(QuejasYReclamosEntity queja) {
+        this.queja = queja;
+    }
+
+    /**
+     * @return the pago
+     */
+    public PagoEntity getPago() {
+        return pago;
+    }
+
+    /**
+     * @param pago the pago to set
+     */
+    public void setPago(PagoEntity pago) {
+        this.pago = pago;
+    }
+
+    /**
+     * @return the comidaTipo
+     */
+    public ComidaTipoEntity getComidaTipo() {
+        return comidaTipo;
+    }
+
+    /**
+     * @param comidaTipo the comidaTipo to set
+     */
+    public void setComidaTipo(ComidaTipoEntity comidaTipo) {
+        this.comidaTipo = comidaTipo;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+    
 }
