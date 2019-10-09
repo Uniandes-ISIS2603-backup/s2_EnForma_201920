@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ComidaTipoDTO implements Serializable
 {
     
-    private Long idComidaTipoDTO;
+    private Long id;
    
     private String menu;
     private String momentoDelDia;
@@ -52,7 +52,7 @@ public class ComidaTipoDTO implements Serializable
     {
         if(comidaTipoEntity != null)
         {
-            this.idComidaTipoDTO = comidaTipoEntity.getId();
+            this.id = comidaTipoEntity.getId();
             this.menu = comidaTipoEntity.getMenu();
             this.momentoDelDia = comidaTipoEntity.getMomentoDelDia();
             this.nombre = comidaTipoEntity.getNombre();
@@ -90,6 +90,7 @@ public class ComidaTipoDTO implements Serializable
         comidaTipoEntity.setNombre(this.getNombre());
         comidaTipoEntity.setMomentoDelDia(this.getMomentoDelDia());
         comidaTipoEntity.setMenu(this.getMenu());
+        comidaTipoEntity.setId(id);
         if(this.administrador != null)
         {
             comidaTipoEntity.setAdministrador(this.administrador.toEntity());
@@ -171,6 +172,20 @@ public class ComidaTipoDTO implements Serializable
      @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

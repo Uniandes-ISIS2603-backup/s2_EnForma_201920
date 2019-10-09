@@ -5,8 +5,21 @@
  */
 package co.edu.uniandes.csw.enforma.test.persistence;
 
+import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
+import co.edu.uniandes.csw.enforma.ejb.ComidaTipoLogic;
+import co.edu.uniandes.csw.enforma.persistence.QuejasYReclamosPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistence;
+import co.edu.uniandes.csw.enforma.ejb.DomicilioLogic;
+import co.edu.uniandes.csw.enforma.ejb.PagoLogic;
+import co.edu.uniandes.csw.enforma.ejb.QuejasYReclamosLogic;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
+import co.edu.uniandes.csw.enforma.entities.PagoEntity;
+import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
+import co.edu.uniandes.csw.enforma.persistence.PagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -35,8 +48,21 @@ public class DomicilioPersistenceTest
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(DomicilioEntity.class)
-                .addClass(DomicilioPersistence.class)
+                .addPackage(DomicilioEntity.class.getPackage())
+                .addPackage(DomicilioPersistence.class.getPackage())
+                .addPackage(DomicilioLogic.class.getPackage())
+                .addPackage(QuejasYReclamosEntity.class.getPackage())
+                .addPackage(QuejasYReclamosPersistence.class.getPackage())
+                .addPackage(QuejasYReclamosLogic.class.getPackage())
+                .addPackage(ComidaTipoEntity.class.getPackage())
+                .addPackage(ComidaTipoPersistence.class.getPackage())
+                .addPackage(ComidaTipoLogic.class.getPackage())
+                .addPackage(PagoEntity.class.getPackage())
+                .addPackage(PagoPersistence.class.getPackage())
+                .addPackage(PagoLogic.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClientePersistence.class.getPackage())
+                .addPackage(ClienteLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }

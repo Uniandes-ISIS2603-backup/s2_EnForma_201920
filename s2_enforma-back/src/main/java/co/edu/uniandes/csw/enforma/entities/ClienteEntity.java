@@ -49,9 +49,9 @@ public class ClienteEntity extends BaseEntity implements Serializable
 // @ManyToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 // private List<QuejasYReclamosEntity> quejas;
 // 
-// @PodamExclude
-// @OneToOne
-// private TarjetaPrepagoEntity tarjetaPrepago;
+ @PodamExclude
+@OneToOne
+ private TarjetaPrepagoEntity tarjetaPrepago;
  
 
  public ClienteEntity(){
@@ -212,18 +212,18 @@ public class ClienteEntity extends BaseEntity implements Serializable
 //        this.quejas = quejas;
 //    }
 //
-//    /**
-//     * @return the tarjetaPrepago
-//     */
-//    public TarjetaPrepagoEntity getTarjetaPrepago() {
-//        return tarjetaPrepago;
-//    }
-//
-//    /**
-//     * @param tarjetaPrepago the tarjetaPrepago to set
-//     */
-//    public void setTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago)
-//    {
-//      this.tarjetaPrepago = tarjetaPrepago;
-//    }
+    /**
+     * @return the tarjetaPrepago
+     */
+    public TarjetaPrepagoEntity getTarjetaPrepago() {
+        return tarjetaPrepago;
+    }
+
+    /**
+     * @param tarjetaPrepago the tarjetaPrepago to set
+     */
+    public void setTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago)
+    {
+      this.tarjetaPrepago = tarjetaPrepago;
+    }
 }
