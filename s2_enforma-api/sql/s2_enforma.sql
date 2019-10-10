@@ -5,6 +5,8 @@ delete from DomicilioEntity;
 delete from TarjetaPrepagoEntity;
 delete from ComidaTipoEntity;
 delete from AdministradorEntity;
+delete from CalificacionEntity;
+delete from QuejasYReclamosEntity;
 
 
 
@@ -34,5 +36,9 @@ insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 
 
 insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (100, 20000, 0, 'Ok',200);
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (200, 40000,1234, 1, 'Ok',100);
-insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
+--insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
 
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (100, 5, 'Excelente', '2019-10-10 05:31:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (200, 3, 'Regular', '2019-10-10 05:32:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (300, 1, 'Malo', '2019-10-10 05:33:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (400, 5, '', '2019-10-10 05:34:02');
