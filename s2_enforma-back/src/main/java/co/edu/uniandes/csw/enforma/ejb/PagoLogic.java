@@ -64,11 +64,11 @@ public class PagoLogic {
      } 
      
      
-     public List<PagoEntity> getPagos() {
+     public PagoEntity getPagos(Long domiciliosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los pagos");
-        List<PagoEntity> pagos = persistence.findAll();
+        DomicilioEntity domenti= domicilioPersistence.find(domiciliosId);
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los pagos");
-        return pagos;
+        return domenti.getPago();
     }
 
     /**

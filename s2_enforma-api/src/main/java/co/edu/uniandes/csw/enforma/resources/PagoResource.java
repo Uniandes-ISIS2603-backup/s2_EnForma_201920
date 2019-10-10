@@ -29,18 +29,16 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Elina Jaimes
  */
-
 @Produces("application/json")
 @Consumes("application/json")
-@RequestScoped
 public class PagoResource {
-    
+
     private static final Logger LOGGER = Logger.getLogger(PagoResource.class.getName());
 
     @Inject
     private PagoLogic pagoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
-    
-   /**
+
+    /**
      * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico con un id auto-generado por la
      * base de datos.
@@ -55,7 +53,11 @@ public class PagoResource {
     @POST
     public PagoDTO createPago(@PathParam("domiciliosId") Long domiciliosId, PagoDTO pago) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "PagoResource createPago: input: {0}", pago);
+
         PagoDTO nuevoPagoDTO = new PagoDTO(pagoLogic.crearPago(domiciliosId, pago.toEntity()));
+        if (nuevoPagoDTO == null) {
+            throw new WebApplicationException("El recurso /books/" + domiciliosId + "/reviews" + "no existe.", 404);
+        }
         LOGGER.log(Level.INFO, "PagoResource createPago: output: {0}", nuevoPagoDTO);
         return nuevoPagoDTO;
     }
@@ -64,15 +66,19 @@ public class PagoResource {
      * Busca y devuelve todas las reseñas que existen en un libro.
      *
      * @param domiciliosId El ID del libro del cual se buscan las reseñas
-     * @return JSONArray {@link PagoDTO} - Las reseñas encontradas en el
-     * libro. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link PagoDTO} - Las reseñas encontradas en el libro.
+     * Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<PagoDTO> getPagos() {
+    public PagoDTO getPagos(@PathParam("domiciliosId") Long domiciliosId) {
         LOGGER.log(Level.INFO, "PagoResource getPagos: input: {0}");
-        List<PagoDTO> listaDTOs = listEntity2DTO(pagoLogic.getPagos());
-        LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDTOs);
-        return listaDTOs;
+        PagoEntity jeje = pagoLogic.getPagos(domiciliosId);
+        if (jeje == null) {
+            throw new WebApplicationException("El recurso /books/" + domiciliosId + "/reviews" + "no existe.", 404);
+        }
+        PagoDTO paguito = new PagoDTO(jeje);
+        LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", paguito);
+        return paguito;
     }
 
     /**
@@ -168,5 +174,5 @@ public class PagoResource {
         }
         return list;
     }
-    
+
 }

@@ -156,20 +156,20 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      */
     
     
-     @Test
-    public void getPagosTest() {
-        List<PagoEntity> list = pagoLogica.getPagos();
-        Assert.assertEquals(data.size(), list.size());
-        for (PagoEntity entity : list) {
-            boolean found = false;
-            for (PagoEntity storedEntity : data) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+//     @Test
+//    public void getPagosTest() {
+//        List<PagoEntity> list = pagoLogica.getPagos();
+//        Assert.assertEquals(data.size(), list.size());
+//        for (PagoEntity entity : list) {
+//            boolean found = false;
+//            for (PagoEntity storedEntity : data) {
+//                if (entity.getId().equals(storedEntity.getId())) {
+//                    found = true;
+//                }
+//            }
+//            Assert.assertTrue(found);
+//        }
+//    }
 
     /**
      * Prueba para consultar un Pago.
