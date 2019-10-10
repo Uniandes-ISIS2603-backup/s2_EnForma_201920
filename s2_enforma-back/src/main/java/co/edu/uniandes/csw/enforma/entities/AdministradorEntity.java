@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.enforma.entities;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -11,36 +12,29 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
+
 /**
  *
  * @author Elina Jaimes
  */
 @Entity
 public class AdministradorEntity extends BaseEntity implements Serializable {
-    
-    
+
     private String nombre;
     private String contrasena;
     private String username;
-/**    
+
     @PodamExclude
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<DietaTipoEntity> dietaTipo;
-    
+
     @PodamExclude
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ComidaTipoEntity> comidasTipo;
-    
-    
-    
-*/
-    
-    
-    public AdministradorEntity()
-    {
+
+    public AdministradorEntity() {
     }
-    
-    
+
     /**
      * @return the nombre
      */
@@ -86,32 +80,29 @@ public class AdministradorEntity extends BaseEntity implements Serializable {
     /**
      * @return the dietaTipo
      */
-//    public List<DietaTipoEntity> getDietaTipo() {
-//        return dietaTipo;
-//    }
+    public List<DietaTipoEntity> getDietaTipo() {
+        return dietaTipo;
+    }
 
     /**
      * @param dietaTipo the dietaTipo to set
      */
-//    public void setDietaTipo(List<DietaTipoEntity> dietaTipo) {
-//        this.dietaTipo = dietaTipo;
-//    }
+    public void setDietaTipo(List<DietaTipoEntity> dietaTipo) {
+        this.dietaTipo = dietaTipo;
+    }
 
     /**
      * @return the comidasTipo
      */
-  //  public List<ComidaTipoEntity> getComidasTipo() {
-  //      return comidasTipo;
-  //  }
+    public List<ComidaTipoEntity> getComidasTipo() {
+        return comidasTipo;
+    }
 
     /**
      * @param comidasTipo the comidasTipo to set
      */
-  //  public void setComidasTipo(List<ComidaTipoEntity> comidasTipo) {
-  //      this.comidasTipo = comidasTipo;
-  //  }
-    
-    
-    
-    
+    public void setComidasTipo(List<ComidaTipoEntity> comidasTipo) {
+        this.comidasTipo = comidasTipo;
+    }
+
 }

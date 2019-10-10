@@ -22,3 +22,7 @@ insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa
 
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (100,'Fusion', 'Desayuno', 300 , 'huevo,arepa,queso y chocolate' );
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (200,'Reto', 'Almuerzo', 400 , 'buriitoooototototototo' );
+
+insert into AdministradorEntity (nombre, contrasena, username) values ('Arri Ondricek', '09231yb370', 'Arri');
+insert into AdministradorEntity (nombre, contrasena, username) values ('Brandise Nary', '16144yv107', 'Brandise');
+insert into AdministradorEntity (nombre, contrasena, username) values ('Karel Tellenbrook', '97237ke365', 'Karel');
