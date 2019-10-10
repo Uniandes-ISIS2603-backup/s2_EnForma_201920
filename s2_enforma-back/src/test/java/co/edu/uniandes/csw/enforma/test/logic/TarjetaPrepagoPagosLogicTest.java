@@ -33,7 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author Juan Sebastián Clavijo
  */
-@RunWith(Arquillian.class)  
+//@RunWith(Arquillian.class)  
 public class TarjetaPrepagoPagosLogicTest 
 {
     private PodamFactory factory = new PodamFactoryImpl();
@@ -55,92 +55,92 @@ public class TarjetaPrepagoPagosLogicTest
     
     private List<DomicilioEntity> domiciliosData = new ArrayList<DomicilioEntity>();
     
-     /**
-     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
-     * El jar contiene las clases, el descriptor de la base de datos y el
-     * archivo beans.xml para resolver la inyección de dependencias.
-     */
-    @Deployment
-    public static JavaArchive createDeployment() 
-    {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(TarjetaPrepagoEntity.class.getPackage())
-                .addPackage(TarjetaPrepagoLogic.class.getPackage())
-                .addPackage(TarjetaPrepagoPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
-    }
+//     /**
+//     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+//     * El jar contiene las clases, el descriptor de la base de datos y el
+//     * archivo beans.xml para resolver la inyección de dependencias.
+//     */
+//    @Deployment
+//    public static JavaArchive createDeployment() 
+//    {
+//        return ShrinkWrap.create(JavaArchive.class)
+//                .addPackage(TarjetaPrepagoEntity.class.getPackage())
+//                .addPackage(TarjetaPrepagoLogic.class.getPackage())
+//                .addPackage(TarjetaPrepagoPersistence.class.getPackage())
+//                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+//                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+//    }
+//    
+//    /**
+//     * Configuración inicial de la prueba.
+//     */
+//    @Before
+//    public void configTest() 
+//    {
+//        try {
+//            utx.begin();
+//            clearData();
+//            insertData();
+//            utx.commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            try {
+//                utx.rollback();
+//            } catch (Exception e1) {
+//                e1.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Limpia las tablas que están implicadas en la prueba.
+//     */
+//    private void clearData() 
+//    {
+//        em.createQuery("delete from PagoEntity").executeUpdate();
+//        em.createQuery("delete from TarjetaPrepagoEntity").executeUpdate();
+//        em.createQuery("delete from DomicilioEntity").executeUpdate();
+//
+//    }
+//
+//    /**
+//     * Inserta los datos iniciales para el correcto funcionamiento de las
+//     * pruebas.
+//     */
+//    private void insertData() 
+//    {
+//        
+//        for (int i = 0; i < 3; i++) {
+//            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
+//            em.persist(entity);
+//            domiciliosData.add(entity);
+//        }
+//        for (int i = 0; i < 3; i++) 
+//        {
+//            PagoEntity pagos = factory.manufacturePojo(PagoEntity.class);
+//            //pagos.setOrden(domiciliosData.get(i));
+//            em.persist(pagos);
+//            pagosData.add(pagos);
+//
+//        }
+//        for (int i = 0; i < 3; i++) 
+//        {
+//            TarjetaPrepagoEntity entity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
+//            em.persist(entity);
+//            data.add(entity);
+//            
+//                pagosData.get(i).setOrden(domiciliosData.get(i));
+//               pagosData.get(i).setTarjetaPrepago(entity);
+//               
+//
+//        }
+//        
+//        
+//    }
     
-    /**
-     * Configuración inicial de la prueba.
-     */
-    @Before
-    public void configTest() 
-    {
-        try {
-            utx.begin();
-            clearData();
-            insertData();
-            utx.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            try {
-                utx.rollback();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Limpia las tablas que están implicadas en la prueba.
-     */
-    private void clearData() 
-    {
-        em.createQuery("delete from PagoEntity").executeUpdate();
-        em.createQuery("delete from TarjetaPrepagoEntity").executeUpdate();
-        em.createQuery("delete from DomicilioEntity").executeUpdate();
-
-    }
-
-    /**
-     * Inserta los datos iniciales para el correcto funcionamiento de las
-     * pruebas.
-     */
-    private void insertData() 
-    {
-        
-        for (int i = 0; i < 3; i++) {
-            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
-            em.persist(entity);
-            domiciliosData.add(entity);
-        }
-        for (int i = 0; i < 3; i++) 
-        {
-            PagoEntity pagos = factory.manufacturePojo(PagoEntity.class);
-            //pagos.setOrden(domiciliosData.get(i));
-            em.persist(pagos);
-            pagosData.add(pagos);
-
-        }
-        for (int i = 0; i < 3; i++) 
-        {
-            TarjetaPrepagoEntity entity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-            em.persist(entity);
-            data.add(entity);
-            
-                pagosData.get(i).setOrden(domiciliosData.get(i));
-               pagosData.get(i).setTarjetaPrepago(entity);
-               
-
-        }
-        
-        
-    }
-    
-    /**
-     * Prueba para asociar un pagos existente a un tarjeta prepago.
-     */
+//    /**
+//     * Prueba para asociar un pagos existente a un tarjeta prepago.
+//     */
 //    @Test
 //    public void addPagosTest() 
 //    {
@@ -152,10 +152,10 @@ public class TarjetaPrepagoPagosLogicTest
 //        Assert.assertEquals(pagoEntity.getId(), response.getId());
 //    }
 
-    /**
-     * Prueba para obtener una colección de instancias de pagos asociadas a una
-     * instancia tarjeta prepago.
-     */
+//    /**
+//     * Prueba para obtener una colección de instancias de pagos asociadas a una
+//     * instancia tarjeta prepago.
+//     */
 //    @Test
 //    public void getPagosTest() 
 //    {
@@ -164,12 +164,12 @@ public class TarjetaPrepagoPagosLogicTest
 //        Assert.assertEquals(1, list.size());
 //    }
     
-     /**
-     * Prueba para obtener una instancia de pagos asociada a una instancia
-     * tarjeta prepago.
-     *
-     * @throws BusinessLogicException
-     */
+//     /**
+//     * Prueba para obtener una instancia de pagos asociada a una instancia
+//     * tarjeta prepago.
+//     *
+//     * @throws BusinessLogicException
+//     */
 //    @Test
 //    public void getPagoTest() throws BusinessLogicException 
 //    {
@@ -184,12 +184,12 @@ public class TarjetaPrepagoPagosLogicTest
 //        Assert.assertEquals(pagoEntity.getOrden(), response.getOrden());
 //    }
     
-     /**
-     * Prueba para obtener una instancia de pagos asociada a una instancia
-     * tarjeta prepago que no le pertenece.
-     *
-     * @throws BusinessLogicException
-     */
+//     /**
+//     * Prueba para obtener una instancia de pagos asociada a una instancia
+//     * tarjeta prepago que no le pertenece.
+//     *
+//     * @throws BusinessLogicException
+//     */
 //    @Test(expected = BusinessLogicException.class)
 //    public void getPagoNoAsociadoTest() throws BusinessLogicException 
 //    {
@@ -198,10 +198,10 @@ public class TarjetaPrepagoPagosLogicTest
 //        tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId(), pagoEntity.getOrden().getId());
 //    }
 
-    /**
-     * Prueba para remplazar las instancias de pagos asociadas a una instancia
-     * de tarjeta prepago.
-     */
+//    /**
+//     * Prueba para remplazar las instancias de pagos asociadas a una instancia
+//     * de tarjeta prepago.
+//     */
 //    @Test
 //    public void replacePagosTest() 
 //    {
