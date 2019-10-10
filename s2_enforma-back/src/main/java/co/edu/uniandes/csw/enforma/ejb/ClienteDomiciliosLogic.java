@@ -5,20 +5,16 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
+
 import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
-import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
-import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
+
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+
 import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
-import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
-import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
@@ -29,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * Clase que implementa la conexion con la persistencia para la relación entre
  * la entidad de Cliente y Domicilio.
- * @domicilio Sofia Vargas
+ * @author Sofia Vargas
  */
 @Stateless
 public class ClienteDomiciliosLogic 

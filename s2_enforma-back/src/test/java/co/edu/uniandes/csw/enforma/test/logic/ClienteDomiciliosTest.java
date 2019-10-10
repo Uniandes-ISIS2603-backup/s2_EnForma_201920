@@ -30,7 +30,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author @Sofia Vargas
+ * @author Sofia Vargas
  */
 @RunWith(Arquillian.class)
 public class ClienteDomiciliosTest 
