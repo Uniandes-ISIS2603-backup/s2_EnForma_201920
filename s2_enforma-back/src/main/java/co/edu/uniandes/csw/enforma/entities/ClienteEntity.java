@@ -171,50 +171,50 @@ private TarjetaPrepagoEntity tarjetaPrepago;
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-//    /**
-//     * @return the dietaTipo
-//     */
-//    public DietaTipoEntity getDietaTipo() {
-//        return dietaTipo;
-//    }
-//
-//    /**
-//     * @param dietaTipo the dietaTipo to set
-//     */
-//    public void setDietaTipo(DietaTipoEntity dietaTipo) {
-//       this.dietaTipo = dietaTipo;
-//    }
-//
-//    /**
-//     * @return the domicilios
-//     */
-//    public List<DomicilioEntity> getDomicilios() 
-//    {
-//        return domicilios;
-//    }
-//
-//    /**
-//     * @param domicilio the domicilios to set
-//     */
-//   public void setDomicilios(List<DomicilioEntity> domicilios) {
-//        this.domicilios = domicilios;
-//    }
-//
-//    /**
-//     * @return the quejas
-//     */
-//    public List<QuejasYReclamosEntity> getQuejasYReclamos() {
-//        return quejas;
-//   }
-//
-//    /**
-//     * @param quejas the quejas to set
-//     */
-//    public void setQuejasYReclamos(List<QuejasYReclamosEntity> quejas)
-//   {
-//        this.quejas = quejas;
-//    }
-//
+    /**
+     * @return the dietaTipo
+     */
+    public DietaTipoEntity getDietaTipo() {
+        return dietaTipo;
+    }
+
+    /**
+     * @param dietaTipo the dietaTipo to set
+     */
+    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+       this.dietaTipo = dietaTipo;
+    }
+
+    /**
+     * @return the domicilios
+     */
+    public List<DomicilioEntity> getDomicilios() 
+    {
+        return domicilios;
+    }
+
+    /**
+     * @param domicilio the domicilios to set
+     */
+   public void setDomicilios(List<DomicilioEntity> domicilios) {
+        this.domicilios = domicilios;
+    }
+
+    /**
+     * @return the quejas
+     */
+    public List<QuejasYReclamosEntity> getQuejasYReclamos() {
+        return quejas;
+   }
+
+    /**
+     * @param quejas the quejas to set
+     */
+    public void setQuejasYReclamos(List<QuejasYReclamosEntity> quejas)
+   {
+        this.quejas = quejas;
+    }
+
     /**
      * @return the tarjetaPrepago
      */

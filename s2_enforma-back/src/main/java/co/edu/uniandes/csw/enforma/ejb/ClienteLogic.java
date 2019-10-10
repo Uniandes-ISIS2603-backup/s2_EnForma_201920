@@ -130,17 +130,17 @@ public class ClienteLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         
-//        List<QuejasYReclamosEntity> quejas  = getCliente(clienteId).getQuejasYReclamos();
-//        if(quejas != null && !quejas.isEmpty())
-//        {
-//            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
-//        }
-//        List<DomicilioEntity> domicilios  = getCliente(clienteId).getDomicilios();
-//        if(quejas != null && !quejas.isEmpty())
-//        {
-//            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
-//        }
-//       
+        List<QuejasYReclamosEntity> quejas  = getCliente(clienteId).getQuejasYReclamos();
+        if(quejas != null && !quejas.isEmpty())
+        {
+            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
+        }
+        List<DomicilioEntity> domicilios  = getCliente(clienteId).getDomicilios();
+        if(quejas != null && !quejas.isEmpty())
+        {
+            throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");
+        }
+       
         persistence.delete(clienteId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", clienteId);
     }

@@ -148,7 +148,7 @@ public class ClienteResource
         {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }
-       // clienteEditorialLogic.removeEditorial(clientesId);
+        //clienteEditorialLogic.removeEditorial(clientesId);
         clienteLogic.deleteCliente(clientesId);
         LOGGER.info("ClienteResource deleteCliente: output: void");
     }
