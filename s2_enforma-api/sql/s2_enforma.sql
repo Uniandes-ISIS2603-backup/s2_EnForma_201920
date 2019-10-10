@@ -26,3 +26,6 @@ insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) value
 insert into AdministradorEntity (nombre, contrasena, username) values ('Arri Ondricek', '09231yb370', 'Arri');
 insert into AdministradorEntity (nombre, contrasena, username) values ('Brandise Nary', '16144yv107', 'Brandise');
 insert into AdministradorEntity (nombre, contrasena, username) values ('Karel Tellenbrook', '97237ke365', 'Karel');
+
+insert into PagoEntity (monto, esprepago, estadopago, orden_id) values (20000, 0, 'Ok',200);
+insert into PagoEntity (monto,numerotarjeta, esprepago, estadopago, orden_id) values (40000,1234, 1, 'Ok',100);
