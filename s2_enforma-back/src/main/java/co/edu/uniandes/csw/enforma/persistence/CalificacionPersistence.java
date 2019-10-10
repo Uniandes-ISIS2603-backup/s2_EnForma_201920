@@ -54,6 +54,12 @@ public class CalificacionPersistence
         return query.getResultList();
     }
     
+    public CalificacionEntity find(Long calificacionId)
+    {
+        LOGGER.log(Level.INFO, "Consultando la calificaion con id= {0}", calificacionId);
+        return em.find(CalificacionEntity.class, calificacionId);
+    }
+    
     /**
      * Buscar una calificacion
      * Busca si hay alguna calificacion asociada a un cliente, una dieta y con un ID especifico
@@ -62,7 +68,7 @@ public class CalificacionPersistence
      * @param calificacionId id correspondiente a la calificacion buscada
      * @return la calificacion buscada
      */
-    public CalificacionEntity find(Long clienteId, Long dietaId, Long calificacionId)
+    public CalificacionEntity findByClienteYDietaTipo(Long clienteId, Long dietaId, Long calificacionId)
     {
         LOGGER.log(Level.INFO, "Consultando la calificaion con id= {0} del cliente con id = " + clienteId + "de la dieta con id = " + dietaId, calificacionId);
         TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.usuario.id = :clienteId) and (p.dietaTipo.id = :dietaId) and (p.id = :calificacionId)", CalificacionEntity.class);
@@ -200,7 +206,7 @@ public class CalificacionPersistence
     public void delete(Long calificacionId)
     {
         LOGGER.log(Level.INFO, "Borrando la calificacion con el Id={0}", calificacionId);
-        // Se hace uso del mismo método que esta explicado en public CalificacionEntity find(Long id) para obtener la calificacion a borrar.
+        // Se hace uso del mismo método que esta explicado en public CalificacionEntity findByClienteYDietaTipo(Long id) para obtener la calificacion a borrar.
         CalificacionEntity calificacionEntity = em.find(CalificacionEntity.class, calificacionId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
         EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.

@@ -169,16 +169,28 @@ public class CalificacionPersistenceTest
         }
     }
     
-    /**
-     * Prueba para consultar una calificacion
-     */
     @Test
     public void getCalificacionTest()
     {
         CalificacionEntity entity = data.get(0);
+        CalificacionEntity newEntity = cp.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getId(), newEntity.getId());
+        Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());
+        Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+    }
+    
+    /**
+     * Prueba para consultar una calificacion
+     */
+    @Test
+    public void getCalificacionByClienteYDietaTipoTest()
+    {
+        CalificacionEntity entity = data.get(0);
 //        ClienteEntity clienteEntity = dataCliente.get(0);
 //        DietaTipoEntity dietaEntity = dataDieta.get(0);
-        CalificacionEntity newEntity = cp.find(entity.getUsuario().getId(),entity.getDietaTipo().getId(),entity.getId());
+        CalificacionEntity newEntity = cp.findByClienteYDietaTipo(entity.getUsuario().getId(),entity.getDietaTipo().getId(),entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
         Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());

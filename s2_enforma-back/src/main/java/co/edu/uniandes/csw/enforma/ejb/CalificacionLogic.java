@@ -73,6 +73,18 @@ public class CalificacionLogic
         return quejasYReclamos;
     }
     
+    public CalificacionEntity getCalificacion(Long calificacionId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la calificacion con id = {0}",calificacionId);
+        CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionId);
+        if(calificacionEntity == null)
+        {
+            LOGGER.log(Level.INFO, "La calificacion con el id = {0} no existe", calificacionId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la caificacion con id = {0}", calificacionId);
+        return calificacionEntity;
+    }
+    
     public CalificacionEntity getCalificacionesByDietaId(Long dietaId)
     {
        LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las calificaciones de la dieta con id = {0}", dietaId);
@@ -81,10 +93,10 @@ public class CalificacionLogic
        return dieta;
     }
     
-    public CalificacionEntity getCalificacion(Long clienteId, Long dietaId, Long calificacionId)
+    public CalificacionEntity getCalificacionByClienteIdYDietaTipoId(Long clienteId, Long dietaId, Long calificacionId)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la calificacion con id = {0}, hecha por el cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionId);
-        CalificacionEntity calificacionEntity = calificacionPersistence.find(clienteId, dietaId, calificacionId);
+        CalificacionEntity calificacionEntity = calificacionPersistence.findByClienteYDietaTipo(clienteId, dietaId, calificacionId);
         if(calificacionEntity == null)
         {
             LOGGER.log(Level.SEVERE, "La calificacion con el id = {0} no existe", calificacionId);
@@ -93,7 +105,15 @@ public class CalificacionLogic
         return calificacionEntity;
     }
     
-    public CalificacionEntity updateCalificacion(Long clienteId, Long dietaId, CalificacionEntity calificacionEntity) throws BusinessLogicException
+    public CalificacionEntity updateCalificacion(Long calificacionId, CalificacionEntity calificacionEntity)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0}", calificacionId);
+        CalificacionEntity newCalificacionEntity = calificacionPersistence.update(calificacionEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0}", calificacionId);
+        return newCalificacionEntity;
+    }
+    
+    public CalificacionEntity updateCalificacionByClienteIdYDietaTipoId(Long clienteId, Long dietaId, CalificacionEntity calificacionEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0} del cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionEntity.getId());
         
@@ -118,10 +138,21 @@ public class CalificacionLogic
         return newEntity;
     }
     
-    public void deleteCalificacion(Long clienteId, Long dietaId, Long calificacionId) throws BusinessLogicException
+    public void deleteCalificacion(Long calificacionId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la calificacion con id = {0}", calificacionId);
+        CalificacionEntity old = getCalificacion(calificacionId);
+        if(old == null)
+        {
+            throw new BusinessLogicException("La calificacion con id = " + calificacionId);
+        }
+        calificacionPersistence.delete(calificacionId);
+    }
+    
+    public void deleteCalificacionByClienteIdYDietaTipoId(Long clienteId, Long dietaId, Long calificacionId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la calificacion con id = {0} hecha por el cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionId);
-        CalificacionEntity old = getCalificacion(clienteId, dietaId, calificacionId);
+        CalificacionEntity old = getCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacionId);
         if(old == null)
         {
             throw new BusinessLogicException("La calificacion con id = " + calificacionId + " no esta asociada con el cliente con id = " + clienteId + " y/o con la dieta con id = " + dietaId);

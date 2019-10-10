@@ -58,50 +58,50 @@ public class QuejasYReclamosResource
     
     
     
-    @GET
-    @Path("{quejasyreclamosId: \\d+}")
-    public QuejasYReclamosDTO getQuejaOReclamo(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId)
-    {
-        LOGGER.log(Level.INFO, "CalificacionResource getQuejaOReclamo: input: {0}", quejasYReclamosId);
-        QuejasYReclamosEntity quejasYReclamosEntity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
-        if(quejasYReclamosEntity == null)
-        {
-            throw new WebApplicationException("El recurso /quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-        }
-        QuejasYReclamosDTO quejasYReclamosDetailDTO = new QuejasYReclamosDTO(quejasYReclamosEntity);
-        LOGGER.log(Level.INFO, "QuejasYReclamosResource getQuejaOReclamo: output: {0}", quejasYReclamosId);
-        return quejasYReclamosDetailDTO;
-    }
+//    @GET
+//    @Path("{quejasyreclamosId: \\d+}")
+//    public QuejasYReclamosDTO getQuejaOReclamo(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId)
+//    {
+//        LOGGER.log(Level.INFO, "CalificacionResource getQuejaOReclamo: input: {0}", quejasYReclamosId);
+//        QuejasYReclamosEntity quejasYReclamosEntity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
+//        if(quejasYReclamosEntity == null)
+//        {
+//            throw new WebApplicationException("El recurso /quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
+//        }
+//        QuejasYReclamosDTO quejasYReclamosDetailDTO = new QuejasYReclamosDTO(quejasYReclamosEntity);
+//        LOGGER.log(Level.INFO, "QuejasYReclamosResource getQuejaOReclamo: output: {0}", quejasYReclamosId);
+//        return quejasYReclamosDetailDTO;
+//    }
     
-    @PUT
-    @Path("{quejasyreclamosId: \\d+}")
-    public QuejasYReclamosDTO updateQuejasYReclamos(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId, QuejasYReclamosDTO quejasYReclamos) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: input: id: {0}, quejasYReclamos: {1}", new Object[]{quejasYReclamosId, quejasYReclamos});
-        quejasYReclamos.setId(quejasYReclamosId);
-        if(quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId) == null)
-        {
-            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-        }
-        QuejasYReclamosDTO quejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.updateQuejasYReclamos(clienteId, domicilioId, quejasYReclamos.toEntity()));
-        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: output: {0}", quejasYReclamosDTO);
-        return quejasYReclamosDTO;
-    }
+//    @PUT
+//    @Path("{quejasyreclamosId: \\d+}")
+//    public QuejasYReclamosDTO updateQuejasYReclamos(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId, QuejasYReclamosDTO quejasYReclamos) throws BusinessLogicException
+//    {
+//        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: input: id: {0}, quejasYReclamos: {1}", new Object[]{quejasYReclamosId, quejasYReclamos});
+//        quejasYReclamos.setId(quejasYReclamosId);
+//        if(quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId) == null)
+//        {
+//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
+//        }
+//        QuejasYReclamosDTO quejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.updateQuejasYReclamos(clienteId, domicilioId, quejasYReclamos.toEntity()));
+//        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: output: {0}", quejasYReclamosDTO);
+//        return quejasYReclamosDTO;
+//    }
     
     
-    @DELETE
-    @Path("{quejasyreclamosId: \\d+}")
-    public void deleteQuejasYReclamos(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "QuejasYReclamosResource deleteQuejasYReclamos: input: {0}", quejasYReclamosId);
-        QuejasYReclamosEntity entity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
-        if(entity == null)
-        {
-            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-        }
-        quejasYReclamosLogic.deleteQuejasYReclamos(clienteId, domicilioId, quejasYReclamosId);
-        LOGGER.info("CalificacionResource deleteCalificacion: output: void");
-    }
+//    @DELETE
+//    @Path("{quejasyreclamosId: \\d+}")
+//    public void deleteQuejasYReclamos(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId) throws BusinessLogicException
+//    {
+//        LOGGER.log(Level.INFO, "QuejasYReclamosResource deleteQuejasYReclamos: input: {0}", quejasYReclamosId);
+//        QuejasYReclamosEntity entity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
+//        if(entity == null)
+//        {
+//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
+//        }
+//        quejasYReclamosLogic.deleteQuejasYReclamos(clienteId, domicilioId, quejasYReclamosId);
+//        LOGGER.info("CalificacionResource deleteCalificacion: output: void");
+//    }
     
     
     /**
