@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
+import co.edu.uniandes.csw.enforma.entities.AdministradorEntity;
 import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistence;
 //import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.List;
@@ -30,6 +32,10 @@ public class ComidaTipoLogic {
     //n este caso payara (servidor de aplicaciones o contenedor) es el que crea los objetos.
     @Inject
     private ComidaTipoPersistence persistenceComidaTipo;
+    
+    //esta es la relación
+     @Inject
+    private AdministradorPersistence administradorPersistence;
     
     /**
      * 
@@ -181,6 +187,8 @@ public class ComidaTipoLogic {
      
      
      }
+
+    
      
     
    

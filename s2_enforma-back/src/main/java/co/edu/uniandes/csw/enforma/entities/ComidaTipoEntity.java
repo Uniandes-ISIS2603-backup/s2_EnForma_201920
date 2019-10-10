@@ -26,6 +26,9 @@ public class ComidaTipoEntity extends BaseEntity implements Serializable
     @PodamExclude
     @ManyToOne
     private AdministradorEntity administrador;
+    
+    
+    
     private String momentoDelDia;
     
     
