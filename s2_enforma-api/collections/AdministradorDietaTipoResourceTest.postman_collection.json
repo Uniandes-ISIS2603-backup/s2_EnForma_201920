@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "ddda7cf9-d29d-46b3-9460-1489d0c83af7",
+		"name": "AdministradorDietaTipoResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "979992b2-c9a7-436c-9b43-153840403f2a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"contrasena\": \"16144yv107\",\r\n        \"nombre\": \"Mari\",\r\n        \"username\": \"Poppins\"\r\n }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear administrador 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "979992b2-c9a7-436c-9b43-153840403f2a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"contrasena\": \"16144yv107\",\r\n        \"nombre\": \"Mari\",\r\n        \"username\": \"Nera\"\r\n }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear DietaTipo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"caloriasMax\": 25,\r\n        \"caloriasMin\": 20,\r\n        \"cantidadAzucar\": 50,\r\n        \"cantidadFibra\": 50,\r\n        \"cantidadGrasa\": 50,\r\n        \"id\": 4545,\r\n        \"nombre\": \"MadreMarthaPerdoneme\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear DietaTipo 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"caloriasMax\": 25,\r\n        \"caloriasMin\": 20,\r\n        \"cantidadAzucar\": 50,\r\n        \"cantidadFibra\": 50,\r\n        \"cantidadGrasa\": 50,\r\n        \"id\": 455,\r\n        \"nombre\": \"Quw\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una DietaTipo por un Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ad9a40c-f7b2-44b5-839d-2b9accbdff83",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/dietas/{{dieta}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{jesus}}",
+						"dietas",
+						"{{dieta}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener las dietastipo creadas por un administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73c8816e-0bf7-4026-888a-b01506c2831e",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Editorial count with books\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{jesus}}",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una DietaTipo de un administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8fd9e63c-479e-49d7-8038-b096a582ab01",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/comidastipo/{{dieta}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{jesus}}",
+						"comidastipo",
+						"{{dieta}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar comidaTipo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7417450-1c16-4ee8-af65-1bb7a77deba0",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/ComidasTipo/{{dieta}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"ComidasTipo",
+						"{{dieta}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "864401bf-b7f7-44d8-871e-e03b66680fc1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{adminde}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{adminde}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

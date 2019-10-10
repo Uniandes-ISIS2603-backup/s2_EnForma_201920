@@ -26,9 +26,9 @@ public class QuejasYReclamosDTO implements Serializable
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fecha;
     
-    //private UsuarioDTO usuario;
+    private ClienteDTO cliente;
     
-    //private DomicilioDTO domicilio;
+    private DomicilioDTO domicilio;
     
     
     public QuejasYReclamosDTO()
@@ -45,9 +45,8 @@ public class QuejasYReclamosDTO implements Serializable
             this.descripcion = quejasYReclamosEntity.getDescripcion();
             this.asusnto = quejasYReclamosEntity.getAsunto();
             this.fecha = quejasYReclamosEntity.getFecha();
-            
-            
-            
+            this.cliente = new ClienteDTO(quejasYReclamosEntity.getUsuario());
+            this.domicilio = new DomicilioDTO(quejasYReclamosEntity.getDomicilio());
         }
     }
     
@@ -59,8 +58,8 @@ public class QuejasYReclamosDTO implements Serializable
         quejasYReclamosEntity.setAsunto(this.getAsusnto());
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
         quejasYReclamosEntity.setFecha(this.getFecha());
-        
-        
+        quejasYReclamosEntity.setUsuario(this.getCliente().toEntity());
+        quejasYReclamosEntity.setDomicilio(this.getDomicilio().toEntity());
         return quejasYReclamosEntity;
     }
 
@@ -118,6 +117,34 @@ public class QuejasYReclamosDTO implements Serializable
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the domicilio
+     */
+    public DomicilioDTO getDomicilio() {
+        return domicilio;
+    }
+
+    /**
+     * @param domicilio the domicilio to set
+     */
+    public void setDomicilio(DomicilioDTO domicilio) {
+        this.domicilio = domicilio;
     }
     
     

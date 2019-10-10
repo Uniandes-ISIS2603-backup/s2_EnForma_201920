@@ -6,9 +6,15 @@
 package co.edu.uniandes.csw.enforma.test.logic;
 
 import co.edu.uniandes.csw.enforma.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
+import co.edu.uniandes.csw.enforma.ejb.DietaTipoLogic;
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -44,7 +50,11 @@ public class CalificacionLogicTest
     @Inject
     private UserTransaction utx;
     
-    private List<CalificacionEntity> data = new ArrayList<>();
+    private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
+    
+    private List<ClienteEntity> clienteData = new ArrayList<ClienteEntity>();
+    
+    private List<DietaTipoEntity> dietaData = new ArrayList<DietaTipoEntity>();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -53,6 +63,12 @@ public class CalificacionLogicTest
                 .addPackage(CalificacionEntity.class.getPackage())
                 .addPackage(CalificacionLogic.class.getPackage())
                 .addPackage(CalificacionPersistence.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClienteLogic.class.getPackage())
+                .addPackage(ClientePersistence.class.getPackage())
+                .addPackage(DietaTipoEntity.class.getPackage())
+                .addPackage(DietaTipoLogic.class.getPackage())
+                .addPackage(DietaTipoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -84,6 +100,8 @@ public class CalificacionLogicTest
     private void clearData() 
     {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
+        em.createQuery("delete from DietaTipoEntity").executeUpdate();
     }
 
     /**
@@ -92,8 +110,23 @@ public class CalificacionLogicTest
      */
     private void insertData() 
     {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entity);
+            clienteData.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
+            DietaTipoEntity entity = factory.manufacturePojo(DietaTipoEntity.class);
+            em.persist(entity);
+            dietaData.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            entity.setUsuario(clienteData.get(0));
+            entity.setDietaTipo(dietaData.get(0));
             em.persist(entity);
             data.add(entity);
         }
@@ -103,7 +136,9 @@ public class CalificacionLogicTest
     public void createCalificacionTest() throws BusinessLogicException
     {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
+        newEntity.setUsuario(clienteData.get(0));
+        newEntity.setDietaTipo(dietaData.get(0));
+        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId() ,newEntity);
         Assert.assertNotNull(result);
         
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
@@ -114,19 +149,41 @@ public class CalificacionLogicTest
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void createCalificacionPuntajeNull() throws BusinessLogicException
+    public void createCalificacionPuntajeNullTest() throws BusinessLogicException
     {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setUsuario(clienteData.get(0));
+        newEntity.setDietaTipo(dietaData.get(0));
         newEntity.setPuntaje(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId(), newEntity);
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void createCalificacionFechaNull() throws BusinessLogicException
+    public void createCalificacionFechaNullTest() throws BusinessLogicException
     {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setUsuario(clienteData.get(0));
+        newEntity.setDietaTipo(dietaData.get(0));
         newEntity.setfecha(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId(), newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionDietaTipoNullTest() throws BusinessLogicException
+    {
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setUsuario(clienteData.get(0));
+        newEntity.setDietaTipo(null);
+        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createCalificacionClienteNullTest() throws BusinessLogicException
+    {
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setDietaTipo(dietaData.get(0));
+        newEntity.setUsuario(null);
+        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
     }
     
     @Test 
@@ -154,7 +211,19 @@ public class CalificacionLogicTest
     public void getCalificacionTest()
     {
         CalificacionEntity entity = data.get(0);
-        CalificacionEntity result = calificacionLogic.getCalificacion(entity.getId());
+        CalificacionEntity result = calificacionLogic.getCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), entity.getId());
+        Assert.assertNotNull(result);
+        Assert.assertEquals(entity.getId(), result.getId());
+        Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
+        Assert.assertEquals(entity.getComentario(), result.getComentario());
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
+    }
+    
+    @Test
+    public void getCalificacionByDietaTipoTest(Long dietaId)
+    {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity result = calificacionLogic.getCalificacionesByDietaId(dietaData.get(0).getId());
         Assert.assertNotNull(result);
         Assert.assertEquals(entity.getId(), result.getId());
         Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
@@ -169,7 +238,7 @@ public class CalificacionLogicTest
         CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
         pojoEntity.setId(entity.getId());
         
-        calificacionLogic.updateCalificacion(pojoEntity);
+        calificacionLogic.updateCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), pojoEntity);
         CalificacionEntity result = em.find(CalificacionEntity.class, entity.getId());
         
          Assert.assertEquals(pojoEntity.getId(), result.getId());
@@ -185,6 +254,6 @@ public class CalificacionLogicTest
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setfecha(null);
         newEntity.setId(entity.getId());
-        calificacionLogic.updateCalificacion(newEntity);
+        calificacionLogic.updateCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
     }
 }

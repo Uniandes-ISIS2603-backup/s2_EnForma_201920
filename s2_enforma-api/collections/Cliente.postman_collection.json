@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "b6c9421a-1105-4b4b-a382-f4ca8fe324df",
+		"name": "Cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47bea183-b496-478a-8500-bb1838f06c8e",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t \"contrasenia\": \"987654321\",\r\n        \"edad\": 26,\r\n        \"gluten\": false,\r\n        \"id\": 300,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Sofia\",\r\n        \"objetivos\": \"Tonificar\",\r\n        \"peso\": 86.5,\r\n        \"userName\": \"Ssofia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear cliente 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f1033de-ca18-4415-b3f3-f8c0e2e62c43",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a2\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t \"contrasenia\": \"1234\",\r\n        \"edad\": 28,\r\n        \"gluten\": true,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Santiago \",\r\n        \"objetivos\": \"Ganar masa muscular\",\r\n        \"peso\": 76.5,\r\n        \"userName\": \"Santiagoo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los clientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f606c75f-1bca-46dd-a590-a0b58961ba53",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
+							"tests[\"authors count\"] = data.length >= 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7909102b-d45e-4b37-9f18-0477aeb112ad",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3118d170-e7f6-4270-b83c-a932ec4e6b71",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"contrasenia\": \"123456789\",\n        \"edad\": 20,\n        \"gluten\": false,\n        \"id\": 200,\n        \"lactosa\": false,\n        \"nombre\": \"Elina\",\n        \"objetivos\": \"bajar de peso\",\n        \"peso\": 62.5,\n        \"userName\": \"mmaria\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89fcb600-d876-4eff-b4f1-d71d3e42501e",
+						"exec": [
+							"tests[\"No se deberia obtener un cliente con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /clientes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6bee52c3-4a41-4255-88d6-2b15cb290dcb",
+						"exec": [
+							"tests[\"No se deberia actualizar un cliente con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /clientes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contrasenia\": \"987654\",\r\n    \"edad\": 25,\r\n    \"gluten\": false,\r\n    \"id\": 100,\r\n    \"lactosa\": true,\r\n    \"nombre\": \"Juanes\",\r\n    \"objetivos\": \"Tonificar\",\r\n    \"peso\": 86.5,\r\n    \"userName\": \"Jjuan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cde002b0-eef3-4c47-be48-59e6e381754d",
+						"exec": [
+							"tests[\"No se deberia borrar un cliente con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /clientes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0af8520-6934-4801-95fe-d2f6cbb49249",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar el cliente 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02d79bfb-85ec-40e0-aa0b-f6dcf110275a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_a2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

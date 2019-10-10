@@ -6,8 +6,12 @@
 package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,13 +31,24 @@ public class CalificacionLogic
     @Inject
     private CalificacionPersistence calificacionPersistence;
     
-    //@Inject
-    //private ClientePersistence clientePersistence;
+    @Inject
+    private ClientePersistence clientePersistence;
     
-    public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException
+    @Inject
+    private DietaTipoPersistence dietaPersistence;
+    
+    public CalificacionEntity createCalificacion(Long clienteId, Long dietaId, CalificacionEntity calificacion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la calificacion");
-        //if(calificacion.getPuntaje() == null || clientePersistence.find(calificacion.getUsuario().getId())== null)
+
+        if(calificacion.getUsuario() == null)
+        {
+            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
+        }
+        if(calificacion.getDietaTipo() == null)
+        {
+            throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");
+        }
         if(calificacion.getPuntaje() == null )
         {
             throw new BusinessLogicException("El puntaje de la calificacion esta sin marcar");
@@ -42,24 +57,34 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("La fecha de la calificacion es null");
         }
-        
-        calificacionPersistence.create(calificacion);
+        ClienteEntity cliente = clientePersistence.find(clienteId);
+        DietaTipoEntity dieta = dietaPersistence.find(dietaId);
+        calificacion.setUsuario(cliente);
+        calificacion.setDietaTipo(dieta);
         LOGGER.log(Level.INFO, "Termian el proceso de creacion de la calificacion");
-        return calificacion;
+        return calificacionPersistence.create(calificacion);
     }
     
     public List<CalificacionEntity> getCalificaciones()
     {
-       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las calificaciones");
-       List<CalificacionEntity> calificaciones = calificacionPersistence.findAll();
-       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas las calificaciones");
-       return calificaciones;
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos las calificaciones");
+        List<CalificacionEntity> quejasYReclamos = calificacionPersistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos las quejas y reclamos");
+        return quejasYReclamos;
     }
     
-    public CalificacionEntity getCalificacion(Long calificacionId)
+    public CalificacionEntity getCalificacionesByDietaId(Long dietaId)
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0}", calificacionId);
-        CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionId);
+       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las calificaciones de la dieta con id = {0}", dietaId);
+       CalificacionEntity dieta = calificacionPersistence.findByDietaTipoId(dietaId);
+       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas las calificaciones de la dieta con id = {0}", dietaId);
+       return dieta;
+    }
+    
+    public CalificacionEntity getCalificacion(Long clienteId, Long dietaId, Long calificacionId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la calificacion con id = {0}, hecha por el cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionId);
+        CalificacionEntity calificacionEntity = calificacionPersistence.find(clienteId, dietaId, calificacionId);
         if(calificacionEntity == null)
         {
             LOGGER.log(Level.SEVERE, "La calificacion con el id = {0} no existe", calificacionId);
@@ -68,24 +93,41 @@ public class CalificacionLogic
         return calificacionEntity;
     }
     
-    public CalificacionEntity updateCalificacion(CalificacionEntity calificacionEntity) throws BusinessLogicException
+    public CalificacionEntity updateCalificacion(Long clienteId, Long dietaId, CalificacionEntity calificacionEntity) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0}", calificacionEntity.getId());
-
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la calificacion con id = {0} del cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionEntity.getId());
+        
+        ClienteEntity clienteEntity = clientePersistence.find(clienteId);
+        if(clienteEntity == null)
+        {
+            throw new BusinessLogicException("El id del cliente que esta generando la calificacion no se encontro");
+        }
+        DietaTipoEntity dietaEntity = dietaPersistence.find(dietaId);
+        if(dietaEntity == null)
+        {
+            throw new BusinessLogicException("El id de la dieta que contiene la calificacion no se encontro");
+        }
         if(!validateFecha(calificacionEntity.getFecha()))
         {
             throw new BusinessLogicException("La fecha es invalida");
         }
+        calificacionEntity.setUsuario(clienteEntity);
+        calificacionEntity.setDietaTipo(dietaEntity);
         CalificacionEntity newEntity  = calificacionPersistence.update(calificacionEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0}", calificacionEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0} del cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionEntity.getId());
         return newEntity;
     }
     
-    public void deleteCalificacion(Long calificacionId)
+    public void deleteCalificacion(Long clienteId, Long dietaId, Long calificacionId) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la calificacion con id = {0}", calificacionId);
-        calificacionPersistence.delete(calificacionId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la calificacion con id = {0}", calificacionId);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la calificacion con id = {0} hecha por el cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionId);
+        CalificacionEntity old = getCalificacion(clienteId, dietaId, calificacionId);
+        if(old == null)
+        {
+            throw new BusinessLogicException("La calificacion con id = " + calificacionId + " no esta asociada con el cliente con id = " + clienteId + " y/o con la dieta con id = " + dietaId);
+        }
+        calificacionPersistence.delete(old.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la calificacion con id = {0} hecha por el cliente con id = " + clienteId + " a la dieta con id = " + dietaId, calificacionId);
     }
     
     private boolean validateFecha(Date fecha)
