@@ -54,7 +54,7 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
                     pagos.add(new PagoDTO(entityPago));
                 }
             }
-            else if(tarjetaPrepagoEntity.getCliente() != null)
+            if(tarjetaPrepagoEntity.getCliente() != null)
             {
                 this.cliente = new ClienteDTO(tarjetaPrepagoEntity.getCliente());
             }
@@ -78,7 +78,7 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
             }
             tarjetaPrepagoEntity.setPagos(pagosEntity);
         }
-        else if(cliente != null)
+        if(cliente != null)
         {
            tarjetaPrepagoEntity.setCliente(this.cliente.toEntity());
         }
