@@ -160,6 +160,16 @@ public class DomicilioResource
         domicilioLogic.deleteDomicilio(domiciliosId);
     }
     
+    @Path("{domiciliosId: \\d+}/pagos")
+    public Class<PagoResource> getpagoResource(@PathParam("domiciliosId") Long domiciliosId)
+    {
+        if(domicilioLogic.getDomicilio(domiciliosId) == null)
+        {
+            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + "/pagos no existe.", 404);
+        }
+        return PagoResource.class;
+    }
+    
     
      /**
      * Lista de entidades a DTO.
