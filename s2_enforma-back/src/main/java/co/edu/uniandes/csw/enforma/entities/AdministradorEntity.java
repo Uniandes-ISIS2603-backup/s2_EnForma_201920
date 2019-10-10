@@ -25,11 +25,11 @@ public class AdministradorEntity extends BaseEntity implements Serializable {
     private String username;
 
     @PodamExclude
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "administrador")
     private List<DietaTipoEntity> dietaTipo;
 
     @PodamExclude
-    @OneToMany(mappedBy = "administrador", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "administrador")
     private List<ComidaTipoEntity> comidasTipo;
 
     public AdministradorEntity() {
