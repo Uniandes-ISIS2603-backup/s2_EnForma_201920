@@ -34,5 +34,5 @@ insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 
 
 insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (100, 20000, 0, 'Ok',200);
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (200, 40000,1234, 1, 'Ok',100);
-insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago) values (56, 40000,1234, 1, 'Ok');
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
 

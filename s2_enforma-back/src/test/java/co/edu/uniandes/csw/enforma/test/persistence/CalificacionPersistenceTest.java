@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.enforma.test.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import co.edu.uniandes.csw.enforma.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,15 +44,23 @@ public class CalificacionPersistenceTest
     @Inject
     UserTransaction utx;
     
-    private List<CalificacionEntity> data = new ArrayList<>();
+    private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
+    
+    private List<ClienteEntity> dataCliente = new ArrayList<ClienteEntity>();
+    
+    private List<DietaTipoEntity> dataDieta = new ArrayList<DietaTipoEntity>();
     
     
     @Deployment
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(CalificacionEntity.class)
-                .addClass(CalificacionPersistence.class)
+                .addPackage(CalificacionEntity.class.getPackage())
+                .addPackage(CalificacionPersistence.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClientePersistence.class.getPackage())
+                .addPackage(DietaTipoEntity.class.getPackage())
+                .addPackage(DietaTipoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
@@ -81,6 +93,8 @@ public class CalificacionPersistenceTest
     private void clearData() 
     {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
+//        em.createQuery("delete from ClienteEntity").executeUpdate();
+//        em.createQuery("delete from DietaTipoEntity").executeUpdate();
     }
     
      /**
@@ -91,7 +105,24 @@ public class CalificacionPersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) 
         {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entity);
+            dataCliente.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
+            DietaTipoEntity entity = factory.manufacturePojo(DietaTipoEntity.class);
+            em.persist(entity);
+            dataDieta.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            if(i == 0)
+            {
+                entity.setUsuario(dataCliente.get(0));
+                entity.setDietaTipo(dataDieta.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -145,7 +176,9 @@ public class CalificacionPersistenceTest
     public void getCalificacionTest()
     {
         CalificacionEntity entity = data.get(0);
-        CalificacionEntity newEntity = cp.find(entity.getId());
+//        ClienteEntity clienteEntity = dataCliente.get(0);
+//        DietaTipoEntity dietaEntity = dataDieta.get(0);
+        CalificacionEntity newEntity = cp.find(entity.getUsuario().getId(),entity.getDietaTipo().getId(),entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
         Assert.assertEquals(entity.getPuntaje(), newEntity.getPuntaje());
@@ -191,7 +224,8 @@ public class CalificacionPersistenceTest
      * Prueba para consultar una calificacion por puntaje
      */
     @Test
-    public void findCalificacionByPuntajeTest() {
+    public void findCalificacionByPuntajeTest() 
+    {
         CalificacionEntity entity = data.get(0);
         CalificacionEntity newEntity = cp.findByPuntaje(entity.getPuntaje());
         Assert.assertNotNull(newEntity);
@@ -202,7 +236,8 @@ public class CalificacionPersistenceTest
      * Prueba para consultar una calificacion por fecha
      */
     @Test
-    public void findCalificacionByFechaTest() {
+    public void findCalificacionByFechaTest() 
+    {
         CalificacionEntity entity = data.get(0);
         CalificacionEntity newEntity = cp.findByFecha(entity.getFecha());
         Assert.assertNotNull(newEntity);
@@ -211,5 +246,20 @@ public class CalificacionPersistenceTest
         newEntity = cp.findByFecha(null);
         Assert.assertNull(newEntity);
     } 
+    
+    /**
+     * Prueba para consultar una calificacion por el id de la dieta a la que pertenece
+     */
+    @Test
+    public void findCalificacionByDietaTipoIdTest()
+    {
+        CalificacionEntity entity = data.get(0);
+        CalificacionEntity newEntity = cp.findByDietaTipoId(entity.getDietaTipo().getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getDietaTipo(), newEntity.getDietaTipo());
+        
+        newEntity = cp.findByDietaTipoId(null);
+        Assert.assertNull(newEntity);
+    }
     
 }

@@ -119,7 +119,8 @@ public class ClienteResource
     {
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: id: {0} , cliente: {1}", new Object[]{clientesId, cliente});
         cliente.setId(clientesId);
-        if (clienteLogic.getCliente(clientesId) == null) {
+        if (clienteLogic.getCliente(clientesId) == null)
+        {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
         }
         ClienteDetailDTO detailDTO = null;

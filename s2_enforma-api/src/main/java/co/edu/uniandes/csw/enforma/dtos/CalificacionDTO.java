@@ -26,16 +26,22 @@ public class CalificacionDTO implements Serializable
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fecha;
     
-    //private UsuarioDTO usuario;
+    private ClienteDTO cliente;
     
-    //private DietaTipoDTO dieta;
+    private DietaTipoDTO dieta;
     
-    
+    /**
+     * Constructor por defecto
+     */
     public CalificacionDTO()
     {
         
     }
     
+    /**
+     * Constructor a partir de una entidad
+     * @param calificacionEntity La entidad de la cual se construye el DTO
+     */
     public CalificacionDTO(CalificacionEntity calificacionEntity)
     {
         if(calificacionEntity != null)
@@ -44,9 +50,8 @@ public class CalificacionDTO implements Serializable
             this.puntaje = calificacionEntity.getPuntaje();
             this.comentario = calificacionEntity.getComentario();
             this.fecha = calificacionEntity.getFecha();
-            
-            
-            
+            this.cliente = new ClienteDTO(calificacionEntity.getUsuario());
+            this.dieta = new DietaTipoDTO(calificacionEntity.getDietaTipo()); 
         }
     }
     
@@ -58,10 +63,8 @@ public class CalificacionDTO implements Serializable
         calificacionEntity.setPuntaje(this.getPuntaje());
         calificacionEntity.setComentario(this.getComentario());
         calificacionEntity.setfecha(this.getFecha());
-        
-        
-        
-        
+        calificacionEntity.setUsuario(this.getCliente().toEntity());
+        calificacionEntity.setDietaTipo(this.getDieta().toEntity());
         return calificacionEntity;
     }
 
@@ -119,6 +122,34 @@ public class CalificacionDTO implements Serializable
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the dieta
+     */
+    public DietaTipoDTO getDieta() {
+        return dieta;
+    }
+
+    /**
+     * @param dieta the dieta to set
+     */
+    public void setDieta(DietaTipoDTO dieta) {
+        this.dieta = dieta;
     }
     
     
