@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.enforma.dtos;
 
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import java.io.Serializable;
@@ -24,6 +25,8 @@ public class DietaTipoDetailDTO extends DietaTipoDTO implements Serializable{
     
     private List<ComidaTipoDTO> comidas;
     
+    private List<ClienteDTO> clientes;
+    
     
     
     public DietaTipoDetailDTO(){
@@ -40,18 +43,25 @@ public class DietaTipoDetailDTO extends DietaTipoDTO implements Serializable{
      */
     public DietaTipoDetailDTO(DietaTipoEntity dietaTipoEntity) {
         super(dietaTipoEntity);
-//        if (dietaTipoEntity.getCalificaciones() != null) {
-//            calificaciones = new ArrayList<>();
-//            for (CalificacionEntity entityCalificacion : dietaTipoEntity.getCalificaciones()) {
-//                calificaciones.add(new CalificacionDTO(entityCalificacion));
-//            }
-//        }
-//        if (dietaTipoEntity.getComidas() != null) {
-//            comidas = new ArrayList<>();
-//            for (ComidaTipoEntity entityComida: dietaTipoEntity.getComidas()) {
-//                comidas.add(new ComidaTipoDTO(entityComida));
-//            }
-//        }
+        if (dietaTipoEntity.getCalificaciones() != null) {
+            calificaciones = new ArrayList<>();
+            for (CalificacionEntity entityCalificacion : dietaTipoEntity.getCalificaciones()) {
+                calificaciones.add(new CalificacionDTO(entityCalificacion));
+            }
+        }
+        if (dietaTipoEntity.getComidas() != null) {
+            comidas = new ArrayList<>();
+            for (ComidaTipoEntity entityComida: dietaTipoEntity.getComidas()) {
+                comidas.add(new ComidaTipoDTO(entityComida));
+            }
+        }
+
+        if (dietaTipoEntity.getClientes() != null) {
+            clientes = new ArrayList<>();
+            for (ClienteEntity clienteEntity: dietaTipoEntity.getClientes()) {
+                clientes.add(new ClienteDTO(clienteEntity));
+            }
+        }
     }
     
     
@@ -64,20 +74,28 @@ public class DietaTipoDetailDTO extends DietaTipoDTO implements Serializable{
     @Override
     public DietaTipoEntity toEntity() {
         DietaTipoEntity dietaTipoEntity = super.toEntity();
-//        if (calificaciones != null) {
-//            List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
-//            for (CalificacionDTO dtoCalificacion : getCalificaciones()) {
-//                calificacionesEntity.add(dtoCalificacion.toEntity());
-//            }
-//            dietaTipoEntity.setCalificaciones(calificacionesEntity);
-//        }
-//        if (comidas != null) {
-//            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
-//            for (ComidaTipoDTO dtoComida : getComidas()) {
-//                comidasEntity.add(dtoComida.toEntity());
-//            }
-//            dietaTipoEntity.setComidas(comidasEntity);
-//        }
+        if (calificaciones != null) {
+            List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
+            for (CalificacionDTO dtoCalificacion : getCalificaciones()) {
+                calificacionesEntity.add(dtoCalificacion.toEntity());
+            }
+            dietaTipoEntity.setCalificaciones(calificacionesEntity);
+        }
+        if (comidas != null) {
+            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
+            for (ComidaTipoDTO dtoComida : getComidas()) {
+                comidasEntity.add(dtoComida.toEntity());
+            }
+            dietaTipoEntity.setComidas(comidasEntity);
+        }
+        if (clientes != null) {
+            List<ClienteEntity> clientesEntity = new ArrayList<>();
+            for (ClienteDTO dtoCliente : getClientes()) {
+                clientesEntity.add(dtoCliente.toEntity());
+            }
+            dietaTipoEntity.setClientes(clientesEntity);
+        }
+
         return dietaTipoEntity;
     }
     
@@ -122,6 +140,20 @@ public class DietaTipoDetailDTO extends DietaTipoDTO implements Serializable{
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<ClienteDTO> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<ClienteDTO> clientes) {
+        this.clientes = clientes;
     }
     
     
