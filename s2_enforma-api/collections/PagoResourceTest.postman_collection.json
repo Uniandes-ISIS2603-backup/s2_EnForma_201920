@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "25be7b95-2412-4739-b98d-b5b52d680450",
+		"name": "PagoResourceTest",
+		"description": "Pago Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd8c5f01-7cec-4d72-bb5e-47c99e1adf7a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"costo\": 23000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Medellín\"\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73368d0c-d3b1-4d9b-ba87-31e976205285",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"esPrepago\": false,\r\n    \"estadoPago\": \"Ok\",\r\n    \"monto\": 23000.0\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_d}}/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_d}}",
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar un pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60742bc9-02c7-4c6b-b1ff-157b58cb86cd",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_d1}}/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_d1}}",
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar un pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16688ddd-98e6-42b5-b264-7665fa30aafa",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\":20000\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_d1}}/pagos/{{new_id_p1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_d1}}",
+						"pagos",
+						"{{new_id_p1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ad1c25e-6cec-4d95-9be5-c61a265055d9",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_d1}}/pagos/56",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_d1}}",
+						"pagos",
+						"56"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
