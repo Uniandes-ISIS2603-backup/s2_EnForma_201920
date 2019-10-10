@@ -6,8 +6,12 @@
 package co.edu.uniandes.csw.enforma.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 
@@ -38,13 +42,23 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
     private Boolean tieneGluten;
     private Boolean tieneLactosa;
     
-    @PodamExclude
-    @ManyToOne
-    private ClienteEntity cliente;
+
     
     @PodamExclude
     @ManyToOne
     private AdministradorEntity administrador;
+    
+    @PodamExclude
+    @OneToMany
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    
+    @PodamExclude
+    @OneToMany
+    private List<ComidaTipoEntity> comidas = new ArrayList<ComidaTipoEntity>();
+    
+    @PodamExclude
+    @OneToMany
+    private List<ClienteEntity> clientes = new ArrayList<ClienteEntity>();
 
     /**
      * @return the nombre
@@ -158,19 +172,7 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
         this.tieneLactosa = tieneLactosa;
     }
 
-    /**
-     * @return the cliente
-     */
-    public ClienteEntity getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteEntity cliente) {
-        this.cliente = cliente;
-    }
+    
 
     /**
      * @return the administrador
@@ -184,6 +186,48 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
      */
     public void setAdministrador(AdministradorEntity administrador) {
         this.administrador = administrador;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the comidas
+     */
+    public List<ComidaTipoEntity> getComidas() {
+        return comidas;
+    }
+
+    /**
+     * @param comidas the comidas to set
+     */
+    public void setComidas(List<ComidaTipoEntity> comidas) {
+        this.comidas = comidas;
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<ClienteEntity> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<ClienteEntity> clientes) {
+        this.clientes = clientes;
     }
     
     

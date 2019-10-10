@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,9 +28,16 @@ public class DietaTipoLogic {
     @Inject
     private DietaTipoPersistence persistence;
     
+    @Inject
+    private AdministradorPersistence administradorPersistence;
+    
     public DietaTipoEntity createDietaTipo(DietaTipoEntity dietaTipo) throws BusinessLogicException
     {
-       if(dietaTipo.getNombre()==null){
+       if (dietaTipo.getAdministrador()== null || administradorPersistence.find(dietaTipo.getAdministrador().getId()) == null) {
+            throw new BusinessLogicException("El administrador es inválida");
+        }
+        
+        if(dietaTipo.getNombre()==null){
            throw new BusinessLogicException("El nombre de la Dieta está vacío.");
        } 
        if(dietaTipo.getCantidadGrasa()==null){
