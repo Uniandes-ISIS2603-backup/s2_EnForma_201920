@@ -11,6 +11,8 @@ delete from AdministradorEntity;
 
 insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (100, '2019-01-29 19:27:39', 'b', 36.96 );
 insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (200, '2019-05-20 20:30:39', 'a', 40.2 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo, pago_id) values (78, '2019-05-20 20:30:39', 'a', 40000,56);
+
 
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
@@ -32,3 +34,5 @@ insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 
 
 insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (100, 20000, 0, 'Ok',200);
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (200, 40000,1234, 1, 'Ok',100);
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago) values (56, 40000,1234, 1, 'Ok');
+
