@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamDoubleValue;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -37,21 +39,22 @@ public class ClienteEntity extends BaseEntity implements Serializable
  private String userName;
  private String contrasenia;
  
-// @PodamExclude
-// @OneToOne(mappedBy = "cliente")
-//private DietaTipoEntity dietaTipo;
+@PodamExclude
+ @ManyToOne
+ private DietaTipoEntity dietaTipo;
+ 
 // 
-//@PodamExclude
-//@ManyToMany(mappedBy = "cliente")
-// private List<DomicilioEntity> domicilios;
+@PodamExclude
+@OneToMany(mappedBy = "cliente")
+private List<DomicilioEntity> domicilios;
 // 
-// @PodamExclude
-// @ManyToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-// private List<QuejasYReclamosEntity> quejas;
-// 
- @PodamExclude
-@OneToOne
- private TarjetaPrepagoEntity tarjetaPrepago;
+@PodamExclude
+ @OneToMany//(mappedBy = "usuario")//, fetch = FetchType.LAZY)
+ private List<QuejasYReclamosEntity> quejas;
+ 
+@PodamExclude
+@OneToOne(mappedBy = "cliente")
+private TarjetaPrepagoEntity tarjetaPrepago;
  
 
  public ClienteEntity(){
