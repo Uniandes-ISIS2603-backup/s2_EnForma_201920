@@ -20,9 +20,9 @@ public class TarjetaPrepagoDTO implements Serializable
     
     private String numTarjetaPrepago;
     
-    private double saldo;
+    private Double saldo;
     
-    private double puntos;
+    private Double puntos;
     
     /**
      * constructor por defecto

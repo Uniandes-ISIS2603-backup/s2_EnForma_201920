@@ -18,17 +18,20 @@ import java.util.logging.Level;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.PathParam;
 
 /**
  *
  * @author Jose Manuel Flórez
  */
 
-@Path("ComidaTipo")
+@Path("ComidasTipo")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -79,18 +82,57 @@ public class ComidaTipoResource
     public List<ComidaTipoDTO> getComidasTipo() {
         LOGGER.info("ComidatipoResource getComidasTipo: input: void");
         List<ComidaTipoDTO> listaComidasTipo = listEntity2DetailDTO(comidaTipoLogic.getComidasTipo());
-        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", listaComidasTipo);
+        LOGGER.log(Level.INFO, "ComidaTipoResource getComidasTipo: output: {0}", listaComidasTipo);
         return listaComidasTipo;
     }
     
+     /**
+     * Busca el libro con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param comidaTipoId Identificador del libro que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link BookDetailDTO} - El libro buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el libro.
+     */
+    
+    @GET
+    @Path("{comidaTipoId: \\d+}")
+    public ComidaTipoDTO getComidaTipo(@PathParam("comidaTipoId") Long comidaTipoId) {
+        LOGGER.log(Level.INFO, "BookResource getBook: input: {0}", comidaTipoId);
+        ComidaTipoEntity comidaTipoEntity = comidaTipoLogic.getComidaTipo(comidaTipoId);
+        if (comidaTipoEntity == null) {
+            throw new WebApplicationException("El recurso /comidaTipo/" + comidaTipoId + " no existe.", 404);
+        }
+        ComidaTipoDTO comidaTipoDTO = new ComidaTipoDTO(comidaTipoEntity);
+        LOGGER.log(Level.INFO, "ComidaTipoResource getComidatipo: output: {0}", comidaTipoDTO);
+        return comidaTipoDTO;
+    }
     
     
-    
-    
-    
-    
-    
-    
+   
+    /**
+     * Borra el libro con el id asociado recibido en la URL.
+     *
+     * @param booksId Identificador del libro que se desea borrar. Este debe ser
+     * una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * cuando el libro tiene autores asociados.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el libro.
+     */
+    @DELETE
+    @Path("{comidaTipoId: \\d+}")
+    public void deleteComidaTipo(@PathParam("comidaTipoId") Long comidaTipoId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "BookResource deleteComidaTipo: input: {0}", comidaTipoId);
+        ComidaTipoEntity entity = comidaTipoLogic.getComidaTipo(comidaTipoId);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /books/" + comidaTipoId + " no existe.", 404);
+        }
+      //  bookEditorialLogic.removeEditorial(booksId);
+        comidaTipoLogic.deleteComidaTipo(comidaTipoId);
+        LOGGER.info("ComidaTipoResource deleteComidaTipo: output: void");
+    }
     
     
     
