@@ -51,7 +51,7 @@ public class ComidaTipoDietaTipoResource
     
     
     /**
-     * Remplaza la instancia de Editorial asociada a un Book.
+     * Remplaza la dieta Tipo de la comdia tipo.
      *
      * @param comidaTipoId Identificador del libro que se esta actualizando. Este
      * debe ser una cadena de dígitos.
@@ -63,7 +63,7 @@ public class ComidaTipoDietaTipoResource
      * libro.
      */
     @PUT
-    public ComidaTipoDTO replaceDietaTipo(@PathParam("booksId") Long comidaTipoId, DietaTipoDTO dietaTipo) {
+    public ComidaTipoDTO replaceDietaTipo(@PathParam("comidaTipoId") Long comidaTipoId, DietaTipoDTO dietaTipo) {
         LOGGER.log(Level.INFO, "ComidatipoDietaTipoResource replaceDietaTipo: input: comidaTipoId{0} , DietaTipo:{1}", new Object[]{comidaTipoId, dietaTipo});
         if (comidaTipoLogic.getComidaTipo(comidaTipoId) == null) {
             throw new WebApplicationException("El recurso /ComidasTipo/" + comidaTipoId + " no existe.", 404);
