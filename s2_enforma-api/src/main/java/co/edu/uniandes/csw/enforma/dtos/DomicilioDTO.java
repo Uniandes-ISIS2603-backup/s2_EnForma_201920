@@ -25,7 +25,7 @@ public class DomicilioDTO implements Serializable
     private Date fecha;
     
     private String lugarEntrega;
-    private double costo;
+    private Double costo;
     
     
      /**

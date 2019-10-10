@@ -34,7 +34,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     
     @PodamExclude
     @OneToOne
-    private QuejasYReclamosEntity queja;
+    private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
     @OneToOne
@@ -94,15 +94,15 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     /**
      * @return the queja
      */
-    public QuejasYReclamosEntity getQueja() {
-        return queja;
+    public QuejasYReclamosEntity getQuejasYReclamos() {
+        return quejasYReclamos;
     }
 
     /**
      * @param queja the queja to set
      */
-    public void setQueja(QuejasYReclamosEntity queja) {
-        this.queja = queja;
+    public void setQuejasYReclamos(QuejasYReclamosEntity queja) {
+        this.quejasYReclamos = queja;
     }
 
     /**
