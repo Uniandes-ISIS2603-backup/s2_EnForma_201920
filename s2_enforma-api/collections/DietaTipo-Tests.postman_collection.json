@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "8ee78bcb-e051-4194-a267-bab6f222082e",
+		"name": "DietaTipo-Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "430b37eb-bd09-4294-9891-2153c08dc788",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\r\n\t\t\r\n        \"nombre\": \"Adelgazar\",\r\n        \"contrasena\": \"true\",\r\n        \"username\": \"userPrueba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una dieta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "33c22e82-04d0-4651-add9-60575f9a7e1a",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_d\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\r\n\t\t\"caloriasMax\": 600,\r\n        \"caloriasMin\": 200,\r\n        \"cantidadAzucar\": 500,\r\n        \"cantidadFibra\": 51,\r\n        \"cantidadGrasa\": 520,\r\n        \"nombre\": \"Adelgazar\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false,\r\n        \"administrador\": { \"id\": {{new_id_a}} }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una dieta 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8bafc72-1d9d-4ff7-9916-dc21acc35408",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_d2\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\r\n\t\t\"caloriasMax\": 20,\r\n        \"caloriasMin\": 40,\r\n        \"cantidadAzucar\": 5,\r\n        \"cantidadFibra\": 1,\r\n        \"cantidadGrasa\": 20,\r\n        \"nombre\": \"Otra\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false,\r\n        \"administrador\": { \"id\": {{new_id_a}} }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las dietas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ddcc38b-a582-4c9b-a4a1-429756cec78d",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"dietas count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una dieta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{new_id_d}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas",
+						"{{new_id_d}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una dieta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48121ab9-0aa9-4660-9ab2-d793a18fce73",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{new_id_d}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas",
+						"{{new_id_d}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
