@@ -50,10 +50,10 @@ public class CalificacionResource
      * o cuando no ingresa un puntaje 
      */
     @POST
-    public CalificacionDTO createCalificacion(@PathParam("clientesId") Long clienteId, @PathParam("dietatipoId") Long dietaId, CalificacionDTO calificacion) throws BusinessLogicException
+    public CalificacionDTO createCalificacion(CalificacionDTO calificacion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CalificacionResource createCalificacion: input: {0}", calificacion);
-        CalificacionDTO nuevaCalificacionDTO = new CalificacionDTO(calificacionLogic.createCalificacion(clienteId, dietaId, calificacion.toEntity()));
+        CalificacionDTO nuevaCalificacionDTO = new CalificacionDTO(calificacionLogic.createCalificacion( calificacion.toEntity()));
         LOGGER.log(Level.INFO, "CalificacionResource createCalificacion: output: {0}", nuevaCalificacionDTO);
         return nuevaCalificacionDTO;
     }
