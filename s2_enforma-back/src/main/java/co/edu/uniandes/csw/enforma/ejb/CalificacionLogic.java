@@ -37,18 +37,18 @@ public class CalificacionLogic
     @Inject
     private DietaTipoPersistence dietaPersistence;
     
-    public CalificacionEntity createCalificacion(Long clienteId, Long dietaId, CalificacionEntity calificacion) throws BusinessLogicException
+    public CalificacionEntity createCalificacion( CalificacionEntity calificacion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la calificacion");
 
-        if(calificacion.getUsuario() == null)
+        if(calificacion.getUsuario() == null || clientePersistence.find(calificacion.getUsuario().getId()) == null)
         {
             throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
         }
-        if(calificacion.getDietaTipo() == null)
-        {
-            throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");
-        }
+//        if(calificacion.getDietaTipo() == null)
+//        {
+//            throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");
+//        }
         if(calificacion.getPuntaje() == null )
         {
             throw new BusinessLogicException("El puntaje de la calificacion esta sin marcar");
@@ -57,10 +57,7 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("La fecha de la calificacion es null");
         }
-        ClienteEntity cliente = clientePersistence.find(clienteId);
-        DietaTipoEntity dieta = dietaPersistence.find(dietaId);
-        calificacion.setUsuario(cliente);
-        calificacion.setDietaTipo(dieta);
+
         LOGGER.log(Level.INFO, "Termian el proceso de creacion de la calificacion");
         return calificacionPersistence.create(calificacion);
     }

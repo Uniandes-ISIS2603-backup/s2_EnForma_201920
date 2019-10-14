@@ -33,7 +33,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     private Date fecha;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity usuario;
 
     @PodamExclude

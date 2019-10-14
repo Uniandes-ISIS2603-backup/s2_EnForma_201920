@@ -138,7 +138,7 @@ public class CalificacionLogicTest
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setUsuario(clienteData.get(0));
         newEntity.setDietaTipo(dietaData.get(0));
-        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId() ,newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
         
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
@@ -155,7 +155,7 @@ public class CalificacionLogicTest
         newEntity.setUsuario(clienteData.get(0));
         newEntity.setDietaTipo(dietaData.get(0));
         newEntity.setPuntaje(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId(), newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -165,7 +165,7 @@ public class CalificacionLogicTest
         newEntity.setUsuario(clienteData.get(0));
         newEntity.setDietaTipo(dietaData.get(0));
         newEntity.setfecha(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(),dietaData.get(0).getId(), newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -174,7 +174,7 @@ public class CalificacionLogicTest
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setUsuario(clienteData.get(0));
         newEntity.setDietaTipo(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
     }
     
     @Test(expected = BusinessLogicException.class)
@@ -183,7 +183,7 @@ public class CalificacionLogicTest
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setDietaTipo(dietaData.get(0));
         newEntity.setUsuario(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
+        CalificacionEntity result = calificacionLogic.createCalificacion( newEntity);
     }
     
     @Test 

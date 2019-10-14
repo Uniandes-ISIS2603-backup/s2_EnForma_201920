@@ -50,8 +50,23 @@ public class CalificacionDTO implements Serializable
             this.puntaje = calificacionEntity.getPuntaje();
             this.comentario = calificacionEntity.getComentario();
             this.fecha = calificacionEntity.getFecha();
-            this.cliente = new ClienteDTO(calificacionEntity.getUsuario());
-            this.dieta = new DietaTipoDTO(calificacionEntity.getDietaTipo()); 
+            if(calificacionEntity.getUsuario() != null)
+            {
+               this.cliente = new ClienteDTO(calificacionEntity.getUsuario()); 
+            }
+            else
+            {
+                this.cliente = null;
+            }
+            if(calificacionEntity.getDietaTipo()!= null)
+            {
+                this.dieta = new DietaTipoDTO(calificacionEntity.getDietaTipo());  
+            }
+            else
+            {
+                this.dieta = null;
+            }
+           
         }
     }
     
@@ -63,8 +78,15 @@ public class CalificacionDTO implements Serializable
         calificacionEntity.setPuntaje(this.getPuntaje());
         calificacionEntity.setComentario(this.getComentario());
         calificacionEntity.setfecha(this.getFecha());
-        calificacionEntity.setUsuario(this.getCliente().toEntity());
-        calificacionEntity.setDietaTipo(this.getDieta().toEntity());
+        if(calificacionEntity.getUsuario() != null)
+        {
+            calificacionEntity.setUsuario(this.getCliente().toEntity());
+        }
+        if(calificacionEntity.getDietaTipo() != null)
+        {                   
+            calificacionEntity.setDietaTipo(this.getDieta().toEntity());
+        }
+
         return calificacionEntity;
     }
 
