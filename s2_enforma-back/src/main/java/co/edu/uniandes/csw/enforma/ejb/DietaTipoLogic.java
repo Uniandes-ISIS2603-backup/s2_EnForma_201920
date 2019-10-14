@@ -70,8 +70,12 @@ public class DietaTipoLogic {
        if(dietaTipo.getCantidadGrasa()<=0){
            throw new BusinessLogicException("La cantidad de grasa no puede ser menor o igual a cero.");
        }
+        LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
+       if(persistence.findByNombre(dietaTipo.getNombre()) != null){
+           LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
+           throw new BusinessLogicException("Ya existe una dieta con ese nombre");
+       } 
        
-        
         dietaTipo = persistence.create(dietaTipo);
         return dietaTipo;
     }
@@ -91,6 +95,7 @@ public class DietaTipoLogic {
         }
         return dietaTipoEntity;
     }
+    
     
     
     

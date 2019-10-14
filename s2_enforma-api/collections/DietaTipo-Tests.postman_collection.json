@@ -33,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\r\n\t\t\r\n        \"nombre\": \"Adelgazar\",\r\n        \"contrasena\": \"true\",\r\n        \"username\": \"userPrueba\"\r\n}",
+					"raw": "{\t\t\r\n\t\t\r\n        \"nombre\": \"AdminPrueba\",\r\n        \"contrasena\": \"true\",\r\n        \"username\": \"userPrueba\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,6 +159,56 @@
 			"response": []
 		},
 		{
+			"name": "Crear una dieta con el mismo nombre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "255cfb1a-3267-426f-a4a6-5f85f1fba423",
+						"exec": [
+							"tests[\"No crea con el mismo nombre\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya existe una dieta con ese nombre\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\r\n\t\t\"caloriasMax\": 600,\r\n        \"caloriasMin\": 200,\r\n        \"cantidadAzucar\": 500,\r\n        \"cantidadFibra\": 51,\r\n        \"cantidadGrasa\": 520,\r\n        \"nombre\": \"Adelgazar\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false,\r\n        \"administrador\": { \"id\": {{new_id_a}} }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener todas las dietas",
 			"event": [
 				{
@@ -216,6 +266,41 @@
 			"response": []
 		},
 		{
+			"name": "Obtener una dieta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42fb091e-89f0-48f4-bc46-8d45d479da1e",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /dietas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Borrar una dieta",
 			"event": [
 				{
@@ -248,6 +333,66 @@
 						"api",
 						"dietas",
 						"{{new_id_d}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una dieta 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48121ab9-0aa9-4660-9ab2-d793a18fce73",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{new_id_d2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas",
+						"{{new_id_d2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar el admin",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{new_id_a}}"
 					]
 				}
 			},
