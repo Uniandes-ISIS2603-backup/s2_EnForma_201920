@@ -41,12 +41,12 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      */
     public AdministradorDetailDTO(AdministradorEntity administradorEntity) {
         super(administradorEntity);
-//        if (administradorEntity != null) {
-//            dietas = new ArrayList<>();
-////            for (DietaTipoEntity entityDietaTipo : administradorEntity.getDietaTipos()) {
-////                dietas.add(new DietaTipoDTO(entityDietaTipo));
-////            }
-//        }
+        if (administradorEntity != null) {
+            dietas = new ArrayList<>();
+            for (DietaTipoEntity entityDietaTipo : administradorEntity.getDietaTipo()) {
+                dietas.add(new DietaTipoDTO(entityDietaTipo));
+            }
+        }
 //        if (administradorEntity.getComidaTipos() != null) {
 //            comidas = new ArrayList<>();
 //            for (ComidaTipoEntity entityComidaTipo : administradorEntity.getComidaTipos()) {
@@ -63,13 +63,13 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     @Override
     public AdministradorEntity toEntity() {
         AdministradorEntity administradorEntity = super.toEntity();
-//        if (dietas != null) {
-//            List<DietaTipoEntity> dietasEntity = new ArrayList<>();
-//            for (DietaTipoDTO dtoDietaTipo : dietas) {
-//                dietasEntity.add(dtoDietaTipo.toEntity());
-//            }
-//            administradorEntity.setDietaTipo(dietasEntity);
-//        }
+        if (dietas != null) {
+            List<DietaTipoEntity> dietasEntity = new ArrayList<>();
+            for (DietaTipoDTO dtoDietaTipo : dietas) {
+                dietasEntity.add(dtoDietaTipo.toEntity());
+            }
+            administradorEntity.setDietaTipo(dietasEntity);
+        }
 //        if (comidas != null) {
 //            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
 //            for (ComidaTipoDTO dtoComidaTipo : comidas) {
