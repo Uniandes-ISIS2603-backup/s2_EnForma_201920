@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 import co.edu.uniandes.csw.enforma.entities.AdministradorEntity;
+import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import javax.ejb.Stateless;
@@ -105,6 +106,11 @@ public class AdministradorLogic {
      */
     public void deleteAdministrador(Long administradorsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el administrador con id = {0}", administradorsId);
+        
+        List<DietaTipoEntity> dietas = getAdministrador(administradorsId).getDietaTipo();
+        if (dietas != null && !dietas.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar el administrador con id = " + administradorsId + " porque tiene dietas asociadas");
+        }
         persistence.delete(administradorsId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el administrador con id = {0}", administradorsId);
     }
