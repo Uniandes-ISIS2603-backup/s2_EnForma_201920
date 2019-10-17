@@ -42,14 +42,13 @@ public class CalificacionPersistence
     
     /**
      * Devuelve todas las calificaciones asociadas a una dieta de la base de datos
-     * @param dietaId id correspondiente de la dieta que se quieren las calificaciones
      * @return una lista con todas las calificaciones que encuentre en la base datos de la dieta que se quiere
      */
     public List<CalificacionEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todas las calificaciones");
         // Se crea un query para buscar todas las quejas y relcamos en la base de datos.
-        TypedQuery query = em.createQuery("select u from CalificacionEntity u", CalificacionEntity.class);
+        TypedQuery<CalificacionEntity> query = em.createQuery("select u from CalificacionEntity u", CalificacionEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de quejas y reclamos.
         return query.getResultList();
     }
