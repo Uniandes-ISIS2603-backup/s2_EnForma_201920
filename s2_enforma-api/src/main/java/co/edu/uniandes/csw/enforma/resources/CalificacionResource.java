@@ -63,7 +63,9 @@ public class CalificacionResource
     public List<CalificacionDTO> getCalificaciones()
     {
         LOGGER.info("CalificacionResource getCalificaciones: input: void");
-        List<CalificacionDTO> listaCalificaciones = listEntity2DTO(calificacionLogic.getCalificaciones());
+        List<CalificacionEntity> listaEntity = calificacionLogic.getCalificaciones();
+        LOGGER.log(Level.INFO, "CalificacionResource getCalificacionesEntity: output: {0}", listaEntity);
+        List<CalificacionDTO> listaCalificaciones = listEntity2DTO(listaEntity);
         LOGGER.log(Level.INFO, "CalificacionResource getCalificaciones: output: {0}", listaCalificaciones);
         return listaCalificaciones;
     }

@@ -45,6 +45,7 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
         }
+        LOGGER.log(Level.INFO, "idDieta = {0}", calificacion.getDietaTipo().getId() );
         if(calificacion.getDietaTipo()== null || dietaPersistence.find(calificacion.getDietaTipo().getId()) == null)
         {
             throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");

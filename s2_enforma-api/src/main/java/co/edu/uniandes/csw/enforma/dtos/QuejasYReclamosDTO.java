@@ -45,8 +45,23 @@ public class QuejasYReclamosDTO implements Serializable
             this.descripcion = quejasYReclamosEntity.getDescripcion();
             this.asusnto = quejasYReclamosEntity.getAsunto();
             this.fecha = quejasYReclamosEntity.getFecha();
-            this.cliente = new ClienteDTO(quejasYReclamosEntity.getUsuario());
-            this.domicilio = new DomicilioDTO(quejasYReclamosEntity.getDomicilio());
+            if(quejasYReclamosEntity.getCliente() != null)
+            {
+                this.cliente = new ClienteDTO(quejasYReclamosEntity.getCliente()); 
+            }
+            else
+            {
+                this.cliente = null;
+            }
+            if(quejasYReclamosEntity.getDomicilio() != null)
+            {
+                this.domicilio = new DomicilioDTO(quejasYReclamosEntity.getDomicilio());
+            }
+            else
+            {
+                this.domicilio = null;
+            }
+            
         }
     }
     
@@ -58,8 +73,14 @@ public class QuejasYReclamosDTO implements Serializable
         quejasYReclamosEntity.setAsunto(this.getAsusnto());
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
         quejasYReclamosEntity.setFecha(this.getFecha());
-        quejasYReclamosEntity.setUsuario(this.getCliente().toEntity());
-        quejasYReclamosEntity.setDomicilio(this.getDomicilio().toEntity());
+        if(this.cliente != null)
+        {
+            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
+        }
+        if(this.domicilio != null)
+        {
+            quejasYReclamosEntity.setDomicilio(this.getDomicilio().toEntity());
+        }
         return quejasYReclamosEntity;
     }
 

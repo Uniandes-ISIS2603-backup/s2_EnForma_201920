@@ -49,13 +49,17 @@ public class CalificacionDTO implements Serializable
     {
         if(calificacionEntity != null)
         {
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getId = {0}",calificacionEntity.getId());
             this.id = calificacionEntity.getId();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getPuntaje = {0}",calificacionEntity.getPuntaje());
             this.puntaje = calificacionEntity.getPuntaje();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getComentario = {0}",calificacionEntity.getComentario());
             this.comentario = calificacionEntity.getComentario();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getFecha = {0}",calificacionEntity.getFecha());
             this.fecha = calificacionEntity.getFecha();
             if(calificacionEntity.getCliente() != null)
             {
-                LOGGER.log(Level.INFO, "constructor calificacionDTO getClienteId = {0}",calificacionEntity.getCliente().getId());
+               LOGGER.log(Level.INFO, "constructor calificacionDTO getClienteId = {0}",calificacionEntity.getCliente().getId());
                this.cliente = new ClienteDTO(calificacionEntity.getCliente()); 
             }
             else

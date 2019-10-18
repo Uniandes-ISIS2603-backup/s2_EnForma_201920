@@ -38,7 +38,7 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private ClienteEntity usuario;
+    private ClienteEntity cliente;
 
     /**
      * Devuelve la descripcion de la queja o reclamo
@@ -105,17 +105,17 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     }
 
     /**
-     * @return the usuario
+     * @return the cliente
      */
-    public ClienteEntity getUsuario() {
-        return usuario;
+    public ClienteEntity getCliente() {
+        return cliente;
     }
 
     /**
-     * @param usuario the usuario to set
+     * @param cliente the cliente to set
      */
-    public void setUsuario(ClienteEntity usuario) {
-        this.usuario = usuario;
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
     }
     
     

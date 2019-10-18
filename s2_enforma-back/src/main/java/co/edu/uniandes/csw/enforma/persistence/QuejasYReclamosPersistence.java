@@ -54,12 +54,18 @@ public class QuejasYReclamosPersistence
         return query.getResultList();
     }
     
+    public QuejasYReclamosEntity find(Long clienteId)
+    {
+        LOGGER.log(Level.INFO, "Consultando cliente con id={0}", clienteId);
+        return em.find(QuejasYReclamosEntity.class, clienteId);
+    }
+    
     /**
      * Busca si hay alguna queja o reclamo con el id que se envia
      * @param quejasYReclamosId id correspondiente a la queja o reclamo buscada
      * @return la queja o reclamo buscada
      */
-    public QuejasYReclamosEntity find(Long clienteId, Long domicilioId, Long quejasYReclamosId)
+    public QuejasYReclamosEntity findByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId)
     {
         LOGGER.log(Level.INFO, "Consultando la queja o reclamo con id= {0} del cliente con id = " + clienteId + "del domicilio con id = " + domicilioId, quejasYReclamosId);
         TypedQuery<QuejasYReclamosEntity> q = em.createQuery("select p from QuejasYReclamosEntity p where (p.usuario.id = :clienteId) and (p.domicilio.id = :domicilioId) and (p.id = :quejasyreclamosId)", QuejasYReclamosEntity.class);
