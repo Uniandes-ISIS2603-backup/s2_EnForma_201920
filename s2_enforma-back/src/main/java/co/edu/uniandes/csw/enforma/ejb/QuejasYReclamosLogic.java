@@ -39,6 +39,7 @@ public class QuejasYReclamosLogic
     
     public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
+        LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la queja o reclamo");
         if(quejaReclamo.getCliente() == null)
         {
             throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
@@ -61,7 +62,7 @@ public class QuejasYReclamosLogic
         {
             throw new BusinessLogicException("La fecha de la queja o reclamo esta vacia");
         }
-        
+         LOGGER.log(Level.INFO, "Termina el proceso de creacion de la queja y reclamo");
         return persistence.create(quejaReclamo);
     }
     

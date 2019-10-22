@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.enforma.adapters.DateAdapter;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class QuejasYReclamosDTO implements Serializable
 {
+    private static Logger LOGGER = Logger.getLogger(QuejasYReclamosDTO.class.getName());
     private Long id;
     
     private String descripcion;
@@ -68,19 +71,27 @@ public class QuejasYReclamosDTO implements Serializable
     
     public QuejasYReclamosEntity toEntity()
     {
+        LOGGER.log(Level.INFO, "Inicia el toEntity");
         QuejasYReclamosEntity quejasYReclamosEntity = new QuejasYReclamosEntity();
+        LOGGER.log(Level.INFO, "id = {0}", this.getId());
         quejasYReclamosEntity.setId(this.getId());
+        LOGGER.log(Level.INFO, "asunto = {0}", this.getAsusnto());
         quejasYReclamosEntity.setAsunto(this.getAsusnto());
+        LOGGER.log(Level.INFO, "descripcion = {0}", this.getDescripcion());
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
+        LOGGER.log(Level.INFO, "fecha = {0}", this.getFecha());
         quejasYReclamosEntity.setFecha(this.getFecha());
         if(this.cliente != null)
         {
+            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
             quejasYReclamosEntity.setCliente(this.cliente.toEntity());
         }
         if(this.domicilio != null)
         {
-            quejasYReclamosEntity.setDomicilio(this.getDomicilio().toEntity());
+            LOGGER.log(Level.INFO, "domicilio = {0}", this.getDomicilio());
+            quejasYReclamosEntity.setDomicilio(this.domicilio.toEntity());
         }
+        LOGGER.log(Level.INFO, "Termina el toEntity");
         return quejasYReclamosEntity;
     }
 

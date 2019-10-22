@@ -33,11 +33,11 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     private Date fecha;
     
     @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private ClienteEntity cliente;
 
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private DietaTipoEntity dietaTipo;
 
     /**

@@ -37,7 +37,7 @@ public class QuejasYReclamosEntity extends BaseEntity implements Serializable
     private DomicilioEntity domicilio;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ClienteEntity cliente;
 
     /**

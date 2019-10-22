@@ -42,7 +42,10 @@ public class QuejasYReclamosResource
     public QuejasYReclamosDTO createQuejasYReclamos(QuejasYReclamosDTO quejaReclamo) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "QuejasYReclamosResource createQuejasYReclamos: input: {0}", quejaReclamo);
-        QuejasYReclamosDTO nuevaQuejaYReclamoDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.createQuejasYReclamos( quejaReclamo.toEntity()));
+        LOGGER.log(Level.INFO, "Entra al toEntity");
+        QuejasYReclamosEntity entity = quejaReclamo.toEntity();
+        LOGGER.log(Level.INFO, "Sale del toEntity");
+        QuejasYReclamosDTO nuevaQuejaYReclamoDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.createQuejasYReclamos(entity));
         LOGGER.log(Level.INFO, "CalificacionResource createCalificacion: output: {0}", nuevaQuejaYReclamoDTO);
         return nuevaQuejaYReclamoDTO;
     }
