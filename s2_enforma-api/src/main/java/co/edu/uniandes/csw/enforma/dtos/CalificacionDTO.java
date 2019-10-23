@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.enforma.adapters.DateAdapter;
 import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class CalificacionDTO implements Serializable
 {
+    private static final Logger LOGGER = Logger.getLogger(CalificacionDTO.class.getName());
     private Long id;
     
     private Integer puntaje;
@@ -46,16 +49,22 @@ public class CalificacionDTO implements Serializable
     {
         if(calificacionEntity != null)
         {
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getId = {0}",calificacionEntity.getId());
             this.id = calificacionEntity.getId();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getPuntaje = {0}",calificacionEntity.getPuntaje());
             this.puntaje = calificacionEntity.getPuntaje();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getComentario = {0}",calificacionEntity.getComentario());
             this.comentario = calificacionEntity.getComentario();
+            LOGGER.log(Level.INFO, "constructor calificacionDTO getFecha = {0}",calificacionEntity.getFecha());
             this.fecha = calificacionEntity.getFecha();
-            if(calificacionEntity.getUsuario() != null)
+            if(calificacionEntity.getCliente() != null)
             {
-               this.cliente = new ClienteDTO(calificacionEntity.getUsuario()); 
+               LOGGER.log(Level.INFO, "constructor calificacionDTO getClienteId = {0}",calificacionEntity.getCliente().getId());
+               this.cliente = new ClienteDTO(calificacionEntity.getCliente()); 
             }
             else
             {
+                LOGGER.log(Level.INFO, "constructor else calificacionDTO getClienteId = {0}",calificacionEntity.getCliente().getId());
                 this.cliente = null;
             }
             if(calificacionEntity.getDietaTipo()!= null)
@@ -78,15 +87,14 @@ public class CalificacionDTO implements Serializable
         calificacionEntity.setPuntaje(this.getPuntaje());
         calificacionEntity.setComentario(this.getComentario());
         calificacionEntity.setfecha(this.getFecha());
-        if(calificacionEntity.getUsuario() != null)
+        if(this.cliente != null)
         {
-            calificacionEntity.setUsuario(this.getCliente().toEntity());
+            calificacionEntity.setCliente(this.cliente.toEntity());
         }
-        if(calificacionEntity.getDietaTipo() != null)
-        {                   
-            calificacionEntity.setDietaTipo(this.getDieta().toEntity());
+        if(this.dieta != null)
+        {
+            calificacionEntity.setDietaTipo(this.dieta.toEntity());
         }
-
         return calificacionEntity;
     }
 

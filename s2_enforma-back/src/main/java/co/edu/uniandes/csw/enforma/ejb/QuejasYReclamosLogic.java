@@ -37,9 +37,38 @@ public class QuejasYReclamosLogic
     @Inject
     private DomicilioPersistence domicilioPersistence;
     
-    public QuejasYReclamosEntity createQuejasYReclamos(Long clienteId, Long domicilioId, QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
+    public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
-        if(quejaReclamo.getUsuario() == null)
+        LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la queja o reclamo");
+        if(quejaReclamo.getCliente() == null)
+        {
+            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
+        }
+        if(quejaReclamo.getDomicilio() == null)
+        {
+            throw new BusinessLogicException("El id del domicilio que esta recibiendo la calificacion no se encuentra");
+        }
+        if(quejaReclamo.getAsunto() == null)
+        {
+            throw new BusinessLogicException("El asunto de la queja o reclamo esta vacio");
+        }
+        
+        if(quejaReclamo.getDescripcion() == null)
+        {
+            throw new BusinessLogicException("La descripcion de la queja o reclamo esta vacia");
+        }
+        
+        if(quejaReclamo.getFecha() == null)
+        {
+            throw new BusinessLogicException("La fecha de la queja o reclamo esta vacia");
+        }
+         LOGGER.log(Level.INFO, "Termina el proceso de creacion de la queja y reclamo");
+        return persistence.create(quejaReclamo);
+    }
+    
+    public QuejasYReclamosEntity createQuejasYReclamosByClienteIdYDomicilioId(Long clienteId, Long domicilioId, QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
+    {
+        if(quejaReclamo.getCliente() == null)
         {
             throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
         }
@@ -63,7 +92,7 @@ public class QuejasYReclamosLogic
         }
         ClienteEntity cliente = clientePersistence.find(clienteId);
         DomicilioEntity domicilio = domicilioPersistence.find(domicilioId);
-        quejaReclamo.setUsuario(cliente);
+        quejaReclamo.setCliente(cliente);
         quejaReclamo.setDomicilio(domicilio);
         return persistence.create(quejaReclamo);
     }
@@ -76,10 +105,22 @@ public class QuejasYReclamosLogic
         return quejasYReclamos;
     }
     
-    public QuejasYReclamosEntity getQuejaOReclamo(Long clienteId, Long domicilioId, Long quejaOReclamoId)
+    public QuejasYReclamosEntity getQuejaOReclamo(Long quejasYReclamosId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la queja o reclamo con id = {0}",quejasYReclamosId);
+        QuejasYReclamosEntity quejasYReclamosEntity = persistence.find(quejasYReclamosId);
+        if(quejasYReclamosEntity == null)
+        {
+            LOGGER.log(Level.INFO, "La queja o reclamo con el id = {0} no existe", quejasYReclamosId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la queja o reclamo con id = {0}", quejasYReclamosId);
+        return quejasYReclamosEntity;
+    }
+    
+    public QuejasYReclamosEntity getQuejaOReclamoByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejaOReclamoId)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la queja o reclamo con id = {0}, hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejaOReclamoId);
-        QuejasYReclamosEntity quejasYReclamosEntity = persistence.find(clienteId, domicilioId, quejaOReclamoId);
+        QuejasYReclamosEntity quejasYReclamosEntity = persistence.findByClienteIdYDomicilioId(clienteId, domicilioId, quejaOReclamoId);
         if (quejasYReclamosEntity == null) 
         {
             LOGGER.log(Level.SEVERE, "La queja o reclamo con el id = {0} no existe", quejaOReclamoId);
@@ -104,7 +145,15 @@ public class QuejasYReclamosLogic
        return quejasYReclamos; 
     }
     
-    public QuejasYReclamosEntity updateQuejasYReclamos(Long clienteId,  Long domicilioId, QuejasYReclamosEntity quejasYReclamosEntity) throws BusinessLogicException
+    public QuejasYReclamosEntity updateQuejasYReclamos(Long quejasYReclamosId, QuejasYReclamosEntity quejasYReclamosEntity)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0}", quejasYReclamosId);
+        QuejasYReclamosEntity newQuejasYReclamosEntity = persistence.update(quejasYReclamosEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la calificacion con id = {0}", quejasYReclamosId);
+        return newQuejasYReclamosEntity;
+    }
+    
+    public QuejasYReclamosEntity updateQuejasYReclamosByClienteIdYDomicilioId(Long clienteId,  Long domicilioId, QuejasYReclamosEntity quejasYReclamosEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
@@ -129,17 +178,23 @@ public class QuejasYReclamosLogic
         {
             throw new BusinessLogicException("La fecha es invalida");
         }
-        quejasYReclamosEntity.setUsuario(clienteEntity);
+        quejasYReclamosEntity.setCliente(clienteEntity);
         quejasYReclamosEntity.setDomicilio(domicilioEntity);
         QuejasYReclamosEntity newEntity = persistence.update(quejasYReclamosEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
         return newEntity;
     }
+
+    public void deleteQuejasYReclamos(Long quejasYReclamosId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la queja o reclamo con id = {0}", quejasYReclamosId);
+        persistence.delete(quejasYReclamosId);
+    }
     
-    public void deleteQuejasYReclamos(Long clienteId, Long domicilioId, Long quejasYReclamosId) throws BusinessLogicException
+    public void deleteQuejasYReclamosByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la queja o reclamo con id = {0} hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejasYReclamosId);
-        QuejasYReclamosEntity old = getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
+        QuejasYReclamosEntity old = getQuejaOReclamoByClienteIdYDomicilioId(clienteId, domicilioId, quejasYReclamosId);
         if(old == null)
         {
             throw new BusinessLogicException("La queja o reclmo con id = " + quejasYReclamosId + " no esta asociada con el cliente con id = " + clienteId + " y/o con el domicilio con el id = " + domicilioId);
