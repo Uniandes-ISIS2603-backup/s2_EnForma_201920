@@ -81,11 +81,11 @@ public class QuejasYReclamosDTO implements Serializable
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
         LOGGER.log(Level.INFO, "fecha = {0}", this.getFecha());
         quejasYReclamosEntity.setFecha(this.getFecha());
-        if(this.cliente != null)
-        {
-            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
-            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
-        }
+//        if(this.cliente != null)
+//        {
+//            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
+//            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
+//        }
         if(this.domicilio != null)
         {
             LOGGER.log(Level.INFO, "domicilio = {0}", this.getDomicilio());
