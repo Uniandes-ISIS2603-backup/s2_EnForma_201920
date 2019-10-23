@@ -62,7 +62,7 @@ public class AdministradorComidaTipoResource {
         if (comidaTipoLogic.getComidaTipo(comidaTiposId) == null) {
             throw new WebApplicationException("El recurso /comidaTipos/" + comidaTiposId + " no existe.", 404);
         }
-        ComidaTipoDTO comidaTipoDTO = new ComidaTipoDTO(administradorComidaTiposLogic.addComidasTipo(comidaTiposId, administradorsId));
+        ComidaTipoDTO comidaTipoDTO = new ComidaTipoDTO(administradorComidaTiposLogic.addComidaTipo(comidaTiposId, administradorsId));
         LOGGER.log(Level.INFO, "AdministradorComidaTiposResource addComidaTipo: output: {0}", comidaTipoDTO);
         return comidaTipoDTO;
     }
@@ -104,7 +104,7 @@ public class AdministradorComidaTipoResource {
         if (comidaTipoLogic.getComidaTipo(comidaTiposId) == null) {
             throw new WebApplicationException("El recurso /administradors/" + administradorsId + "/comidaTipos/" + comidaTiposId + " no existe.", 404);
         }
-        ComidaTipoDTO comidaTipoDetailDTO = new ComidaTipoDTO(administradorComidaTiposLogic.getComidasTipo(administradorsId, comidaTiposId));
+        ComidaTipoDTO comidaTipoDetailDTO = new ComidaTipoDTO(administradorComidaTiposLogic.getComidaTipo(administradorsId, comidaTiposId));
         LOGGER.log(Level.INFO, "AdministradorComidaTiposResource getComidaTipo: output: {0}", comidaTipoDetailDTO);
         return comidaTipoDetailDTO;
     }
@@ -129,7 +129,7 @@ public class AdministradorComidaTipoResource {
                 throw new WebApplicationException("El recurso /comidaTipos/" + comidaTipo.getId() + " no existe.", 404);
             }
         }
-        List<ComidaTipoDTO> listaDetailDTOs = comidaTiposListEntity2DTO(administradorComidaTiposLogic.replaceComidasTipos(administradorsId, comidaTiposListDTO2Entity(comidaTipos)));
+        List<ComidaTipoDTO> listaDetailDTOs = comidaTiposListEntity2DTO(administradorComidaTiposLogic.replaceComidaTipos(administradorsId, comidaTiposListDTO2Entity(comidaTipos)));
         LOGGER.log(Level.INFO, "AdministradorComidaTiposResource replaceComidaTipos: output: {0}", listaDetailDTOs);
         return listaDetailDTOs;
     }
