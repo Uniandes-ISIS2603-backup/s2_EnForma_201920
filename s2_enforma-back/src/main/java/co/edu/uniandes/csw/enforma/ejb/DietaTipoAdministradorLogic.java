@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Julio Morales
  */
+@Stateless
 public class DietaTipoAdministradorLogic {
     private static final Logger LOGGER = Logger.getLogger(DietaTipoAdministradorLogic.class.getName());
 

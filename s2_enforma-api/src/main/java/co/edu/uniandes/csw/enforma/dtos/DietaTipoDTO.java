@@ -7,12 +7,16 @@ package co.edu.uniandes.csw.enforma.dtos;
 
 import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Julio Morales
  */
 public class DietaTipoDTO implements Serializable{
+    
+    private static final Logger LOGGER = Logger.getLogger(DietaTipoDTO.class.getName());
     
     private Long id;
     private String nombre;
@@ -49,8 +53,11 @@ public class DietaTipoDTO implements Serializable{
             
             
             if (dietaTipoEntity.getAdministrador() != null) {
+                LOGGER.log(Level.INFO, "DietaTipoDTO constructor if1: getAdmin: {0}", dietaTipoEntity.getAdministrador());
+
                 this.administrador = new AdministradorDTO(dietaTipoEntity.getAdministrador());
             } else {
+                LOGGER.log(Level.INFO, "DietaTipoDTO constructor else: getAdmin: {0}", dietaTipoEntity.getAdministrador());
                 this.administrador = null;
             }
             

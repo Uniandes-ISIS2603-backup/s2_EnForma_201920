@@ -33,11 +33,8 @@ public class DietaTipoLogic {
     
     public DietaTipoEntity createDietaTipo(DietaTipoEntity dietaTipo) throws BusinessLogicException
     {
-       if (dietaTipo.getAdministrador()== null || administradorPersistence.find(dietaTipo.getAdministrador().getId()) == null) {
-            throw new BusinessLogicException("El administrador es inválida");
-        }
         
-        if(dietaTipo.getNombre()==null){
+       if(dietaTipo.getNombre()==null){
            throw new BusinessLogicException("El nombre de la Dieta está vacío.");
        } 
        if(dietaTipo.getCantidadGrasa()==null){
