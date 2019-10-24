@@ -14,7 +14,7 @@
 						"id": "979992b2-c9a7-436c-9b43-153840403f2a",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
+							"postman.setGlobalVariable(\"new_admin\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);",
 							""
@@ -110,7 +110,7 @@
 						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"postman.setGlobalVariable(\"dieta1\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -129,7 +129,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"caloriasMax\": 25,\r\n        \"caloriasMin\": 20,\r\n        \"cantidadAzucar\": 50,\r\n        \"cantidadFibra\": 50,\r\n        \"cantidadGrasa\": 50,\r\n        \"id\": 4545,\r\n        \"nombre\": \"MadreMarthaPerdoneme\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false\r\n    }"
+					"raw": "{\r\n        \"caloriasMax\": 25,\r\n        \"caloriasMin\": 20,\r\n        \"cantidadAzucar\": 50,\r\n        \"cantidadFibra\": 50,\r\n        \"cantidadGrasa\": 50,\r\n        \"id\": 4545,\r\n        \"nombre\": \"Madre\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false,\r\n        \"administrador\": {\"id\":{{new_admin}} }\r\n    }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
@@ -156,7 +156,7 @@
 						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"postman.setGlobalVariable(\"dieta2\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -194,43 +194,6 @@
 			"response": []
 		},
 		{
-			"name": "Crear una DietaTipo por un Admin",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5ad9a40c-f7b2-44b5-839d-2b9accbdff83",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/dietas/{{dieta}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"administradores",
-						"{{jesus}}",
-						"dietas",
-						"{{dieta}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Obtener las dietastipo creadas por un administrador",
 			"event": [
 				{
@@ -250,7 +213,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/dietas",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_admin}}/dietas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -260,7 +223,7 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{jesus}}",
+						"{{new_admin}}",
 						"dietas"
 					]
 				}
@@ -287,7 +250,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/comidastipo/{{dieta}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_admin}}/dietas/{{dieta1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -297,16 +260,16 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{jesus}}",
-						"comidastipo",
-						"{{dieta}}"
+						"{{new_admin}}",
+						"dietas",
+						"{{dieta1}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar comidaTipo",
+			"name": "Eliminar Dieta",
 			"event": [
 				{
 					"listen": "test",
@@ -323,7 +286,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/ComidasTipo/{{dieta}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{dieta1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -332,8 +295,8 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"ComidasTipo",
-						"{{dieta}}"
+						"dietas",
+						"{{dieta1}}"
 					]
 				}
 			},
@@ -357,7 +320,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{adminde}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_admin}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -367,7 +330,7 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{adminde}}"
+						"{{new_admin}}"
 					]
 				}
 			},
