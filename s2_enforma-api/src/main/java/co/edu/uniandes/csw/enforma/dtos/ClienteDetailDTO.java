@@ -119,6 +119,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     {
         return quejas;
     }
+    
 
     /**
      * Modifica la lista de quejas para el cliente
