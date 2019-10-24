@@ -44,19 +44,19 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     public ClienteDetailDTO(ClienteEntity clienteEntity)
     {
         super(clienteEntity);
-//        if (clienteEntity != null) 
-//        {
-//            domicilios = new ArrayList<>();
-//            for (DomicilioEntity entityDomicilios : clienteEntity.getDomicilios()) 
-//            {
-//                domicilios.add(new DomicilioDTO(entityDomicilios));
-//            }
-//            quejas = new ArrayList();
-//            for (QuejasYReclamosEntity entityQuejasYReclamos : clienteEntity.getQuejasYReclamos()) 
-//            {
-//                quejas.add(new QuejasYReclamosDTO(entityQuejasYReclamos));
-//            }
-//        }
+        if (clienteEntity != null) 
+        {
+            domicilios = new ArrayList<>();
+            for (DomicilioEntity entityDomicilios : clienteEntity.getDomicilios()) 
+            {
+                domicilios.add(new DomicilioDTO(entityDomicilios));
+            }
+            quejas = new ArrayList();
+            for (QuejasYReclamosEntity entityQuejasYReclamos : clienteEntity.getQuejas()) 
+            {
+                quejas.add(new QuejasYReclamosDTO(entityQuejasYReclamos));
+            }
+        }
     }
     
 
