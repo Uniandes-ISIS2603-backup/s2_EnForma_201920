@@ -47,8 +47,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
-    
-    
+
     /**
      * @return the fecha
      */
@@ -80,29 +79,29 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     /**
      * @return the costo
      */
-    public double getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
     /**
      * @param costo the costo to set
      */
-    public void setCosto(double costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
-    
+
     /**
-     * @return the queja
+     * @return the quejasYReclamos
      */
     public QuejasYReclamosEntity getQuejasYReclamos() {
         return quejasYReclamos;
     }
 
     /**
-     * @param queja the queja to set
+     * @param quejasYReclamos the quejasYReclamos to set
      */
-    public void setQuejasYReclamos(QuejasYReclamosEntity queja) {
-        this.quejasYReclamos = queja;
+    public void setQuejasYReclamos(QuejasYReclamosEntity quejasYReclamos) {
+        this.quejasYReclamos = quejasYReclamos;
     }
 
     /**
@@ -146,5 +145,8 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
+    
+    
+    
     
 }

@@ -123,7 +123,7 @@ public class AdministradorComidaTipoLogicTest {
     public void addComidaTiposTest() {
         AdministradorEntity entity = data.get(0);
         ComidaTipoEntity comidaTipoEntity = comidaTiposData.get(1);
-        ComidaTipoEntity response = administradorComidaTiposLogic.addComidasTipo(comidaTipoEntity.getId(), entity.getId());
+        ComidaTipoEntity response = administradorComidaTiposLogic.addComidaTipo(comidaTipoEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(comidaTipoEntity.getId(), response.getId());
@@ -150,7 +150,7 @@ public class AdministradorComidaTipoLogicTest {
     public void getComidaTipoTest() throws BusinessLogicException {
         AdministradorEntity entity = data.get(0);
         ComidaTipoEntity comidaTipoEntity = comidaTiposData.get(0);
-        ComidaTipoEntity response = administradorComidaTiposLogic.getComidasTipo(entity.getId(), comidaTipoEntity.getId());
+        ComidaTipoEntity response = administradorComidaTiposLogic.getComidaTipo(entity.getId(), comidaTipoEntity.getId());
 
         Assert.assertEquals(comidaTipoEntity.getId(), response.getId());
         Assert.assertEquals(comidaTipoEntity.getNombre(), response.getNombre());
@@ -166,7 +166,7 @@ public class AdministradorComidaTipoLogicTest {
     public void getComidaTipoNoAsociadoTest() throws BusinessLogicException {
         AdministradorEntity entity = data.get(0);
         ComidaTipoEntity comidaTipoEntity = comidaTiposData.get(1);
-        administradorComidaTiposLogic.getComidasTipo(entity.getId(), comidaTipoEntity.getId());
+        administradorComidaTiposLogic.getComidaTipo(entity.getId(), comidaTipoEntity.getId());
     }
 
     /**
@@ -177,7 +177,7 @@ public class AdministradorComidaTipoLogicTest {
     public void replaceComidaTiposTest() {
         AdministradorEntity entity = data.get(0);
         List<ComidaTipoEntity> list = comidaTiposData.subList(1, 3);
-        administradorComidaTiposLogic.replaceComidasTipos(entity.getId(), list);
+        administradorComidaTiposLogic.replaceComidaTipos(entity.getId(), list);
 
         entity = administradorLogic.getAdministrador(entity.getId());
         Assert.assertFalse(entity.getComidasTipo().contains(comidaTiposData.get(0)));

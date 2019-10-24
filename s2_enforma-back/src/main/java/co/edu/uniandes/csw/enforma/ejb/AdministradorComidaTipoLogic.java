@@ -26,7 +26,7 @@ public class AdministradorComidaTipoLogic {
      private static final Logger LOGGER = Logger.getLogger(AdministradorComidaTipoLogic.class.getName());
 
     @Inject
-    private ComidaTipoPersistence dietaTipoPersistence;
+    private ComidaTipoPersistence comidaTipoPersistence;
 
     @Inject
     private AdministradorPersistence administradorPersistence;
@@ -39,10 +39,10 @@ public class AdministradorComidaTipoLogic {
      * libro.
      * @return El libro creado.
      */
-    public ComidaTipoEntity addComidasTipo(Long dietaTiposId, Long administradorsId) {
+    public ComidaTipoEntity addComidaTipo(Long dietaTiposId, Long administradorsId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la administrador con id = {0}", administradorsId);
         AdministradorEntity administradorEntity = administradorPersistence.find(administradorsId);
-        ComidaTipoEntity dietaTipoEntity = dietaTipoPersistence.find(dietaTiposId);
+        ComidaTipoEntity dietaTipoEntity = comidaTipoPersistence.find(dietaTiposId);
         dietaTipoEntity.setAdministrador(administradorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un libro a la administrador con id = {0}", administradorsId);
         return dietaTipoEntity;
@@ -68,10 +68,10 @@ public class AdministradorComidaTipoLogic {
      * @throws BusinessLogicException Si el libro no se encuentra en la
      * administrador
      */
-    public ComidaTipoEntity getComidasTipo(Long administradorsId, Long dietaTiposId) throws BusinessLogicException {
+    public ComidaTipoEntity getComidaTipo(Long administradorsId, Long dietaTiposId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la administrador con id = " + administradorsId, dietaTiposId);
         List<ComidaTipoEntity> dietaTipos = administradorPersistence.find(administradorsId).getComidasTipo();
-        ComidaTipoEntity dietaTipoEntity = dietaTipoPersistence.find(dietaTiposId);
+        ComidaTipoEntity dietaTipoEntity = comidaTipoPersistence.find(dietaTiposId);
         int index = dietaTipos.indexOf(dietaTipoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la administrador con id = " + administradorsId, dietaTiposId);
         if (index >= 0) {
@@ -87,10 +87,10 @@ public class AdministradorComidaTipoLogic {
      * @param administradorsId El id de la administrador que se quiere actualizar.
      * @return La lista de libros actualizada.
      */
-    public List<ComidaTipoEntity> replaceComidasTipos(Long administradorsId, List<ComidaTipoEntity> dietaTipos) {
+    public List<ComidaTipoEntity> replaceComidaTipos(Long administradorsId, List<ComidaTipoEntity> dietaTipos) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la administrador con id = {0}", administradorsId);
         AdministradorEntity administradorEntity = administradorPersistence.find(administradorsId);
-        List<ComidaTipoEntity> dietaTipoList = dietaTipoPersistence.findAll();
+        List<ComidaTipoEntity> dietaTipoList = comidaTipoPersistence.findAll();
         for (ComidaTipoEntity dietaTipo : dietaTipoList) {
             if (dietaTipos.contains(dietaTipo)) {
                 dietaTipo.setAdministrador(administradorEntity);

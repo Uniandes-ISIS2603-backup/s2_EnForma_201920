@@ -32,14 +32,14 @@ public class ComidaTipoAdministradorLogic
     private AdministradorPersistence administradorPersistence;
 
     
-    public ComidaTipoEntity createComidaTipoAdmin(Long administradorId, ComidaTipoEntity comidaTipoEntity) {
-          LOGGER.log(Level.INFO, "Inicia proceso de crear review");
-        AdministradorEntity admin = administradorPersistence.find(administradorId);
-        comidaTipoEntity.setAdministrador(admin);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del review");
-        return comidaTipoPersistence.create(comidaTipoEntity);
-    
-    }
+//    public ComidaTipoEntity createComidaTipoAdmin(Long administradorId, ComidaTipoEntity comidaTipoEntity) {
+//          LOGGER.log(Level.INFO, "Inicia proceso de crear review");
+//        AdministradorEntity admin = administradorPersistence.find(administradorId);
+//        comidaTipoEntity.setAdministrador(admin);
+//        LOGGER.log(Level.INFO, "Termina proceso de creación del review");
+//        return comidaTipoPersistence.create(comidaTipoEntity);
+//    
+//    }
 
     
      /**

@@ -164,7 +164,7 @@ public class DomicilioLogicTest
     public void createDomicilioCostoNegativoTest() throws BusinessLogicException
     {
         DomicilioEntity newEntity = factory.manufacturePojo(DomicilioEntity.class);
-        newEntity.setCosto(-50);
+        newEntity.setCosto(-50.0);
         DomicilioEntity result = domicilioLogic.createDomicilio(newEntity);
     }
     
@@ -257,7 +257,7 @@ public class DomicilioLogicTest
     {
         DomicilioEntity entity = data.get(0);
         DomicilioEntity pojoEntity = factory.manufacturePojo(DomicilioEntity.class);
-        pojoEntity.setCosto(-245);
+        pojoEntity.setCosto(-245.0);
         pojoEntity.setId(entity.getId());
         domicilioLogic.updateDomicilio(pojoEntity.getId(), pojoEntity);
     }

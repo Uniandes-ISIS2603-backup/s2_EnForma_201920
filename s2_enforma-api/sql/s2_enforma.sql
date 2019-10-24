@@ -5,13 +5,15 @@ delete from DomicilioEntity;
 delete from TarjetaPrepagoEntity;
 delete from ComidaTipoEntity;
 delete from AdministradorEntity;
+delete from CalificacionEntity;
+delete from QuejasYReclamosEntity;
 
 
 
 
 insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (100, '2019-01-29 19:27:39', 'b', 36.96 );
 insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (200, '2019-05-20 20:30:39', 'a', 40.2 );
-insert into DomicilioEntity (id, fecha, lugarEntrega, costo, pago_id) values (78, '2019-05-20 20:30:39', 'a', 40000,56);
+--insert into DomicilioEntity (id, fecha, lugarEntrega, costo, pago_id) values (78, '2019-05-20 20:30:39', 'a', 40000,56);
 
 
 insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
@@ -34,5 +36,13 @@ insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 
 
 insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (100, 20000, 0, 'Ok',200);
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (200, 40000,1234, 1, 'Ok',100);
-insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
+--insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
 
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (100, 5, 'Excelente', '2019-10-10 05:31:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (200, 3, 'Regular', '2019-10-10 05:32:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (300, 1, 'Malo', '2019-10-10 05:33:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha) values (400, 5, '', '2019-10-10 05:34:02');
+
+insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (100, 'Demora en la entrega', 'Se demoro bastante', '2019-10-10 05:31:02');
+insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (200, 'Comida fria', 'Ya no tenia ni sabor', '2019-10-10 05:32:02');
+insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (300, 'Lo pedi sin un ingrediente que traia', 'Especifique que sin salsa y me lo trajeron con salsa', '2019-10-10 05:33:02');

@@ -123,24 +123,25 @@ public class ComidaTipoAdministradorLogicTest
     }
 
     
-     /**
-     * Prueba para crear un Review.
-     *
-     * @throws BusinessLogicException
-     */
-    @Test
-    public void createComidaTipoAdminTest() throws BusinessLogicException {
-        ComidaTipoEntity newEntity = factory.manufacturePojo(ComidaTipoEntity.class);
-        newEntity.setAdministrador(data.get(1));
-        ComidaTipoEntity result = comidaTipoAdministradorLogic.createComidaTipoAdmin(data.get(1).getId(), newEntity);
-        Assert.assertNotNull(result);
-        ComidaTipoEntity entity = em.find(ComidaTipoEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-        Assert.assertEquals(newEntity.getCalorias(), entity.getCalorias());
-        Assert.assertEquals(newEntity.getMenu(), entity.getMenu());
-         Assert.assertEquals(newEntity.getMomentoDelDia(), entity.getMomentoDelDia());
-    }
+//     /**
+//     * Prueba para crear un Review.
+//     *
+//     * @throws BusinessLogicException
+//     */
+//    @Test
+//    public void createComidaTipoAdminTest() throws BusinessLogicException {
+//        ComidaTipoEntity newEntity = factory.manufacturePojo(ComidaTipoEntity.class);
+//        newEntity.setAdministrador(data.get(1));
+//        ComidaTipoEntity result = comidaTipoAdministradorLogic.createComidaTipoAdmin(data.get(1).getId(), newEntity);
+//        Assert.assertNotNull(result);
+//        ComidaTipoEntity entity = em.find(ComidaTipoEntity.class, result.getId());
+//        Assert.assertEquals(newEntity.getId(), entity.getId());
+//        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+//        Assert.assertEquals(newEntity.getCalorias(), entity.getCalorias());
+//        Assert.assertEquals(newEntity.getMenu(), entity.getMenu());
+//         Assert.assertEquals(newEntity.getMomentoDelDia(), entity.getMomentoDelDia());
+//    }
+    
      /**
      * Prueba para remplazar las instancias de comidaTipo asociadas a una instancia
      * de Administrador.

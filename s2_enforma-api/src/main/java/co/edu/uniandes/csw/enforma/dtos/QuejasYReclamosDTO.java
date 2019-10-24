@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.enforma.adapters.DateAdapter;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 public class QuejasYReclamosDTO implements Serializable
 {
+    private static Logger LOGGER = Logger.getLogger(QuejasYReclamosDTO.class.getName());
     private Long id;
     
     private String descripcion;
@@ -26,9 +29,9 @@ public class QuejasYReclamosDTO implements Serializable
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fecha;
     
-    //private UsuarioDTO usuario;
+    private ClienteDTO cliente;
     
-    //private DomicilioDTO domicilio;
+    private DomicilioDTO domicilio;
     
     
     public QuejasYReclamosDTO()
@@ -45,8 +48,22 @@ public class QuejasYReclamosDTO implements Serializable
             this.descripcion = quejasYReclamosEntity.getDescripcion();
             this.asusnto = quejasYReclamosEntity.getAsunto();
             this.fecha = quejasYReclamosEntity.getFecha();
-            
-            
+            if(quejasYReclamosEntity.getCliente() != null)
+            {
+                this.cliente = new ClienteDTO(quejasYReclamosEntity.getCliente()); 
+            }
+            else
+            {
+                this.cliente = null;
+            }
+            if(quejasYReclamosEntity.getDomicilio() != null)
+            {
+                this.domicilio = new DomicilioDTO(quejasYReclamosEntity.getDomicilio());
+            }
+            else
+            {
+                this.domicilio = null;
+            }
             
         }
     }
@@ -54,13 +71,27 @@ public class QuejasYReclamosDTO implements Serializable
     
     public QuejasYReclamosEntity toEntity()
     {
+        LOGGER.log(Level.INFO, "Inicia el toEntity");
         QuejasYReclamosEntity quejasYReclamosEntity = new QuejasYReclamosEntity();
+        LOGGER.log(Level.INFO, "id = {0}", this.getId());
         quejasYReclamosEntity.setId(this.getId());
+        LOGGER.log(Level.INFO, "asunto = {0}", this.getAsusnto());
         quejasYReclamosEntity.setAsunto(this.getAsusnto());
+        LOGGER.log(Level.INFO, "descripcion = {0}", this.getDescripcion());
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
+        LOGGER.log(Level.INFO, "fecha = {0}", this.getFecha());
         quejasYReclamosEntity.setFecha(this.getFecha());
-        
-        
+//        if(this.cliente != null)
+//        {
+//            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
+//            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
+//        }
+        if(this.domicilio != null)
+        {
+            LOGGER.log(Level.INFO, "domicilio = {0}", this.getDomicilio());
+            quejasYReclamosEntity.setDomicilio(this.domicilio.toEntity());
+        }
+        LOGGER.log(Level.INFO, "Termina el toEntity");
         return quejasYReclamosEntity;
     }
 
@@ -118,6 +149,34 @@ public class QuejasYReclamosDTO implements Serializable
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the domicilio
+     */
+    public DomicilioDTO getDomicilio() {
+        return domicilio;
+    }
+
+    /**
+     * @param domicilio the domicilio to set
+     */
+    public void setDomicilio(DomicilioDTO domicilio) {
+        this.domicilio = domicilio;
     }
     
     

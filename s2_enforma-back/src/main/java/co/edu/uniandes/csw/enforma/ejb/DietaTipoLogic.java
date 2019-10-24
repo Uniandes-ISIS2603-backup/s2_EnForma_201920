@@ -33,11 +33,8 @@ public class DietaTipoLogic {
     
     public DietaTipoEntity createDietaTipo(DietaTipoEntity dietaTipo) throws BusinessLogicException
     {
-       if (dietaTipo.getAdministrador()== null || administradorPersistence.find(dietaTipo.getAdministrador().getId()) == null) {
-            throw new BusinessLogicException("El administrador es inválida");
-        }
         
-        if(dietaTipo.getNombre()==null){
+       if(dietaTipo.getNombre()==null){
            throw new BusinessLogicException("El nombre de la Dieta está vacío.");
        } 
        if(dietaTipo.getCantidadGrasa()==null){
@@ -70,8 +67,12 @@ public class DietaTipoLogic {
        if(dietaTipo.getCantidadGrasa()<=0){
            throw new BusinessLogicException("La cantidad de grasa no puede ser menor o igual a cero.");
        }
+        LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
+       if(persistence.findByNombre(dietaTipo.getNombre()) != null){
+           LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
+           throw new BusinessLogicException("Ya existe una dieta con ese nombre");
+       } 
        
-        
         dietaTipo = persistence.create(dietaTipo);
         return dietaTipo;
     }
@@ -91,6 +92,7 @@ public class DietaTipoLogic {
         }
         return dietaTipoEntity;
     }
+    
     
     
     

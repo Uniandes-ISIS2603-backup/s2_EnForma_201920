@@ -22,7 +22,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class CalificacionPersistence 
 {
-    private static final Logger LOGGER = Logger.getLogger(QuejasYReclamosPersistence.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CalificacionPersistence.class.getName());
     
     @PersistenceContext(unitName = "enformaPU")
     protected EntityManager em;
@@ -41,32 +41,55 @@ public class CalificacionPersistence
     }
     
     /**
-     * Devuelve todas las calificaciones de la base de datos
-     * @return una lista con todas las calificaciones que encuentre en la base datos, 
-     * "select u from QuejasYReclamosEntity u" es como un "select * from QuejasYReclamosEntity;" - "SELECT * FROM table_name" en SQL.
+     * Devuelve todas las calificaciones asociadas a una dieta de la base de datos
+     * @return una lista con todas las calificaciones que encuentre en la base datos de la dieta que se quiere
      */
     public List<CalificacionEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todas las calificaciones");
-        // Se crea un query para buscar todas las calificaciones en la base de datos.
-        TypedQuery query = em.createQuery("select u from CalificacionEntity u", CalificacionEntity.class);
-        // Note que en el query se hace uso del método getResultList() que obtiene una lista de calificaciones.
+        // Se crea un query para buscar todas las quejas y relcamos en la base de datos.
+        TypedQuery<CalificacionEntity> query = em.createQuery("select u from CalificacionEntity u", CalificacionEntity.class);
+        // Note que en el query se hace uso del método getResultList() que obtiene una lista de quejas y reclamos.
         return query.getResultList();
     }
     
+    public CalificacionEntity find(Long calificacionId)
+    {
+        LOGGER.log(Level.INFO, "Consultando la calificaion con id= {0}", calificacionId);
+        return em.find(CalificacionEntity.class, calificacionId);
+    }
+    
     /**
-     * Busca si hay alguna calificacion con el id que se envia
+     * Buscar una calificacion
+     * Busca si hay alguna calificacion asociada a un cliente, una dieta y con un ID especifico
+     * @param clienteId El id del cliente con respecto al cual se busca
+     * @param dietaId El id de la dieta con respecto a la cual se busca
      * @param calificacionId id correspondiente a la calificacion buscada
      * @return la calificacion buscada
      */
-    public CalificacionEntity find(Long calificacionId)
+    public CalificacionEntity findByClienteYDietaTipo(Long clienteId, Long dietaId, Long calificacionId)
     {
-        LOGGER.log(Level.INFO, "Consultando la calificaion con id={0}", calificacionId);
-        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
-         *el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
-         *Suponga que es algo similar a "select * from CalificacionEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
-         */
-        return em.find(CalificacionEntity.class, calificacionId);
+        LOGGER.log(Level.INFO, "Consultando la calificaion con id= {0} del cliente con id = " + clienteId + "de la dieta con id = " + dietaId, calificacionId);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.usuario.id = :clienteId) and (p.dietaTipo.id = :dietaId) and (p.id = :calificacionId)", CalificacionEntity.class);
+        q.setParameter("clienteId", clienteId);
+        q.setParameter("dietaId", dietaId);
+        q.setParameter("calificacionId", calificacionId);
+        List<CalificacionEntity> results = q.getResultList();
+        CalificacionEntity calificacion = null;
+        if(results == null)
+        {
+            calificacion = null;
+        }
+        else if(results.isEmpty())
+        {
+            calificacion = null;
+        }
+        else if(results.size() >= 1)
+        {
+            calificacion = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar la calificacion con id = {0} del cliente con id = " + clienteId + "de la dieta con id = " + dietaId, calificacionId);
+        return calificacion;
     }
     
     /**
@@ -85,11 +108,16 @@ public class CalificacionPersistence
         // Se invoca el query se obtiene la lista resultado
         List<CalificacionEntity> samePuntaje = query.getResultList();
         CalificacionEntity result;
-        if (samePuntaje == null) {
+        if (samePuntaje == null) 
+        {
             result = null;
-        } else if (samePuntaje.isEmpty()) {
+        } 
+        else if (samePuntaje.isEmpty()) 
+        {
             result = null;
-        } else {
+        } 
+        else 
+        {
             result = samePuntaje.get(0);
         }
         LOGGER.log(Level.INFO, "Saliendo de consultar puntajeCalificacion por calificacion ", puntaje);
@@ -112,14 +140,46 @@ public class CalificacionPersistence
         // Se invoca el query se obtiene la lista resultado
         List<CalificacionEntity> sameDate = query.getResultList();
         CalificacionEntity result;
-        if (sameDate == null) {
+        if (sameDate == null) 
+        {
             result = null;
-        } else if (sameDate.isEmpty()) {
+        } 
+        else if (sameDate.isEmpty()) 
+        {
             result = null;
-        } else {
+        } 
+        else 
+        {
             result = sameDate.get(0);
         }
         LOGGER.log(Level.INFO, "Saliendo de consultar las calificaciones por fecha ", fecha);
+        return result;
+    }
+    
+    
+    public CalificacionEntity findByDietaTipoId(Long dietaId)
+    {
+        LOGGER.log(Level.INFO, "Consultando calificaciones por el id de la dieta a las que pertenecen", dietaId);
+        // Se crea un query para buscar calificaciones por el id de la dieta que recibe el método como argumento. ":dietaId" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From CalificacionEntity e where e.dietaTipo.id = :dietaId", CalificacionEntity.class);
+        // Se remplaza el placeholder ":dietaId" con el valor del argumento 
+        query = query.setParameter("dietaId", dietaId);
+        // Se invoca el query se obtiene la lista resultado
+        List<CalificacionEntity> sameDietaId = query.getResultList();
+        CalificacionEntity result = null;
+        if(sameDietaId == null)
+        {
+            result = null;
+        }
+        else if(sameDietaId.isEmpty())
+        {
+            result = null;
+        }
+        else if(sameDietaId.size() >= 1)
+        {
+            result = sameDietaId.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar las calificaciones por el id de la dieta a las que pertenecen", dietaId);
         return result;
     }
     
@@ -145,7 +205,7 @@ public class CalificacionPersistence
     public void delete(Long calificacionId)
     {
         LOGGER.log(Level.INFO, "Borrando la calificacion con el Id={0}", calificacionId);
-        // Se hace uso del mismo método que esta explicado en public CalificacionEntity find(Long id) para obtener la calificacion a borrar.
+        // Se hace uso del mismo método que esta explicado en public CalificacionEntity findByClienteYDietaTipo(Long id) para obtener la calificacion a borrar.
         CalificacionEntity calificacionEntity = em.find(CalificacionEntity.class, calificacionId);
         /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
         EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
@@ -153,4 +213,3 @@ public class CalificacionPersistence
         em.remove(calificacionEntity);
     }
 }
-

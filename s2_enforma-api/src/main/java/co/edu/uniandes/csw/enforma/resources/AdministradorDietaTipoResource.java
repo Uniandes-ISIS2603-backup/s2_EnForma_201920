@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Estudiante
+ * @author Elina Jaimes
  */
 
 @Consumes(MediaType.APPLICATION_JSON)

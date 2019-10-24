@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import co.edu.uniandes.csw.enforma.persistence.DietaTipoPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Julio Morales
  */
+@Stateless
 public class DietaTipoAdministradorLogic {
     private static final Logger LOGGER = Logger.getLogger(DietaTipoAdministradorLogic.class.getName());
 
@@ -33,7 +35,7 @@ public class DietaTipoAdministradorLogic {
      * @param adminId El id del Administrador que se será del dietaTipo.
      * @return el nuevo dietaTipo.
      */
-    public DietaTipoEntity replaceEditorial(Long dietaTipoId, Long adminId) {
+    public DietaTipoEntity replaceAdministrador(Long dietaTipoId, Long adminId) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar dietaTipo con id = {0}", dietaTipoId);
         AdministradorEntity administradorEntity = administradorPersistence.find(adminId);
         DietaTipoEntity dietaTipoEntity = dietaTipoPersistence.find(dietaTipoId);
@@ -48,7 +50,7 @@ public class DietaTipoAdministradorLogic {
      *
      * @param dietaTipoId El DietaTipo que se desea borrar de la administrador.
      */
-    public void removeEditorial(Long dietaTipoId) {
+    public void removeAdministrador(Long dietaTipoId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la Editorial del libro con id = {0}", dietaTipoId);
         DietaTipoEntity dietaTipoEntity = dietaTipoPersistence.find(dietaTipoId);
         AdministradorEntity administradorEntity = administradorPersistence.find(dietaTipoEntity.getAdministrador().getId());

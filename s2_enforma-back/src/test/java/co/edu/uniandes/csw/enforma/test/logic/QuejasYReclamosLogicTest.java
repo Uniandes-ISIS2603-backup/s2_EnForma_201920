@@ -5,9 +5,15 @@
  */
 package co.edu.uniandes.csw.enforma.test.logic;
 
+import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
+import co.edu.uniandes.csw.enforma.ejb.DomicilioLogic;
 import co.edu.uniandes.csw.enforma.ejb.QuejasYReclamosLogic;
+import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
+import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import co.edu.uniandes.csw.enforma.persistence.QuejasYReclamosPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +52,10 @@ public class QuejasYReclamosLogicTest
     
     private List<QuejasYReclamosEntity> data = new ArrayList<QuejasYReclamosEntity>();
     
+    private List<ClienteEntity> clienteData = new ArrayList<ClienteEntity>();
+    
+    private List<DomicilioEntity> domicilioData = new ArrayList<DomicilioEntity>();
+    
     @Deployment
     public static JavaArchive createDeployment()
     {
@@ -53,6 +63,12 @@ public class QuejasYReclamosLogicTest
                 .addPackage(QuejasYReclamosEntity.class.getPackage())
                 .addPackage(QuejasYReclamosLogic.class.getPackage())
                 .addPackage(QuejasYReclamosPersistence.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(ClienteLogic.class.getPackage())
+                .addPackage(ClientePersistence.class.getPackage())
+                .addPackage(DomicilioEntity.class.getPackage())
+                .addPackage(DomicilioLogic.class.getPackage())
+                .addPackage(DomicilioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -83,6 +99,8 @@ public class QuejasYReclamosLogicTest
     private void clearData() 
     {
         em.createQuery("delete from QuejasYReclamosEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
+        em.createQuery("delete from DomicilioEntity").executeUpdate();
     }
 
     /**
@@ -91,19 +109,51 @@ public class QuejasYReclamosLogicTest
      */
     private void insertData() 
     {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entity);
+            clienteData.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
+            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
+            em.persist(entity);
+            domicilioData.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
             QuejasYReclamosEntity entity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+            entity.setCliente(clienteData.get(0));
+            entity.setDomicilio(domicilioData.get(0));
             em.persist(entity);
             data.add(entity);
         }
     }
     
-    
     @Test 
     public void createQuejasYReclamosLogicTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setCliente(clienteData.get(0));
+        newEntity.setDomicilio(domicilioData.get(0));
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+        Assert.assertNotNull(result);
+        
+        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
+        Assert.assertEquals(entity.getId(), result.getId());
+        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
+        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+        Assert.assertEquals(entity.getFecha(), result.getFecha());
+    }
+    
+    @Test 
+    public void createQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setCliente(clienteData.get(0));
+        newEntity.setDomicilio(domicilioData.get(0));
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(), newEntity);
         Assert.assertNotNull(result);
         
         QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
@@ -117,6 +167,8 @@ public class QuejasYReclamosLogicTest
     public void createQuejasYReclamosAsuntoNull() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setCliente(clienteData.get(0));
+        newEntity.setDomicilio(domicilioData.get(0));
         newEntity.setAsunto(null);
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
@@ -125,6 +177,8 @@ public class QuejasYReclamosLogicTest
     public void createQuejasYReclamosDescripcionNull() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setCliente(clienteData.get(0));
+        newEntity.setDomicilio(domicilioData.get(0));
         newEntity.setDescripcion(null);
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
@@ -133,7 +187,27 @@ public class QuejasYReclamosLogicTest
     public void createQuejasYReclamosFechaNull() throws BusinessLogicException
     {
         QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setCliente(clienteData.get(0));
+        newEntity.setDomicilio(domicilioData.get(0));
         newEntity.setFecha(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+    }
+    
+     @Test(expected = BusinessLogicException.class)
+    public void createQuejasYReclamosClienteNullTest() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setDomicilio(domicilioData.get(0));
+        newEntity.setCliente(null);
+        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createQuejasYReclamosDomicilioNullTest() throws BusinessLogicException
+    {
+        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        newEntity.setDomicilio(null);
+        newEntity.setCliente(clienteData.get(0));
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
     
@@ -170,6 +244,42 @@ public class QuejasYReclamosLogicTest
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
+//    @Test
+//    public void getQuejaYReclamoByClienteIdYDomicilioIdTest()
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.getQuejaOReclamoByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(), entity.getId());
+//        Assert.assertNotNull(result);
+//        Assert.assertEquals(entity.getId(), result.getId());
+//        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
+//        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+//        Assert.assertEquals(entity.getFecha(), result.getFecha());
+//    }
+    
+//    @Test
+//    public void getQuejaYReclamoByClienteTest()
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.getQuejasYReclamosByClienteId(clienteData.get(0).getId());
+//        Assert.assertNotNull(result);
+//        Assert.assertEquals(entity.getId(), result.getId());
+//        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
+//        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+//        Assert.assertEquals(entity.getFecha(), result.getFecha());
+//    }
+    
+//    @Test
+//    public void getQuejaYReclamoByDietaTest()
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.getQuejasYReclamosByDomicilioId(domicilioData.get(0).getId());
+//        Assert.assertNotNull(result);
+//        Assert.assertEquals(entity.getId(), result.getId());
+//        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
+//        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+//        Assert.assertEquals(entity.getFecha(), result.getFecha());
+//    }
+    
     @Test
     public void updateQuejasYReclamosTest() throws BusinessLogicException
     {
@@ -177,7 +287,7 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity pojoEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
         pojoEntity.setId(entity.getId());
         
-        quejasYReclamosLogic.updateQuejasYReclamos(pojoEntity);
+        quejasYReclamosLogic.updateQuejasYReclamos(pojoEntity.getId(),pojoEntity);
         QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
         
          Assert.assertEquals(pojoEntity.getId(), result.getId());
@@ -186,53 +296,69 @@ public class QuejasYReclamosLogicTest
          Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
     }
     
-    @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosAsuntoNullTest1() throws BusinessLogicException
+    @Test
+    public void updateQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setAsunto(null);
-        newEntity.setId(entity.getId());
-        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
+        QuejasYReclamosEntity pojoEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+        pojoEntity.setId(entity.getId());
+        
+        quejasYReclamosLogic.updateQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(),pojoEntity);
+        QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
+        
+         Assert.assertEquals(pojoEntity.getId(), result.getId());
+         Assert.assertEquals(pojoEntity.getAsunto(), result.getAsunto());
+         Assert.assertEquals(pojoEntity.getDescripcion(), result.getDescripcion());
+         Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
     }
+//    
+//    @Test(expected = BusinessLogicException.class)
+//    public void updateQuejasYReclamosAsuntoNullTest1() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setAsunto(null);
+//        newEntity.setId(entity.getId());
+//        quejasYReclamosLogic.updateQuejasYReclamos(newEntity.getId(), newEntity);
+//    }
+//    
+//    @Test(expected = BusinessLogicException.class)
+//    public void updateQuejasYReclamosAsuntoNullTest2() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setAsunto("");
+//        newEntity.setId(entity.getId());
+//        quejasYReclamosLogic.updateQuejasYReclamos(newEntity.getId(), newEntity);
+//    }
     
-    @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosAsuntoNullTest2() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setAsunto("");
-        newEntity.setId(entity.getId());
-        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
-    }
+//    @Test(expected = BusinessLogicException.class)
+//    public void updateQuejasYReclamosDescripcionNullTest1() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setDescripcion(null);
+//        newEntity.setId(entity.getId());
+//        quejasYReclamosLogic.updateQuejasYReclamos(newEntity.getId(), newEntity);
+//    }
+//    
+//    @Test(expected = BusinessLogicException.class)
+//    public void updateQuejasYReclamosDescripcionNullTest2() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setDescripcion("");
+//        newEntity.setId(entity.getId());
+//        quejasYReclamosLogic.updateQuejasYReclamos(newEntity.getId(), newEntity);
+//    }
     
-    @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosDescripcionNullTest1() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setDescripcion(null);
-        newEntity.setId(entity.getId());
-        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
-    }
-    
-    @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosDescripcionNullTest2() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setDescripcion("");
-        newEntity.setId(entity.getId());
-        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
-    }
-    
-    @Test(expected = BusinessLogicException.class)
-    public void updateQuejasYReclamosFechaNullTest() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setFecha(null);
-        newEntity.setId(entity.getId());
-        quejasYReclamosLogic.updateQuejasYReclamos(newEntity);
-    }
+//    @Test(expected = BusinessLogicException.class)
+//    public void updateQuejasYReclamosFechaNullTest() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setFecha(null);
+//        newEntity.setId(entity.getId());
+//        quejasYReclamosLogic.updateQuejasYReclamos(newEntity.getId(), newEntity);
+//    }
 }
