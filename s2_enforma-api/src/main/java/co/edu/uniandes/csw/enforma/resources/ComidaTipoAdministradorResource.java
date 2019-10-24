@@ -43,25 +43,25 @@ public class ComidaTipoAdministradorResource
     @Inject
     private AdministradorLogic administradorLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
-   /**
-     * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
-     * petición y se regresa un objeto identico con un id auto-generado por la
-     * base de datos.
-     *
-     * @param administradorId El ID del libro del cual se le agrega la reseña
-     * @param comidaTipoDTO {@link ComidaTipoTO} - La reseña que se desea guardar.
-     * @return JSON {@link ReviewDTO} - La reseña guardada con el atributo id
-     * autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera cuando ya existe la reseña.
-     */
-    @POST
-    public ComidaTipoDTO createComidaTipo(@PathParam("administradoresId") Long administradorId, ComidaTipoDTO comidaTipoDTO) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ReviewResource createReview: input: {0}", comidaTipoDTO);
-        ComidaTipoDTO nuevoReviewDTO = new ComidaTipoDTO(comidaTipoAdministradorLogic.createComidaTipoAdmin(administradorId, comidaTipoDTO.toEntity()));
-        LOGGER.log(Level.INFO, "ReviewResource createReview: output: {0}", nuevoReviewDTO);
-        return nuevoReviewDTO;
-    }
+//   /**
+//     * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
+//     * petición y se regresa un objeto identico con un id auto-generado por la
+//     * base de datos.
+//     *
+//     * @param administradorId El ID del libro del cual se le agrega la reseña
+//     * @param comidaTipoDTO {@link ComidaTipoTO} - La reseña que se desea guardar.
+//     * @return JSON {@link ReviewDTO} - La reseña guardada con el atributo id
+//     * autogenerado.
+//     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+//     * Error de lógica que se genera cuando ya existe la reseña.
+//     */
+//    @POST
+//    public ComidaTipoDTO createComidaTipo(@PathParam("administradoresId") Long administradorId, ComidaTipoDTO comidaTipoDTO) throws BusinessLogicException {
+//        LOGGER.log(Level.INFO, "ReviewResource createReview: input: {0}", comidaTipoDTO);
+//        ComidaTipoDTO nuevoReviewDTO = new ComidaTipoDTO(comidaTipoAdministradorLogic.createComidaTipoAdmin(administradorId, comidaTipoDTO.toEntity()));
+//        LOGGER.log(Level.INFO, "ReviewResource createReview: output: {0}", nuevoReviewDTO);
+//        return nuevoReviewDTO;
+//    }
 
     
     
