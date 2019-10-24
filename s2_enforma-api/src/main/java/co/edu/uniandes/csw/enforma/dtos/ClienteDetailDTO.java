@@ -71,22 +71,22 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     public ClienteEntity toEntity() 
     {
         ClienteEntity clienteEntity = super.toEntity();
-//        if (domicilios != null) {
-//            List<DomicilioEntity> domiciliosEntity = new ArrayList<>();
-//            for (DomicilioDTO dtoDomicilio : domicilios) 
-//            {
-//                domiciliosEntity.add(dtoDomicilio.toEntity());
-//            }
-//            clienteEntity.setDomicilios(domiciliosEntity);
-//        }
-//        if (quejas != null) {
-//            List<QuejasYReclamosEntity> quejasEntity = new ArrayList<>();
-//            for (QuejasYReclamosDTO dtoQuejasYReclamos : quejas)
-//            {
-//                quejasEntity.add(dtoQuejasYReclamos.toEntity());
-//            }
-//            clienteEntity.setQuejasYReclamos(quejasEntity);
-//        }
+        if (domicilios != null) {
+            List<DomicilioEntity> domiciliosEntity = new ArrayList<>();
+            for (DomicilioDTO dtoDomicilio : domicilios) 
+            {
+                domiciliosEntity.add(dtoDomicilio.toEntity());
+            }
+            clienteEntity.setDomicilios(domiciliosEntity);
+        }
+        if (quejas != null) {
+            List<QuejasYReclamosEntity> quejasEntity = new ArrayList<>();
+            for (QuejasYReclamosDTO dtoQuejasYReclamos : quejas)
+            {
+                quejasEntity.add(dtoQuejasYReclamos.toEntity());
+            }
+            clienteEntity.setQuejas(quejasEntity);
+        }
         return clienteEntity;
     }
 
@@ -95,7 +95,8 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @return the domicilios
      */
-    public List<DomicilioDTO> getDomicilios() {
+    public List<DomicilioDTO> getDomicilios() 
+    {
         return domicilios;
     }
 
@@ -114,7 +115,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @return the quejas
      */
-    public List<QuejasYReclamosDTO> getQuejasYReclamos() 
+    public List<QuejasYReclamosDTO> getQuejas() 
     {
         return quejas;
     }
@@ -124,7 +125,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @param quejas the quejas to set
      */
-    public void setQuejasYReclamos(List<QuejasYReclamosDTO> quejas) 
+    public void setQuejas(List<QuejasYReclamosDTO> quejas) 
     {
         this.quejas = quejas;
     }
