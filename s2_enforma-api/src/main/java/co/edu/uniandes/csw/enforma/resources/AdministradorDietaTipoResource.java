@@ -43,28 +43,7 @@ public class AdministradorDietaTipoResource {
     private DietaTipoLogic dietaTipoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
-     * Guarda un libro dentro de una administrador con la informacion que recibe el
-     * la URL. Se devuelve el libro que se guarda en la administrador.
-     *
-     * @param administradorsId Identificador de la administrador que se esta
-     * actualizando. Este debe ser una cadena de dígitos.
-     * @param dietaTiposId Identificador del libro que se desea guardar. Este debe
-     * ser una cadena de dígitos.
-     * @return JSON {@link DietaTipoDTO} - El libro guardado en la administrador.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @POST
-    @Path("{dietaTiposId: \\d+}")
-    public DietaTipoDTO addDietaTipo(@PathParam("administradorsId") Long administradorsId, @PathParam("dietaTiposId") Long dietaTiposId) {
-        LOGGER.log(Level.INFO, "AdministradorDietaTiposResource addDietaTipo: input: administradorsID: {0} , dietaTiposId: {1}", new Object[]{administradorsId, dietaTiposId});
-        if (dietaTipoLogic.getDietaTipo(dietaTiposId) == null) {
-            throw new WebApplicationException("El recurso /dietaTipos/" + dietaTiposId + " no existe.", 404);
-        }
-        DietaTipoDTO dietaTipoDTO = new DietaTipoDTO(administradorDietaTiposLogic.addDietaTipo(dietaTiposId, administradorsId));
-        LOGGER.log(Level.INFO, "AdministradorDietaTiposResource addDietaTipo: output: {0}", dietaTipoDTO);
-        return dietaTipoDTO;
-    }
+   
 
     /**
      * Busca y devuelve todos los libros que existen en la administrador.
@@ -75,6 +54,7 @@ public class AdministradorDietaTipoResource {
      * administrador. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+    
     public List<DietaTipoDetailDTO> getDietaTipos(@PathParam("administradorsId") Long administradorsId) {
         LOGGER.log(Level.INFO, "AdministradorDietaTiposResource getDietaTipos: input: {0}", administradorsId);
         List<DietaTipoDetailDTO> listaDetailDTOs = dietaTiposListEntity2DTO(administradorDietaTiposLogic.getDietaTipos(administradorsId));
@@ -108,30 +88,6 @@ public class AdministradorDietaTipoResource {
         return dietaTipoDetailDTO;
     }
 
-    /**
-     * Remplaza las instancias de DietaTipo asociadas a una instancia de Administrador
-     *
-     * @param administradorsId Identificador de la administrador que se esta
-     * remplazando. Este debe ser una cadena de dígitos.
-     * @param dietaTipos JSONArray {@link DietaTipoDTO} El arreglo de libros nuevo para la
-     * administrador.
-     * @return JSON {@link DietaTipoDTO} - El arreglo de libros guardado en la
-     * administrador.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @PUT
-    public List<DietaTipoDetailDTO> replaceDietaTipos(@PathParam("administradorsId") Long administradorsId, List<DietaTipoDetailDTO> dietaTipos) {
-        LOGGER.log(Level.INFO, "AdministradorDietaTiposResource replaceDietaTipos: input: administradorsId: {0} , dietaTipos: {1}", new Object[]{administradorsId, dietaTipos});
-        for (DietaTipoDetailDTO dietaTipo : dietaTipos) {
-            if (dietaTipoLogic.getDietaTipo(dietaTipo.getId()) == null) {
-                throw new WebApplicationException("El recurso /dietaTipos/" + dietaTipo.getId() + " no existe.", 404);
-            }
-        }
-        List<DietaTipoDetailDTO> listaDetailDTOs = dietaTiposListEntity2DTO(administradorDietaTiposLogic.replaceDietaTipos(administradorsId, dietaTiposListDTO2Entity(dietaTipos)));
-        LOGGER.log(Level.INFO, "AdministradorDietaTiposResource replaceDietaTipos: output: {0}", listaDetailDTOs);
-        return listaDetailDTOs;
-    }
 
     /**
      * Convierte una lista de DietaTipoEntity a una lista de DietaTipoDetailDTO.
