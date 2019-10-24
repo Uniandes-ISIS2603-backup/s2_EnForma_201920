@@ -31,7 +31,7 @@ import javax.ws.rs.PathParam;
  * @author Jose Manuel Flórez
  */
 
-@Path("ComidasTipo")
+@Path("comidas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -102,7 +102,7 @@ public class ComidaTipoResource
         LOGGER.log(Level.INFO, "BookResource getBook: input: {0}", comidaTipoId);
         ComidaTipoEntity comidaTipoEntity = comidaTipoLogic.getComidaTipo(comidaTipoId);
         if (comidaTipoEntity == null) {
-            throw new WebApplicationException("El recurso /comidaTipo/" + comidaTipoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /ComidasTipo/" + comidaTipoId + " no existe.", 404);
         }
         ComidaTipoDTO comidaTipoDTO = new ComidaTipoDTO(comidaTipoEntity);
         LOGGER.log(Level.INFO, "ComidaTipoResource getComidatipo: output: {0}", comidaTipoDTO);
@@ -124,10 +124,10 @@ public class ComidaTipoResource
     @DELETE
     @Path("{comidaTipoId: \\d+}")
     public void deleteComidaTipo(@PathParam("comidaTipoId") Long comidaTipoId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "BookResource deleteComidaTipo: input: {0}", comidaTipoId);
+        LOGGER.log(Level.INFO, "ComidaTipoResource deleteComidaTipo: input: {0}", comidaTipoId);
         ComidaTipoEntity entity = comidaTipoLogic.getComidaTipo(comidaTipoId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /books/" + comidaTipoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /ComidasTipo/" + comidaTipoId + " no existe.", 404);
         }
       //  bookEditorialLogic.removeEditorial(booksId);
         comidaTipoLogic.deleteComidaTipo(comidaTipoId);
