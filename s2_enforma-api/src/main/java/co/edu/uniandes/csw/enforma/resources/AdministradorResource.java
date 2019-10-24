@@ -167,11 +167,19 @@ public class AdministradorResource {
      * Error de lógica que se genera cuando no se encuentra la editorial.
      */
     @Path("{administradorsId: \\d+}/dietas")
-    public Class<AdministradorDietaTipoResource> getEditorialBooksResource(@PathParam("administradorsId") Long administradorsId) {
+    public Class<AdministradorDietaTipoResource> getAdministradorDietaTipoResource(@PathParam("administradorsId") Long administradorsId) {
         if (administradorLogic.getAdministrador(administradorsId)==null) {
             throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
         }
         return AdministradorDietaTipoResource.class;
+    }
+    
+    @Path("{administradorsId: \\d+}/comidas")
+    public Class<AdministradorComidaTipoResource> getAdministradorComidaTipoResource(@PathParam("administradorsId") Long administradorsId) {
+        if (administradorLogic.getAdministrador(administradorsId)==null) {
+            throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
+        }
+        return AdministradorComidaTipoResource.class;
     }
     
     
