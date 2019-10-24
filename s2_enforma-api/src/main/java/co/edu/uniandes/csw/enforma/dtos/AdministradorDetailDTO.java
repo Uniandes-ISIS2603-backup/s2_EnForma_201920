@@ -63,9 +63,9 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     @Override
     public AdministradorEntity toEntity() {
         AdministradorEntity administradorEntity = super.toEntity();
-        if (dietas != null) {
+        if (getDietas() != null) {
             List<DietaTipoEntity> dietasEntity = new ArrayList<>();
-            for (DietaTipoDTO dtoDietaTipo : dietas) {
+            for (DietaTipoDTO dtoDietaTipo : getDietas()) {
                 dietasEntity.add(dtoDietaTipo.toEntity());
             }
             administradorEntity.setDietaTipo(dietasEntity);
@@ -81,40 +81,33 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     }
 
     /**
-     * Devuelve las reseñas asociadas a este libro
-     *
-     * @return Lista de DTOs de Reseñas
+     * @return the dietas
      */
-    public List<DietaTipoDTO> getDietaTipos() {
+    public List<DietaTipoDTO> getDietas() {
         return dietas;
     }
 
     /**
-     * Modifica las reseñas de este libro.
-     *
-     * @param dietas Las nuevas reseñas
+     * @param dietas the dietas to set
      */
-    public void setDietaTipos(List<DietaTipoDTO> dietas) {
+    public void setDietas(List<DietaTipoDTO> dietas) {
         this.dietas = dietas;
     }
 
     /**
-     * Devuelve los autores del libro
-     *
-     * @return DTO de Autores
+     * @return the comidas
      */
-    public List<ComidaTipoDTO> getComidaTipos() {
+    public List<ComidaTipoDTO> getComidas() {
         return comidas;
     }
 
     /**
-     * Modifica los autores del libro
-     *
-     * @param comidas Lista de autores
+     * @param comidas the comidas to set
      */
-    public void setComidaTipos(List<ComidaTipoDTO> comidas) {
+    public void setComidas(List<ComidaTipoDTO> comidas) {
         this.comidas = comidas;
     }
 
+    
     
 }
