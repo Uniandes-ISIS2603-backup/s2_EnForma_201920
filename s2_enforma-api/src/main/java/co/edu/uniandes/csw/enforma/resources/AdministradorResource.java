@@ -151,6 +151,38 @@ public class AdministradorResource {
     }
     
     
+    
+    /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param administradorsId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{administradorsId: \\d+}/dietas")
+    public Class<AdministradorDietaTipoResource> getAdministradorDietaTipoResource(@PathParam("administradorsId") Long administradorsId) {
+        if (administradorLogic.getAdministrador(administradorsId)==null) {
+            throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
+        }
+        return AdministradorDietaTipoResource.class;
+    }
+    
+    @Path("{administradorsId: \\d+}/comidas")
+    public Class<AdministradorComidaTipoResource> getAdministradorComidaTipoResource(@PathParam("administradorsId") Long administradorsId) {
+        if (administradorLogic.getAdministrador(administradorsId)==null) {
+            throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
+        }
+        return AdministradorComidaTipoResource.class;
+    }
+    
+    
     private List<AdministradorDetailDTO> listEntity2DTO(List<AdministradorEntity> entityList) {
         List<AdministradorDetailDTO> list = new ArrayList<>();
         for (AdministradorEntity entity : entityList) {
@@ -159,4 +191,5 @@ public class AdministradorResource {
         return list;
     
 }
+    
 }

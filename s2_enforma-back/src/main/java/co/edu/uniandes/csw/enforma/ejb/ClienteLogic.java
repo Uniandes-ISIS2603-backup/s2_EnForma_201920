@@ -130,7 +130,7 @@ public class ClienteLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         
-        List<QuejasYReclamosEntity> quejas  = getCliente(clienteId).getQuejasYReclamos();
+        List<QuejasYReclamosEntity> quejas  = getCliente(clienteId).getQuejas();
         if(quejas != null && !quejas.isEmpty())
         {
             throw new BusinessLogicException("No se puede borrar el autor con id= " + clienteId + "porque tiene quejas asociadas.");

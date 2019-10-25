@@ -34,8 +34,8 @@ insert into AdministradorEntity (id, nombre, contrasena, username) values (100, 
 insert into AdministradorEntity (id, nombre, contrasena, username) values (200, 'Brandise Nary', '16144yv107', 'Brandise');
 insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 'Karel Tellenbrook', '97237ke365', 'Karel');
 
-insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (100, 20000, 0, 'Ok',200);
-insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (200, 40000,1234, 1, 'Ok',100);
+insert into PagoEntity (id, monto, esprepago, estadopago) values (100, 2, 0, 'Ok');
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago) values (200, 4,1234, 1, 'Ok');
 --insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
 
 insert into CalificacionEntity(id, puntaje, comentario, fecha) values (100, 5, 'Excelente', '2019-10-10 05:31:02');

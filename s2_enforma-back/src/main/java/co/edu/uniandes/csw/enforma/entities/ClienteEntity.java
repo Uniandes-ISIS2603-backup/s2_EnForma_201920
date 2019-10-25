@@ -8,8 +8,8 @@ package co.edu.uniandes.csw.enforma.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+//import javax.persistence.FetchType;
+//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -194,23 +194,25 @@ private TarjetaPrepagoEntity tarjetaPrepago;
     }
 
     /**
-     * @param domicilio the domicilios to set
+     * @param domicilios the domicilios to set
      */
-   public void setDomicilios(List<DomicilioEntity> domicilios) {
+   public void setDomicilios(List<DomicilioEntity> domicilios) 
+   {
         this.domicilios = domicilios;
     }
 
     /**
      * @return the quejas
      */
-    public List<QuejasYReclamosEntity> getQuejasYReclamos() {
+    public List<QuejasYReclamosEntity> getQuejas()
+    {
         return quejas;
    }
 
     /**
      * @param quejas the quejas to set
      */
-    public void setQuejasYReclamos(List<QuejasYReclamosEntity> quejas)
+    public void setQuejas(List<QuejasYReclamosEntity> quejas)
    {
         this.quejas = quejas;
     }

@@ -44,19 +44,19 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     public ClienteDetailDTO(ClienteEntity clienteEntity)
     {
         super(clienteEntity);
-//        if (clienteEntity != null) 
-//        {
-//            domicilios = new ArrayList<>();
-//            for (DomicilioEntity entityDomicilios : clienteEntity.getDomicilios()) 
-//            {
-//                domicilios.add(new DomicilioDTO(entityDomicilios));
-//            }
-//            quejas = new ArrayList();
-//            for (QuejasYReclamosEntity entityQuejasYReclamos : clienteEntity.getQuejasYReclamos()) 
-//            {
-//                quejas.add(new QuejasYReclamosDTO(entityQuejasYReclamos));
-//            }
-//        }
+        if (clienteEntity != null) 
+        {
+            domicilios = new ArrayList<>();
+            for (DomicilioEntity entityDomicilios : clienteEntity.getDomicilios()) 
+            {
+                domicilios.add(new DomicilioDTO(entityDomicilios));
+            }
+            quejas = new ArrayList();
+            for (QuejasYReclamosEntity entityQuejasYReclamos : clienteEntity.getQuejas()) 
+            {
+                quejas.add(new QuejasYReclamosDTO(entityQuejasYReclamos));
+            }
+        }
     }
     
 
@@ -71,22 +71,22 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     public ClienteEntity toEntity() 
     {
         ClienteEntity clienteEntity = super.toEntity();
-//        if (domicilios != null) {
-//            List<DomicilioEntity> domiciliosEntity = new ArrayList<>();
-//            for (DomicilioDTO dtoDomicilio : domicilios) 
-//            {
-//                domiciliosEntity.add(dtoDomicilio.toEntity());
-//            }
-//            clienteEntity.setDomicilios(domiciliosEntity);
-//        }
-//        if (quejas != null) {
-//            List<QuejasYReclamosEntity> quejasEntity = new ArrayList<>();
-//            for (QuejasYReclamosDTO dtoQuejasYReclamos : quejas)
-//            {
-//                quejasEntity.add(dtoQuejasYReclamos.toEntity());
-//            }
-//            clienteEntity.setQuejasYReclamos(quejasEntity);
-//        }
+        if (domicilios != null) {
+            List<DomicilioEntity> domiciliosEntity = new ArrayList<>();
+            for (DomicilioDTO dtoDomicilio : domicilios) 
+            {
+                domiciliosEntity.add(dtoDomicilio.toEntity());
+            }
+            clienteEntity.setDomicilios(domiciliosEntity);
+        }
+        if (quejas != null) {
+            List<QuejasYReclamosEntity> quejasEntity = new ArrayList<>();
+            for (QuejasYReclamosDTO dtoQuejasYReclamos : quejas)
+            {
+                quejasEntity.add(dtoQuejasYReclamos.toEntity());
+            }
+            clienteEntity.setQuejas(quejasEntity);
+        }
         return clienteEntity;
     }
 
@@ -95,7 +95,8 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @return the domicilios
      */
-    public List<DomicilioDTO> getDomicilios() {
+    public List<DomicilioDTO> getDomicilios() 
+    {
         return domicilios;
     }
 
@@ -114,17 +115,18 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
      *
      * @return the quejas
      */
-    public List<QuejasYReclamosDTO> getQuejasYReclamos() 
+    public List<QuejasYReclamosDTO> getQuejas() 
     {
         return quejas;
     }
+    
 
     /**
      * Modifica la lista de quejas para el cliente
      *
      * @param quejas the quejas to set
      */
-    public void setQuejasYReclamos(List<QuejasYReclamosDTO> quejas) 
+    public void setQuejas(List<QuejasYReclamosDTO> quejas) 
     {
         this.quejas = quejas;
     }

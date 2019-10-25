@@ -43,29 +43,7 @@ public class AdministradorComidaTipoResource {
     @Inject
     private ComidaTipoLogic comidaTipoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
-    /**
-     * Guarda un libro dentro de una administrador con la informacion que recibe el
-     * la URL. Se devuelve el libro que se guarda en la administrador.
-     *
-     * @param administradorsId Identificador de la administrador que se esta
-     * actualizando. Este debe ser una cadena de dígitos.
-     * @param comidaTiposId Identificador del libro que se desea guardar. Este debe
-     * ser una cadena de dígitos.
-     * @return JSON {@link ComidaTipoDTO} - El libro guardado en la administrador.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @POST
-    @Path("{comidaTiposId: \\d+}")
-    public ComidaTipoDTO addComidaTipo(@PathParam("administradorsId") Long administradorsId, @PathParam("comidaTiposId") Long comidaTiposId) {
-        LOGGER.log(Level.INFO, "AdministradorComidaTiposResource addComidaTipo: input: administradorsID: {0} , comidaTiposId: {1}", new Object[]{administradorsId, comidaTiposId});
-        if (comidaTipoLogic.getComidaTipo(comidaTiposId) == null) {
-            throw new WebApplicationException("El recurso /comidaTipos/" + comidaTiposId + " no existe.", 404);
-        }
-        ComidaTipoDTO comidaTipoDTO = new ComidaTipoDTO(administradorComidaTiposLogic.addComidasTipo(comidaTiposId, administradorsId));
-        LOGGER.log(Level.INFO, "AdministradorComidaTiposResource addComidaTipo: output: {0}", comidaTipoDTO);
-        return comidaTipoDTO;
-    }
+  
 
     /**
      * Busca y devuelve todos los libros que existen en la administrador.
@@ -104,35 +82,12 @@ public class AdministradorComidaTipoResource {
         if (comidaTipoLogic.getComidaTipo(comidaTiposId) == null) {
             throw new WebApplicationException("El recurso /administradors/" + administradorsId + "/comidaTipos/" + comidaTiposId + " no existe.", 404);
         }
-        ComidaTipoDTO comidaTipoDetailDTO = new ComidaTipoDTO(administradorComidaTiposLogic.getComidasTipo(administradorsId, comidaTiposId));
+        ComidaTipoDTO comidaTipoDetailDTO = new ComidaTipoDTO(administradorComidaTiposLogic.getComidaTipo(administradorsId, comidaTiposId));
         LOGGER.log(Level.INFO, "AdministradorComidaTiposResource getComidaTipo: output: {0}", comidaTipoDetailDTO);
         return comidaTipoDetailDTO;
     }
 
-    /**
-     * Remplaza las instancias de ComidaTipo asociadas a una instancia de Administrador
-     *
-     * @param administradorsId Identificador de la administrador que se esta
-     * remplazando. Este debe ser una cadena de dígitos.
-     * @param comidaTipos JSONArray {@link ComidaTipoDTO} El arreglo de libros nuevo para la
-     * administrador.
-     * @return JSON {@link ComidaTipoDTO} - El arreglo de libros guardado en la
-     * administrador.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @PUT
-    public List<ComidaTipoDTO> replaceComidaTipos(@PathParam("administradorsId") Long administradorsId, List<ComidaTipoDTO> comidaTipos) {
-        LOGGER.log(Level.INFO, "AdministradorComidaTiposResource replaceComidaTipos: input: administradorsId: {0} , comidaTipos: {1}", new Object[]{administradorsId, comidaTipos});
-        for (ComidaTipoDTO comidaTipo : comidaTipos) {
-            if (comidaTipoLogic.getComidaTipo(comidaTipo.getId()) == null) {
-                throw new WebApplicationException("El recurso /comidaTipos/" + comidaTipo.getId() + " no existe.", 404);
-            }
-        }
-        List<ComidaTipoDTO> listaDetailDTOs = comidaTiposListEntity2DTO(administradorComidaTiposLogic.replaceComidasTipos(administradorsId, comidaTiposListDTO2Entity(comidaTipos)));
-        LOGGER.log(Level.INFO, "AdministradorComidaTiposResource replaceComidaTipos: output: {0}", listaDetailDTOs);
-        return listaDetailDTOs;
-    }
+    
 
     /**
      * Convierte una lista de ComidaTipoEntity a una lista de ComidaTipoDetailDTO.
