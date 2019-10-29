@@ -48,20 +48,25 @@ public class QuejasYReclamosDTO implements Serializable
             this.descripcion = quejasYReclamosEntity.getDescripcion();
             this.asusnto = quejasYReclamosEntity.getAsunto();
             this.fecha = quejasYReclamosEntity.getFecha();
+            LOGGER.log(Level.INFO, "pasa atributos de la clase");
             if(quejasYReclamosEntity.getCliente() != null)
             {
                 this.cliente = new ClienteDTO(quejasYReclamosEntity.getCliente()); 
+                LOGGER.log(Level.INFO, "cliente no es null = {0}", this.cliente);
             }
             else
             {
+                LOGGER.log(Level.INFO, "cliente es null");
                 this.cliente = null;
             }
             if(quejasYReclamosEntity.getDomicilio() != null)
             {
                 this.domicilio = new DomicilioDTO(quejasYReclamosEntity.getDomicilio());
+                LOGGER.log(Level.INFO, "domicilio no es null = {0}", this.domicilio);
             }
             else
             {
+                LOGGER.log(Level.INFO, "domicilio es null");
                 this.domicilio = null;
             }
             
@@ -81,11 +86,11 @@ public class QuejasYReclamosDTO implements Serializable
         quejasYReclamosEntity.setDescripcion(this.getDescripcion());
         LOGGER.log(Level.INFO, "fecha = {0}", this.getFecha());
         quejasYReclamosEntity.setFecha(this.getFecha());
-//        if(this.cliente != null)
-//        {
-//            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
-//            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
-//        }
+        if(this.cliente != null)
+        {
+            LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
+            quejasYReclamosEntity.setCliente(this.cliente.toEntity());
+        }
         if(this.domicilio != null)
         {
             LOGGER.log(Level.INFO, "domicilio = {0}", this.getDomicilio());

@@ -136,7 +136,7 @@ public class DomicilioDTO implements Serializable
      * modifica el costo del domicilio
      * @param costo2 nuevo
      */
-    public void setCosto(double costo2)
+    public void setCosto(Double costo2)
     {
         this.costo = costo2;
     }

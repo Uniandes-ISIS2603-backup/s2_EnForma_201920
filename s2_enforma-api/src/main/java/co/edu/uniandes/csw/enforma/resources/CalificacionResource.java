@@ -169,7 +169,7 @@ public class CalificacionResource
     
     @DELETE
     @Path("{calificacionesId: \\d+}")
-    public void deleteCalificacion(@PathParam("calificacionId") Long calificacionId) throws BusinessLogicException
+    public void deleteCalificacion(@PathParam("calificacionesId") Long calificacionId) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CalificacionResource deleteCalificacion: input: {0}", calificacionId);
         if(calificacionLogic.getCalificacion(calificacionId) == null)

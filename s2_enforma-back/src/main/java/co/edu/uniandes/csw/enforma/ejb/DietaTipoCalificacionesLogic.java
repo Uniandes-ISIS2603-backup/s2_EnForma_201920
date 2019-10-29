@@ -39,7 +39,7 @@ public class DietaTipoCalificacionesLogic {
      * Agregar una calificacion a la dieta
      *
      * @param calificacionId La calificacion a guardar
-     * @param dietaTiposId El id de la dieta en la cual se va a guardar la calificacion.
+     * @param dietaTipoId El id de la dieta en la cual se va a guardar la calificacion.
      * @return La calificacion creada.
      */
     public CalificacionEntity addCalificacion(Long calificacionId, Long dietaTipoId) {
