@@ -78,14 +78,14 @@ public class QuejasYReclamosDTO implements Serializable
     {
         LOGGER.log(Level.INFO, "Inicia el toEntity");
         QuejasYReclamosEntity quejasYReclamosEntity = new QuejasYReclamosEntity();
-        LOGGER.log(Level.INFO, "id = {0}", this.getId());
-        quejasYReclamosEntity.setId(this.getId());
-        LOGGER.log(Level.INFO, "asunto = {0}", this.getAsusnto());
-        quejasYReclamosEntity.setAsunto(this.getAsusnto());
-        LOGGER.log(Level.INFO, "descripcion = {0}", this.getDescripcion());
-        quejasYReclamosEntity.setDescripcion(this.getDescripcion());
-        LOGGER.log(Level.INFO, "fecha = {0}", this.getFecha());
-        quejasYReclamosEntity.setFecha(this.getFecha());
+        LOGGER.log(Level.INFO, "id = {0}", this.id);
+        quejasYReclamosEntity.setId(this.id);
+        LOGGER.log(Level.INFO, "asunto = {0}", this.asusnto);
+        quejasYReclamosEntity.setAsunto(this.asusnto);
+        LOGGER.log(Level.INFO, "descripcion = {0}", this.descripcion);
+        quejasYReclamosEntity.setDescripcion(this.descripcion);
+        LOGGER.log(Level.INFO, "fecha = {0}", this.fecha);
+        quejasYReclamosEntity.setFecha(this.fecha);
         if(this.cliente != null)
         {
             LOGGER.log(Level.INFO, "cliente = {0}", this.getCliente());
