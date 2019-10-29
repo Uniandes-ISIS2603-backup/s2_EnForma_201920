@@ -61,7 +61,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     /**
      * @param saldo
      */
-    public void setSaldo(double saldo)
+    public void setSaldo(Double saldo)
     {
         this.saldo = saldo;
     }
@@ -77,7 +77,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     /**
      * @param puntos
      */
-    public void setPuntos(double puntos)
+    public void setPuntos(Double puntos)
     {
         this.puntos = puntos;
     }

@@ -117,7 +117,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * modifica los puntos
      * @param puntos 
      */
-    public void setPunto(double puntos)
+    public void setPunto(Double puntos)
     {
         this.puntos = puntos;
     }
@@ -135,7 +135,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * modifica el saldo de la tarjeta
      * @param saldo el saldo
      */
-    public void setSaldo(double saldo)
+    public void setSaldo(Double saldo)
     {
         this.saldo = saldo;
     }
