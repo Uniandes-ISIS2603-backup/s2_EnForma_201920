@@ -121,19 +121,16 @@ public class TarjetaPrepagoPagosLogicTest
         for (int i = 0; i < 3; i++) 
         {
             PagoEntity pagos = factory.manufacturePojo(PagoEntity.class);
-            pagos.setOrden(domiciliosData.get(i));
             em.persist(pagos);
             pagosData.add(pagos);
-
+             pagosData.get(i).setOrden(domiciliosData.get(i));
         }
         for (int i = 0; i < 3; i++) 
         {
             TarjetaPrepagoEntity entity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
             em.persist(entity);
             data.add(entity);
-            
-                pagosData.get(i).setOrden(domiciliosData.get(i));
-               pagosData.get(i).setTarjetaPrepago(entity);
+            pagosData.get(i).setTarjetaPrepago(entity);
                
 
         }
@@ -145,9 +142,9 @@ public class TarjetaPrepagoPagosLogicTest
      * Prueba para asociar un pagos existente a un tarjeta prepago.
      */
     @Test 
-    public void aaddPagosTest() 
+    public void addPagosTest() 
     {
-        TarjetaPrepagoEntity entity = data.get(1);
+        TarjetaPrepagoEntity entity = data.get(0);
         PagoEntity pagoEntity = pagosData.get(1);
         PagoEntity response = tarjetaPrepagoPagosLogic.addPago(pagoEntity.getId(), entity.getId(), pagoEntity.getOrden().getId());
 

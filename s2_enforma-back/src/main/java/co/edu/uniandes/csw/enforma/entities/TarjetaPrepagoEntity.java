@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamDoubleValue;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -22,13 +23,15 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
 {
     private String idTarjetaPrepago;
     
+    @PodamDoubleValue(minValue = 1.0)
     private Double saldo;
     
+    @PodamDoubleValue(minValue = 1.0)
     private Double puntos;
     
     @PodamExclude
-    @OneToMany
-    private List<PagoEntity> pagos = new ArrayList<PagoEntity>();
+    @OneToMany(mappedBy="tarjetaPrepago")
+    private List<PagoEntity> pagos= new ArrayList<PagoEntity>();
     
     @PodamExclude
     @OneToOne
