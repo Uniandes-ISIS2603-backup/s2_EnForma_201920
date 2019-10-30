@@ -88,26 +88,4 @@ public class ClienteDomiciliosLogic
         }
         throw new BusinessLogicException("El domicilio no está asociado a la cliente");
     }
-
-    /**
-     * Remplazar domicilios de una cliente
-     *
-     * @param domicilios Lista de domicilios que serán los de la cliente.
-     * @param clientesId El id de la cliente que se quiere actualizar.
-     * @return La lista de domicilios actualizada.
-     */
-    public List<DomicilioEntity> replaceDomicilios(Long clientesId, List<DomicilioEntity> domicilios) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la cliente con id = {0}", clientesId);
-        ClienteEntity clienteEntity = clientePersistence.find(clientesId);
-        List<DomicilioEntity> domicilioList = domicilioPersistence.findAll();
-        for (DomicilioEntity domicilio : domicilioList) {
-            if (domicilios.contains(domicilio)) {
-                domicilio.setCliente(clienteEntity);
-            } else if (domicilio.getCliente() != null && domicilio.getCliente().equals(clienteEntity)) {
-                domicilio.setCliente(null);
-            }
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la cliente con id = {0}", clientesId);
-        return domicilios;
-    }
 }

@@ -108,31 +108,7 @@ public class ClienteDomiciliosResource {
         return domicilioDetailDTO;
     }
 
-    /**
-     * Remplaza las instancias de Domicilio asociadas a una instancia de Cliente
-     *
-     * @param clientesId Identificador de la cliente que se esta
-     * remplazando. Este debe ser una cadena de dígitos.
-     * @param domicilios JSONArray {@link DomicilioDTO} El arreglo de libros nuevo para la
-     * cliente.
-     * @return JSON {@link DomicilioDTO} - El arreglo de libros guardado en la
-     * cliente.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @PUT
-    public List<DomicilioDTO> replaceDomicilios(@PathParam("clientesId") Long clientesId, List<DomicilioDTO> domicilios) {
-        LOGGER.log(Level.INFO, "ClienteDomiciliosResource replaceDomicilios: input: clientesId: {0} , domicilios: {1}", new Object[]{clientesId, domicilios});
-        for (DomicilioDTO domicilio : domicilios) {
-            if (domicilioLogic.getDomicilio(domicilio.getId()) == null) {
-                throw new WebApplicationException("El recurso /domicilios/" + domicilio.getId() + " no existe.", 404);
-            }
-        }
-        List<DomicilioDTO> listaDetailDTOs = domiciliosListEntity2DTO(clienteDomiciliosLogic.replaceDomicilios(clientesId, domiciliosListDTO2Entity(domicilios)));
-        LOGGER.log(Level.INFO, "ClienteDomiciliosResource replaceDomicilios: output: {0}", listaDetailDTOs);
-        return listaDetailDTOs;
-    }
-
+   
     /**
      * Convierte una lista de DomicilioEntity a una lista de DomicilioDetailDTO.
      *
