@@ -113,17 +113,11 @@ public class TarjetaPrepagoPagosLogicTest
     private void insertData() 
     {
         
-        for (int i = 0; i < 3; i++) {
-            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
-            em.persist(entity);
-            domiciliosData.add(entity);
-        }
         for (int i = 0; i < 3; i++) 
         {
             PagoEntity pagos = factory.manufacturePojo(PagoEntity.class);
             em.persist(pagos);
             pagosData.add(pagos);
-             pagosData.get(i).setOrden(domiciliosData.get(i));
         }
         for (int i = 0; i < 3; i++) 
         {
@@ -146,7 +140,7 @@ public class TarjetaPrepagoPagosLogicTest
     {
         TarjetaPrepagoEntity entity = data.get(0);
         PagoEntity pagoEntity = pagosData.get(1);
-        PagoEntity response = tarjetaPrepagoPagosLogic.addPago(pagoEntity.getId(), entity.getId(), pagoEntity.getOrden().getId());
+        PagoEntity response = tarjetaPrepagoPagosLogic.addPago(pagoEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(pagoEntity.getId(), response.getId());
@@ -175,7 +169,7 @@ public class TarjetaPrepagoPagosLogicTest
     {
         TarjetaPrepagoEntity entity = data.get(1);
         PagoEntity pagoEntity = pagosData.get(1);
-        PagoEntity response = tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId(), pagoEntity.getOrden().getId());
+        PagoEntity response = tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId());
 
         Assert.assertEquals(pagoEntity.getId(), response.getId());
         Assert.assertEquals(pagoEntity.getEstadoPago(), response.getEstadoPago());
@@ -195,7 +189,7 @@ public class TarjetaPrepagoPagosLogicTest
     {
         TarjetaPrepagoEntity entity = data.get(0);
         PagoEntity pagoEntity = pagosData.get(1);
-        tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId(), pagoEntity.getOrden().getId());
+        tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId());
     }
 
     /**
