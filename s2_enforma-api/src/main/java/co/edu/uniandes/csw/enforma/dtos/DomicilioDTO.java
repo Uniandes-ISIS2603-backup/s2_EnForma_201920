@@ -127,7 +127,7 @@ public class DomicilioDTO implements Serializable
      * Devuelve el costo del domicilio
      * @return costo
      */
-    public double getCosto()
+    public Double getCosto()
     {
         return this.costo;
     }

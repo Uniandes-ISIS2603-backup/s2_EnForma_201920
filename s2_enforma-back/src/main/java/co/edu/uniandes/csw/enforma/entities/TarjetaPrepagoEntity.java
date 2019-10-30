@@ -56,7 +56,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
      /**
      * @return saldo
      */
-    public double getSaldo()
+    public Double getSaldo()
     {
         return this.saldo;
     }
@@ -72,7 +72,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
      /**
      * @return puntos
      */
-    public double getPuntos()
+    public Double getPuntos()
     {
         return this.puntos;
     }
