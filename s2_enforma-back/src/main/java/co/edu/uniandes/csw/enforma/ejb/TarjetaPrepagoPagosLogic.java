@@ -35,8 +35,7 @@ public class TarjetaPrepagoPagosLogic
      * Agregar un pago a la tarjeta prepago
      *
      * @param pagosId El id del pago a guardar
-     * @param tarjetasId El id de la tarjeta en la cual se va a guardar el
-     * @param domicilioId 
+     * @param tarjetasId El id de la tarjeta en la cual se va a guardar el 
      * libro.
      * @return El libro creado.
      */
@@ -67,7 +66,6 @@ public class TarjetaPrepagoPagosLogic
      *
      * @param tarjetasId El id de la tarjeta a buscar.
      * @param pagosId El id del pago a buscar
-     * @param domicilioId
      * @return El pago encontrado dentro de la tarjeta.
      * @throws BusinessLogicException Si el pago no se encuentra en la
      * tarjeta

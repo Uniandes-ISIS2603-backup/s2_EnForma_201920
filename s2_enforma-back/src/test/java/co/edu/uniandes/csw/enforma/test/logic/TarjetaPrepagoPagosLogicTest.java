@@ -56,7 +56,6 @@ public class TarjetaPrepagoPagosLogicTest
 
     private List<PagoEntity> pagosData = new ArrayList<>();
     
-    private List<DomicilioEntity> domiciliosData = new ArrayList<DomicilioEntity>();
     
      /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -102,8 +101,6 @@ public class TarjetaPrepagoPagosLogicTest
     {
         em.createQuery("delete from PagoEntity").executeUpdate();
         em.createQuery("delete from TarjetaPrepagoEntity").executeUpdate();
-        em.createQuery("delete from DomicilioEntity").executeUpdate();
-
     }
 
     /**
@@ -124,12 +121,11 @@ public class TarjetaPrepagoPagosLogicTest
             TarjetaPrepagoEntity entity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
             em.persist(entity);
             data.add(entity);
-            pagosData.get(i).setTarjetaPrepago(entity);
-               
-
+            if(i==0)
+            {
+                pagosData.get(i).setTarjetaPrepago(entity);
+            }
         }
-        
-        
     }
     
     /**
@@ -153,7 +149,7 @@ public class TarjetaPrepagoPagosLogicTest
     @Test
     public void getPagosTest() 
     {
-        List<PagoEntity> list = tarjetaPrepagoPagosLogic.getPagos(data.get(1).getId());
+        List<PagoEntity> list = tarjetaPrepagoPagosLogic.getPagos(data.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
@@ -167,8 +163,8 @@ public class TarjetaPrepagoPagosLogicTest
     @Test
     public void getPagoTest() throws BusinessLogicException 
     {
-        TarjetaPrepagoEntity entity = data.get(1);
-        PagoEntity pagoEntity = pagosData.get(1);
+        TarjetaPrepagoEntity entity = data.get(0);
+        PagoEntity pagoEntity = pagosData.get(0);
         PagoEntity response = tarjetaPrepagoPagosLogic.getPago(entity.getId(), pagoEntity.getId());
 
         Assert.assertEquals(pagoEntity.getId(), response.getId());
@@ -199,7 +195,7 @@ public class TarjetaPrepagoPagosLogicTest
     @Test
     public void replacePagosTest() 
     {
-        TarjetaPrepagoEntity entity = data.get(1);
+        TarjetaPrepagoEntity entity = data.get(0);
         List<PagoEntity> list = pagosData.subList(1, 3);
         tarjetaPrepagoPagosLogic.replacePagos(entity.getId(), list);
 

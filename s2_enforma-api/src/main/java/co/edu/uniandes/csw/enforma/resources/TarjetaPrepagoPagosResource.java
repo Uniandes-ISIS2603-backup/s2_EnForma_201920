@@ -51,7 +51,6 @@ public class TarjetaPrepagoPagosResource
      * actualizando. Este debe ser una cadena de dígitos.
      * @param pagosId Identificador del pago que se desea guardar. Este debe
      * ser una cadena de dígitos.
-     * @param domicilioId
      * @return JSON {@link PagoDTO} - El pago guardado en la tarjeta.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago.
@@ -97,7 +96,6 @@ public class TarjetaPrepagoPagosResource
      * @return JSON {@link PagoDTO} - El pago buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago.
-     * @param domicilioId
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago en la
      * editorial.
@@ -106,7 +104,7 @@ public class TarjetaPrepagoPagosResource
     @Path("{pagosId: \\d+}")
     public PagoDTO getPago(@PathParam("tarjetasId") Long tarjetasId, @PathParam("pagosId") Long pagosId) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: input: tarjetasId: {0} , pagosId: {1} , domicilioId: (2)", new Object[]{tarjetasId, pagosId});
+        LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: input: tarjetasId: {0} , pagosId: {1}", new Object[]{tarjetasId, pagosId});
         if (pagoLogic.getPago(pagosId) == null) 
         {
             throw new WebApplicationException("El recurso /tarjetas/" + tarjetasId + "/pagos/" + pagosId + " no existe.", 404);
