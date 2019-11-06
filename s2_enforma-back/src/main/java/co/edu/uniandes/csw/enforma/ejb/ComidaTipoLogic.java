@@ -77,6 +77,11 @@ public class ComidaTipoLogic {
                  throw new BusinessLogicException("el momento del día de la comida tipo es vacío, no es posible crearlo");
         
         }
+          LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
+       if(persistenceComidaTipo.findByNombre(comidaTipo.getNombre()) != null){
+           LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
+           throw new BusinessLogicException("Ya existe una dieta con ese nombre");
+       } 
         
          comidaTipo = persistenceComidaTipo.create(comidaTipo);
                 return comidaTipo;
