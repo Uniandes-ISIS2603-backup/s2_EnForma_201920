@@ -29,6 +29,11 @@ public class DomicilioDTO implements Serializable
     
     
      /**
+     * relacion uno a uno con cliente
+     */
+    private ClienteDTO cliente;
+    
+     /**
      * Constructor por defecto
      */
     public DomicilioDTO() 
@@ -49,7 +54,10 @@ public class DomicilioDTO implements Serializable
             this.fecha = domicilioEntity.getFecha();
             this.lugarEntrega = domicilioEntity.getLugarEntrega();
             this.costo = domicilioEntity.getCosto();
-            
+            if(domicilioEntity.getCliente() != null)
+            {
+                this.cliente = new ClienteDTO(domicilioEntity.getCliente());
+            }
         }
     }
     
@@ -65,7 +73,10 @@ public class DomicilioDTO implements Serializable
         domicilioEntity.setFecha(this.fecha);
         domicilioEntity.setLugarEntrega(this.lugarEntrega);
         domicilioEntity.setCosto(this.costo);
-
+        if(this.cliente != null)
+        {
+            domicilioEntity.setCliente(this.cliente.toEntity());
+        }
         return domicilioEntity;
     }
     
@@ -146,6 +157,20 @@ public class DomicilioDTO implements Serializable
     public String toString() 
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
     
 }

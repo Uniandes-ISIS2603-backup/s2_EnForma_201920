@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,9 @@ public class DomicilioLogic
     @Inject
     private DomicilioPersistence persistence;
     
+//    @Inject
+//    private ClientePersistence clientePersistence;
+    
      /**
      * Guardar un nuevo domicilio
      *
@@ -39,10 +43,12 @@ public class DomicilioLogic
     {
         if(domicilio.getLugarEntrega() == null)
             throw new BusinessLogicException("El lugar de entrega no puede ser nulo"); 
-        else if(domicilio.getCosto() < 0)
+        if(domicilio.getCosto() < 0)
             throw new BusinessLogicException("El costo no puede ser negativo");
-        else if(domicilio.getFecha() == null)
+        if(domicilio.getFecha() == null)
             throw new BusinessLogicException("La fecha no puede ser invalida");
+//        if(domicilio.getCliente() == null || clientePersistence.find(domicilio.getCliente().getId()) == null)
+//            throw new BusinessLogicException("El cliente no puede ser invalido");
         domicilio = persistence.create(domicilio);
         return domicilio;
     }

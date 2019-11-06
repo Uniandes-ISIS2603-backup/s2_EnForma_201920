@@ -31,10 +31,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
      */
     private ComidaTipoDTO comidaTipo;
     
-    /**
-     * relacion uno a uno con cliente
-     */
-    private ClienteDTO cliente;
+
     
     /**
      * constructor vacio
@@ -67,10 +64,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         {
             this.comidaTipo = new ComidaTipoDTO(domicilioEntity.getComidaTipo());
         }
-        if(domicilioEntity.getCliente() != null)
-        {
-            this.cliente = new ClienteDTO(domicilioEntity.getCliente());
-        }
+
     }
 
     /**
@@ -96,10 +90,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         {
             entity.setComidaTipo(this.getComidaTipo().toEntity());
         }
-        if (this.getCliente() != null) 
-        {
-            entity.setCliente(this.getCliente().toEntity());
-        }
+        
         return entity;
     }
     
@@ -146,19 +137,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         this.comidaTipo = comidaTipo;
     }
 
-    /**
-     * @return the cliente
-     */
-    public ClienteDTO getCliente() {
-        return cliente;
-    }
 
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteDTO cliente) {
-        this.cliente = cliente;
-    }
     
         
     @Override
