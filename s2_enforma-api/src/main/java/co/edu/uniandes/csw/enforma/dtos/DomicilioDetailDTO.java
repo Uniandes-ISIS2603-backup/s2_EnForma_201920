@@ -26,10 +26,6 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
      */
     private PagoDTO pago;
     
-     /**
-     * relacion uno a uno comida tipo
-     */
-    private ComidaTipoDTO comidaTipo;
     
 
     
@@ -60,10 +56,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         {
             this.pago = new PagoDTO(domicilioEntity.getPago());
         }
-        if(domicilioEntity.getComidaTipo() != null)
-        {
-            this.comidaTipo = new ComidaTipoDTO(domicilioEntity.getComidaTipo());
-        }
+
 
     }
 
@@ -85,10 +78,6 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         if (this.getPago() != null) 
         {
             entity.setPago(this.getPago().toEntity());
-        }
-        if (this.getComidaTipo() != null) 
-        {
-            entity.setComidaTipo(this.getComidaTipo().toEntity());
         }
         
         return entity;
@@ -123,19 +112,6 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         this.pago = pago;
     }
 
-    /**
-     * @return the comidaTipo
-     */
-    public ComidaTipoDTO getComidaTipo() {
-        return comidaTipo;
-    }
-
-    /**
-     * @param comidaTipo the comidaTipo to set
-     */
-    public void setComidaTipo(ComidaTipoDTO comidaTipo) {
-        this.comidaTipo = comidaTipo;
-    }
 
 
     

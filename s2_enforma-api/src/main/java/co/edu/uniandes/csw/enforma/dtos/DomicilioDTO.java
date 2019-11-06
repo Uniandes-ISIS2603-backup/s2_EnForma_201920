@@ -29,6 +29,11 @@ public class DomicilioDTO implements Serializable
     
     
      /**
+     * relacion uno a uno comida tipo
+     */
+    private ComidaTipoDTO comidaTipo;
+    
+     /**
      * relacion uno a uno con cliente
      */
     private ClienteDTO cliente;
@@ -58,6 +63,10 @@ public class DomicilioDTO implements Serializable
             {
                 this.cliente = new ClienteDTO(domicilioEntity.getCliente());
             }
+            if(domicilioEntity.getComidaTipo()!= null)
+            {
+                this.comidaTipo = new ComidaTipoDTO(domicilioEntity.getComidaTipo());
+            }
         }
     }
     
@@ -76,6 +85,10 @@ public class DomicilioDTO implements Serializable
         if(this.cliente != null)
         {
             domicilioEntity.setCliente(this.cliente.toEntity());
+        }
+        if(this.comidaTipo != null)
+        {
+            domicilioEntity.setComidaTipo(this.comidaTipo.toEntity());
         }
         return domicilioEntity;
     }
@@ -171,6 +184,20 @@ public class DomicilioDTO implements Serializable
      */
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @return the comidaTipo
+     */
+    public ComidaTipoDTO getComidaTipo() {
+        return comidaTipo;
+    }
+
+    /**
+     * @param comidaTipo the comidaTipo to set
+     */
+    public void setComidaTipo(ComidaTipoDTO comidaTipo) {
+        this.comidaTipo = comidaTipo;
     }
     
 }

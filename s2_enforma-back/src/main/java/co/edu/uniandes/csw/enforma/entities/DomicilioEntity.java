@@ -35,7 +35,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private Double costo;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy="domicilio")
     private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
