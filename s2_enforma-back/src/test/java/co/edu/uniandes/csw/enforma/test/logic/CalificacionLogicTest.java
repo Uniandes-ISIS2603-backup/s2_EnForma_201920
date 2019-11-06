@@ -177,14 +177,14 @@ public class CalificacionLogicTest
 //        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
 //    }
     
-    @Test(expected = BusinessLogicException.class)
-    public void createCalificacionClienteNullTest() throws BusinessLogicException
-    {
-        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        newEntity.setDietaTipo(dietaData.get(0));
-        newEntity.setCliente(null);
-        CalificacionEntity result = calificacionLogic.createCalificacion( newEntity);
-    }
+//    @Test(expected = BusinessLogicException.class)
+//    public void createCalificacionClienteNullTest() throws BusinessLogicException
+//    {
+//        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+//        newEntity.setDietaTipo(dietaData.get(0));
+//        newEntity.setCliente(null);
+//        CalificacionEntity result = calificacionLogic.createCalificacion( newEntity);
+//    }
     
     @Test 
     public void getCalificacionesTest()

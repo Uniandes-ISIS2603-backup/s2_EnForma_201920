@@ -40,10 +40,10 @@ public class QuejasYReclamosLogic
     public QuejasYReclamosEntity createQuejasYReclamos(QuejasYReclamosEntity quejaReclamo) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la queja o reclamo");
-        if(quejaReclamo.getCliente() == null)
-        {
-            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
-        }
+//        if(quejaReclamo.getCliente() == null)
+//        {
+//            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
+//        }
 //        if(quejaReclamo.getDomicilio() == null)
 //        {
 //            throw new BusinessLogicException("El id del domicilio que esta recibiendo la calificacion no se encuentra");

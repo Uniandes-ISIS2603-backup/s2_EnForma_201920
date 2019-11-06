@@ -41,15 +41,15 @@ public class CalificacionLogic
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de creacion de la calificacion");
 
-        if(calificacion.getCliente() == null || clientePersistence.find(calificacion.getCliente().getId()) == null)
-        {
-            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
-        }
-        LOGGER.log(Level.INFO, "idDieta = {0}", calificacion.getDietaTipo().getId() );
-        if(calificacion.getDietaTipo()== null || dietaPersistence.find(calificacion.getDietaTipo().getId()) == null)
-        {
-            throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");
-        }
+//        if(calificacion.getCliente() == null || clientePersistence.find(calificacion.getCliente().getId()) == null)
+//        {
+//            throw new BusinessLogicException("El id del cliente que esta creando la calificacion no se encuentra");
+//        }
+//        LOGGER.log(Level.INFO, "idDieta = {0}", calificacion.getDietaTipo().getId() );
+//        if(calificacion.getDietaTipo()== null || dietaPersistence.find(calificacion.getDietaTipo().getId()) == null)
+//        {
+//            throw new BusinessLogicException("El id de la dieta que se esta calificando no se encuentra");
+//        }
         if(calificacion.getPuntaje() == null )
         {
             throw new BusinessLogicException("El puntaje de la calificacion esta sin marcar");

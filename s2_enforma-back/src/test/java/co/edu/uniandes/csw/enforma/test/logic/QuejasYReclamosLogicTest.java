@@ -193,23 +193,23 @@ public class QuejasYReclamosLogicTest
         QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
     }
     
-     @Test(expected = BusinessLogicException.class)
-    public void createQuejasYReclamosClienteNullTest() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setDomicilio(domicilioData.get(0));
-        newEntity.setCliente(null);
-        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
-    }
+//     @Test(expected = BusinessLogicException.class)
+//    public void createQuejasYReclamosClienteNullTest() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setDomicilio(domicilioData.get(0));
+//        newEntity.setCliente(null);
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+//    }
     
-    @Test(expected = BusinessLogicException.class)
-    public void createQuejasYReclamosDomicilioNullTest() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setDomicilio(null);
-        newEntity.setCliente(clienteData.get(0));
-        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
-    }
+//    @Test(expected = BusinessLogicException.class)
+//    public void createQuejasYReclamosDomicilioNullTest() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setDomicilio(null);
+//        newEntity.setCliente(clienteData.get(0));
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamos(newEntity);
+//    }
     
     @Test 
     public void getQuejasYReclamosTest()
