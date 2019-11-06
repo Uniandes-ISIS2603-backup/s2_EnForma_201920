@@ -38,8 +38,8 @@ insert into PagoEntity (id, monto, esprepago, estadopago) values (100, 2, 0, 'Ok
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago) values (200, 4,1234, 1, 'Ok');
 --insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (56, 40000,1234, 1, 'Ok', 78);
 
--- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (100, 5, 'Excelente', '2019-10-10 05:31:02');
--- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (200, 3, 'Regular', '2019-10-10 05:32:02');
+insert into CalificacionEntity(id, puntaje, comentario, fecha, cliente_id, dietaTipo_id) values (100, 5, 'Excelente', '2019-10-10 05:31:02', 100, 100);
+insert into CalificacionEntity(id, puntaje, comentario, fecha, cliente_id, dietaTipo_id) values (200, 3, 'Regular', '2019-10-10 05:32:02', 200, 200);
 -- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (300, 1, 'Malo', '2019-10-10 05:33:02');
 -- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (400, 5, '', '2019-10-10 05:34:02');
 

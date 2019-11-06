@@ -234,15 +234,15 @@
 			"response": []
 		},
 		{
-			"name": "Crea una calificacion con cliente null",
+			"name": "Crea una calificacion con un puntaje fuera de rango",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "9e990bfa-1c12-4456-a694-1e27bd74c078",
+						"id": "69e87e0b-e288-49ad-9f9c-86c5b1e62ff5",
 						"exec": [
-							"tests[\"No crea con cliente = null\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El id del cliente que esta creando la calificacion no se encuentra\");"
+							"tests[\"No crea con puntaje mayor a 5 o menor a 1\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje debe ser un entero entre 1 y 5\");"
 						],
 						"type": "text/javascript"
 					}
@@ -260,52 +260,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"puntaje\": 4,\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crea una calificacion con dieta null",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c5134683-d32b-426c-bebb-b88dd4169d93",
-						"exec": [
-							"tests[\"No crea con dieta = null\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El id de la dieta que se esta calificando no se encuentra\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"puntaje\": 4,\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":0 }\r\n}"
+					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"puntaje\": 6,\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
@@ -375,6 +330,41 @@
 						"api",
 						"calificaciones",
 						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1923b49d-4490-4b41-b8fa-39af1de0c57d",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no exite\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"calificaciones",
+						"0"
 					]
 				}
 			},

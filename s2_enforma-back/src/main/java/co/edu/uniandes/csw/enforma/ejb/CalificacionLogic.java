@@ -58,6 +58,10 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("La fecha de la calificacion es null");
         }
+        if(calificacion.getPuntaje() < 1 || calificacion.getPuntaje() > 5)
+        {
+            throw new BusinessLogicException("El puntaje debe ser un entero entre 1 y 5");
+        }
 
         LOGGER.log(Level.INFO, "Termian el proceso de creacion de la calificacion");
         return calificacionPersistence.create(calificacion);
