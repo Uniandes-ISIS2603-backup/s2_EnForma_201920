@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamDoubleValue;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -21,9 +23,13 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PagoEntity extends BaseEntity implements Serializable
 {
 
-
+    @PodamDoubleValue(minValue = 1.0)
     private Double monto;
+    
+    @PodamIntValue(minValue = 1)
     private Integer numeroTarjeta;
+    
+    
     private Boolean esPrepago;
     private String estadoPago;
     

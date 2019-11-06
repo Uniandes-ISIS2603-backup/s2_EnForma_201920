@@ -108,7 +108,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * devuelve los puntos de la tarjeta
      * @return puntos
      */
-    public double getPuntos()
+    public Double getPuntos()
     {
         return puntos;
     }
@@ -117,7 +117,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * modifica los puntos
      * @param puntos 
      */
-    public void setPunto(double puntos)
+    public void setPunto(Double puntos)
     {
         this.puntos = puntos;
     }
@@ -126,7 +126,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * devuelve el saldo de la tarjeta
      * @return saldo
      */
-    public double getSaldo()
+    public Double getSaldo()
     {
         return saldo;
     }
@@ -135,7 +135,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * modifica el saldo de la tarjeta
      * @param saldo el saldo
      */
-    public void setSaldo(double saldo)
+    public void setSaldo(Double saldo)
     {
         this.saldo = saldo;
     }

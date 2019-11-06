@@ -26,15 +26,8 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
      */
     private PagoDTO pago;
     
-     /**
-     * relacion uno a uno comida tipo
-     */
-    private ComidaTipoDTO comidaTipo;
     
-    /**
-     * relacion uno a uno con cliente
-     */
-    private ClienteDTO cliente;
+
     
     /**
      * constructor vacio
@@ -63,14 +56,8 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         {
             this.pago = new PagoDTO(domicilioEntity.getPago());
         }
-        if(domicilioEntity.getComidaTipo() != null)
-        {
-            this.comidaTipo = new ComidaTipoDTO(domicilioEntity.getComidaTipo());
-        }
-        if(domicilioEntity.getCliente() != null)
-        {
-            this.cliente = new ClienteDTO(domicilioEntity.getCliente());
-        }
+
+
     }
 
     /**
@@ -92,14 +79,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         {
             entity.setPago(this.getPago().toEntity());
         }
-        if (this.getComidaTipo() != null) 
-        {
-            entity.setComidaTipo(this.getComidaTipo().toEntity());
-        }
-        if (this.getCliente() != null) 
-        {
-            entity.setCliente(this.getCliente().toEntity());
-        }
+        
         return entity;
     }
     
@@ -132,33 +112,8 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
         this.pago = pago;
     }
 
-    /**
-     * @return the comidaTipo
-     */
-    public ComidaTipoDTO getComidaTipo() {
-        return comidaTipo;
-    }
 
-    /**
-     * @param comidaTipo the comidaTipo to set
-     */
-    public void setComidaTipo(ComidaTipoDTO comidaTipo) {
-        this.comidaTipo = comidaTipo;
-    }
 
-    /**
-     * @return the cliente
-     */
-    public ClienteDTO getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(ClienteDTO cliente) {
-        this.cliente = cliente;
-    }
     
         
     @Override

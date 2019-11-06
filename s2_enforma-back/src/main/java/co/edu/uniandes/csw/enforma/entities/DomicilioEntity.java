@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamDoubleValue;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -29,15 +30,16 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private Date fecha;
 
     private String lugarEntrega;
-
+    
+    @PodamDoubleValue(minValue = 1.0)
     private Double costo;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy="domicilio")
     private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy="orden")
     private PagoEntity pago;
     
     @PodamExclude

@@ -39,13 +39,13 @@ public class TarjetaPrepagoLogic
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la tarjeta prepago");
         if(tarjetaPrepago.getId() == null)
             throw new BusinessLogicException("El id de la tarjeta no pude ser vacío");
-        else if(tarjetaPrepago.getSaldo() < 0)
+        if(tarjetaPrepago.getSaldo() < 0)
             throw new BusinessLogicException("El saldo no puede ser menor a cero");
-        else if(tarjetaPrepago.getPuntos() < 0)
+        if(tarjetaPrepago.getPuntos() < 0)
             throw new BusinessLogicException("Los puntos no pueden ser negativos");
-        else if(tarjetaPrepago.getIdTarjetaPrepago() == null)
+        if(tarjetaPrepago.getIdTarjetaPrepago() == null)
             throw new BusinessLogicException("El numero de la tarjeta no puede ser nulo");
-        else if(tarjetaPrepago.getIdTarjetaPrepago().equals(""))
+        if(tarjetaPrepago.getIdTarjetaPrepago().equals(""))
             throw new BusinessLogicException("El numero de la tarjeta no puede ser vacío");
         
         

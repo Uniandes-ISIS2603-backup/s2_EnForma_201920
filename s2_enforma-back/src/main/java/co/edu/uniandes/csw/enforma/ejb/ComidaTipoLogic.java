@@ -71,10 +71,6 @@ public class ComidaTipoLogic {
             throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comida, no es posible crearlo");
         }
         
-        if(persistenceComidaTipo.find(comidaTipo.getId())!=null)
-        {
-            throw new BusinessLogicException("La comida tipo que intentamos crear ya existe, no es posible crearlo");
-        }
         
          if(comidaTipo.getMomentoDelDia() ==null || comidaTipo.getMomentoDelDia().isEmpty())
         {

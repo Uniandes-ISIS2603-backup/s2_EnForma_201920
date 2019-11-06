@@ -30,6 +30,7 @@ import javax.inject.Inject;
  *
  * @author Juan Sebastián Clavijo
  */
+@Path("tarjetaprepagoagos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TarjetaPrepagoPagosResource 
@@ -50,21 +51,20 @@ public class TarjetaPrepagoPagosResource
      * actualizando. Este debe ser una cadena de dígitos.
      * @param pagosId Identificador del pago que se desea guardar. Este debe
      * ser una cadena de dígitos.
-     * @param domicilioId
      * @return JSON {@link PagoDTO} - El pago guardado en la tarjeta.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago.
      */
     @POST
     @Path("{pagosId: \\d+}")
-    public PagoDTO addPago(@PathParam("tarjetasId") Long tarjetasId, @PathParam("pagosId") Long pagosId, @PathParam("domicilioId") Long domicilioId) 
+    public PagoDTO addPago(@PathParam("tarjetasId") Long tarjetasId, @PathParam("pagosId") Long pagosId) 
     {
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource addPago: input: tarjetasId: {0} , pagosId: {1}", new Object[]{tarjetasId, pagosId});
-        if (pagoLogic.getPago(pagosId, domicilioId) == null) 
+        if (pagoLogic.getPago(pagosId) == null) 
         {
             throw new WebApplicationException("El recurso /pagos/" + pagosId + " no existe.", 404);
         }
-        PagoDTO pagoDTO = new PagoDTO(tarjetaPrepagoPagosLogic.addPago(pagosId, tarjetasId,domicilioId ));
+        PagoDTO pagoDTO = new PagoDTO(tarjetaPrepagoPagosLogic.addPago(pagosId, tarjetasId));
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource addPago: output: {0}", pagoDTO);
         return pagoDTO;
     }
@@ -96,21 +96,20 @@ public class TarjetaPrepagoPagosResource
      * @return JSON {@link PagoDTO} - El pago buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago.
-     * @param domicilioId
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el pago en la
      * editorial.
      */
     @GET
     @Path("{pagosId: \\d+}")
-    public PagoDTO getPago(@PathParam("tarjetasId") Long tarjetasId, @PathParam("pagosId") Long pagosId, @PathParam("domicilioId") Long domicilioId) throws BusinessLogicException 
+    public PagoDTO getPago(@PathParam("tarjetasId") Long tarjetasId, @PathParam("pagosId") Long pagosId) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: input: tarjetasId: {0} , pagosId: {1} , domicilioId: (2)", new Object[]{tarjetasId, pagosId, domicilioId});
-        if (pagoLogic.getPago(pagosId,domicilioId ) == null) 
+        LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: input: tarjetasId: {0} , pagosId: {1}", new Object[]{tarjetasId, pagosId});
+        if (pagoLogic.getPago(pagosId) == null) 
         {
             throw new WebApplicationException("El recurso /tarjetas/" + tarjetasId + "/pagos/" + pagosId + " no existe.", 404);
         }
-        PagoDTO pagoDTO = new PagoDTO(tarjetaPrepagoPagosLogic.getPago(tarjetasId, pagosId, domicilioId));
+        PagoDTO pagoDTO = new PagoDTO(tarjetaPrepagoPagosLogic.getPago(tarjetasId, pagosId));
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: output: {0}", pagoDTO);
         return pagoDTO;
     }
@@ -132,7 +131,7 @@ public class TarjetaPrepagoPagosResource
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource replacePagos: input: tarjetasId: {0} , pagos: {1}", new Object[]{tarjetasId, pagos});
         for (PagoDTO pago : pagos) 
         {
-            if (pagoLogic.getPago(pago.getId(), pago.getOrden().getId()) == null) 
+            if (pagoLogic.getPago(pago.getId()) == null) 
             {
                 throw new WebApplicationException("El recurso /pagos/" + pago.getId() + " no existe.", 404);
             }

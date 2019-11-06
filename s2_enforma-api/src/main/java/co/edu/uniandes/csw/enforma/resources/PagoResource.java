@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.enforma.resources;
 
 import co.edu.uniandes.csw.enforma.dtos.PagoDTO;
+import co.edu.uniandes.csw.enforma.dtos.PagoDTO;
 import co.edu.uniandes.csw.enforma.ejb.PagoLogic;
+import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Elina Jaimes
  */
+
+@Path("pagos")
 @Produces("application/json")
 @Consumes("application/json")
 public class PagoResource {
@@ -43,133 +47,150 @@ public class PagoResource {
      * petición y se regresa un objeto identico con un id auto-generado por la
      * base de datos.
      *
-     * @param domiciliosId El ID del libro del cual se le agrega la reseña
+     * @param pagosId El ID del libro del cual se le agrega la reseña
      * @param pago {@link PagoDTO} - La reseña que se desea guardar.
      * @return JSON {@link PagoDTO} - La reseña guardada con el atributo id
      * autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando ya existe la reseña.
      */
-    @POST
-    public PagoDTO createPago(@PathParam("domiciliosId") Long domiciliosId, PagoDTO pago) throws BusinessLogicException {
+   
+    
+    
+    
+     @POST
+    public PagoDTO createPago(PagoDTO pago) throws BusinessLogicException 
+    {
         LOGGER.log(Level.INFO, "PagoResource createPago: input: {0}", pago);
-
-        PagoDTO nuevoPagoDTO = new PagoDTO(pagoLogic.crearPago(domiciliosId, pago.toEntity()));
-        if (nuevoPagoDTO == null) {
-            throw new WebApplicationException("El recurso /books/" + domiciliosId + "/reviews" + "no existe.", 404);
-        }
+        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
+        PagoEntity pagoEntity = pago.toEntity();
+        // Invoca la lógica para crear la editorial nueva
+        PagoEntity nuevoPagoEntity = pagoLogic.crearPago(pagoEntity);
+        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
+        PagoDTO nuevoPagoDTO = new PagoDTO(nuevoPagoEntity);
         LOGGER.log(Level.INFO, "PagoResource createPago: output: {0}", nuevoPagoDTO);
         return nuevoPagoDTO;
     }
-
-    /**
-     * Busca y devuelve todas las reseñas que existen en un libro.
+    
+     /**
+     * Busca y devuelve todos los pagos que existen.
      *
-     * @param domiciliosId El ID del libro del cual se buscan las reseñas
-     * @return JSONArray {@link PagoDTO} - Las reseñas encontradas en el libro.
-     * Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link PagoDTO} - Las reseñas encontradas en el
+     * libro. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public PagoDTO getPagos(@PathParam("domiciliosId") Long domiciliosId) {
-        LOGGER.log(Level.INFO, "PagoResource getPagos: input: {0}");
-        PagoEntity jeje = pagoLogic.getPagos(domiciliosId);
-        if (jeje == null) {
-            throw new WebApplicationException("El recurso /books/" + domiciliosId + "/reviews" + "no existe.", 404);
-        }
-        PagoDTO paguito = new PagoDTO(jeje);
-        LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", paguito);
-        return paguito;
+    public List<PagoDTO> getPagos() 
+    {
+        LOGGER.log(Level.INFO, "PagoResource getPagos: input: void");
+        List<PagoDTO> listaDTOs = listEntity2DTO(pagoLogic.getPagos());
+        LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDTOs);
+        return listaDTOs;
     }
-
-    /**
-     * Busca y devuelve la reseña con el ID recibido en la URL, relativa a un
-     * libro.
+    
+     /**
+     * Busca y devuelve el pago con el ID recibido en la URL, relativa a un
+     * pago.
      *
-     * @param domiciliosId El ID del libro del cual se buscan las reseñas
-     * @param pagosId El ID de la reseña que se busca
-     * @return {@link PagoDTO} - La reseña encontradas en el libro.
+     * @param pagosId El ID del pago que se busca
+     * @return {@link PagoDetailDTO} - El pago encontrado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la reseña.
+     * Error de lógica que se genera cuando no se encuentra el pago.
      */
     @GET
     @Path("{pagosId: \\d+}")
-    public PagoDTO getPago(@PathParam("domiciliosId") Long domiciliosId, @PathParam("pagosId") Long pagosId) throws BusinessLogicException {
+    public PagoDTO getPago(@PathParam("pagosId") Long pagosId) throws BusinessLogicException 
+    {
         LOGGER.log(Level.INFO, "PagoResource getPago: input: {0}", pagosId);
-        PagoEntity entity = pagoLogic.getPago(domiciliosId, pagosId);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /domicilios/" + domiciliosId + "/pagos/" + pagosId + " no existe.", 404);
+        PagoEntity entity = pagoLogic.getPago(pagosId);
+        if (entity == null) 
+        {
+            throw new WebApplicationException("El recurso /pago/" + pagosId + " no existe.", 404);
         }
         PagoDTO pagoDTO = new PagoDTO(entity);
         LOGGER.log(Level.INFO, "PagoResource getPago: output: {0}", pagoDTO);
         return pagoDTO;
     }
-
-    /**
-     * Actualiza una reseña con la informacion que se recibe en el cuerpo de la
+    
+     /**
+     * Actualiza un pago con la informacion que se recibe en el cuerpo de la
      * petición y se regresa el objeto actualizado.
      *
-     * @param domiciliosId El ID del libro del cual se guarda la reseña
-     * @param pagosId El ID de la reseña que se va a actualizar
-     * @param pago {@link PagoDTO} - La reseña que se desea guardar.
-     * @return JSON {@link PagoDTO} - La reseña actualizada.
+     * @param pagosId El ID del pago que se va a actualizar
+     * @param pago {@link PagoDTO} - el pago que se desea guardar.
+     * @return JSON {@link PagoDTO} - El pago actualizada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera cuando ya existe la reseña.
+     * Error de lógica que se genera cuando ya existe el pago.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la reseña.
+     * Error de lógica que se genera cuando no se encuentra el pago.
      */
     @PUT
     @Path("{pagosId: \\d+}")
-    public PagoDTO updatePago(@PathParam("domiciliosId") Long domiciliosId, @PathParam("pagosId") Long pagosId, PagoDTO pago) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "PagoResource updatePago: input: domiciliosId: {0} , pagosId: {1} , pago:{2}", new Object[]{domiciliosId, pagosId, pago});
-        if (pagosId.equals(pago.getId())) {
-            throw new BusinessLogicException("Los ids del Pago no coinciden.");
+    public PagoDTO updatePago(@PathParam("pagosId") Long pagosId, PagoDTO pago) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "PagoResource updatePago: input: pagosId: {0} , pago:{1}", new Object[]{pagosId, pago});
+        if (pagosId.equals(pago.getId())) 
+        {
+            throw new BusinessLogicException("Los ids del pago no coinciden.");
         }
-        PagoEntity entity = pagoLogic.getPago(domiciliosId, pagosId);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /domicilios/" + domiciliosId + "/pagos/" + pagosId + " no existe.", 404);
+        PagoEntity entity = pagoLogic.getPago(pagosId);
+        if (entity == null) 
+        {
+            throw new WebApplicationException("El recurso /pago/" + pagosId + " no existe.", 404);
 
         }
-        PagoDTO pagoDTO = new PagoDTO(pagoLogic.updatePago(domiciliosId, pago.toEntity()));
+        PagoDTO pagoDTO = new PagoDTO(pagoLogic.updatePago(pagosId, pago.toEntity())); 
         LOGGER.log(Level.INFO, "PagoResource updatePago: output:{0}", pagoDTO);
         return pagoDTO;
 
     }
-
-    /**
-     * Borra la reseña con el id asociado recibido en la URL.
+    
+     /**
+     * Borra el pago con el id asociado recibido en la URL.
      *
-     * @param domiciliosId El ID del libro del cual se va a eliminar la reseña.
-     * @param pagosId El ID de la reseña que se va a eliminar.
+     * @param pagosId El ID del pago que se va a eliminar.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera cuando no se puede eliminar la reseña.
+     * Error de lógica que se genera cuando no se puede eliminar el pago.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la reseña.
+     * Error de lógica que se genera cuando no se encuentra lel pago.
      */
     @DELETE
     @Path("{pagosId: \\d+}")
-    public void deletePago(@PathParam("domiciliosId") Long domiciliosId, @PathParam("pagosId") Long pagosId) throws BusinessLogicException {
-        PagoEntity entity = pagoLogic.getPago(domiciliosId, pagosId);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /domicilios/" + domiciliosId + "/pagos/" + pagosId + " no existe.", 404);
+    public void deletePago(@PathParam("pagosId") Long pagosId) throws BusinessLogicException 
+    {
+        PagoEntity entity = pagoLogic.getPago(pagosId);
+        if (entity == null) 
+        {
+            throw new WebApplicationException("El recurso /pago/" + pagosId + " no existe.", 404);
         }
-        pagoLogic.deletePago(domiciliosId, pagosId);
+        pagoLogic.deletePago(pagosId);
     }
-
-    /**
+    
+    @Path("{pagosId: \\d+}/pagos")
+    public Class<PagoResource> getpagoResource(@PathParam("pagosId") Long pagosId)
+    {
+        if(pagoLogic.getPago(pagosId) == null)
+        {
+            throw new WebApplicationException("El recurso /pago/" + pagosId + "/pagos no existe.", 404);
+        }
+        return PagoResource.class;
+    }
+    
+    
+     /**
      * Lista de entidades a DTO.
      *
-     * Este método convierte una lista de objetos PrizeEntity a una lista de
+     * Este método convierte una lista de objetos PagoEntity a una lista de
      * objetos PagoDTO (json)
      *
      * @param entityList corresponde a la lista de reseñas de tipo Entity que
      * vamos a convertir a DTO.
      * @return la lista de reseñas en forma DTO (json)
      */
-    private List<PagoDTO> listEntity2DTO(List<PagoEntity> entityList) {
+    private List<PagoDTO> listEntity2DTO(List<PagoEntity> entityList) 
+    {
         List<PagoDTO> list = new ArrayList<PagoDTO>();
-        for (PagoEntity entity : entityList) {
+        for (PagoEntity entity : entityList) 
+        {
             list.add(new PagoDTO(entity));
         }
         return list;

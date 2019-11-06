@@ -160,6 +160,19 @@ public class TarjetaPrepagoResource
     }
     
     
+    
+    
+    
+    @Path("{tarjetasprepagoId: \\d+}/pagos")
+    public Class<PagoResource> getpagoResource(@PathParam("domiciliosId") Long domiciliosId)
+    {
+        if(tarjetaPrepagoLogic.getTarjetaPrepago(domiciliosId) == null)
+        {
+            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + "/pagos no existe.", 404);
+        }
+        return PagoResource.class;
+    }
+    
      /**
      * Convierte una lista de entidades a DTO.
      *

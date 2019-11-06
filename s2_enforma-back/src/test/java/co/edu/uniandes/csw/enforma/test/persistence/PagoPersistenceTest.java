@@ -75,7 +75,6 @@ public class PagoPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from PagoEntity").executeUpdate();
-        em.createQuery("delete from DomicilioEntity").executeUpdate();
 
     }
 
@@ -86,19 +85,9 @@ public class PagoPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         
-        for (int i = 0; i < 3; i++) {
-            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
-
-            em.persist(entity);
-            dataDomicilio.add(entity);
-        }
-        
+     
         for (int i = 0; i < 3; i++) {
             PagoEntity entity = factory.manufacturePojo(PagoEntity.class);
-            if(i==0)
-            {
-                entity.setOrden(dataDomicilio.get(0));
-            }
             em.persist(entity);
             data.add(entity);
         }
@@ -144,7 +133,7 @@ public class PagoPersistenceTest {
     @Test
     public void getTest() {
         PagoEntity entity = data.get(0);
-        PagoEntity newEntity = pp.find(dataDomicilio.get(0).getId(), entity.getId());
+        PagoEntity newEntity = pp.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNumeroTarjeta(), newEntity.getNumeroTarjeta());
         Assert.assertEquals(entity.getMonto(), newEntity.getMonto());
