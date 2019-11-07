@@ -49,7 +49,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
 private List<DomicilioEntity> domicilios;
 // 
 @PodamExclude
- @OneToMany//(mappedBy = "usuario")//, fetch = FetchType.LAZY)
+ @OneToMany(mappedBy = "cliente")//, fetch = FetchType.LAZY)
  private List<QuejasYReclamosEntity> quejas;
  
 @PodamExclude

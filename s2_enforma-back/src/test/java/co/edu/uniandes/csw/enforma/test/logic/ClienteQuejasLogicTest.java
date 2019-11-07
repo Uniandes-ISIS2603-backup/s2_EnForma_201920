@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.enforma.test.logic;
 
-import co.edu.uniandes.csw.enforma.ejb.ClienteDomiciliosLogic;
+import co.edu.uniandes.csw.enforma.ejb.ClienteQuejasLogic;
 import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
 import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
-import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
+import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import java.util.ArrayList;
@@ -30,18 +30,17 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Sofia Vargas
+ * @author Estudiante
  */
 @RunWith(Arquillian.class)
-public class ClienteDomiciliosTest 
+public class ClienteQuejasLogicTest 
 {
-    
- private PodamFactory factory = new PodamFactoryImpl();
+     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private ClienteLogic clienteLogic;
     @Inject
-    private ClienteDomiciliosLogic clienteDomiciliosLogic;
+    private ClienteQuejasLogic clienteQuejasLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -51,9 +50,9 @@ public class ClienteDomiciliosTest
 
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
 
-    private List<DomicilioEntity> domiciliosData = new ArrayList();
+    private List<QuejasYReclamosEntity> quejasData = new ArrayList();
 
-    /**
+     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
@@ -92,7 +91,7 @@ public class ClienteDomiciliosTest
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from DomicilioEntity").executeUpdate();
+        em.createQuery("delete from QuejasYReclamosEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
@@ -102,74 +101,71 @@ public class ClienteDomiciliosTest
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            DomicilioEntity domicilios = factory.manufacturePojo(DomicilioEntity.class);
-            em.persist(domicilios);
-            domiciliosData.add(domicilios);
+            QuejasYReclamosEntity quejass = factory.manufacturePojo(QuejasYReclamosEntity.class);
+            em.persist(quejass);
+            quejasData.add(quejass);
         }
         for (int i = 0; i < 3; i++) {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-                domiciliosData.get(i).setCliente(entity);
+                quejasData.get(i).setCliente(entity);
             }
         }
     }
 
     /**
-     * Prueba para asociar un Domicilios existente a un Cliente.
+     * Prueba para asociar un QuejasYReclamoss existente a un Cliente.
      */
     @Test
-    public void addDomiciliosTest() {
+    public void addQuejasYReclamossTest() {
         ClienteEntity entity = data.get(0);
-        DomicilioEntity domicilioEntity = domiciliosData.get(1);
-        DomicilioEntity response = clienteDomiciliosLogic.addDomicilio(domicilioEntity.getId(), entity.getId());
+        QuejasYReclamosEntity quejasEntity = quejasData.get(1);
+        QuejasYReclamosEntity response = clienteQuejasLogic.addQueja(quejasEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(domicilioEntity.getId(), response.getId());
+        Assert.assertEquals(quejasEntity.getId(), response.getId());
     }
 
     /**
-     * Prueba para obtener una colección de instancias de Domicilios asociadas a una
+     * Prueba para obtener una colección de instancias de QuejasYReclamoss asociadas a una
      * instancia Cliente.
      */
     @Test
-    public void getDomiciliosTest() {
-        List<DomicilioEntity> list = clienteDomiciliosLogic.getDomicilios(data.get(0).getId());
+    public void getQuejasYReclamosTest() {
+        List<QuejasYReclamosEntity> list = clienteQuejasLogic.getQuejas(data.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
 
     /**
-     * Prueba para obtener una instancia de Domicilios asociada a una instancia
+     * Prueba para obtener una instancia de QuejasYReclamoss asociada a una instancia
      * Cliente.
      *
-     * @throws co.edu.uniandes.csw.domiciliostore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.quejasstore.exceptions.BusinessLogicException
      */
     @Test
-    public void getDomicilioTest() throws BusinessLogicException {
+    public void getQuejasYReclamossTest() throws BusinessLogicException {
         ClienteEntity entity = data.get(0);
-        DomicilioEntity domicilioEntity = domiciliosData.get(0);
-        DomicilioEntity response = clienteDomiciliosLogic.getDomicilio(entity.getId(), domicilioEntity.getId());
+        QuejasYReclamosEntity quejasEntity = quejasData.get(0);
+        QuejasYReclamosEntity response = clienteQuejasLogic.getQuejas(entity.getId(), quejasEntity.getId());
 
-        Assert.assertEquals(domicilioEntity.getId(), response.getId());
-       Assert.assertEquals(domicilioEntity.getCosto(), response.getCosto(), 0.001);
-        Assert.assertEquals(domicilioEntity.getFecha(), response.getFecha());
-        Assert.assertEquals(domicilioEntity.getLugarEntrega(), response.getLugarEntrega());
+        Assert.assertEquals(quejasEntity.getId(), response.getId());
     }
 
     /**
-     * Prueba para obtener una instancia de Domicilios asociada a una instancia
+     * Prueba para obtener una instancia de QuejasYReclamoss asociada a una instancia
      * Cliente que no le pertenece.
      *
-     * @throws co.edu.uniandes.csw.domiciliostore.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.quejasstore.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
-    public void getDomicilioNoAsociadoTest() throws BusinessLogicException {
+    public void getQuejasYReclamosNoAsociadoTest() throws BusinessLogicException {
         ClienteEntity entity = data.get(0);
-        DomicilioEntity domicilioEntity = domiciliosData.get(1);
-        clienteDomiciliosLogic.getDomicilio(entity.getId(), domicilioEntity.getId());
+        QuejasYReclamosEntity quejasEntity = quejasData.get(1);
+        clienteQuejasLogic.getQuejas(entity.getId(), quejasEntity.getId());
     }
+
+   
 }
-
-

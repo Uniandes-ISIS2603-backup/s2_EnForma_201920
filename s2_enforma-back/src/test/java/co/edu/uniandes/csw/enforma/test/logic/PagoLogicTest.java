@@ -13,7 +13,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.runner.RunWith;
 import co.edu.uniandes.csw.enforma.ejb.PagoLogic;
-import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +46,11 @@ protected EntityManager em;
 
 private List<PagoEntity> data = new ArrayList<PagoEntity>();
         
-private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
-
 
 //Le decimos lo que vamos a probar. 
      @Deployment
     public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class).addPackage(PagoEntity.class.getPackage()).addPackage(PagoPersistence.class.getPackage()).addClass(PagoLogic.class).addAsManifestResource("META-INF/persistence.xml", "persistence.xml").addAsManifestResource("META-INF/beans.xml", "beans.xml");
+        return ShrinkWrap.create(JavaArchive.class).addPackage(PagoEntity.class.getPackage()).addPackage(PagoPersistence.class.getPackage()).addPackage(PagoLogic.class.getPackage()).addAsManifestResource("META-INF/persistence.xml", "persistence.xml").addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     @Before
     public void configTest() {
@@ -77,7 +74,6 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      */
     private void clearData() {
         em.createQuery("delete from PagoEntity").executeUpdate();
-        em.createQuery("delete from DomicilioEntity").executeUpdate();
     }
 
     /**
@@ -87,13 +83,9 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
     private void insertData() {
         
         for (int i = 0; i < 3; i++) {
-            DomicilioEntity entity = factory.manufacturePojo(DomicilioEntity.class);
-            em.persist(entity);
-            dataDomicilio.add(entity);
-        }
-        for (int i = 0; i < 3; i++) {
             PagoEntity entity = factory.manufacturePojo(PagoEntity.class);
-            entity.setOrden(dataDomicilio.get(1));
+    
+
             em.persist(entity);
             data.add(entity);
         }
@@ -105,10 +97,10 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
    public void createTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
-        newEntity.setOrden(dataDomicilio.get(1));
         newEntity.setMonto(100.00);
         newEntity.setNumeroTarjeta(354567);
-        PagoEntity result = pagoLogica.crearPago(dataDomicilio.get(1).getId(),newEntity);
+        PagoEntity result = pagoLogica.crearPago(newEntity);
+
         Assert.assertNotNull(result);
 
         PagoEntity entity = em.find(PagoEntity.class, result.getId());
@@ -120,33 +112,29 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      public void createFailTest1() throws BusinessLogicException
      {
          PagoEntity newEntity= factory.manufacturePojo(PagoEntity.class);
-         newEntity.setOrden(dataDomicilio.get(1));
          newEntity.setMonto(-20000.00);
-         PagoEntity result= pagoLogica.crearPago(dataDomicilio.get(1).getId(),newEntity);
+         PagoEntity result= pagoLogica.crearPago(newEntity);
      }
      
      @Test(expected = BusinessLogicException.class)
     public void createPagoTestConMontoInvalido() throws BusinessLogicException {
         PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
-        newEntity.setOrden(dataDomicilio.get(1));
         newEntity.setMonto(0.0);
-        pagoLogica.crearPago(newEntity.getOrden().getId(),newEntity);
+        pagoLogica.crearPago(newEntity);
     }
     
     @Test(expected = BusinessLogicException.class)
     public void createPagoTestConTarjetaInvalido() throws BusinessLogicException {
         PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
         newEntity.setNumeroTarjeta(0);
-        newEntity.setOrden(dataDomicilio.get(0));
-        pagoLogica.crearPago(newEntity.getOrden().getId(),newEntity);
+        pagoLogica.crearPago(newEntity);
     }
     
      @Test(expected = BusinessLogicException.class)
     public void createPagoTestConTarjetaInvalido2() throws BusinessLogicException {
         PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
         newEntity.setNumeroTarjeta(-1111111);
-        newEntity.setOrden(dataDomicilio.get(1));
-        pagoLogica.crearPago(newEntity.getOrden().getId(),newEntity);
+        pagoLogica.crearPago(newEntity);
     }
 
     /**
@@ -154,22 +142,27 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      *
      * @throws co.edu.uniandes.csw.pagostore.exceptions.BusinessLogicException
      */
+    @Test(expected = BusinessLogicException.class)
+    public void createPagoTestConNullTarjeta() throws BusinessLogicException {
+        PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
+        newEntity.setNumeroTarjeta(null);
+        pagoLogica.crearPago(newEntity);
+    }
     
-    
-//     @Test
-//    public void getPagosTest() {
-//        List<PagoEntity> list = pagoLogica.getPagos();
-//        Assert.assertEquals(data.size(), list.size());
-//        for (PagoEntity entity : list) {
-//            boolean found = false;
-//            for (PagoEntity storedEntity : data) {
-//                if (entity.getId().equals(storedEntity.getId())) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
+     @Test
+    public void getPagosTest() {
+        List<PagoEntity> list = pagoLogica.getPagos();
+        Assert.assertEquals(data.size(), list.size());
+        for (PagoEntity entity : list) {
+            boolean found = false;
+            for (PagoEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
 
     /**
      * Prueba para consultar un Pago.
@@ -177,7 +170,7 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
     @Test
     public void getPagoTest() {
         PagoEntity entity = data.get(0);
-        PagoEntity resultEntity = pagoLogica.getPago(entity.getOrden().getId(),entity.getId());
+        PagoEntity resultEntity = pagoLogica.getPago(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
@@ -221,7 +214,7 @@ private List<DomicilioEntity> dataDomicilio= new ArrayList<DomicilioEntity>();
      @Test
     public void deletePagoTest() throws BusinessLogicException {
         PagoEntity entity = data.get(0);
-        pagoLogica.deletePago(entity.getOrden().getId(),entity.getId());
+        pagoLogica.deletePago(entity.getId());
         PagoEntity deleted = em.find(PagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

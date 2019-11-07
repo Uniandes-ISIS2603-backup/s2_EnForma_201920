@@ -35,16 +35,15 @@ public class TarjetaPrepagoPagosLogic
      * Agregar un pago a la tarjeta prepago
      *
      * @param pagosId El id del pago a guardar
-     * @param tarjetasId El id de la tarjeta en la cual se va a guardar el
-     * @param domicilioId 
+     * @param tarjetasId El id de la tarjeta en la cual se va a guardar el 
      * libro.
      * @return El libro creado.
      */
-    public PagoEntity addPago(Long pagosId, Long tarjetasId, Long domicilioId) 
+    public PagoEntity addPago(Long pagosId, Long tarjetasId) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un pago a la tarjeta prepago con id = {0}", tarjetasId);
         TarjetaPrepagoEntity tarjetaPrepagoEntity = tarjetaPrepagoPersistence.find(tarjetasId);
-        PagoEntity pagoEntity = pagoPersistence.find(pagosId, domicilioId);
+        PagoEntity pagoEntity = pagoPersistence.find(pagosId);
         pagoEntity.setTarjetaPrepago(tarjetaPrepagoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un pago a la tarjeta prepago con id = {0}", tarjetasId);
         return pagoEntity;
@@ -67,16 +66,15 @@ public class TarjetaPrepagoPagosLogic
      *
      * @param tarjetasId El id de la tarjeta a buscar.
      * @param pagosId El id del pago a buscar
-     * @param domicilioId
      * @return El pago encontrado dentro de la tarjeta.
      * @throws BusinessLogicException Si el pago no se encuentra en la
      * tarjeta
      */
-    public PagoEntity getPago(Long tarjetasId, Long pagosId, Long domicilioId) throws BusinessLogicException 
+    public PagoEntity getPago(Long tarjetasId, Long pagosId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el pago con id = {0} de la tarjeta con id = " + tarjetasId, pagosId);
         List<PagoEntity> pagos = tarjetaPrepagoPersistence.find(tarjetasId).getPagos();
-        PagoEntity pagoEntity = pagoPersistence.find(pagosId, domicilioId);
+        PagoEntity pagoEntity = pagoPersistence.find(pagosId);
         int index = pagos.indexOf(pagoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar el pago con id = {0} de la tarjeta con id = " + tarjetasId, pagosId);
         if (index >= 0) 

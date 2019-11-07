@@ -14,7 +14,7 @@
 						"id": "979992b2-c9a7-436c-9b43-153840403f2a",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
+							"postman.setGlobalVariable(\"superadmin\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);",
 							""
@@ -35,7 +35,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"contrasena\": \"16144yv107\",\r\n        \"nombre\": \"Mari\",\r\n        \"username\": \"Poppins\"\r\n }"
+					"raw": "{\r\n        \"contrasena\": \"16144yv107\",\r\n        \"nombre\": \"Maria\",\r\n        \"username\": \"Poppina\"\r\n }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores",
@@ -110,7 +110,7 @@
 						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"postman.setGlobalVariable(\"comida1\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -129,10 +129,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"calorias\": 300,\r\n        \"id\":234,\r\n        \"menu\": \"huevito con quiero pasar desarrollo\",\r\n        \"momentoDelDia\": \"Desayuno\",\r\n        \"nombre\": \"Fusion\"\r\n    }"
+					"raw": "{\r\n        \"calorias\": 300,\r\n        \"id\":234,\r\n        \"menu\": \"huevito con quiero pasar desarrollo\",\r\n        \"momentoDelDia\": \"Desayuno\",\r\n        \"nombre\": \"Fusion\",\r\n        \"administrador\": {\"id\":{{superadmin}} }\r\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/ComidasTipo",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -141,7 +141,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"ComidasTipo"
+						"comidas"
 					]
 				}
 			},
@@ -156,7 +156,7 @@
 						"id": "bac7b248-7cde-4124-852f-7c48b5dd3c38",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"postman.setGlobalVariable(\"comida2\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -175,10 +175,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"calorias\": 300,\r\n        \"id\":234455,\r\n        \"menu\": \"Quiero comprar para ti una casa bella\",\r\n        \"momentoDelDia\": \"Desayuno\",\r\n        \"nombre\": \"Fusion\"\r\n    }"
+					"raw": "{\r\n        \"calorias\": 300,\r\n        \"id\":234455,\r\n        \"menu\": \"Quiero comprar para ti una casa bella\",\r\n        \"momentoDelDia\": \"Desayuno\",\r\n        \"nombre\": \"Fusion\",\r\n        \"administrador\": {\"id\":{{superadmin}} }\r\n        \r\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/ComidasTipo",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -187,44 +187,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"ComidasTipo"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear una ComidaTipo por un Admin",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5ad9a40c-f7b2-44b5-839d-2b9accbdff83",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/comidastipo/{{comidatip}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"administradores",
-						"{{jesus}}",
-						"comidastipo",
-						"{{comidatip}}"
+						"comidas"
 					]
 				}
 			},
@@ -250,7 +213,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/comidastipo",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{superadmin}}/comidas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -260,8 +223,8 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{jesus}}",
-						"comidastipo"
+						"{{superadmin}}",
+						"comidas"
 					]
 				}
 			},
@@ -287,7 +250,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{jesus}}/comidastipo/{{comidatip}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{superadmin}}/comidas/{{comida2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -297,16 +260,16 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{jesus}}",
-						"comidastipo",
-						"{{comidatip}}"
+						"{{superadmin}}",
+						"comidas",
+						"{{comida2}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar comidaTipo",
+			"name": "Eliminar comidaTipo1",
 			"event": [
 				{
 					"listen": "test",
@@ -323,7 +286,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/ComidasTipo/{{comidatip1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas/{{comida1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -332,8 +295,42 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"ComidasTipo",
-						"{{comidatip1}}"
+						"comidas",
+						"{{comida1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar comidaTipo2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7417450-1c16-4ee8-af65-1bb7a77deba0",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas/{{comida2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"comidas",
+						"{{comida2}}"
 					]
 				}
 			},
@@ -357,7 +354,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{adminde}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{superadmin}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -367,7 +364,7 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{adminde}}"
+						"{{superadmin}}"
 					]
 				}
 			},
