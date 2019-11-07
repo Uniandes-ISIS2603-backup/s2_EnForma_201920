@@ -132,6 +132,22 @@ public class DietaTipoResource {
     
     
     
+    @Path("{dietaId: \\d+}/calificaciones")
+    public Class<DietaTipoCalificacionesResource> getDietaTipoCalificacionesResource(@PathParam("dietaId") Long dietaId) {
+        if (dietaTipoLogic.getDietaTipo(dietaId)==null) {
+            throw new WebApplicationException("El recurso /dietas/" + dietaId + " no existe.", 404);
+        }
+        return DietaTipoCalificacionesResource.class;
+    }
+    
+    @Path("{dietaId: \\d+}/clientes")
+    public Class<DietaTipoClientesResource> getDietaTipoClientesResource(@PathParam("dietaId") Long dietaId) {
+        if (dietaTipoLogic.getDietaTipo(dietaId)==null) {
+            throw new WebApplicationException("El recurso /dietas/" + dietaId + " no existe.", 404);
+        }
+        return DietaTipoClientesResource.class;
+    }
+    
     
     
     
