@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -24,6 +25,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable
 {
+    @PodamIntValue(minValue = 1, maxValue = 5)
     private Integer puntaje;
     
     private String comentario;

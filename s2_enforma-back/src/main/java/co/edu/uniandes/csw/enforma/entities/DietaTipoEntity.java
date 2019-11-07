@@ -53,11 +53,11 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy = "dietaTipo")
     private List<ComidaTipoEntity> comidas = new ArrayList<ComidaTipoEntity>();
     
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy = "dietaTipo")
     private List<ClienteEntity> clientes = new ArrayList<ClienteEntity>();
 
     /**

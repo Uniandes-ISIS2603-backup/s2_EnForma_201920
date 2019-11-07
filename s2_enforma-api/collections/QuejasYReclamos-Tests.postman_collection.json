@@ -1,63 +1,17 @@
 {
 	"info": {
-		"_postman_id": "4fb5974d-cba6-4150-be39-7b547b9651c2",
-		"name": "Calificacion-Tests",
+		"_postman_id": "79fe3299-42c0-45dd-a93f-27681daef7af",
+		"name": "QuejasYReclamos-Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Crear una dieta",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ce6e05f7-b348-445e-a0de-2d866def5609",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_d\", data.id);",
-							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "\t{\t\t\r\n\t\t\"caloriasMax\": 2500,\r\n        \"caloriasMin\": 2000,\r\n        \"cantidadAzucar\": 500,\r\n        \"cantidadFibra\": 51,\r\n        \"cantidadGrasa\": 520,\r\n        \"nombre\": \"Aumento masa muscular\",\r\n        \"tieneGluten\": true,\r\n        \"tieneLactosa\": false\r\n\t}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"dietas"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Crea un cliente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "629cff34-03f2-43fc-b60d-322dce2dabe4",
+						"id": "6437cfcb-847a-483d-910b-c1751693654d",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
@@ -79,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"contrasenia\": \"123456789\",\r\n        \"edad\": 20,\r\n        \"gluten\": false,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Jimmy\",\r\n        \"objetivos\": \"aa\",\r\n        \"peso\": 66,\r\n        \"userName\": \"Jp\"\r\n    }"
+					"raw": "\t{\r\n        \"contrasenia\": \"123456789\",\r\n        \"edad\": 20,\r\n        \"gluten\": false,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Jimmy\",\r\n        \"objetivos\": \"aa\",\r\n        \"peso\": 66,\r\n        \"userName\": \"Jp\"\r\n    }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
@@ -98,15 +52,15 @@
 			"response": []
 		},
 		{
-			"name": "Crear una calificacion",
+			"name": "Crea un domicilio",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "c22e5349-01a8-4b7f-a9fb-1216d0fdcb3f",
+						"id": "fdb51ecf-7058-4eb9-8142-ee54a4ad728c",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_c\", data.id);",
+							"postman.setGlobalVariable(\"new_id_dom\", data.id);",
 							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -125,10 +79,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"puntaje\": 4,\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
+					"raw": "\t{\r\n        \"costo\": 50.11,\r\n        \"fecha\": \"2019-01-29T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"bogota\"\r\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -137,168 +91,44 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"calificaciones"
+						"domicilios"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crea una calificacion con puntaje null",
+			"name": "Crea una queja o reclamo",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "9531c871-a310-43c4-99ef-7c2a1b853f66",
-						"exec": [
-							"tests[\"No crea con puntaje = null\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje de la calificacion esta sin marcar\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crea una calificacion con fecha null",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b3ad8edc-1fe9-4a4b-bfa7-1e5452043407",
-						"exec": [
-							"tests[\"No crea con fecha = null\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de la calificacion es null\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"puntaje\": 4,\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crea una calificacion con un puntaje fuera de rango",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "69e87e0b-e288-49ad-9f9c-86c5b1e62ff5",
-						"exec": [
-							"tests[\"No crea con puntaje mayor a 5 o menor a 1\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El puntaje debe ser un entero entre 1 y 5\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"comentario\": \"Bueno\",\r\n        \"fecha\": \"2019-11-10T05:00:00Z[UTC]\",\r\n        \"puntaje\": 6,\r\n        \"cliente\": { \"id\": {{new_id_cl}} },\r\n        \"dieta\": { \"id\":{{new_id_d}} }\r\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener todas las calificaciones",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1a6a5c10-852c-4ba4-9771-cdcb4979f0ec",
+						"id": "e25f1c85-b348-47c9-9766-8a024d90419c",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"calificaciones count\"] = data.length >= 0;"
+							"postman.setGlobalVariable(\"new_id_qyr\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n        \"descripcion\": \"Se demoro bastante\",\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -307,19 +137,43 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"calificaciones"
+						"quejasyreclamos"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtiene una calificacion por id",
+			"name": "Crea una queja o reclamo con asunto null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9a497ad-9b7a-4df2-977d-9cc95da48d67",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El asunto de la queja o reclamo esta vacio\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"descripcion\": \"Se demoro bastante\",\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones/{{new_id_c}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -328,8 +182,140 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"calificaciones",
-						"{{new_id_c}}"
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo con descripcion null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ec7b1b1-541f-4fd5-98fa-37a4b673d5b5",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La descripcion de la queja o reclamo esta vacia\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo con fecha null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcad2802-ed22-4c99-b8f1-42c8770e3986",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de la queja o reclamo esta vacia\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n        \"descripcion\": \"Se demoro bastante\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las quejas y reclamos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene una queja o reclamo por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos",
+						"{{new_id_qyr}}"
 					]
 				}
 			},
@@ -341,10 +327,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1923b49d-4490-4b41-b8fa-39af1de0c57d",
+						"id": "d25e6db3-c877-4666-971a-19afd71534f2",
 						"exec": [
 							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no exite\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /quejasyreclamos/0 no exite\");"
 						],
 						"type": "text/javascript"
 					}
@@ -354,7 +340,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones/0",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -363,7 +349,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"calificaciones",
+						"quejasyreclamos",
 						"0"
 					]
 				}
@@ -371,12 +357,12 @@
 			"response": []
 		},
 		{
-			"name": "Borrar una califiacion",
+			"name": "Borra una queja o reclamo",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "81e7def0-88ab-40b6-a7d6-1532115c0977",
+						"id": "dce753e6-a6b7-43ca-8b39-26687df8df01",
 						"exec": [
 							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
@@ -386,20 +372,9 @@
 			],
 			"request": {
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/calificaciones/{{new_id_c}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -408,20 +383,54 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"calificaciones",
-						"{{new_id_c}}"
+						"quejasyreclamos",
+						"{{new_id_qyr}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar un cliente",
+			"name": "Borra un domicilio",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "8cf41c1b-245b-4146-aa68-9b2b37e599e4",
+						"id": "637b0569-b974-4cd4-a10f-6b6c2f1e8e47",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_dom}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_dom}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d955d2db-239b-4a04-9aa4-66628b566b3f",
 						"exec": [
 							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
@@ -444,40 +453,6 @@
 						"api",
 						"clientes",
 						"{{new_id_cl}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borra una dieta",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "aa2d6da1-916a-4ec9-bb18-63722a56fdbd",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{new_id_d}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"dietas",
-						"{{new_id_d}}"
 					]
 				}
 			},

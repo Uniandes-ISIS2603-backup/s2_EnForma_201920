@@ -48,33 +48,6 @@ public class DietaTipoCalificacionesResource {
     
     
     /**
-     * Guarda una calificacion dentro de una dieta con la informacion que recibe el
-     * la URL. Se devuelve la calificacion que se guarda en la dieta.
-     *
-     * @param dietaId Identificador de la dieta que se esta
-     * actualizando. Este debe ser una cadena de dígitos.
-     * @param calificacionesId Identificador del libro que se desea guardar. Este debe
-     * ser una cadena de dígitos.
-     * @return JSON {@link DietaTipoDTO} - El libro guardado en la administrador.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
-     */
-    @POST
-    @Path("{calificacionesId: \\d+}")
-    public CalificacionDTO addCalificacion(@PathParam("dietaId") Long dietaId, @PathParam("calificacionesId") Long calificacionesId) {
-        LOGGER.log(Level.INFO, "DietaTipoCalificacionesResource addCalificacion: input: dietaId: {0} , calificacionesId: {1}", new Object[]{dietaId, calificacionesId});
-        if (calificacionLogic.getCalificacion(calificacionesId) == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
-        }
-        CalificacionDTO calificacionDTO = new CalificacionDTO(dietaTipoCalificacionesLogic.addCalificacion(calificacionesId, dietaId));
-        LOGGER.log(Level.INFO, "DietaTipoCalificacionesResource addCalificacion: output: {0}", calificacionDTO);
-        return calificacionDTO;
-    }
-    
-    
-    
-    
-    /**
      * Busca y devuelve todos las calificaciones que existen en la dieta.
      *
      * @param dietaId Identificador de la dieta que se esta buscando.
@@ -143,19 +116,7 @@ public class DietaTipoCalificacionesResource {
         return list;
     }
 
-    /**
-     * Convierte una lista de DietaTipoDetailDTO a una lista de DietaTipoEntity.
-     *
-     * @param dtos Lista de DietaTipoDetailDTO a convertir.
-     * @return Lista de DietaTipoEntity convertida.
-     */
-    private List<CalificacionEntity> dietaTiposListDTO2Entity(List<CalificacionDTO> dtos) {
-        List<CalificacionEntity> list = new ArrayList<>();
-        for (CalificacionDTO dto : dtos) {
-            list.add(dto.toEntity());
-        }
-        return list;
-    }
+    
     
     
 }

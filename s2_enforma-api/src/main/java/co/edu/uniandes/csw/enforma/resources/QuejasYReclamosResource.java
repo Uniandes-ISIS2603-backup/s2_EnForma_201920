@@ -48,7 +48,7 @@ public class QuejasYReclamosResource
         LOGGER.log(Level.INFO, "Entra al toEntity");
         QuejasYReclamosEntity entity = quejaReclamo.toEntity();
         LOGGER.log(Level.INFO, "Sale del toEntity");
-        QuejasYReclamosDTO nuevaQuejaYReclamoDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.createQuejasYReclamos(quejaReclamo.toEntity()));
+        QuejasYReclamosDTO nuevaQuejaYReclamoDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.createQuejasYReclamos(entity));
         LOGGER.log(Level.INFO, "CalificacionResource createCalificacion: output: {0}", nuevaQuejaYReclamoDTO);
         return nuevaQuejaYReclamoDTO;
     }
