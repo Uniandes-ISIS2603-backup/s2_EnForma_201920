@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -35,7 +36,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private Double costo;
     
     @PodamExclude
-    @OneToOne(mappedBy="domicilio")
+    @OneToOne(mappedBy="domicilio", fetch = FetchType.LAZY)
     private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
