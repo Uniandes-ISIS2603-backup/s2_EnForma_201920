@@ -1,12 +1,12 @@
+delete from CalificacionEntity;
+delete from QuejasYReclamosEntity;
+delete from AdministradorEntity;
+delete from ComidaTipoEntity;
 delete from PagoEntity;
 delete from ClienteEntity;
 delete from DietaTipoEntity;
 delete from DomicilioEntity;
 delete from TarjetaPrepagoEntity;
-delete from ComidaTipoEntity;
-delete from AdministradorEntity;
-delete from CalificacionEntity;
-delete from QuejasYReclamosEntity;
 
 
 
@@ -43,6 +43,6 @@ insert into CalificacionEntity(id, puntaje, comentario, fecha, cliente_id, dieta
 -- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (300, 1, 'Malo', '2019-10-10 05:33:02');
 -- insert into CalificacionEntity(id, puntaje, comentario, fecha) values (400, 5, '', '2019-10-10 05:34:02');
 
--- insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (100, 'Demora en la entrega', 'Se demoro bastante', '2019-10-10 05:31:02');
--- insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (200, 'Comida fria', 'Ya no tenia ni sabor', '2019-10-10 05:32:02');
+insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha, cliente_id) values (100, 'Demora en la entrega', 'Se demoro bastante', '2019-10-10 05:31:02', 100);
+insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha, cliente_id) values (200, 'Comida fria', 'Ya no tenia ni sabor', '2019-10-10 05:32:02', 200);
 -- insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (300, 'Lo pedi sin un ingrediente que traia', 'Especifique que sin salsa y me lo trajeron con salsa', '2019-10-10 05:33:02');

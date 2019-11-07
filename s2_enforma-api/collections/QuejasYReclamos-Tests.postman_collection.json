@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "79fe3299-42c0-45dd-a93f-27681daef7af",
+		"name": "QuejasYReclamos-Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6437cfcb-847a-483d-910b-c1751693654d",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\r\n        \"contrasenia\": \"123456789\",\r\n        \"edad\": 20,\r\n        \"gluten\": false,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Jimmy\",\r\n        \"objetivos\": \"aa\",\r\n        \"peso\": 66,\r\n        \"userName\": \"Jp\"\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fdb51ecf-7058-4eb9-8142-ee54a4ad728c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_dom\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\r\n        \"costo\": 50.11,\r\n        \"fecha\": \"2019-01-29T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"bogota\"\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e25f1c85-b348-47c9-9766-8a024d90419c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_qyr\", data.id);",
+							"tests[\"no genera error el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n        \"descripcion\": \"Se demoro bastante\",\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo con asunto null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9a497ad-9b7a-4df2-977d-9cc95da48d67",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El asunto de la queja o reclamo esta vacio\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"descripcion\": \"Se demoro bastante\",\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo con descripcion null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ec7b1b1-541f-4fd5-98fa-37a4b673d5b5",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La descripcion de la queja o reclamo esta vacia\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n\r\n        \"fecha\": \"2019-10-10T05:00:00Z[UTC]\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una queja o reclamo con fecha null",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcad2802-ed22-4c99-b8f1-42c8770e3986",
+						"exec": [
+							"tests[\"No crea con asunto = null\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"La fecha de la queja o reclamo esta vacia\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"asusnto\": \"Demora en la entrega\",\r\n        \"descripcion\": \"Se demoro bastante\",\r\n\t\t\"cliente\": { \"id\": {{new_id_cl}} },\r\n\t\t\"domicilio\": { \"id\": {{new_id_dom}} }\r\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las quejas y reclamos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene una queja o reclamo por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos",
+						"{{new_id_qyr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d25e6db3-c877-4666-971a-19afd71534f2",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /quejasyreclamos/0 no exite\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra una queja o reclamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dce753e6-a6b7-43ca-8b39-26687df8df01",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos",
+						"{{new_id_qyr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "637b0569-b974-4cd4-a10f-6b6c2f1e8e47",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_dom}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_dom}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d955d2db-239b-4a04-9aa4-66628b566b3f",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_cl}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
