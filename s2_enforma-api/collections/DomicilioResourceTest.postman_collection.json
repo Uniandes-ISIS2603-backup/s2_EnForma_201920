@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "52462e33-a6f3-422f-adae-5478474fae46",
+		"name": "DomicilioResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_cli\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 134134,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear quejas y reclamos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_qyr\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"descripcion\": \"la mejor descripcion\",\n\t\"asusnto\": \"el mejor asunto, no esta vaciooooooooo\",\n\t\"fecha\": \"2018-08-20T00:00:00-05:00\",\n\t\"cliente\": { \"id\": {{new_id_cli}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pag\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 234,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear comidaTipo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_comit\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\r\n        \"calorias\": 350,\r\n        \"menu\": \"elo\",\r\n        \"momentoDelDia\": \"Cenita\",\r\n        \"nombre\": \"salchichon\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"comidas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_domi\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} },\n\t\"quejasYReclamos\": { \"id\":{{new_id_qyr}} },\n\t\"pago\": { \"id\": {{new_id_pag}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener todos los domicilios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"domicilios count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_domi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_domi}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_domi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{new_id_domi}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar comidaTipo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas/{{new_id_comit}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"comidas",
+						"{{new_id_comit}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{new_id_pag}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos",
+						"{{new_id_pag}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar quejas y reclamos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"quejasyreclamos",
+						"{{new_id_qyr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_cli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
