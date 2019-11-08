@@ -80,7 +80,7 @@ public class ComidaTipoLogic {
           LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
        if(persistenceComidaTipo.findByNombre(comidaTipo.getNombre()) != null){
            LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
-           throw new BusinessLogicException("Ya existe una dieta con ese nombre");
+           throw new BusinessLogicException("Ya existe una comida con ese nombre");
        } 
         
          comidaTipo = persistenceComidaTipo.create(comidaTipo);
@@ -131,7 +131,7 @@ public class ComidaTipoLogic {
      */
      public ComidaTipoEntity updateComidaTipoEntity (Long comidaTipoId, ComidaTipoEntity comidaTipoEntity) throws BusinessLogicException
      { 
-         LOGGER.log(Level.INFO, "inicia proceso de actualizar el libro con id = {0} ", comidaTipoId);
+         LOGGER.log(Level.INFO, "inicia proceso de actualizar la comida con id = {0} ", comidaTipoId);
          
          if(comidaTipoEntity.getMenu() ==null || comidaTipoEntity.getMenu().isEmpty())
         {
@@ -147,12 +147,16 @@ public class ComidaTipoLogic {
         
         if(comidaTipoEntity.getCalorias() == null)
         {
-            throw new BusinessLogicException("Las calorías son nulasno es posible actializar comida Tipo con id = " +  comidaTipoId);
+            throw new BusinessLogicException("Las calorías son nulas no es posible actializar comida Tipo con id = " +  comidaTipoId);
         }
         
         if(comidaTipoEntity.getCalorias() < 100 )
         {
             throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comidano es posible actializar comida Tipo con id = " + comidaTipoId);
+        }
+        if (comidaTipoEntity.getImagenComida()==null)
+        {
+            throw new BusinessLogicException("La imagen no pueden ser vacia en la comida Tipo con id = " + comidaTipoId);
         }
         
         if(comidaTipoEntity.getMomentoDelDia() ==null || comidaTipoEntity.getMomentoDelDia().isEmpty())
@@ -180,11 +184,11 @@ public class ComidaTipoLogic {
       */
      public void deleteComidaTipo (Long comidaTipoId) throws BusinessLogicException
      {
-         LOGGER.log(Level.INFO, "inicia el proceso de borrar una ComidaTipocon id = {0} ", comidaTipoId);
+         LOGGER.log(Level.INFO, "inicia el proceso de borrar una Comida Tipocon id = {0} ", comidaTipoId);
     
          persistenceComidaTipo.delete(comidaTipoId);
          
-         LOGGER.log(Level.INFO,"Termina el proceso de borrar una comida Tipo con id = {0}", comidaTipoId);
+         LOGGER.log(Level.INFO,"Termina el proceso de borrar una Comida Tipo con id = {0}", comidaTipoId);
      
      
      }

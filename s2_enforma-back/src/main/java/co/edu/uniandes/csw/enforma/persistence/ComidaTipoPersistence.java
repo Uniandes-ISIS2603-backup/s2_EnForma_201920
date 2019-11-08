@@ -75,7 +75,7 @@ public class ComidaTipoPersistence {
     
     public ComidaTipoEntity find (Long ComidaTipoID)
     {
-        LOGGER.log(Level.INFO, " Consultando el libro con id =" + ComidaTipoID, ComidaTipoID);
+        LOGGER.log(Level.INFO, " Consultando la comida Tipo con id =" + ComidaTipoID, ComidaTipoID);
         return em.find(ComidaTipoEntity.class, ComidaTipoID);
    
     
@@ -172,7 +172,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByMenu(String menu) {
-        LOGGER.log(Level.INFO, "Consultando libros por menu ", menu);
+        LOGGER.log(Level.INFO, "Consultando comidas por menu ", menu);
         // Se crea un query para buscar libros con el menu que recibe el método como argumento. ":menu" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.menu = :menu", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":menu" con el valor del argumento 
@@ -187,7 +187,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameMenu.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por menu ", menu);
+        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por menu ", menu);
         return result;
     }
     
@@ -200,7 +200,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByNombre(String nombre) {
-        LOGGER.log(Level.INFO, "Consultando libros por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Consultando comidas por nombre ", nombre);
         // Se crea un query para buscar libros con el nombre que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.nombre = :nombre", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":nombre" con el valor del argumento 
@@ -215,7 +215,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por nombre ", nombre);
         return result;
     }
     
