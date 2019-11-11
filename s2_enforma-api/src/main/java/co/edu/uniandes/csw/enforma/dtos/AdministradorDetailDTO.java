@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.enforma.dtos;
 
 import co.edu.uniandes.csw.enforma.entities.AdministradorEntity;
 import co.edu.uniandes.csw.enforma.entities.DietaTipoEntity;
+import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +47,13 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             for (DietaTipoEntity entityDietaTipo : administradorEntity.getDietaTipo()) {
                 dietas.add(new DietaTipoDTO(entityDietaTipo));
             }
+            
+            comidas = new ArrayList<>();
+            for (ComidaTipoEntity entityComidaTipo : administradorEntity.getComidasTipo()) {
+                comidas.add(new ComidaTipoDTO(entityComidaTipo));
         }
-//        if (administradorEntity.getComidaTipos() != null) {
-//            comidas = new ArrayList<>();
-//            for (ComidaTipoEntity entityComidaTipo : administradorEntity.getComidaTipos()) {
-//                comidas.add(new ComidaTipoDTO(entityComidaTipo));
-//            }
-//        }
+      
+        }
     }
 
     /**
@@ -70,13 +71,13 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             }
             administradorEntity.setDietaTipo(dietasEntity);
         }
-//        if (comidas != null) {
-//            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
-//            for (ComidaTipoDTO dtoComidaTipo : comidas) {
-//                comidasEntity.add(dtoComidaTipo.toEntity());
-//            }
-//            administradorEntity.setComidasTipo(comidasEntity);
-//        }
+        if (comidas != null) {
+            List<ComidaTipoEntity> comidasEntity = new ArrayList<>();
+            for (ComidaTipoDTO dtoComidaTipo : comidas) {
+                comidasEntity.add(dtoComidaTipo.toEntity());
+            }
+            administradorEntity.setComidasTipo(comidasEntity);
+        }
         return administradorEntity;
     }
 
