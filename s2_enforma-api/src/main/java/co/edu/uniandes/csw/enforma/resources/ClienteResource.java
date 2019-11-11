@@ -153,6 +153,24 @@ public class ClienteResource
         clienteLogic.deleteCliente(clientesId);
         LOGGER.info("ClienteResource deleteCliente: output: void");
     }
+    
+    @Path("{clienteId: \\d+}/quejas")
+    public Class<ClienteQuejasResource > getClienteQuejasResource (@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId)==null) {
+            throw new WebApplicationException("El recurso /clientes/" + clienteId + " no existe.", 404);
+        }
+        return ClienteQuejasResource.class;
+    }
+    
+    @Path("{clienteId: \\d+}/domicilios")
+    public Class<ClienteDomiciliosResource > getClienteDomiciliosResource (@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId)==null) {
+            throw new WebApplicationException("El recurso /clientes/" + clienteId + " no existe.", 404);
+        }
+        return ClienteDomiciliosResource.class;
+    }
+    
+    
 /**
      * Convierte una lista de entidades a DTO.
      *
