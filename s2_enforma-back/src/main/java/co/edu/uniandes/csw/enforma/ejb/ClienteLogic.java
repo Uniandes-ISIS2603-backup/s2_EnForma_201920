@@ -33,6 +33,8 @@ public class ClienteLogic
     
    public ClienteEntity crearCliente(ClienteEntity cliente) throws BusinessLogicException
    {
+       if(getClienteByUsername(cliente.getUserName()) != null)
+           throw new BusinessLogicException("Ya existe un cliente con el mismo username");
        if(cliente.getNombre() == null)
            throw new BusinessLogicException("El nombre del cliente está vacio.");
        if(cliente.getEdad() <= 0)
@@ -82,6 +84,18 @@ public class ClienteLogic
             LOGGER.log(Level.SEVERE, "El cliente con el id = {0} no existe", clienteId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el cliente con id = {0}",clienteId);
+        return clienteEntity;
+    }
+    
+    public ClienteEntity getClienteByUsername(String pUsername)
+    {
+         LOGGER.log(Level.INFO, "Inicia proceso de consultar el cliente con username = {0}", pUsername);
+        ClienteEntity clienteEntity = persistence.findByUserName(pUsername);
+        if (clienteEntity == null) 
+        {
+            LOGGER.log(Level.SEVERE, "El cliente con el username = {0} no existe", pUsername);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el cliente con username = {0}",pUsername);
         return clienteEntity;
     }
     

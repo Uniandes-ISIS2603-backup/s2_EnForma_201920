@@ -40,6 +40,8 @@ public class ComidaTipoEntity extends BaseEntity implements Serializable
     
     private String nombre;
     
+    private String imagenComida;
+    
     /**
      * @return the calorias
      */
@@ -122,6 +124,20 @@ public class ComidaTipoEntity extends BaseEntity implements Serializable
      */
     public void setAdministrador(AdministradorEntity administrador) {
         this.administrador = administrador;
+    }
+
+    /**
+     * @return the imagenComida
+     */
+    public String getImagenComida() {
+        return imagenComida;
+    }
+
+    /**
+     * @param imagenComida the imagenComida to set
+     */
+    public void setImagenComida(String imagenComida) {
+        this.imagenComida = imagenComida;
     }
     
 

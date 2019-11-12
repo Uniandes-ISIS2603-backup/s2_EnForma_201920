@@ -125,6 +125,7 @@ public class ClienteQuejasResource
         return list;
     }
 
+    
     /**
      * Convierte una lista de QuejasDetailDTO a una lista de QuejasEntity.
      *

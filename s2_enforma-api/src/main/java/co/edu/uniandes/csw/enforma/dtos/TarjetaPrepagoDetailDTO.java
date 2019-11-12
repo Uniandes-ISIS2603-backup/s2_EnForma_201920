@@ -24,10 +24,6 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
      */
     private List<PagoDTO> pagos;
     
-    /**
-     * relacion uno a uno cliente
-     */
-    private ClienteDTO cliente;
     
     /**
      * constructor por defecto
@@ -54,10 +50,6 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
                     pagos.add(new PagoDTO(entityPago));
                 }
             }
-            if(tarjetaPrepagoEntity.getCliente() != null)
-            {
-                this.cliente = new ClienteDTO(tarjetaPrepagoEntity.getCliente());
-            }
         }
     }
     
@@ -78,10 +70,7 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
             }
             tarjetaPrepagoEntity.setPagos(pagosEntity);
         }
-        if(cliente != null)
-        {
-           tarjetaPrepagoEntity.setCliente(this.cliente.toEntity());
-        }
+
         return tarjetaPrepagoEntity;
     }
     
@@ -103,23 +92,7 @@ public class TarjetaPrepagoDetailDTO extends TarjetaPrepagoDTO implements Serial
         this.pagos = lista;
     }
     
-    /**
-     * devuelve el cliente asociado a la tarjeta
-     * @return cliente
-     */
-    public ClienteDTO getCliente()
-    {
-        return cliente;
-    }
-    
-    /**
-     * modifica el cliente
-     * @cliente 
-     */
-    public void setCliente(ClienteDTO cliente)
-    {
-        this.cliente = cliente;
-    }
+
     
     @Override
     public String toString() {

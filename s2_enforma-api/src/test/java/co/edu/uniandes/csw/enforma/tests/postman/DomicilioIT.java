@@ -28,7 +28,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class DomicilioIT 
 {
-    private static final String COLLECTION = "TarjetaPrepagoPagos-Tests.postman_collection";
+    private static final String COLLECTION = "DomicilioResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
