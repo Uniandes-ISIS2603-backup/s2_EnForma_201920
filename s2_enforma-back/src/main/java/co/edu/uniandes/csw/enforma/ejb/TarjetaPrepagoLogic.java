@@ -37,8 +37,6 @@ public class TarjetaPrepagoLogic
     public TarjetaPrepagoEntity createTarjetaPrepago(TarjetaPrepagoEntity tarjetaPrepago) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la tarjeta prepago");
-        if(tarjetaPrepago.getId() == null)
-            throw new BusinessLogicException("El id de la tarjeta no pude ser vacío");
         if(tarjetaPrepago.getSaldo() < 0)
             throw new BusinessLogicException("El saldo no puede ser menor a cero");
         if(tarjetaPrepago.getPuntos() < 0)

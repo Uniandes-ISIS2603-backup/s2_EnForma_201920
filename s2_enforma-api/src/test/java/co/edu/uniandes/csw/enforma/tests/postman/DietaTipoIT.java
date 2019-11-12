@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.enforma.tests.postman;
 
-
-import co.edu.uniandes.csw.enforma.dtos.TarjetaPrepagoDTO;
+import co.edu.uniandes.csw.enforma.dtos.DietaTipoDTO;
 import co.edu.uniandes.csw.enforma.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.enforma.resources.TarjetaPrepagoResource;
+import co.edu.uniandes.csw.enforma.resources.DietaTipoResource;
+import co.edu.uniandes.csw.enforma.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +24,13 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author Juan Sebastián Clavijo
+ * @author Julio Morales
  */
 @RunWith(Arquillian.class)
-public class TarjetaPrepagoIT 
-{
-    private static final String COLLECTION = "TarjetaPrepagoResourceTest.postman_collection";
+public class DietaTipoIT {
     
+    private static final String COLLECTION = "DietaTipo-Tests.postman_collection";
+
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "s2_enforma-api.war")//War del modulo api
@@ -39,8 +39,8 @@ public class TarjetaPrepagoIT
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(TarjetaPrepagoResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-                .addPackage(TarjetaPrepagoDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(DietaTipoResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquete
+                .addPackage(DietaTipoDTO.class.getPackage())
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
@@ -50,11 +50,10 @@ public class TarjetaPrepagoIT
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"));
     }
-    
+
     @Test
     @RunAsClient
-    public void postman() throws IOException 
-    {
+    public void postman() throws IOException {
         PostmanTestBuilder tp = new PostmanTestBuilder();
         tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
         String desiredResult = "0";
@@ -66,4 +65,8 @@ public class TarjetaPrepagoIT
 
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
+    
+    
+    
+    
 }

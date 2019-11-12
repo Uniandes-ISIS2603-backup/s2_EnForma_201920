@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "84103b48-8a3b-448a-bb9b-2c32a49e080b",
+		"name": "TarjetaPrepagoResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_cli\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 134134,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear tarjeta prepago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_t\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"234\",\n\t\"saldo\": \"42.0\",\n\t\"puntos\": \"406.0\",\n\t\"cliente\": { \"id\":{{new_id_cli}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener todas las tarjetas prepagos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"domicilios count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener tarjeta prepago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago",
+						"{{new_id_t}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar tarjeta prepago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago",
+						"{{new_id_t}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_cli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
