@@ -135,13 +135,6 @@ public class TarjetaPrepagoLogicTest
         
     }
     
-    @Test (expected = BusinessLogicException.class)
-    public void createTarjetaPrepagoIdNullTest() throws BusinessLogicException
-    {
-        TarjetaPrepagoEntity newEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-        newEntity.setId(null);
-        TarjetaPrepagoEntity result = tarjetaPrepagoLogic.createTarjetaPrepago(newEntity);
-    }
     
     /**
      * pueba para crear una tarjeta prepago con un numero invalido
