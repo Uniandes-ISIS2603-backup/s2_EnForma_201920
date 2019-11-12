@@ -77,6 +77,10 @@ public class ComidaTipoLogic {
                  throw new BusinessLogicException("el momento del día de la comida tipo es vacío, no es posible crearlo");
         
         }
+//          if (comidaTipo.getImagenComida()==null)
+//        {
+//            throw new BusinessLogicException("La imagen no pueden ser vacia en la comida Tipo");
+//        }
           LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
        if(persistenceComidaTipo.findByNombre(comidaTipo.getNombre()) != null){
            LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
