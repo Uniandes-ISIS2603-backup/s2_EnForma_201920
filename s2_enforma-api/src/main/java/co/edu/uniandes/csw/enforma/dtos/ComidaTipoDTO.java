@@ -23,6 +23,7 @@ public class ComidaTipoDTO implements Serializable
     private String momentoDelDia;
     private Integer calorias;
     private String nombre;
+    private String imagenComida;
     
      
  
@@ -57,6 +58,7 @@ public class ComidaTipoDTO implements Serializable
             this.momentoDelDia = comidaTipoEntity.getMomentoDelDia();
             this.nombre = comidaTipoEntity.getNombre();
             this.calorias = comidaTipoEntity.getCalorias();
+            //this.imagenComida = comidaTipoEntity.getImagenComida();
                 
             if (comidaTipoEntity.getAdministrador() != null) 
             {
@@ -214,6 +216,20 @@ public class ComidaTipoDTO implements Serializable
      */
     public void setDietaTipo(DietaTipoDTO dietaTipo) {
         this.dietaTipo = dietaTipo;
+    }
+
+    /**
+     * @return the imagenComida
+     */
+    public String getImagenComida() {
+        return imagenComida;
+    }
+
+    /**
+     * @param imagenComida the imagenComida to set
+     */
+    public void setImagenComida(String imagenComida) {
+        this.imagenComida = imagenComida;
     }
     
    
