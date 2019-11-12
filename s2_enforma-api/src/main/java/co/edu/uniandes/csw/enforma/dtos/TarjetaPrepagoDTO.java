@@ -24,6 +24,11 @@ public class TarjetaPrepagoDTO implements Serializable
     
     private Double puntos;
     
+     /**
+     * relacion uno a uno cliente
+     */
+    private ClienteDTO cliente;
+    
     /**
      * constructor por defecto
      */
@@ -45,6 +50,10 @@ public class TarjetaPrepagoDTO implements Serializable
             this.numTarjetaPrepago = tarjetaPrepagoEntity.getIdTarjetaPrepago();
             this.puntos = tarjetaPrepagoEntity.getPuntos();
             this.saldo = tarjetaPrepagoEntity.getSaldo();
+            if(tarjetaPrepagoEntity.getCliente() != null)
+            {
+                this.cliente = new ClienteDTO(tarjetaPrepagoEntity.getCliente());
+            }
         }
     }
     
@@ -60,6 +69,10 @@ public class TarjetaPrepagoDTO implements Serializable
         tarjetaPrepagoEntity.setIdTarjetaPrepago(this.numTarjetaPrepago);
         tarjetaPrepagoEntity.setSaldo(this.saldo);
         tarjetaPrepagoEntity.setPuntos(this.puntos);
+        if(this.cliente != null)
+        {
+            tarjetaPrepagoEntity.setCliente(this.cliente.toEntity());
+        }
 
         return tarjetaPrepagoEntity;
     }
@@ -144,6 +157,20 @@ public class TarjetaPrepagoDTO implements Serializable
     public String toString() 
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
  
 }
