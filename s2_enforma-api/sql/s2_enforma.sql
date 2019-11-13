@@ -16,8 +16,8 @@ insert into DomicilioEntity (id, fecha, lugarEntrega, costo) values (200, '2019-
 --insert into DomicilioEntity (id, fecha, lugarEntrega, costo, pago_id) values (78, '2019-05-20 20:30:39', 'a', 40000,56);
 
 
-insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
-insert into TarjetaPrepagoEntity (id, idTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (100, '12345', 12.12, 200.2 );
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
 
 
 insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (100, 'Juan', 25, 86.5, 'Tonificar', 0, 1, 'Jjuan', '987654321');

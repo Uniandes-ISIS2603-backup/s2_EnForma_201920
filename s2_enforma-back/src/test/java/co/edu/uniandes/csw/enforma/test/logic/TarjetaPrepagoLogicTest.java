@@ -128,7 +128,7 @@ public class TarjetaPrepagoLogicTest
         Assert.assertNotNull(result);
         
         TarjetaPrepagoEntity entity = em.find(TarjetaPrepagoEntity.class, result.getId());
-        Assert.assertEquals(entity.getIdTarjetaPrepago(), result.getIdTarjetaPrepago());
+        Assert.assertEquals(entity.getNumTarjetaPrepago(), result.getNumTarjetaPrepago());
         Assert.assertEquals(entity.getPuntos(), result.getPuntos(), 0.001);
         Assert.assertEquals(entity.getSaldo(), result.getSaldo(), 0.001);
        // Assert.assertEquals(entity.getPagos(), result.getPagos());
@@ -144,7 +144,7 @@ public class TarjetaPrepagoLogicTest
     public void createTarjetaPrepagoNumeroInvalidoTest() throws BusinessLogicException
     {
         TarjetaPrepagoEntity newEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-        newEntity.setIdTarjetaPrepago(null);
+        newEntity.setNumTarjetaPrepago(null);
         TarjetaPrepagoEntity result = tarjetaPrepagoLogic.createTarjetaPrepago(newEntity);
     }
     
@@ -156,7 +156,7 @@ public class TarjetaPrepagoLogicTest
     public void createTarjetaPrepagoNumeroVacioTest() throws BusinessLogicException
     {
         TarjetaPrepagoEntity newEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-        newEntity.setIdTarjetaPrepago("");
+        newEntity.setNumTarjetaPrepago("");
         TarjetaPrepagoEntity result = tarjetaPrepagoLogic.createTarjetaPrepago(newEntity);
     }
     
@@ -214,7 +214,7 @@ public class TarjetaPrepagoLogicTest
         TarjetaPrepagoEntity resultEntity = tarjetaPrepagoLogic.getTarjetaPrepago(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
-        Assert.assertEquals(entity.getIdTarjetaPrepago(), resultEntity.getIdTarjetaPrepago());
+        Assert.assertEquals(entity.getNumTarjetaPrepago(), resultEntity.getNumTarjetaPrepago());
         Assert.assertEquals(entity.getSaldo(), resultEntity.getSaldo(), 0.001);
         Assert.assertEquals(entity.getPuntos(), resultEntity.getPuntos(),0.001);
     }
@@ -235,7 +235,7 @@ public class TarjetaPrepagoLogicTest
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getSaldo(), resp.getSaldo(),0.001);
         Assert.assertEquals(pojoEntity.getPuntos(), resp.getPuntos(), 0.001);
-        Assert.assertEquals(pojoEntity.getIdTarjetaPrepago(), resp.getIdTarjetaPrepago());
+        Assert.assertEquals(pojoEntity.getNumTarjetaPrepago(), resp.getNumTarjetaPrepago());
     }
     
      /**
@@ -281,7 +281,7 @@ public class TarjetaPrepagoLogicTest
     {
         TarjetaPrepagoEntity entity = data.get(0);
         TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-        pojoEntity.setIdTarjetaPrepago(null);
+        pojoEntity.setNumTarjetaPrepago(null);
         pojoEntity.setId(entity.getId());
         tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
     }
@@ -296,7 +296,7 @@ public class TarjetaPrepagoLogicTest
     {
         TarjetaPrepagoEntity entity = data.get(0);
         TarjetaPrepagoEntity pojoEntity = factory.manufacturePojo(TarjetaPrepagoEntity.class);
-        pojoEntity.setIdTarjetaPrepago("");
+        pojoEntity.setNumTarjetaPrepago("");
         pojoEntity.setId(entity.getId());
         tarjetaPrepagoLogic.updateTarjetaPrepago(pojoEntity.getId(), pojoEntity);
     }

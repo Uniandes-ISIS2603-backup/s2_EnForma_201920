@@ -39,6 +39,16 @@ public class DomicilioDTO implements Serializable
     private ClienteDTO cliente;
     
      /**
+     * relacion uno a uno con quejas y reclamos
+     */
+    private QuejasYReclamosDTO quejasYReclamos;
+    
+    /**
+     * relacion uno a uno con pago
+     */
+    private PagoDTO pago;
+    
+     /**
      * Constructor por defecto
      */
     public DomicilioDTO() 
@@ -67,6 +77,14 @@ public class DomicilioDTO implements Serializable
             {
                 this.comidaTipo = new ComidaTipoDTO(domicilioEntity.getComidaTipo());
             }
+            if(domicilioEntity.getPago() != null)
+            {
+                this.pago = new PagoDTO(domicilioEntity.getPago());
+            }
+            if(domicilioEntity.getQuejasYReclamos() != null)
+            {
+                this.quejasYReclamos = new QuejasYReclamosDTO(domicilioEntity.getQuejasYReclamos());
+            }
         }
     }
     
@@ -89,6 +107,14 @@ public class DomicilioDTO implements Serializable
         if(this.comidaTipo != null)
         {
             domicilioEntity.setComidaTipo(this.comidaTipo.toEntity());
+        }
+        if(this.pago != null)
+        {
+            domicilioEntity.setPago(this.pago.toEntity());
+        }
+        if(this.quejasYReclamos != null)
+        {
+            domicilioEntity.setQuejasYReclamos(this.quejasYReclamos.toEntity());
         }
         return domicilioEntity;
     }
@@ -198,6 +224,34 @@ public class DomicilioDTO implements Serializable
      */
     public void setComidaTipo(ComidaTipoDTO comidaTipo) {
         this.comidaTipo = comidaTipo;
+    }
+
+    /**
+     * @return the quejasYReclamos
+     */
+    public QuejasYReclamosDTO getQuejasYReclamos() {
+        return quejasYReclamos;
+    }
+
+    /**
+     * @param quejasYReclamos the quejasYReclamos to set
+     */
+    public void setQuejasYReclamos(QuejasYReclamosDTO quejasYReclamos) {
+        this.quejasYReclamos = quejasYReclamos;
+    }
+
+    /**
+     * @return the pago
+     */
+    public PagoDTO getPago() {
+        return pago;
+    }
+
+    /**
+     * @param pago the pago to set
+     */
+    public void setPago(PagoDTO pago) {
+        this.pago = pago;
     }
     
 }

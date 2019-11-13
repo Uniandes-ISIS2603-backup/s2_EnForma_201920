@@ -143,7 +143,7 @@ public class TarjetaPrepagoPersistenceTest
        TarjetaPrepagoEntity entity = data.get(0);
        TarjetaPrepagoEntity newEntity = tpp.find(entity.getId());
        Assert.assertNotNull(newEntity);
-       Assert.assertEquals(entity.getIdTarjetaPrepago(), newEntity.getIdTarjetaPrepago());
+       Assert.assertEquals(entity.getNumTarjetaPrepago(), newEntity.getNumTarjetaPrepago());
        Assert.assertEquals(entity.getPuntos(), newEntity.getPuntos(), 0.001);
        Assert.assertEquals(entity.getSaldo(), newEntity.getSaldo(), 0.001);
     }
@@ -183,9 +183,9 @@ public class TarjetaPrepagoPersistenceTest
     @Test
     public void findTarjetaPrepagoByIdTarjetaPrepagoTest() {
         TarjetaPrepagoEntity entity = data.get(0);
-        TarjetaPrepagoEntity newEntity = tpp.findByIdTarjetaPrepago(entity.getIdTarjetaPrepago());
+        TarjetaPrepagoEntity newEntity = tpp.findByIdTarjetaPrepago(entity.getNumTarjetaPrepago());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getIdTarjetaPrepago(), newEntity.getIdTarjetaPrepago());
+        Assert.assertEquals(entity.getNumTarjetaPrepago(), newEntity.getNumTarjetaPrepago());
 
         newEntity = tpp.findByIdTarjetaPrepago(null);
         Assert.assertNull(newEntity);

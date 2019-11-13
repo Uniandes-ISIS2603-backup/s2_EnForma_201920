@@ -16,15 +16,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
 {
-    /**
-     * relacion uno a uno con quejas y reclamos
-     */
-    private QuejasYReclamosDTO quejasYReclamos;
-    
-    /**
-     * relacion uno a uno con pago
-     */
-    private PagoDTO pago;
+
     
     
 
@@ -48,14 +40,7 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
     public DomicilioDetailDTO(DomicilioEntity domicilioEntity) 
     {
         super(domicilioEntity);
-        if (domicilioEntity.getQuejasYReclamos() != null) 
-        {
-            this.quejasYReclamos = new QuejasYReclamosDTO(domicilioEntity.getQuejasYReclamos());
-        }
-        if(domicilioEntity.getPago() != null)
-        {
-            this.pago = new PagoDTO(domicilioEntity.getPago());
-        }
+
 
 
     }
@@ -71,46 +56,15 @@ public class DomicilioDetailDTO extends DomicilioDTO implements Serializable
     public DomicilioEntity toEntity() 
     {
         DomicilioEntity entity = super.toEntity();
-        if (this.getQuejasYReclamos() != null) 
-        {
-            entity.setQuejasYReclamos(this.getQuejasYReclamos().toEntity());
-        }
-        if (this.getPago() != null) 
-        {
-            entity.setPago(this.getPago().toEntity());
-        }
+
         
         return entity;
     }
     
 
-    /**
-     * @return the quejasYReclamos
-     */
-    public QuejasYReclamosDTO getQuejasYReclamos() {
-        return quejasYReclamos;
-    }
 
-    /**
-     * @param quejasYReclamos the quejasYReclamos to set
-     */
-    public void setQuejasYReclamos(QuejasYReclamosDTO quejasYReclamos) {
-        this.quejasYReclamos = quejasYReclamos;
-    }
 
-    /**
-     * @return the pago
-     */
-    public PagoDTO getPago() {
-        return pago;
-    }
-
-    /**
-     * @param pago the pago to set
-     */
-    public void setPago(PagoDTO pago) {
-        this.pago = pago;
-    }
+ 
 
 
 

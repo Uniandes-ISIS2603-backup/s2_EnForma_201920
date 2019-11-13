@@ -21,7 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
 {
-    private String idTarjetaPrepago;
+    private String numTarjetaPrepago;
     
     @PodamDoubleValue(minValue = 1.0)
     private Double saldo;
@@ -40,17 +40,17 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     /**
      * @return idTarjetaPrepago
      */
-    public String getIdTarjetaPrepago()
+    public String getNumTarjetaPrepago()
     {
-        return this.idTarjetaPrepago;
+        return this.numTarjetaPrepago;
     }
     
     /**
      * @param tarjeta
      */
-    public void setIdTarjetaPrepago(String tarjeta)
+    public void setNumTarjetaPrepago(String tarjeta)
     {
-        this.idTarjetaPrepago = tarjeta;
+        this.numTarjetaPrepago = tarjeta;
     }
     
      /**

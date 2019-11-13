@@ -47,7 +47,7 @@ public class TarjetaPrepagoDTO implements Serializable
         if (tarjetaPrepagoEntity != null) 
         {
             this.id = tarjetaPrepagoEntity.getId();
-            this.numTarjetaPrepago = tarjetaPrepagoEntity.getIdTarjetaPrepago();
+            this.numTarjetaPrepago = tarjetaPrepagoEntity.getNumTarjetaPrepago();
             this.puntos = tarjetaPrepagoEntity.getPuntos();
             this.saldo = tarjetaPrepagoEntity.getSaldo();
             if(tarjetaPrepagoEntity.getCliente() != null)
@@ -66,7 +66,7 @@ public class TarjetaPrepagoDTO implements Serializable
     {
         TarjetaPrepagoEntity tarjetaPrepagoEntity = new TarjetaPrepagoEntity();
         tarjetaPrepagoEntity.setId(this.id);
-        tarjetaPrepagoEntity.setIdTarjetaPrepago(this.numTarjetaPrepago);
+        tarjetaPrepagoEntity.setNumTarjetaPrepago(this.numTarjetaPrepago);
         tarjetaPrepagoEntity.setSaldo(this.saldo);
         tarjetaPrepagoEntity.setPuntos(this.puntos);
         if(this.cliente != null)
@@ -130,7 +130,7 @@ public class TarjetaPrepagoDTO implements Serializable
      * modifica los puntos
      * @param puntos 
      */
-    public void setPunto(Double puntos)
+    public void setPuntos(Double puntos)
     {
         this.puntos = puntos;
     }

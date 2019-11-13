@@ -41,9 +41,9 @@ public class TarjetaPrepagoLogic
             throw new BusinessLogicException("El saldo no puede ser menor a cero");
         if(tarjetaPrepago.getPuntos() < 0)
             throw new BusinessLogicException("Los puntos no pueden ser negativos");
-        if(tarjetaPrepago.getIdTarjetaPrepago() == null)
+        if(tarjetaPrepago.getNumTarjetaPrepago() == null)
             throw new BusinessLogicException("El numero de la tarjeta no puede ser nulo");
-        if(tarjetaPrepago.getIdTarjetaPrepago().equals(""))
+        if(tarjetaPrepago.getNumTarjetaPrepago().equals(""))
             throw new BusinessLogicException("El numero de la tarjeta no puede ser vacío");
         
         
@@ -101,7 +101,7 @@ public class TarjetaPrepagoLogic
         {
             throw new BusinessLogicException("Los puntos no puede ser negativos");
         }
-        else if(!validateNUMTARJETA(tarjetaPrepagoEntity.getIdTarjetaPrepago()))
+        else if(!validateNUMTARJETA(tarjetaPrepagoEntity.getNumTarjetaPrepago()))
         {
             throw new BusinessLogicException("El numero de la tarjeta no puede ser null ni cadena vacía");
         }
