@@ -53,7 +53,7 @@ private List<DomicilioEntity> domicilios;
  private List<QuejasYReclamosEntity> quejas;
  
 @PodamExclude
-@OneToOne(mappedBy = "cliente")
+@OneToOne
 private TarjetaPrepagoEntity tarjetaPrepago;
  
 

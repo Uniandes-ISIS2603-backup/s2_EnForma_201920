@@ -76,10 +76,17 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numTarjetaPrepago\": \"234\",\n\t\"saldo\": \"42.0\",\n\t\"puntos\": \"406.0\",\n\t\"cliente\": { \"id\":{{new_id_cli}} }\n}",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"234\",\n\t\"saldo\": \"0.0\",\n\t\"puntos\": \"0.0\",\n\t\"cliente\": { \"id\":{{new_id_cli}} }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
