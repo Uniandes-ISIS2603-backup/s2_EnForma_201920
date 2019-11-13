@@ -303,6 +303,40 @@
 			"response": []
 		},
 		{
+			"name": "Eliminar Dieta2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7417450-1c16-4ee8-af65-1bb7a77deba0",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/dietas/{{dieta2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"dietas",
+						"{{dieta2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Eliminar un administrador",
 			"event": [
 				{
@@ -331,6 +365,40 @@
 						"api",
 						"administradores",
 						"{{new_admin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un administrador2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "864401bf-b7f7-44d8-871e-e03b66680fc1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_id_e2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{new_id_e2}}"
 					]
 				}
 			},
