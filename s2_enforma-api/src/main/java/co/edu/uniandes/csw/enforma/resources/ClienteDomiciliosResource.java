@@ -77,9 +77,9 @@ public class ClienteDomiciliosResource {
     @GET
     public List<DomicilioDTO> getDomicilios(@PathParam("clientesId") Long clientesId) {
         LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilios: input: {0}", clientesId);
-        List<DomicilioDTO> listaDetailDTOs = domiciliosListEntity2DTO(clienteDomiciliosLogic.getDomicilios(clientesId));
-        LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilios: output: {0}", listaDetailDTOs);
-        return listaDetailDTOs;
+        List<DomicilioDTO> listaDTOs = domiciliosListEntity2DTO(clienteDomiciliosLogic.getDomicilios(clientesId));
+        LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilios: output: {0}", listaDTOs);
+        return listaDTOs;
     }
 
     /**
