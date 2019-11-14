@@ -36,11 +36,11 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private Double costo;
     
     @PodamExclude
-    @OneToOne(mappedBy="domicilio", fetch = FetchType.LAZY)
+    @OneToOne
     private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
-    @OneToOne(mappedBy="orden")
+    @OneToOne
     private PagoEntity pago;
     
     @PodamExclude

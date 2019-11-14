@@ -101,54 +101,6 @@
 			"response": []
 		},
 		{
-			"name": "Editar administrador",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b1756dd4-c4e3-47cc-a26e-3fa4145ac689",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"Jesucristo\"\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{admin1}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"administradores",
-						"{{admin1}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Obtener todos los administradores",
 			"event": [
 				{
@@ -205,7 +157,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{new_admin}}/dietatipos",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{adminalone2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -215,8 +167,7 @@
 						"s2_enforma-api",
 						"api",
 						"administradores",
-						"{{new_admin}}",
-						"dietatipos"
+						"{{adminalone2}}"
 					]
 				}
 			},
@@ -251,6 +202,40 @@
 						"api",
 						"administradores",
 						"{{adminalone}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un administrador2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "864401bf-b7f7-44d8-871e-e03b66680fc1",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/administradores/{{adminalone2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"administradores",
+						"{{adminalone2}}"
 					]
 				}
 			},

@@ -184,7 +184,7 @@ public class TarjetaPrepagoResource
      * @return la lista de tarjetas prepago en forma DTO (json)
      */
     private List<TarjetaPrepagoDetailDTO> listEntity2DetailDTO(List<TarjetaPrepagoEntity> entityList) {
-        List<TarjetaPrepagoDetailDTO> list = new ArrayList<>();
+        List<TarjetaPrepagoDetailDTO> list = new ArrayList<TarjetaPrepagoDetailDTO>();
         for (TarjetaPrepagoEntity entity : entityList) {
             list.add(new TarjetaPrepagoDetailDTO(entity));
         }

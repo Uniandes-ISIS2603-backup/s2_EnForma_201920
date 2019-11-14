@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.enforma.resources;
 
 import co.edu.uniandes.csw.enforma.dtos.DomicilioDTO;
-import co.edu.uniandes.csw.enforma.dtos.DomicilioDetailDTO;
 import co.edu.uniandes.csw.enforma.ejb.DomicilioLogic;
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
@@ -74,10 +73,10 @@ public class DomicilioResource
      * libro. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<DomicilioDetailDTO> getDomicilios() 
+    public List<DomicilioDTO> getDomicilios() 
     {
         LOGGER.log(Level.INFO, "DomicilioResource getDomicilios: input: void");
-        List<DomicilioDetailDTO> listaDTOs = listEntity2DTO(domicilioLogic.getDomicilios());
+        List<DomicilioDTO> listaDTOs = listEntity2DTO(domicilioLogic.getDomicilios());
         LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDTOs);
         return listaDTOs;
     }
@@ -93,7 +92,7 @@ public class DomicilioResource
      */
     @GET
     @Path("{domiciliosId: \\d+}")
-    public DomicilioDetailDTO getDomicilio(@PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException 
+    public DomicilioDTO getDomicilio(@PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "DomicilioResource getDomicilio: input: {0}", domiciliosId);
         DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
@@ -101,7 +100,7 @@ public class DomicilioResource
         {
             throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
         }
-        DomicilioDetailDTO domicilioDTO = new DomicilioDetailDTO(entity);
+        DomicilioDTO domicilioDTO = new DomicilioDTO(entity);
         LOGGER.log(Level.INFO, "DomicilioResource getDomicilio: output: {0}", domicilioDTO);
         return domicilioDTO;
     }
@@ -133,7 +132,7 @@ public class DomicilioResource
             throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
 
         }
-        DomicilioDetailDTO domicilioDTO = new DomicilioDetailDTO(domicilioLogic.updateDomicilio(domiciliosId, domicilio.toEntity())); 
+        DomicilioDTO domicilioDTO = new DomicilioDTO(domicilioLogic.updateDomicilio(domiciliosId, domicilio.toEntity())); 
         LOGGER.log(Level.INFO, "DomicilioResource updateDomicilio: output:{0}", domicilioDTO);
         return domicilioDTO;
 
@@ -181,12 +180,12 @@ public class DomicilioResource
      * vamos a convertir a DTO.
      * @return la lista de reseñas en forma DTO (json)
      */
-    private List<DomicilioDetailDTO> listEntity2DTO(List<DomicilioEntity> entityList) 
+    private List<DomicilioDTO> listEntity2DTO(List<DomicilioEntity> entityList) 
     {
-        List<DomicilioDetailDTO> list = new ArrayList<DomicilioDetailDTO>();
-        for (DomicilioEntity entity : entityList) 
+        List<DomicilioDTO> list = new ArrayList<>();
+        for(DomicilioEntity entity : entityList) 
         {
-            list.add(new DomicilioDetailDTO(entity));
+            list.add(new DomicilioDTO(entity));
         }
         return list;
     }

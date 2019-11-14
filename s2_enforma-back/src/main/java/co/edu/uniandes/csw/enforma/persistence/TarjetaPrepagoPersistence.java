@@ -112,7 +112,7 @@ public class TarjetaPrepagoPersistence
     public TarjetaPrepagoEntity findByIdTarjetaPrepago(String idTP) {
         LOGGER.log(Level.INFO, "Consultando tarjetas prepago por idTarjetaPrepago ", idTP);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":idD" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From TarjetaPrepagoEntity e where e.idTarjetaPrepago = :idTP", TarjetaPrepagoEntity.class);
+        TypedQuery query = em.createQuery("Select e From TarjetaPrepagoEntity e where e.numTarjetaPrepago = :idTP", TarjetaPrepagoEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
         query = query.setParameter("idTP", idTP);
         // Se invoca el query se obtiene la lista resultado

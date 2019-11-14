@@ -80,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"domicilio\": {\"id\":{{domi1}} },\r\n    \"esPrepago\": false,\r\n    \"estadoPago\": \"Ok\",\r\n    \"numeroTarjeta\": 1234.0,\r\n    \"monto\": 23000.0\r\n}"
+					"raw": "{\r\n\t\"domicilio\": {\"id\":{{domi1}} },\r\n    \"esPrepago\": false,\r\n    \"estadoPago\": \"Ok\",\r\n    \"numeroTarjeta\": 12342,\r\n    \"monto\": 23000.0\r\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
@@ -118,7 +118,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domi1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domi1}}/pagos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -128,7 +128,8 @@
 						"s2_enforma-api",
 						"api",
 						"domicilios",
-						"{{domi1}}"
+						"{{domi1}}",
+						"pagos"
 					]
 				}
 			},
@@ -154,7 +155,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domi1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -163,8 +164,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"domicilios",
-						"{{domi1}}"
+						"domicilios"
 					]
 				}
 			},
@@ -190,7 +190,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domi1}}/{{pago1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -199,9 +199,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"domicilios",
-						"{{domi1}}",
-						"{{pago1}}"
+						"pagos"
 					]
 				}
 			},
@@ -215,9 +213,7 @@
 					"script": {
 						"id": "8ad1c25e-6cec-4d95-9be5-c61a265055d9",
 						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
 						"type": "text/javascript"
 					}
@@ -227,7 +223,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domi1}}/{{pago1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{pago1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -236,8 +232,7 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"domicilios",
-						"{{domi1}}",
+						"pagos",
 						"{{pago1}}"
 					]
 				}
@@ -252,9 +247,7 @@
 					"script": {
 						"id": "8ad1c25e-6cec-4d95-9be5-c61a265055d9",
 						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
 						],
 						"type": "text/javascript"
 					}

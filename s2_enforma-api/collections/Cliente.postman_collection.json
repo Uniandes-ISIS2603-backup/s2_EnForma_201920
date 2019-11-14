@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b6c9421a-1105-4b4b-a382-f4ca8fe324df",
+		"_postman_id": "832c7456-7be8-4bc8-80b0-ab4450136521",
 		"name": "Cliente",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,12 +42,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -94,12 +94,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -129,12 +129,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -164,12 +164,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -216,12 +216,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -251,12 +251,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/0",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -302,12 +302,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/0",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -337,12 +337,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/0",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/0",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -371,12 +371,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",
@@ -405,12 +405,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/s2_enforma-api/api/clientes/{{new_id_a2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_a2}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s2_enforma-api",
 						"api",

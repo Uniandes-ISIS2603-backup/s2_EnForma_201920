@@ -30,7 +30,6 @@ import javax.inject.Inject;
  *
  * @author Juan Sebastián Clavijo
  */
-@Path("tarjetaprepagoagos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TarjetaPrepagoPagosResource 
