@@ -82,16 +82,16 @@ public class AdministradorLogic {
         
         if(administradorEntity.getUsername().equals("") || administradorEntity.getUsername()==null)
         {
-            throw new BusinessLogicException("Error para actualizar el administrador");
+            throw new BusinessLogicException("Error para cambiar username");
         }
         if(administradorEntity.getNombre().equals("") || administradorEntity.getNombre()==null)
         {
-          throw new BusinessLogicException("Error para actualizar el administrador");
+          throw new BusinessLogicException("Error para actualizar el nombre");
 
         }
         if(administradorEntity.getContrasena().equals("") || administradorEntity.getContrasena()==null)
         {
-          throw new BusinessLogicException("Error para actualizar el administrador");
+          throw new BusinessLogicException("Error para actualizar la contrasena");
         }
         AdministradorEntity newEntity = persistence.update(administradorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el administrador con id = {0}", administradorEntity.getId());
