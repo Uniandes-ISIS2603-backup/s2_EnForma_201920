@@ -1,10 +1,10 @@
 
 
-delete from ClienteEntity_QuejasYReclamosEntity;
-delete from DietaTipoEntity_CalificacionEntity;
-delete from DietaTipoEntity_ClienteEntity;
-delete from DietaTipoEntity_ComidaTipoEntity;
-delete from TarjetaPrepagoEntity_PagoEntity;
+--delete from ClienteEntity_QuejasYReclamosEntity;
+--delete from DietaTipoEntity_CalificacionEntity;
+--delete from DietaTipoEntity_ClienteEntity;
+--delete from DietaTipoEntity_ComidaTipoEntity;
+--delete from TarjetaPrepagoEntity_PagoEntity;
 delete from CalificacionEntity;
 delete from QuejasYReclamosEntity;
 
