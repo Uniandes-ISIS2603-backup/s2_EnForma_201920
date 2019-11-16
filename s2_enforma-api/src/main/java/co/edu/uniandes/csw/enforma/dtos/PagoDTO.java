@@ -24,6 +24,8 @@ public class PagoDTO implements Serializable{
     
     private DomicilioDTO orden;
     
+    private TarjetaPrepagoDTO tarjetaPrepago;
+    
     public PagoDTO(){
         
     }
@@ -40,6 +42,10 @@ public class PagoDTO implements Serializable{
             if(pagoEntity.getOrden()!=null)
             {
                 orden=new DomicilioDTO(pagoEntity.getOrden());
+            }
+            if(pagoEntity.getTarjetaPrepago() !=null)
+            {
+                tarjetaPrepago=new TarjetaPrepagoDTO(pagoEntity.getTarjetaPrepago());
             }
         }
     }
@@ -151,7 +157,25 @@ public class PagoDTO implements Serializable{
         {
         pagoEntity.setOrden(this.getOrden().toEntity());
         }
+        if(this.tarjetaPrepago!= null)
+        {
+            pagoEntity.setTarjetaPrepago(this.getTarjetaPrepago().toEntity());
+        }
         return pagoEntity;
+    }
+
+    /**
+     * @return the tarjetaPrepago
+     */
+    public TarjetaPrepagoDTO getTarjetaPrepago() {
+        return tarjetaPrepago;
+    }
+
+    /**
+     * @param tarjetaPrepago the tarjetaPrepago to set
+     */
+    public void setTarjetaPrepago(TarjetaPrepagoDTO tarjetaPrepago) {
+        this.tarjetaPrepago = tarjetaPrepago;
     }
     
 }
