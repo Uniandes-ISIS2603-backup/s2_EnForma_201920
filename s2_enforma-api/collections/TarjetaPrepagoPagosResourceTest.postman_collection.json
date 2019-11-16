@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Crear cliente",
+			"name": "Crear tarjeta prepago 1",
 			"event": [
 				{
 					"listen": "test",
@@ -14,7 +14,7 @@
 						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_cli\",data.id);",
+							"postman.setGlobalVariable(\"new_id_t1\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 134134,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"34243\",\n\t\"saldo\": \"0.0\",\n\t\"puntos\": \"0.0\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -51,14 +51,14 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"clientes"
+						"tarjetasprepago"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crear tarjeta prepago",
+			"name": "Crear tarjeta prepago 2",
 			"event": [
 				{
 					"listen": "test",
@@ -66,7 +66,7 @@
 						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_domi\",data.id);",
+							"postman.setGlobalVariable(\"new_id_t2\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -79,7 +79,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} },\n\t\"quejasYReclamos\": { \"id\":{{new_id_qyr}} },\n\t\"pago\": { \"id\": {{new_id_pag}} }\n}",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"98776\",\n\t\"saldo\": \"0.0\",\n\t\"puntos\": \"0.0\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,7 +87,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -96,7 +96,142 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"domicilios"
+						"tarjetasprepago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear pago 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p1\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear pago 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear pago 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p3\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 98776,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t2}} }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos"
 					]
 				}
 			},
@@ -122,7 +257,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -131,14 +266,14 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"domicilios"
+						"tarjetasprepago"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "obtener tarjeta prepago",
+			"name": "obtener los pagos de una tarjeta prepago",
 			"event": [
 				{
 					"listen": "test",
@@ -157,45 +292,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_domi}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"domicilios",
-						"{{new_id_domi}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar tarjeta prepago",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t1}}/",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -205,14 +302,52 @@
 						"s2_enforma-api",
 						"api",
 						"tarjetasprepago",
-						"{{new_id_t}}"
+						"{{new_id_t1}}",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "borrar cliente",
+			"name": "obtener los pagos de la segunda tarjeta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t2}}/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago",
+						"{{new_id_t2}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar pago 1",
 			"event": [
 				{
 					"listen": "test",
@@ -233,7 +368,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_cli}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{new_id_p1}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -242,8 +377,160 @@
 					"path": [
 						"s2_enforma-api",
 						"api",
-						"clientes",
-						"{{new_id_cli}}"
+						"pagos",
+						"{{new_id_p1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar pago 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{new_id_p2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos",
+						"{{new_id_p2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar pago 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{new_id_p3}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"pagos",
+						"{{new_id_p3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar tarjeta 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago",
+						"{{new_id_t1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar tarjeta 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/tarjetasprepago/{{new_id_t2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"tarjetasprepago",
+						"{{new_id_t2}}"
 					]
 				}
 			},
