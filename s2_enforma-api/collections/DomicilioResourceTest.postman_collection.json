@@ -58,110 +58,6 @@
 			"response": []
 		},
 		{
-			"name": "Crear quejas y reclamos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_qyr\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"descripcion\": \"la mejor descripcion\",\n\t\"asusnto\": \"el mejor asunto, no esta vaciooooooooo\",\n\t\"fecha\": \"2018-08-20T00:00:00-05:00\",\n\t\"cliente\": { \"id\": {{new_id_cli}} }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"quejasyreclamos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear pago",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pag\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 234,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"pagos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Crear comidaTipo",
 			"event": [
 				{
@@ -235,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} },\n\t\"quejasYReclamos\": { \"id\":{{new_id_qyr}} },\n\t\"pago\": { \"id\": {{new_id_pag}} }\n}",
+					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -400,82 +296,6 @@
 						"api",
 						"comidas",
 						"{{new_id_comit}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar pago",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos/{{new_id_pag}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"pagos",
-						"{{new_id_pag}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar quejas y reclamos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/quejasyreclamos/{{new_id_qyr}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"quejasyreclamos",
-						"{{new_id_qyr}}"
 					]
 				}
 			},
