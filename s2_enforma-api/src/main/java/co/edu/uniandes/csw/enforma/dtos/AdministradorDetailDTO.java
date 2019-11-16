@@ -81,6 +81,14 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
         return administradorEntity;
     }
 
+    
+    /**
+     * @param dietas the dietas to set
+     */
+    public void setDietas(List<DietaTipoDTO> dietas) {
+        this.dietas = dietas;
+    }
+    
     /**
      * @return the dietas
      */
@@ -88,11 +96,11 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
         return dietas;
     }
 
-    /**
-     * @param dietas the dietas to set
+     /**
+     * @param comidas the comidas to set
      */
-    public void setDietas(List<DietaTipoDTO> dietas) {
-        this.dietas = dietas;
+    public void setComidas(List<ComidaTipoDTO> comidas) {
+        this.comidas = comidas;
     }
 
     /**
@@ -102,12 +110,7 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
         return comidas;
     }
 
-    /**
-     * @param comidas the comidas to set
-     */
-    public void setComidas(List<ComidaTipoDTO> comidas) {
-        this.comidas = comidas;
-    }
+   
 
     
     
