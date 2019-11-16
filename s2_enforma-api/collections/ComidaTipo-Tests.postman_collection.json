@@ -210,7 +210,7 @@
 			"response": []
 		},
 		{
-			"name": "crear una Comida Tipo 2 ya existente",
+			"name": "crear una Comida Tipo 2 ya existente sirviendo",
 			"event": [
 				{
 					"listen": "test",
@@ -218,7 +218,7 @@
 						"id": "66012b01-5951-4b0f-99a0-ba561c29408f",
 						"exec": [
 							"tests[\"No crea con el mismo nombre\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya existe una dieta con ese nombre\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya existe una comida con ese nombre\");"
 						],
 						"type": "text/javascript"
 					}
@@ -315,10 +315,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "42fb091e-89f0-48f4-bc46-8d45d479da1e",
+						"id": "39c17914-5184-4310-9647-a1b7f4cadbcf",
 						"exec": [
 							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /comidas/0 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /ComidasTipo/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}

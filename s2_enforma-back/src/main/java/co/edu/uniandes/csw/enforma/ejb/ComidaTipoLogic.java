@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.enforma.ejb;
 
-import co.edu.uniandes.csw.enforma.entities.AdministradorEntity;
 import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
@@ -82,7 +81,8 @@ public class ComidaTipoLogic {
 //            throw new BusinessLogicException("La imagen no pueden ser vacia en la comida Tipo");
 //        }
           LOGGER.log(Level.INFO, "Antes de comprobar si existe mismo nombre");
-       if(persistenceComidaTipo.findByNombre(comidaTipo.getNombre()) != null){
+       if(persistenceComidaTipo.findByNombre(comidaTipo.getNombre()) != null)
+       {
            LOGGER.log(Level.INFO, "Entró de comprobar si existe mismo nombre");
            throw new BusinessLogicException("Ya existe una comida con ese nombre");
        } 
@@ -114,7 +114,7 @@ public class ComidaTipoLogic {
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la comida tipo con id = {0}", comidaTipoId);
        ComidaTipoEntity comidaTipo = persistenceComidaTipo.find(comidaTipoId);
-       if(comidaTipo ==null)
+       if(comidaTipo == null)
        {
            LOGGER.log(Level.SEVERE, "La comida Tipo con el id = {0} no existe" , comidaTipoId);
        }
@@ -158,10 +158,10 @@ public class ComidaTipoLogic {
         {
             throw new BusinessLogicException("Las calorías no pueden se menores a 100 por comidano es posible actializar comida Tipo con id = " + comidaTipoId);
         }
-        if (comidaTipoEntity.getImagenComida()==null)
-        {
-            throw new BusinessLogicException("La imagen no pueden ser vacia en la comida Tipo con id = " + comidaTipoId);
-        }
+//        if (comidaTipoEntity.getImagenComida()==null)
+//        {
+//            throw new BusinessLogicException("La imagen no pueden ser vacia en la comida Tipo con id = " + comidaTipoId);
+//        }
         
         if(comidaTipoEntity.getMomentoDelDia() ==null || comidaTipoEntity.getMomentoDelDia().isEmpty())
         {
