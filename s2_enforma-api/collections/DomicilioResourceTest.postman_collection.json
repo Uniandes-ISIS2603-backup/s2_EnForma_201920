@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "52462e33-a6f3-422f-adae-5478474fae46",
+		"_postman_id": "b1f0e93e-f1cf-4bad-9333-7f1beafc62ee",
 		"name": "DomicilioResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 134134,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
+					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 13,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -120,7 +120,7 @@
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_domi\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -128,7 +128,14 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} }\n}",
