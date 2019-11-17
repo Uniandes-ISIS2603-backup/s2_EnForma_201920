@@ -24,6 +24,8 @@ public class PagoDTO implements Serializable{
     
     private DomicilioDTO orden;
     
+    private TarjetaPrepagoDTO tarjetaPrepago;
+    
     public PagoDTO(){
         
     }
@@ -41,14 +43,11 @@ public class PagoDTO implements Serializable{
             {
                 orden=new DomicilioDTO(pagoEntity.getOrden());
             }
+            if(pagoEntity.getTarjetaPrepago() !=null)
+            {
+                tarjetaPrepago=new TarjetaPrepagoDTO(pagoEntity.getTarjetaPrepago());
+            }
         }
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
     }
 
     /**
@@ -57,26 +56,26 @@ public class PagoDTO implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     /**
-     * @return the monto
+     * @return the id
      */
-    public Double getMonto() {
-        return monto;
+    public Long getId() {
+        return id;
     }
 
-    /**
+    
+     /**
      * @param monto the monto to set
      */
     public void setMonto(Double monto) {
         this.monto = monto;
     }
-
     /**
-     * @return the numeroTarjeta
+     * @return the monto
      */
-    public Integer getNumeroTarjeta() {
-        return numeroTarjeta;
+    public Double getMonto() {
+        return monto;
     }
 
     /**
@@ -87,24 +86,25 @@ public class PagoDTO implements Serializable{
     }
 
     /**
-     * @return the esPrepago
+     * @return the numeroTarjeta
      */
-    public Boolean getEsPrepago() {
-        return esPrepago;
+    public Integer getNumeroTarjeta() {
+        return numeroTarjeta;
     }
 
-    /**
+   /**
      * @param esPrepago the esPrepago to set
      */
     public void setEsPrepago(Boolean esPrepago) {
         this.esPrepago = esPrepago;
     }
 
+
     /**
-     * @return the estadoPago
+     * @return the esPrepago
      */
-    public String getEstadoPago() {
-        return estadoPago;
+    public Boolean getEsPrepago() {
+        return esPrepago;
     }
 
     /**
@@ -114,11 +114,27 @@ public class PagoDTO implements Serializable{
         this.estadoPago = estadoPago;
     }
     
+    /**
+     * @return the estadoPago
+     */
+    public String getEstadoPago() {
+        return estadoPago;
+    }
+
+    
+    
      @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
+    
+    /**
+     * @param orden the orden to set
+     */
+    public void setOrden(DomicilioDTO orden) {
+        this.orden = orden;
+    }
     /**
      * @return the orden
      */
@@ -126,12 +142,7 @@ public class PagoDTO implements Serializable{
         return orden;
     }
 
-    /**
-     * @param orden the orden to set
-     */
-    public void setOrden(DomicilioDTO orden) {
-        this.orden = orden;
-    }
+    
     
      public PagoEntity toEntity() 
     {
@@ -146,7 +157,25 @@ public class PagoDTO implements Serializable{
         {
         pagoEntity.setOrden(this.getOrden().toEntity());
         }
+        if(this.tarjetaPrepago!= null)
+        {
+            pagoEntity.setTarjetaPrepago(this.getTarjetaPrepago().toEntity());
+        }
         return pagoEntity;
+    }
+
+    /**
+     * @return the tarjetaPrepago
+     */
+    public TarjetaPrepagoDTO getTarjetaPrepago() {
+        return tarjetaPrepago;
+    }
+
+    /**
+     * @param tarjetaPrepago the tarjetaPrepago to set
+     */
+    public void setTarjetaPrepago(TarjetaPrepagoDTO tarjetaPrepago) {
+        this.tarjetaPrepago = tarjetaPrepago;
     }
     
 }

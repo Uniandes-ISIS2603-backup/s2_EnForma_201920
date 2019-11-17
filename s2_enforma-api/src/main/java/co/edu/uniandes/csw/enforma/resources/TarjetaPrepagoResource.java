@@ -164,13 +164,13 @@ public class TarjetaPrepagoResource
     
     
     @Path("{tarjetasprepagoId: \\d+}/pagos")
-    public Class<PagoResource> getpagoResource(@PathParam("domiciliosId") Long domiciliosId)
+    public Class<TarjetaPrepagoPagosResource> getTarjetaPrepagoPagosResource(@PathParam("tarjetaPrepagoId") Long tarjetasId)
     {
-        if(tarjetaPrepagoLogic.getTarjetaPrepago(domiciliosId) == null)
+        if(tarjetaPrepagoLogic.getTarjetaPrepago(tarjetasId) == null)
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + "/pagos no existe.", 404);
+            throw new WebApplicationException("El recurso /tarjetaPrepago/" + tarjetasId + "/pagos no existe.", 404);
         }
-        return PagoResource.class;
+        return TarjetaPrepagoPagosResource.class;
     }
     
      /**

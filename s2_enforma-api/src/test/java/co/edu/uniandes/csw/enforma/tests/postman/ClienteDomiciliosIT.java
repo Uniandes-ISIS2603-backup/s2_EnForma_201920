@@ -5,9 +5,8 @@
  */
 package co.edu.uniandes.csw.enforma.tests.postman;
 
-import co.edu.uniandes.csw.enforma.dtos.DomicilioDTO;
 import co.edu.uniandes.csw.enforma.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.enforma.resources.DomicilioResource;
+import co.edu.uniandes.csw.enforma.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -23,12 +22,13 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author Juan Sebastián Clavijo
+ * @author Sofia Vargas
  */
+
 @RunWith(Arquillian.class)
-public class DomicilioIT 
-{
-    private static final String COLLECTION = "DomicilioResourceTest.postman_collection";
+public class ClienteDomiciliosIT {
+    
+    private static final String COLLECTION = "ClienteDomiciliosResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -38,8 +38,7 @@ public class DomicilioIT
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(DomicilioResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-                .addPackage(DomicilioDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(RestConfig.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquete
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
@@ -49,14 +48,11 @@ public class DomicilioIT
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"));
     }
-    
+
     @Test
     @RunAsClient
-    public void postman() throws IOException 
-    {
-       try{
-           PostmanTestBuilder tp = new PostmanTestBuilder();
-      
+    public void postman() throws IOException {
+        PostmanTestBuilder tp = new PostmanTestBuilder();
         tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
         String desiredResult = "0";
         Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
@@ -66,8 +62,8 @@ public class DomicilioIT
         Assert.assertEquals("Error en Test-Scripts de: " + COLLECTION, desiredResult, tp.getTest_scripts_failed());
 
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
-         }catch (Exception e) {
-             e.printStackTrace();
-         }
     }
+    
+    
+    
 }

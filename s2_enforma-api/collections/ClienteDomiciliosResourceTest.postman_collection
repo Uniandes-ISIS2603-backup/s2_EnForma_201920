@@ -1,21 +1,21 @@
 {
 	"info": {
-		"_postman_id": "b1f0e93e-f1cf-4bad-9333-7f1beafc62ee",
-		"name": "DomicilioResourceTest",
+		"_postman_id": "2baf0b85-4392-4a62-a6f7-ff6e88abe294",
+		"name": "ClienteDomicilios",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crear cliente",
+			"name": "Crear un cliente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"id": "f7262389-c802-453d-8ecd-fb8336408d70",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_cli\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"postman.setGlobalVariable(\"clientedomi\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
 						"type": "text/javascript"
@@ -28,13 +28,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"rodrigo\",\n\t\"edad\": 13,\n\t\"peso\": 314.13,\n\t\"objetivos\": \"no se\",\n\t\"gluten\": \"true\",\n\t\"lactosa\": \"true\",\n\t\"userName\": \"rodri\",\n\t\"contrasenia\": \"se supone que es privada\"\n}",
+					"raw": "{\r\n\t \"contrasenia\": \"987654321\",\r\n        \"edad\": 26,\r\n        \"gluten\": false,\r\n        \"id\": 300,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Masero\",\r\n        \"objetivos\": \"Tonificar\",\r\n        \"peso\": 86.5,\r\n        \"userName\": \"Pan\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -58,17 +58,16 @@
 			"response": []
 		},
 		{
-			"name": "Crear comidaTipo",
+			"name": "Crear un domicilio",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
+						"id": "a865fb5d-2a9e-4e51-a354-b8f1b107b892",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_comit\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"postman.setGlobalVariable(\"domicli\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
@@ -86,59 +85,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "\t{\r\n        \"calorias\": 350,\r\n        \"menu\": \"elo\",\r\n        \"momentoDelDia\": \"Cenita\",\r\n        \"nombre\": \"salchichon\"\r\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"comidas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear domicilio",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4aaf108f-999e-48b2-b361-d27ee90041af",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_domi\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"fecha\": \"2000-08-20T00:00:00-05:00\",\n\t\"lugarEntrega\": \"casa\",\n\t\"costo\": \"40.06\",\n\t\"cliente\": { \"id\":{{new_id_cli}} },\n\t\"comidaTipo\": { \"id\": {{new_id_comit}} }\n}",
+					"raw": " {\r\n        \"costo\": 30000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Cali\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} }\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,24 +109,40 @@
 			"response": []
 		},
 		{
-			"name": "obtener todos los domicilios",
+			"name": "Crear un domicilio2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"id": "a865fb5d-2a9e-4e51-a354-b8f1b107b892",
 						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"domicilios count\"] = data.length >= 0;"
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"domicli2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"costo\": 22000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Buenaventura\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
 					"protocol": "http",
@@ -197,12 +160,12 @@
 			"response": []
 		},
 		{
-			"name": "obtener domicilio",
+			"name": "Dar cliente por id",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "0b2be038-b697-4a81-b8a6-ff391fd11b18",
+						"id": "2366fc0e-1244-4671-b5dd-3ac8b9268aac",
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
@@ -216,121 +179,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_domi}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"domicilios",
-						"{{new_id_domi}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar domicilio",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{new_id_domi}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"domicilios",
-						"{{new_id_domi}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar comidaTipo",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas/{{new_id_comit}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_enforma-api",
-						"api",
-						"comidas",
-						"{{new_id_comit}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "borrar cliente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f8dd4ae5-9923-4fec-9f45-2f4f28f14713",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{new_id_cli}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -340,7 +189,220 @@
 						"s2_enforma-api",
 						"api",
 						"clientes",
-						"{{new_id_cli}}"
+						"{{clientedomi}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c9d7827-1cd5-4172-8b85-aae48948fe31",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar domicilios de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee83c4a1-7a6a-411e-a44f-164fe7c8d58a",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar un domicilio de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2989d9d4-c4b5-4ead-8a14-4b48efd8c712",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}",
+						"domicilios",
+						"{{domicli2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d572f8ad-81b4-4738-80f3-dcf1f1643181",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar domicilio2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d572f8ad-81b4-4738-80f3-dcf1f1643181",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b865bec6-11e0-4461-865a-ef08322bfffe",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}"
 					]
 				}
 			},

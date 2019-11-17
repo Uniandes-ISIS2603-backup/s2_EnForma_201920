@@ -39,6 +39,12 @@ public class AdministradorDTO implements Serializable{
     }
 
    
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * @return the id
@@ -47,11 +53,11 @@ public class AdministradorDTO implements Serializable{
         return id;
     }
 
-    /**
-     * @param id the id to set
+  /**
+     * @param nombre the nombre to set
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -61,11 +67,11 @@ public class AdministradorDTO implements Serializable{
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
+      /**
+     * @param username the username to set
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -75,11 +81,11 @@ public class AdministradorDTO implements Serializable{
         return username;
     }
 
-    /**
-     * @param username the username to set
+   /**
+     * @param contrasena the contrasena to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     /**
@@ -89,12 +95,7 @@ public class AdministradorDTO implements Serializable{
         return contrasena;
     }
 
-    /**
-     * @param contrasena the contrasena to set
-     */
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
+   
     
     
      @Override
