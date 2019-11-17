@@ -109,6 +109,57 @@
 			"response": []
 		},
 		{
+			"name": "Crear un domicilio2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a865fb5d-2a9e-4e51-a354-b8f1b107b892",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"domicli2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"costo\": 22000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Buenaventura\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Dar cliente por id",
 			"event": [
 				{
@@ -237,7 +288,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli2}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -249,7 +300,7 @@
 						"clientes",
 						"{{clientedomi}}",
 						"domicilios",
-						"{{domicli}}"
+						"{{domicli2}}"
 					]
 				}
 			},
@@ -284,6 +335,40 @@
 						"api",
 						"domicilios",
 						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar domicilio2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d572f8ad-81b4-4738-80f3-dcf1f1643181",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli2}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli2}}"
 					]
 				}
 			},

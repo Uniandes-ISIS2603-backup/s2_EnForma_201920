@@ -75,7 +75,7 @@ public class ClienteDomiciliosResource {
      * cliente. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<DomicilioDTO> getDomicilios(@PathParam("clientesId") Long clientesId) {
+    public List<DomicilioDTO> getDomicilios(@PathParam("clienteId") Long clientesId) {
         LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilios: input: {0}", clientesId);
         List<DomicilioDTO> listaDTOs = domiciliosListEntity2DTO(clienteDomiciliosLogic.getDomicilios(clientesId));
         LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilios: output: {0}", listaDTOs);
@@ -98,7 +98,7 @@ public class ClienteDomiciliosResource {
      */
     @GET
     @Path("{domiciliosId: \\d+}")
-    public DomicilioDTO getDomicilio(@PathParam("clientesId") Long clientesId, @PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException {
+    public DomicilioDTO getDomicilio(@PathParam("clienteId") Long clientesId, @PathParam("domiciliosId") Long domiciliosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ClienteDomiciliosResource getDomicilio: input: clientesID: {0} , domiciliosId: {1}", new Object[]{clientesId, domiciliosId});
         if (domicilioLogic.getDomicilio(domiciliosId) == null) {
             throw new WebApplicationException("El recurso /clientes/" + clientesId + "/domicilios/" + domiciliosId + " no existe.", 404);
