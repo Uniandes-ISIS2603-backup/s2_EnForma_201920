@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "2baf0b85-4392-4a62-a6f7-ff6e88abe294",
+		"name": "ClienteDomicilios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f7262389-c802-453d-8ecd-fb8336408d70",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"clientedomi\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t \"contrasenia\": \"987654321\",\r\n        \"edad\": 26,\r\n        \"gluten\": false,\r\n        \"id\": 300,\r\n        \"lactosa\": true,\r\n        \"nombre\": \"Masero\",\r\n        \"objetivos\": \"Tonificar\",\r\n        \"peso\": 86.5,\r\n        \"userName\": \"Pan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a865fb5d-2a9e-4e51-a354-b8f1b107b892",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"domicli\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"costo\": 30000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Cali\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar cliente por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2366fc0e-1244-4671-b5dd-3ac8b9268aac",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar un domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c9d7827-1cd5-4172-8b85-aae48948fe31",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar domicilios de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee83c4a1-7a6a-411e-a44f-164fe7c8d58a",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}",
+						"domicilios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar un domicilio de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2989d9d4-c4b5-4ead-8a14-4b48efd8c712",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}",
+						"domicilios",
+						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar domicilio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d572f8ad-81b4-4738-80f3-dcf1f1643181",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/domicilios/{{domicli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"domicilios",
+						"{{domicli}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b865bec6-11e0-4461-865a-ef08322bfffe",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"clientes",
+						"{{clientedomi}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
