@@ -16,7 +16,7 @@
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_t1\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numTarjetaPrepago\": \"34243\",\n\t\"saldo\": \"0.0\",\n\t\"puntos\": \"0.0\"\n}",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"34243\",\n\t\"saldo\": 0.0,\n\t\"puntos\": 0.0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,8 +67,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_t2\",data.id);",
-							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
@@ -76,10 +75,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"numTarjetaPrepago\": \"98776\",\n\t\"saldo\": \"0.0\",\n\t\"puntos\": \"0.0\"\n}",
+					"raw": "{\n\t\"numTarjetaPrepago\": \"98776\",\n\t\"saldo\": 0.0,\n\t\"puntos\": 0.0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,7 +118,7 @@
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_p1\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -121,10 +126,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
+					"raw": "{\n\t\"monto\": 866,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"re tacaooo\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -158,7 +169,7 @@
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_p2\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -166,10 +177,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
+					"raw": "{\n\t\"monto\": 1.345,\n\t\"numeroTarjeta\": 34243,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t1}} }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,10 +228,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"monto\": 132.123,\n\t\"numeroTarjeta\": 98776,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"tacaño\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t2}} }\n}",
+					"raw": "{\n\t\"monto\": 3456.56,\n\t\"numeroTarjeta\": 98776,\n\t\"esPrepago\": \"true\",\n\t\"estadoPago\": \"ertg\",\n\t\"tarjetaPrepago\": { \"id\":{{new_id_t2}} }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
