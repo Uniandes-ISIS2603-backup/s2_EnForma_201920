@@ -129,21 +129,21 @@ public class QuejasYReclamosLogic
         return quejasYReclamosEntity;
     }
     
-    public QuejasYReclamosEntity getQuejasYReclamosByClienteId(Long clienteId)
-    {
-       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las quejas y reclamos del cliente con id = {0}", clienteId);
-       QuejasYReclamosEntity quejasYReclamos = persistence.findByClienteId(clienteId);
-       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas quejas y reclamos del cliente con id = {0}", clienteId);
-       return quejasYReclamos; 
-    }
-    
-    public QuejasYReclamosEntity getQuejasYReclamosByDomicilioId(Long domicilioId)
-    {
-       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las quejas y reclamos del domicilio con id = {0}", domicilioId);
-       QuejasYReclamosEntity quejasYReclamos = persistence.findByDomicilioId(domicilioId);
-       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas quejas y reclamos del cliente con id = {0}", domicilioId);
-       return quejasYReclamos; 
-    }
+//    public QuejasYReclamosEntity getQuejasYReclamosByClienteId(Long clienteId)
+//    {
+//       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las quejas y reclamos del cliente con id = {0}", clienteId);
+//       QuejasYReclamosEntity quejasYReclamos = persistence.findByClienteId(clienteId);
+//       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas quejas y reclamos del cliente con id = {0}", clienteId);
+//       return quejasYReclamos; 
+//    }
+//    
+//    public QuejasYReclamosEntity getQuejasYReclamosByDomicilioId(Long domicilioId)
+//    {
+//       LOGGER.log(Level.INFO,"Inicia proceso de consultar todas las quejas y reclamos del domicilio con id = {0}", domicilioId);
+//       QuejasYReclamosEntity quejasYReclamos = persistence.findByDomicilioId(domicilioId);
+//       LOGGER.log(Level.INFO, "Termina el proceso de consultar todas quejas y reclamos del cliente con id = {0}", domicilioId);
+//       return quejasYReclamos; 
+//    }
     
     public QuejasYReclamosEntity updateQuejasYReclamos(Long quejasYReclamosId, QuejasYReclamosEntity quejasYReclamosEntity)
     {
@@ -153,37 +153,37 @@ public class QuejasYReclamosLogic
         return newQuejasYReclamosEntity;
     }
     
-    public QuejasYReclamosEntity updateQuejasYReclamosByClienteIdYDomicilioId(Long clienteId,  Long domicilioId, QuejasYReclamosEntity quejasYReclamosEntity) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
-        ClienteEntity clienteEntity = clientePersistence.find(clienteId);
-        if(clienteEntity == null)
-        {
-            throw new BusinessLogicException("El id del cliente que esta generando la calificacion no se encontro");
-        }
-        DomicilioEntity domicilioEntity = domicilioPersistence.find(domicilioId);
-        if(domicilioEntity == null)
-        {
-            throw new BusinessLogicException("El id del domicilio que esta recibiendo la calificacion no se encontro");
-        }
-        if(!validateAsunto(quejasYReclamosEntity.getAsunto()))
-        {
-            throw new BusinessLogicException("El asunto es invalido");
-        }
-        if(!validateDescripcion(quejasYReclamosEntity.getDescripcion()))
-        {
-            throw new BusinessLogicException("La descripcion es invalida");
-        }
-        if(!validateFecha(quejasYReclamosEntity.getFecha()))
-        {
-            throw new BusinessLogicException("La fecha es invalida");
-        }
-        quejasYReclamosEntity.setCliente(clienteEntity);
-        quejasYReclamosEntity.setDomicilio(domicilioEntity);
-        QuejasYReclamosEntity newEntity = persistence.update(quejasYReclamosEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
-        return newEntity;
-    }
+//    public QuejasYReclamosEntity updateQuejasYReclamosByClienteIdYDomicilioId(Long clienteId,  Long domicilioId, QuejasYReclamosEntity quejasYReclamosEntity) throws BusinessLogicException
+//    {
+//        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
+//        ClienteEntity clienteEntity = clientePersistence.find(clienteId);
+//        if(clienteEntity == null)
+//        {
+//            throw new BusinessLogicException("El id del cliente que esta generando la calificacion no se encontro");
+//        }
+//        DomicilioEntity domicilioEntity = domicilioPersistence.find(domicilioId);
+//        if(domicilioEntity == null)
+//        {
+//            throw new BusinessLogicException("El id del domicilio que esta recibiendo la calificacion no se encontro");
+//        }
+//        if(!validateAsunto(quejasYReclamosEntity.getAsunto()))
+//        {
+//            throw new BusinessLogicException("El asunto es invalido");
+//        }
+//        if(!validateDescripcion(quejasYReclamosEntity.getDescripcion()))
+//        {
+//            throw new BusinessLogicException("La descripcion es invalida");
+//        }
+//        if(!validateFecha(quejasYReclamosEntity.getFecha()))
+//        {
+//            throw new BusinessLogicException("La fecha es invalida");
+//        }
+//        quejasYReclamosEntity.setCliente(clienteEntity);
+//        quejasYReclamosEntity.setDomicilio(domicilioEntity);
+//        QuejasYReclamosEntity newEntity = persistence.update(quejasYReclamosEntity);
+//        LOGGER.log(Level.INFO, "Termina proceso de actualizar la queja o reclamo con id = {0} del cliente con id = " + clienteId + " de el domicilio con id = "+ domicilioId, quejasYReclamosEntity.getId());
+//        return newEntity;
+//    }
 
     public void deleteQuejasYReclamos(Long quejasYReclamosId) throws BusinessLogicException
     {
@@ -191,17 +191,17 @@ public class QuejasYReclamosLogic
         persistence.delete(quejasYReclamosId);
     }
     
-    public void deleteQuejasYReclamosByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la queja o reclamo con id = {0} hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejasYReclamosId);
-        QuejasYReclamosEntity old = getQuejaOReclamoByClienteIdYDomicilioId(clienteId, domicilioId, quejasYReclamosId);
-        if(old == null)
-        {
-            throw new BusinessLogicException("La queja o reclmo con id = " + quejasYReclamosId + " no esta asociada con el cliente con id = " + clienteId + " y/o con el domicilio con el id = " + domicilioId);
-        }
-        persistence.delete(old.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0} hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejasYReclamosId);
-    }
+//    public void deleteQuejasYReclamosByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId) throws BusinessLogicException
+//    {
+//        LOGGER.log(Level.INFO, "Inicia proceso de borrar la queja o reclamo con id = {0} hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejasYReclamosId);
+//        QuejasYReclamosEntity old = getQuejaOReclamoByClienteIdYDomicilioId(clienteId, domicilioId, quejasYReclamosId);
+//        if(old == null)
+//        {
+//            throw new BusinessLogicException("La queja o reclmo con id = " + quejasYReclamosId + " no esta asociada con el cliente con id = " + clienteId + " y/o con el domicilio con el id = " + domicilioId);
+//        }
+//        persistence.delete(old.getId());
+//        LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0} hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejasYReclamosId);
+//    }
     
     private boolean validateAsunto(String asunto)
     {

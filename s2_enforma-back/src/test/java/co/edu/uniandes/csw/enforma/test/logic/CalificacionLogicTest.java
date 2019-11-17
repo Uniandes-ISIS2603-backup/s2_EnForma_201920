@@ -229,30 +229,6 @@ public class CalificacionLogicTest
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
-//    @Test
-//    public void getCalificacionByClienteIdYDietaTipoIdTest()
-//    {
-//        CalificacionEntity entity = data.get(0);
-//        CalificacionEntity result = calificacionLogic.getCalificacionByClienteIdYDietaTipoId(clienteData.get(0).getId(), dietaData.get(0).getId(), entity.getId());
-//        Assert.assertNotNull(result);
-//        Assert.assertEquals(entity.getId(), result.getId());
-//        Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
-//        Assert.assertEquals(entity.getComentario(), result.getComentario());
-//        Assert.assertEquals(entity.getFecha(), result.getFecha());
-//    }
-    
-//    @Test
-//    public void getCalificacionByDietaTipoTest(Long dietaId)
-//    {
-//        CalificacionEntity entity = data.get(0);
-//        CalificacionEntity result = calificacionLogic.getCalificacionesByDietaId(dietaData.get(0).getId());
-//        Assert.assertNotNull(result);
-//        Assert.assertEquals(entity.getDietaTipo().getId(), result.getId());
-//        Assert.assertEquals(entity.getPuntaje(), result.getPuntaje());
-//        Assert.assertEquals(entity.getComentario(), result.getComentario());
-//        Assert.assertEquals(entity.getFecha(), result.getFecha());
-//    }
-    
     @Test
     public void updateCalificacion()
     {
@@ -267,32 +243,6 @@ public class CalificacionLogicTest
          Assert.assertEquals(pojoEntity.getPuntaje(), result.getPuntaje());
          Assert.assertEquals(pojoEntity.getComentario(), result.getComentario());
          Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
-    }
-    
-    @Test
-    public void updateCalificacionByClienteIdYDietaTipoIdTest() throws BusinessLogicException
-    {
-        CalificacionEntity entity = data.get(0);
-        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
-        pojoEntity.setId(entity.getId());
-        
-        calificacionLogic.updateCalificacionByClienteIdYDietaTipoId(clienteData.get(0).getId(), dietaData.get(0).getId(), pojoEntity);
-        CalificacionEntity result = em.find(CalificacionEntity.class, entity.getId());
-        
-         Assert.assertEquals(pojoEntity.getId(), result.getId());
-         Assert.assertEquals(pojoEntity.getPuntaje(), result.getPuntaje());
-         Assert.assertEquals(pojoEntity.getComentario(), result.getComentario());
-         Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
-    }
-    
-     @Test(expected = BusinessLogicException.class)
-    public void updateCalificacionFechaNullTest() throws BusinessLogicException
-    {
-        CalificacionEntity entity = data.get(0);
-        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        newEntity.setfecha(null);
-        newEntity.setId(entity.getId());
-        calificacionLogic.updateCalificacionByClienteIdYDietaTipoId(clienteData.get(0).getId(), dietaData.get(0).getId(), newEntity);
     }
     
     @Test

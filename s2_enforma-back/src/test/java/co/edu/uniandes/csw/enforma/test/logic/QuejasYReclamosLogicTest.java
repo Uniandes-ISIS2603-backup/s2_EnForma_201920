@@ -297,20 +297,29 @@ public class QuejasYReclamosLogicTest
     }
     
     @Test
-    public void updateQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
+    public void deleteQuejasYReclamosTest() throws BusinessLogicException
     {
         QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity pojoEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        pojoEntity.setId(entity.getId());
-        
-        quejasYReclamosLogic.updateQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(),pojoEntity);
-        QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
-        
-         Assert.assertEquals(pojoEntity.getId(), result.getId());
-         Assert.assertEquals(pojoEntity.getAsunto(), result.getAsunto());
-         Assert.assertEquals(pojoEntity.getDescripcion(), result.getDescripcion());
-         Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
+        quejasYReclamosLogic.deleteQuejasYReclamos(entity.getId());
+        QuejasYReclamosEntity deleted = em.find(QuejasYReclamosEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
+    
+//    @Test
+//    public void updateQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity pojoEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        pojoEntity.setId(entity.getId());
+//        
+//        quejasYReclamosLogic.updateQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(),pojoEntity);
+//        QuejasYReclamosEntity result = em.find(QuejasYReclamosEntity.class, entity.getId());
+//        
+//         Assert.assertEquals(pojoEntity.getId(), result.getId());
+//         Assert.assertEquals(pojoEntity.getAsunto(), result.getAsunto());
+//         Assert.assertEquals(pojoEntity.getDescripcion(), result.getDescripcion());
+//         Assert.assertEquals(pojoEntity.getFecha(), result.getFecha());
+//    }
 //    
 //    @Test(expected = BusinessLogicException.class)
 //    public void updateQuejasYReclamosAsuntoNullTest1() throws BusinessLogicException
