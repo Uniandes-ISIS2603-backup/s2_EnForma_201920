@@ -117,17 +117,17 @@ public class QuejasYReclamosLogic
         return quejasYReclamosEntity;
     }
     
-    public QuejasYReclamosEntity getQuejaOReclamoByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejaOReclamoId)
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la queja o reclamo con id = {0}, hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejaOReclamoId);
-        QuejasYReclamosEntity quejasYReclamosEntity = persistence.findByClienteIdYDomicilioId(clienteId, domicilioId, quejaOReclamoId);
-        if (quejasYReclamosEntity == null) 
-        {
-            LOGGER.log(Level.SEVERE, "La queja o reclamo con el id = {0} no existe", quejaOReclamoId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la queja o reclamo con id = {0}, hecha por el cliente con id = " + clienteId + " a el domiciolio con id=" + domicilioId, quejaOReclamoId);
-        return quejasYReclamosEntity;
-    }
+//    public QuejasYReclamosEntity getQuejaOReclamoByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejaOReclamoId)
+//    {
+//        LOGGER.log(Level.INFO, "Inicia proceso de consultar la queja o reclamo con id = {0}, hecha por el cliente con id = " + clienteId + " a el domicilio con id = " + domicilioId, quejaOReclamoId);
+//        QuejasYReclamosEntity quejasYReclamosEntity = persistence.findByClienteIdYDomicilioId(clienteId, domicilioId, quejaOReclamoId);
+//        if (quejasYReclamosEntity == null) 
+//        {
+//            LOGGER.log(Level.SEVERE, "La queja o reclamo con el id = {0} no existe", quejaOReclamoId);
+//        }
+//        LOGGER.log(Level.INFO, "Termina proceso de consultar la queja o reclamo con id = {0}, hecha por el cliente con id = " + clienteId + " a el domiciolio con id=" + domicilioId, quejaOReclamoId);
+//        return quejasYReclamosEntity;
+//    }
     
 //    public QuejasYReclamosEntity getQuejasYReclamosByClienteId(Long clienteId)
 //    {
