@@ -58,6 +58,58 @@
 			"response": []
 		},
 		{
+			"name": "Crear comida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1dee769-5361-41a8-a803-4f398d860929",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"comidadomi\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"calorias\": 300,\r\n        \"id\":234,\r\n        \"menu\": \"huevito con quiero pasar desarrollo\",\r\n        \"momentoDelDia\": \"Desayuno\",\r\n        \"nombre\": \"Vaporización de las calorias\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"comidas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear un domicilio",
 			"event": [
 				{
@@ -85,7 +137,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n        \"costo\": 30000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Cali\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} }\r\n    }",
+					"raw": " {\r\n        \"costo\": 30000.0,\r\n        \"fecha\": \"2019-04-07T05:00:00Z[UTC]\",\r\n        \"lugarEntrega\": \"Cali\",\r\n    \t \"cliente\": {\"id\":{{clientedomi}} },\r\n    \t \"comidaTipo\": {\"id\":{{comidadomi}} }\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -288,7 +340,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/clientes/{{clientedomi}}/domicilios/{{domicli}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -300,7 +352,7 @@
 						"clientes",
 						"{{clientedomi}}",
 						"domicilios",
-						"{{domicli2}}"
+						"{{domicli}}"
 					]
 				}
 			},
@@ -369,6 +421,40 @@
 						"api",
 						"domicilios",
 						"{{domicli2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar comidaTipo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d572f8ad-81b4-4738-80f3-dcf1f1643181",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/comidas/{{comidadomi}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_enforma-api",
+						"api",
+						"comidas",
+						"{{comidadomi}}"
 					]
 				}
 			},
