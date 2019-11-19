@@ -65,30 +65,30 @@ public class QuejasYReclamosPersistence
      * @param quejasYReclamosId id correspondiente a la queja o reclamo buscada
      * @return la queja o reclamo buscada
      */
-    public QuejasYReclamosEntity findByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId)
-    {
-        LOGGER.log(Level.INFO, "Consultando la queja o reclamo con id= {0} del cliente con id = " + clienteId + "del domicilio con id = " + domicilioId, quejasYReclamosId);
-        TypedQuery<QuejasYReclamosEntity> q = em.createQuery("select p from QuejasYReclamosEntity p where (p.usuario.id = :clienteId) and (p.domicilio.id = :domicilioId) and (p.id = :quejasyreclamosId)", QuejasYReclamosEntity.class);
-        q.setParameter("clienteId", clienteId);
-        q.setParameter("domicilioId", domicilioId);
-        q.setParameter("quejasyreclamosId", quejasYReclamosId);
-        List<QuejasYReclamosEntity> results = q.getResultList();
-        QuejasYReclamosEntity qor = null;
-        if(results == null)
-        {
-            qor = null;
-        }
-        else if(results.isEmpty())
-        {
-            qor = null;
-        }
-        else if(results.size() >= 1)
-        {
-            qor = results.get(0);
-        }
-        LOGGER.log(Level.INFO, "Saliendo de consultar la queja o reclamo con id= {0} del cliente con id = " + clienteId + "del domicilio con id = " + domicilioId, quejasYReclamosId);
-        return qor;
-    }
+//    public QuejasYReclamosEntity findByClienteIdYDomicilioId(Long clienteId, Long domicilioId, Long quejasYReclamosId)
+//    {
+//        LOGGER.log(Level.INFO, "Consultando la queja o reclamo con id= {0} del cliente con id = " + clienteId + "del domicilio con id = " + domicilioId, quejasYReclamosId);
+//        TypedQuery<QuejasYReclamosEntity> q = em.createQuery("select p from QuejasYReclamosEntity p where (p.usuario.id = :clienteId) and (p.domicilio.id = :domicilioId) and (p.id = :quejasyreclamosId)", QuejasYReclamosEntity.class);
+//        q.setParameter("clienteId", clienteId);
+//        q.setParameter("domicilioId", domicilioId);
+//        q.setParameter("quejasyreclamosId", quejasYReclamosId);
+//        List<QuejasYReclamosEntity> results = q.getResultList();
+//        QuejasYReclamosEntity qor = null;
+//        if(results == null)
+//        {
+//            qor = null;
+//        }
+//        else if(results.isEmpty())
+//        {
+//            qor = null;
+//        }
+//        else if(results.size() >= 1)
+//        {
+//            qor = results.get(0);
+//        }
+//        LOGGER.log(Level.INFO, "Saliendo de consultar la queja o reclamo con id= {0} del cliente con id = " + clienteId + "del domicilio con id = " + domicilioId, quejasYReclamosId);
+//        return qor;
+//    }
     
         /**
      * Busca si hay alguna queja o reclamo con el asunto de la queja o reclamo que se envía de argumento
@@ -155,58 +155,58 @@ public class QuejasYReclamosPersistence
         return result;
     }
     
-    public QuejasYReclamosEntity findByClienteId(Long clienteId)
-    {
-        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por el id del cliente a las que pertenecen", clienteId);
-        // Se crea un query para buscar quejas y reclamos por el id del cliente que recibe el método como argumento. ":clienteId" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.usuario.id = :clienteId", QuejasYReclamosEntity.class);
-        // Se remplaza el placeholder ":clienteId" con el valor del argumento 
-        query = query.setParameter("clienteId", clienteId);
-        // Se invoca el query se obtiene la lista resultado
-        List<QuejasYReclamosEntity> sameClienteId = query.getResultList();
-        QuejasYReclamosEntity result = null;
-        if(sameClienteId == null)
-        {
-            result = null;
-        }
-        else if(sameClienteId.isEmpty())
-        {
-            result = null;
-        }
-        else if(sameClienteId.size()>=1)
-        {
-            result = sameClienteId.get(0);
-        }
-        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por el id del cliente a las que pertenecen", clienteId);
-        return result;
-    }
+//    public QuejasYReclamosEntity findByClienteId(Long clienteId)
+//    {
+//        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por el id del cliente a las que pertenecen", clienteId);
+//        // Se crea un query para buscar quejas y reclamos por el id del cliente que recibe el método como argumento. ":clienteId" es un placeholder que debe ser remplazado
+//        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.usuario.id = :clienteId", QuejasYReclamosEntity.class);
+//        // Se remplaza el placeholder ":clienteId" con el valor del argumento 
+//        query = query.setParameter("clienteId", clienteId);
+//        // Se invoca el query se obtiene la lista resultado
+//        List<QuejasYReclamosEntity> sameClienteId = query.getResultList();
+//        QuejasYReclamosEntity result = null;
+//        if(sameClienteId == null)
+//        {
+//            result = null;
+//        }
+//        else if(sameClienteId.isEmpty())
+//        {
+//            result = null;
+//        }
+//        else if(sameClienteId.size()>=1)
+//        {
+//            result = sameClienteId.get(0);
+//        }
+//        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por el id del cliente a las que pertenecen", clienteId);
+//        return result;
+//    }
     
     
-    public QuejasYReclamosEntity findByDomicilioId(Long domicilioId)
-    {
-        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por el id del domicilio a las que pertenecen", domicilioId);
-        // Se crea un query para buscar quejas y reclamos por el id del domicilio que recibe el método como argumento. ":domicilioId" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.domicilio.id = :domicilioId", QuejasYReclamosEntity.class);
-        // Se remplaza el placeholder ":domicilioId" con el valor del argumento 
-        query = query.setParameter("domicilioId", domicilioId);
-        // Se invoca el query se obtiene la lista resultado
-        List<QuejasYReclamosEntity> sameDomicilioId = query.getResultList();
-        QuejasYReclamosEntity result;
-        if(sameDomicilioId == null)
-        {
-            result = null;
-        }
-        else if(sameDomicilioId.isEmpty())
-        {
-            result = null;
-        }
-        else
-        {
-            result = sameDomicilioId.get(0);
-        }
-        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por el id del cliente a las que pertenecen", domicilioId);
-        return result;
-    }
+//    public QuejasYReclamosEntity findByDomicilioId(Long domicilioId)
+//    {
+//        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por el id del domicilio a las que pertenecen", domicilioId);
+//        // Se crea un query para buscar quejas y reclamos por el id del domicilio que recibe el método como argumento. ":domicilioId" es un placeholder que debe ser remplazado
+//        TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.domicilio.id = :domicilioId", QuejasYReclamosEntity.class);
+//        // Se remplaza el placeholder ":domicilioId" con el valor del argumento 
+//        query = query.setParameter("domicilioId", domicilioId);
+//        // Se invoca el query se obtiene la lista resultado
+//        List<QuejasYReclamosEntity> sameDomicilioId = query.getResultList();
+//        QuejasYReclamosEntity result;
+//        if(sameDomicilioId == null)
+//        {
+//            result = null;
+//        }
+//        else if(sameDomicilioId.isEmpty())
+//        {
+//            result = null;
+//        }
+//        else
+//        {
+//            result = sameDomicilioId.get(0);
+//        }
+//        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por el id del cliente a las que pertenecen", domicilioId);
+//        return result;
+//    }
     
     /**
      * Actualiza la queja o reclamo dada

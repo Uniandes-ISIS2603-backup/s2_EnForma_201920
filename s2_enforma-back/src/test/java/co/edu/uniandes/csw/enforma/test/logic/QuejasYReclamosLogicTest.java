@@ -147,21 +147,21 @@ public class QuejasYReclamosLogicTest
         Assert.assertEquals(entity.getFecha(), result.getFecha());
     }
     
-    @Test 
-    public void createQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
-    {
-        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
-        newEntity.setCliente(clienteData.get(0));
-        newEntity.setDomicilio(domicilioData.get(0));
-        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(), newEntity);
-        Assert.assertNotNull(result);
-        
-        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
-        Assert.assertEquals(entity.getId(), result.getId());
-        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
-        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
-        Assert.assertEquals(entity.getFecha(), result.getFecha());
-    }
+//    @Test 
+//    public void createQuejasYReclamosByClienteIdYDomicilioIdTest() throws BusinessLogicException
+//    {
+//        QuejasYReclamosEntity newEntity = factory.manufacturePojo(QuejasYReclamosEntity.class);
+//        newEntity.setCliente(clienteData.get(0));
+//        newEntity.setDomicilio(domicilioData.get(0));
+//        QuejasYReclamosEntity result = quejasYReclamosLogic.createQuejasYReclamosByClienteIdYDomicilioId(clienteData.get(0).getId(), domicilioData.get(0).getId(), newEntity);
+//        Assert.assertNotNull(result);
+//        
+//        QuejasYReclamosEntity entity = em.find(QuejasYReclamosEntity.class, result.getId());
+//        Assert.assertEquals(entity.getId(), result.getId());
+//        Assert.assertEquals(entity.getAsunto(), result.getAsunto());
+//        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+//        Assert.assertEquals(entity.getFecha(), result.getFecha());
+//    }
     
     @Test(expected = BusinessLogicException.class)
     public void createQuejasYReclamosAsuntoNull() throws BusinessLogicException

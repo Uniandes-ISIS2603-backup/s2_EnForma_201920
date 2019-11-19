@@ -276,16 +276,16 @@ public class QuejasYReclamosPersistenceTest
     /**
      * Prueba para consultar una calificacion por el id del domicilio al que pertenece
      */
-    @Test
-    public void findCalificacionByDomicilioIdTest()
-    {
-        QuejasYReclamosEntity entity = data.get(0);
-        QuejasYReclamosEntity newEntity = qrp.findByDomicilioId(entity.getDomicilio().getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getDomicilio(), newEntity.getDomicilio());
-        
-        newEntity = qrp.findByDomicilioId(null);
-        Assert.assertNull(newEntity);
-    }
+//    @Test
+//    public void findCalificacionByDomicilioIdTest()
+//    {
+//        QuejasYReclamosEntity entity = data.get(0);
+//        QuejasYReclamosEntity newEntity = qrp.findByDomicilioId(entity.getDomicilio().getId());
+//        Assert.assertNotNull(newEntity);
+//        Assert.assertEquals(entity.getDomicilio(), newEntity.getDomicilio());
+//        
+//        newEntity = qrp.findByDomicilioId(null);
+//        Assert.assertNull(newEntity);
+//    }
     
 }

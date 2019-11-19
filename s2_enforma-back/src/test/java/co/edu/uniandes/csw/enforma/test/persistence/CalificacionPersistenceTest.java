@@ -262,16 +262,16 @@ public class CalificacionPersistenceTest
     /**
      * Prueba para consultar una calificacion por el id de la dieta a la que pertenece
      */
-    @Test
-    public void findCalificacionByDietaTipoIdTest()
-    {
-        CalificacionEntity entity = data.get(0);
-        CalificacionEntity newEntity = cp.findByDietaTipoId(entity.getDietaTipo().getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getDietaTipo(), newEntity.getDietaTipo());
-        
-        newEntity = cp.findByDietaTipoId(null);
-        Assert.assertNull(newEntity);
-    }
-    
+//    @Test
+//    public void findCalificacionByDietaTipoIdTest()
+//    {
+//        CalificacionEntity entity = data.get(0);
+//        CalificacionEntity newEntity = cp.findByDietaTipoId(entity.getDietaTipo().getId());
+//        Assert.assertNotNull(newEntity);
+//        Assert.assertEquals(entity.getDietaTipo(), newEntity.getDietaTipo());
+//        
+//        newEntity = cp.findByDietaTipoId(null);
+//        Assert.assertNull(newEntity);
+//    }
+//    
 }
