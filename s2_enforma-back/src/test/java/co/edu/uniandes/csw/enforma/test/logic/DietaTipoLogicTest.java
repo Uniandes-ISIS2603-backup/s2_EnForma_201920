@@ -264,7 +264,7 @@ public class DietaTipoLogicTest {
         
        pojoEntity.setId(entity.getId());
          
-        dietaTipoLogic.updateDietaTipo(pojoEntity.getId(), pojoEntity);
+        dietaTipoLogic.updateDietaTipo(pojoEntity);
         DietaTipoEntity result = em.find(DietaTipoEntity.class, entity.getId());
         
         

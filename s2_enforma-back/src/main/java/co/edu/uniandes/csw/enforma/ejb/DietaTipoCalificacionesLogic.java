@@ -77,11 +77,9 @@ public class DietaTipoCalificacionesLogic {
      * dieta.
      */
     public CalificacionEntity getCalificacion(Long calificacionId, Long dietaTipoId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la calificacion con id = {0} de la dieta con id = " + dietaTipoId, calificacionId);
         List<CalificacionEntity> calificaciones = dietaTipoPersistence.find(dietaTipoId).getCalificaciones();
         CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionId);
         int index = calificaciones.indexOf(calificacionEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la calificacion con id = {0} de la dieta con id = " + dietaTipoId, calificacionId);
         if (index >= 0) {
             return calificaciones.get(index);
         }

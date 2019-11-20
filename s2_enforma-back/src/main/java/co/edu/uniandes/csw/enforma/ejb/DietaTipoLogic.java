@@ -80,8 +80,7 @@ public class DietaTipoLogic {
     
     
     public List<DietaTipoEntity> getDietasTipo(){
-        List<DietaTipoEntity> dietasTipo = persistence.findAll();
-        return dietasTipo;
+        return persistence.findAll();
     } 
     
     
@@ -98,9 +97,8 @@ public class DietaTipoLogic {
     
     
     
-    public DietaTipoEntity updateDietaTipo(Long dietaTIpoId, DietaTipoEntity dietaTipo){
-        DietaTipoEntity newEntity = persistence.update(dietaTipo);
-        return newEntity;
+    public DietaTipoEntity updateDietaTipo(DietaTipoEntity dietaTipo){
+        return persistence.update(dietaTipo);
     }
     
     

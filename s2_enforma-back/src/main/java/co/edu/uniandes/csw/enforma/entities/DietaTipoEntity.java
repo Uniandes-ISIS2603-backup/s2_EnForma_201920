@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.enforma.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -50,15 +49,15 @@ public class DietaTipoEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @OneToMany(mappedBy = "dietaTipo")
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "dietaTipo")
-    private List<ComidaTipoEntity> comidas = new ArrayList<ComidaTipoEntity>();
+    private List<ComidaTipoEntity> comidas = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "dietaTipo")
-    private List<ClienteEntity> clientes = new ArrayList<ClienteEntity>();
+    private List<ClienteEntity> clientes = new ArrayList<>();
 
     /**
      * @return the nombre

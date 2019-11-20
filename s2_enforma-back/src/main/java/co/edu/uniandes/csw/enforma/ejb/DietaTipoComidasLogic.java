@@ -73,11 +73,9 @@ public class DietaTipoComidasLogic {
      * dieta.
      */
     public ComidaTipoEntity getComida(Long comidaId, Long dietaTipoId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la comida con id = {0} de la dieta con id = " + dietaTipoId, comidaId);
         List<ComidaTipoEntity> comidas = dietaTipoPersistence.find(dietaTipoId).getComidas();
         ComidaTipoEntity comidaTipoEntity = comidaTipoPersistence.find(comidaId);
         int index = comidas.indexOf(comidaTipoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la comida con id = {0} de la dieta con id = " + dietaTipoId, comidaId);
         if (index >= 0) {
             return comidas.get(index);
         }

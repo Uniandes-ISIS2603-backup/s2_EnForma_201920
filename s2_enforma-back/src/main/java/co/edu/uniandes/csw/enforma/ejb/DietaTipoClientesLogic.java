@@ -78,11 +78,9 @@ public class DietaTipoClientesLogic {
      * dieta.
      */
     public ClienteEntity getCliente(Long clienteId, Long dietaTipoId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el cliente con id = {0} de la dieta con id = " + dietaTipoId, clienteId);
         List<ClienteEntity> clientes = dietaTipoPersistence.find(dietaTipoId).getClientes();
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
         int index = clientes.indexOf(clienteEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el cliente con id = {0} de la dieta con id = " + dietaTipoId, clienteId);
         if (index >= 0) {
             return clientes.get(index);
         }
