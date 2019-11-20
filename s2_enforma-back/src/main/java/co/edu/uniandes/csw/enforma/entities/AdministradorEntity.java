@@ -30,8 +30,7 @@ public class AdministradorEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "administrador")
     private List<ComidaTipoEntity> comidasTipo;
 
-    public AdministradorEntity() {
-    }
+  
 
     /**
      * @return the nombre

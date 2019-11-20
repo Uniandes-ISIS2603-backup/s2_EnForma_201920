@@ -39,11 +39,7 @@ public class PagoEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToOne
     private DomicilioEntity orden;
-    
-    public PagoEntity()
-    {
-    
-    }
+ 
     
     
 
