@@ -123,7 +123,7 @@ public class DietaTipoResource {
         LOGGER.log(Level.INFO, "DietaTipoResource deleteDietaTipo: input: {0}", dietasId);
         DietaTipoEntity entity = dietaTipoLogic.getDietaTipo(dietasId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /dietas/" + dietasId + " no existe.", 404);
+            throw new WebApplicationException("No se puede eliminar la dieta debido a que no existe", 404);
         }
         dietaTipoLogic.deleteDietaTipo(dietasId);
         LOGGER.info("DietaTipoResource deleteDietaTipo: output: void");
@@ -135,7 +135,7 @@ public class DietaTipoResource {
     @Path("{dietaId: \\d+}/calificaciones")
     public Class<DietaTipoCalificacionesResource> getDietaTipoCalificacionesResource(@PathParam("dietaId") Long dietaId) {
         if (dietaTipoLogic.getDietaTipo(dietaId)==null) {
-            throw new WebApplicationException("El recurso /dietas/" + dietaId + " no existe.", 404);
+            throw new WebApplicationException("La dieta no existe", 404);
         }
         return DietaTipoCalificacionesResource.class;
     }
@@ -143,7 +143,7 @@ public class DietaTipoResource {
     @Path("{dietaId: \\d+}/clientes")
     public Class<DietaTipoClientesResource> getDietaTipoClientesResource(@PathParam("dietaId") Long dietaId) {
         if (dietaTipoLogic.getDietaTipo(dietaId)==null) {
-            throw new WebApplicationException("El recurso /dietas/" + dietaId + " no existe.", 404);
+            throw new WebApplicationException("No se puede encontrar los clientes relacionados a la dieta", 404);
         }
         return DietaTipoClientesResource.class;
     }

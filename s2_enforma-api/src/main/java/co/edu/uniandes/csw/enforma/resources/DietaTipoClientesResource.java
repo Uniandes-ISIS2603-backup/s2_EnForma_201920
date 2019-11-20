@@ -23,7 +23,6 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class DietaTipoClientesResource {
     
-    private static final Logger LOGGER = Logger.getLogger(DietaTipoClientesResource.class.getName());
 
     @Inject
     private DietaTipoClientesLogic dietaTipoClientesLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.

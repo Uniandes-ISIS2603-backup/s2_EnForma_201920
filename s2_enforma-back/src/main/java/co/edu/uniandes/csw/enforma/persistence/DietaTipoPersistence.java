@@ -49,7 +49,7 @@ public class DietaTipoPersistence {
     
     
     public DietaTipoEntity findByNombre (String nombre){
-        LOGGER.log(Level.INFO, "Consultando dietas por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Consultando dietas por nombre {0} ", nombre);
         // Se crea un query para buscar dietas con el nombre que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From DietaTipoEntity e where e.nombre = :nombre", DietaTipoEntity.class);
         // Se remplaza el placeholder ":nombre" con el valor del argumento 
@@ -64,7 +64,7 @@ public class DietaTipoPersistence {
         } else {
             result = sameNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar dietas por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Saliendo de consultar dietas por nombre {0} ", nombre);
         return result;
     }
     
