@@ -122,7 +122,7 @@ public class AdministradorResource {
         LOGGER.log(Level.INFO, "AdministradorResource updateAdministrador: input: administradorsId: {0} , administrador: {1}", new Object[]{administradorsId, administrador});
         administrador.setId(administradorsId);
         if (administradorLogic.getAdministrador(administradorsId) == null) {
-            throw new WebApplicationException("El recurso /administradors/" + administradorsId + " no existe.", 404);
+            throw new WebApplicationException("El recurso no puede ser actualizado porque no existe", 404);
         }
         AdministradorDetailDTO detailDTO = new AdministradorDetailDTO(administradorLogic.updateAdministrador(administradorsId, administrador.toEntity()));
         LOGGER.log(Level.INFO, "AdministradorResource updateAdministrador: output: {0}", detailDTO);
@@ -144,7 +144,7 @@ public class AdministradorResource {
     public void deleteAdministrador(@PathParam("administradorsId") Long administradorsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "AdministradorResource deleteAdministrador: input: {0}", administradorsId);
         if (administradorLogic.getAdministrador(administradorsId) == null) {
-            throw new WebApplicationException("El recurso /administradors/" + administradorsId + " no existe.", 404);
+            throw new WebApplicationException("El administrador no puede ser eliminado porque no existe", 404);
         }
         administradorLogic.deleteAdministrador(administradorsId);
         LOGGER.info("AdministradorResource deleteAdministrador: output: void");
@@ -169,7 +169,7 @@ public class AdministradorResource {
     @Path("{administradorsId: \\d+}/dietas")
     public Class<AdministradorDietaTipoResource> getAdministradorDietaTipoResource(@PathParam("administradorsId") Long administradorsId) {
         if (administradorLogic.getAdministrador(administradorsId)==null) {
-            throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
+            throw new WebApplicationException("El recurso de administrador no existe", 404);
         }
         return AdministradorDietaTipoResource.class;
     }
@@ -177,7 +177,7 @@ public class AdministradorResource {
     @Path("{administradorsId: \\d+}/comidas")
     public Class<AdministradorComidaTipoResource> getAdministradorComidaTipoResource(@PathParam("administradorsId") Long administradorsId) {
         if (administradorLogic.getAdministrador(administradorsId)==null) {
-            throw new WebApplicationException("El recurso /administradores/" + administradorsId + " no existe.", 404);
+            throw new WebApplicationException("El recurso no es válido", 404);
         }
         return AdministradorComidaTipoResource.class;
     }

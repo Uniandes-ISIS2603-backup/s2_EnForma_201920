@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.enforma.persistence;
 
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,7 +21,6 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PagoPersistence {
 
-    private static final Logger LOGGER = Logger.getLogger(PagoPersistence.class.getName());
 
     
     @PersistenceContext(unitName="enformaPU")
@@ -42,7 +40,7 @@ public class PagoPersistence {
         q.setParameter("pagosId", pagoID);
         List<PagoEntity> results = q.getResultList();
         PagoEntity pago = null;
-        if (results.size() >= 1) {
+        if (!results.isEmpty()) {
             pago = results.get(0);
         }
         return pago;
