@@ -5,17 +5,17 @@
  */
 package co.edu.uniandes.csw.enforma.resources;
 
-import co.edu.uniandes.csw.enforma.dtos.PagoDTO;
+
 import co.edu.uniandes.csw.enforma.dtos.PagoDTO;
 import co.edu.uniandes.csw.enforma.ejb.PagoLogic;
-import co.edu.uniandes.csw.enforma.entities.PagoEntity;
+
 import co.edu.uniandes.csw.enforma.entities.PagoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -128,10 +128,7 @@ public class PagoResource {
     public PagoDTO updatePago(@PathParam("pagosId") Long pagosId, PagoDTO pago) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "PagoResource updatePago: input: pagosId: {0} , pago:{1}", new Object[]{pagosId, pago});
-        if (pagosId.equals(pago.getId())) 
-        {
-            throw new BusinessLogicException("Los ids del pago no coinciden.");
-        }
+        pago.setId(pagosId);
         PagoEntity entity = pagoLogic.getPago(pagosId);
         if (entity == null) 
         {
@@ -165,15 +162,7 @@ public class PagoResource {
         pagoLogic.deletePago(pagosId);
     }
     
-    @Path("{pagosId: \\d+}/pagos")
-    public Class<PagoResource> getpagoResource(@PathParam("pagosId") Long pagosId)
-    {
-        if(pagoLogic.getPago(pagosId) == null)
-        {
-            throw new WebApplicationException("El recurso /pago/" + pagosId + "/pagos no existe.", 404);
-        }
-        return PagoResource.class;
-    }
+
     
     
      /**

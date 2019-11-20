@@ -70,11 +70,9 @@ public class AdministradorDietaTipoLogic {
      * administrador
      */
     public DietaTipoEntity getDietaTipo(Long administradorsId, Long dietaTiposId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la administrador con id = " + administradorsId, dietaTiposId);
         List<DietaTipoEntity> dietaTipos = administradorPersistence.find(administradorsId).getDietaTipo();
         DietaTipoEntity dietaTipoEntity = dietaTipoPersistence.find(dietaTiposId);
         int index = dietaTipos.indexOf(dietaTipoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la administrador con id = " + administradorsId, dietaTiposId);
         if (index >= 0) {
             return dietaTipos.get(index);
         }

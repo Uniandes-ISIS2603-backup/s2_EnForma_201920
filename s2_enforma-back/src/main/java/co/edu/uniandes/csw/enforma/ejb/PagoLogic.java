@@ -85,10 +85,19 @@ public class PagoLogic {
     public PagoEntity updatePago(Long pagosId, PagoEntity pagoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el pago con id = {0}", pagosId);
         
-        if(pagoEntity.getMonto()<=0 || pagoEntity.getNumeroTarjeta()==0 || pagoEntity.getNumeroTarjeta()==null)
+        if(pagoEntity.getMonto()<=0)
         {
-            throw new BusinessLogicException("Error para actualizar el pago");
+            throw new BusinessLogicException("Monto inválido");
         }
+        if(pagoEntity.getNumeroTarjeta()==0)
+        {
+            throw new BusinessLogicException("Numero tarjeta invalido");
+        }
+         if(pagoEntity.getNumeroTarjeta()==null)
+        {
+            throw new BusinessLogicException("Tarjeta invalida");
+        }
+        
         PagoEntity newEntity = persistence.update(pagoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el pago con id = {0}", pagoEntity.getId());
         return newEntity;
