@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.enforma.resources;
-import co.edu.uniandes.csw.enforma.dtos.DietaTipoDTO;
 import co.edu.uniandes.csw.enforma.dtos.DietaTipoDetailDTO;
 import co.edu.uniandes.csw.enforma.ejb.AdministradorDietaTipoLogic;
 import co.edu.uniandes.csw.enforma.ejb.DietaTipoLogic;
@@ -17,8 +16,6 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;

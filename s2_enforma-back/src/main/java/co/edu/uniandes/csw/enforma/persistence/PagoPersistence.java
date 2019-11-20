@@ -38,19 +38,13 @@ public class PagoPersistence {
     
     public PagoEntity find(Long pagoID)
     {
-         LOGGER.log(Level.INFO, "Consultando el pago con id = {0} " +pagoID);
         TypedQuery<PagoEntity> q = em.createQuery("select p from PagoEntity p where (p.id = :pagosId)", PagoEntity.class);
         q.setParameter("pagosId", pagoID);
         List<PagoEntity> results = q.getResultList();
         PagoEntity pago = null;
-        if (results == null) {
-            pago = null;
-        } else if (results.isEmpty()) {
-            pago = null;
-        } else if (results.size() >= 1) {
+        if (results.size() >= 1) {
             pago = results.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el pago con id = {0}=" + pagoID);
         return pago;
     }
     

@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
-import co.edu.uniandes.csw.enforma.entities.CalificacionEntity;
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
@@ -137,7 +136,7 @@ public class ClienteLogic
     /**
      * Elimina una instancia de Cliente de la base de datos.
      *
-     * @param clientesId Identificador de la instancia a eliminar.
+     * @param clienteId Identificador de la instancia a eliminar.
      * @throws BusinessLogicException si el autor tiene libros asociados.
      */
     public void deleteCliente(Long clienteId) throws BusinessLogicException

@@ -132,7 +132,7 @@ public class PagoResource {
         PagoEntity entity = pagoLogic.getPago(pagosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /pago/" + pagosId + " no existe.", 404);
+            throw new WebApplicationException("No se puede realizar actualizacion ya que el recurso no existe", 404);
 
         }
         PagoDTO pagoDTO = new PagoDTO(pagoLogic.updatePago(pagosId, pago.toEntity())); 
@@ -157,7 +157,7 @@ public class PagoResource {
         PagoEntity entity = pagoLogic.getPago(pagosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /pago/" + pagosId + " no existe.", 404);
+            throw new WebApplicationException("No se puede eliminar el recurso pagos/"+pagosId+" ya que no existe", 404);
         }
         pagoLogic.deletePago(pagosId);
     }
@@ -177,7 +177,7 @@ public class PagoResource {
      */
     private List<PagoDTO> listEntity2DTO(List<PagoEntity> entityList) 
     {
-        List<PagoDTO> list = new ArrayList<PagoDTO>();
+        List<PagoDTO> list = new ArrayList<>();
         for (PagoEntity entity : entityList) 
         {
             list.add(new PagoDTO(entity));
