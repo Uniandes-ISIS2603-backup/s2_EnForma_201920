@@ -75,7 +75,7 @@ public class ComidaTipoPersistence {
     
     public ComidaTipoEntity find (Long ComidaTipoID)
     {
-        LOGGER.log(Level.INFO, " Consultando la comida Tipo con id =" + ComidaTipoID, ComidaTipoID);
+        LOGGER.log(Level.INFO, "Consultando la comida Tipo con id = {0}",ComidaTipoID);
         return em.find(ComidaTipoEntity.class, ComidaTipoID);
    
     
@@ -90,7 +90,7 @@ public class ComidaTipoPersistence {
      */
     public ComidaTipoEntity update (ComidaTipoEntity comidaTipoEnt)
     {
-        LOGGER.log(Level.INFO, "Actualizando la ComidaTipo con id = " + comidaTipoEnt.getId(), comidaTipoEnt.getId());
+        LOGGER.log(Level.INFO, "Actualizando la ComidaTipo con id = {0}", comidaTipoEnt.getId());
         return em.merge(comidaTipoEnt);
     }
     
@@ -103,7 +103,7 @@ public class ComidaTipoPersistence {
      */
     public void delete(Long comidaTipoId) 
     {
-        LOGGER.log(Level.INFO, "Se Está Borrando la Comida tipo con id =" + comidaTipoId, comidaTipoId);
+        LOGGER.log(Level.INFO, "Se Está Borrando la Comida tipo con id = {0}", comidaTipoId);
         ComidaTipoEntity comidaTipoEntity = em.find(ComidaTipoEntity.class, comidaTipoId);
         
         em.remove(comidaTipoEntity);
@@ -117,7 +117,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByMomentoDelDia(String momentoDelDia) {
-        LOGGER.log(Level.INFO, "Consultando libros por momentoDelDia ", momentoDelDia);
+        LOGGER.log(Level.INFO, "Consultando libros por momentoDelDia {0}", momentoDelDia);
         // Se crea un query para buscar ComidaTipo con el momentoDelDia que recibe el método como argumento. ":momentoDelDia" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.momentoDelDia = :momentoDelDia", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":momentoDelDia" con el valor del argumento 
@@ -132,7 +132,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameMomentoDelDia.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por momentoDelDia ", momentoDelDia);
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por momentoDelDia {0}", momentoDelDia);
         return result;
     }
     
@@ -145,7 +145,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByCalorias(Integer calorias) {
-        LOGGER.log(Level.INFO, "Consultando libros por calorias ", calorias);
+        LOGGER.log(Level.INFO, "Consultando libros por calorias {0}", calorias);
         // Se crea un query para buscar ComidasTipo con el calorias que recibe el método como argumento. ":calorias" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.calorias = :calorias", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":calorias" con el valor del argumento 
@@ -160,7 +160,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameCalorias.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por calorias ", calorias);
+        LOGGER.log(Level.INFO, "Saliendo de consultar libros por calorias {0} ", calorias);
         return result;
     }
     
@@ -172,7 +172,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByMenu(String menu) {
-        LOGGER.log(Level.INFO, "Consultando comidas por menu ", menu);
+        LOGGER.log(Level.INFO, "Consultando comidas por menu {0}", menu);
         // Se crea un query para buscar libros con el menu que recibe el método como argumento. ":menu" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.menu = :menu", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":menu" con el valor del argumento 
@@ -187,7 +187,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameMenu.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por menu ", menu);
+        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por menu {0} ", menu);
         return result;
     }
     
@@ -200,7 +200,7 @@ public class ComidaTipoPersistence {
      * existe alguno devuelve el primero.
      */
     public ComidaTipoEntity findByNombre(String nombre) {
-        LOGGER.log(Level.INFO, "Consultando comidas por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Consultando comidas por nombre {0} ", nombre);
         // Se crea un query para buscar libros con el nombre que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ComidaTipoEntity e where e.nombre = :nombre", ComidaTipoEntity.class);
         // Se remplaza el placeholder ":nombre" con el valor del argumento 
@@ -215,7 +215,7 @@ public class ComidaTipoPersistence {
         } else {
             result = sameNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Saliendo de consultar comidas por nombre {0} ", nombre);
         return result;
     }
     
