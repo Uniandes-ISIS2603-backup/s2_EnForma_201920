@@ -121,7 +121,7 @@ public class ClienteResource
         cliente.setId(clientesId);
         if (clienteLogic.getCliente(clientesId) == null)
         {
-            throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
+            throw new WebApplicationException("No se puede actualizar ya que el recurso no existe", 404);
         }
         ClienteDetailDTO detailDTO = null;
         detailDTO = new ClienteDetailDTO(clienteLogic.updateCliente(clientesId, cliente.toEntity()));
@@ -147,7 +147,7 @@ public class ClienteResource
         ClienteEntity entity = clienteLogic.getCliente(clientesId);
         if (entity == null)
         {
-            throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
+            throw new WebApplicationException("No se puede eliminar el cliente ya que no existe", 404);
         }
         //clienteEditorialLogic.removeEditorial(clientesId);
         clienteLogic.deleteCliente(clientesId);
@@ -157,7 +157,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/quejas")
     public Class<ClienteQuejasResource > getClienteQuejasResource (@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId)==null) {
-            throw new WebApplicationException("El recurso /clientes/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException("No se encuentra el cliente", 404);
         }
         return ClienteQuejasResource.class;
     }
@@ -165,7 +165,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/domicilios")
     public Class<ClienteDomiciliosResource > getClienteDomiciliosResource (@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId)==null) {
-            throw new WebApplicationException("El recurso /clientes/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException("No se puede encontrar los domicilios ya que el cliente no existe", 404);
         }
         return ClienteDomiciliosResource.class;
     }

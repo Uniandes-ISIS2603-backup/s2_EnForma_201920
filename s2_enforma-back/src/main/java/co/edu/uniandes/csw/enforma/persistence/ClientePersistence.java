@@ -56,7 +56,7 @@ public class ClientePersistence
       
     public ClienteEntity findByUserName(String user) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por userName ", user);
+        LOGGER.log(Level.INFO, "Consultando cliente por userName {0}", user);
         // Se crea un query para buscar clientes con el user que recibe el método como argumento. ":user" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.userName = :user", ClienteEntity.class);
         // Se remplaza el placeholder ":user" con el valor del argumento 
@@ -74,13 +74,13 @@ public class ClientePersistence
         {
             result = sameUser.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por userName ", user);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por userName {0}", user);
         return result; 
     }
     
      public ClienteEntity findByEdad(Integer edad) 
     {
-        LOGGER.log(Level.INFO, "Consultando clientes por edad ", edad);
+        LOGGER.log(Level.INFO, "Consultando clientes por edad {0}", edad);
         // Se crea un query para buscar clientes con el edad que recibe el método como argumento. ":edad" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.edad = :edad", ClienteEntity.class);
         // Se remplaza el placeholder ":edad" con el valor del argumento 
@@ -98,13 +98,13 @@ public class ClientePersistence
         {
             result = sameEdad.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por edad ", edad);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por edad {0}", edad);
         return result; 
     }
      
       public ClienteEntity findByPeso(Double peso) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por peso ", peso);
+        LOGGER.log(Level.INFO, "Consultando cliente por peso {0}", peso);
         // Se crea un query para buscar clientes con el peso que recibe el método como argumento. ":peso" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.peso = :peso", ClienteEntity.class);
         // Se remplaza el placeholder ":peso" con el valor del argumento 
@@ -122,14 +122,14 @@ public class ClientePersistence
         {
             result = samePeso.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por peso ", peso);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por peso {0} ", peso);
         return result; 
     }
     
       
        public ClienteEntity findByGluten(Boolean gluten) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por gluten ", gluten);
+        LOGGER.log(Level.INFO, "Consultando cliente por gluten {0}", gluten);
         // Se crea un query para buscar clientes con el gluten que recibe el método como argumento. ":gluten" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.gluten = :gluten", ClienteEntity.class);
         // Se remplaza el placeholder ":gluten" con el valor del argumento 
@@ -147,13 +147,13 @@ public class ClientePersistence
         {
             result = sameGluten.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por gluten ", gluten);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por gluten {0} ", gluten);
         return result; 
     }
        
         public ClienteEntity findByLactosa(Boolean lactosa) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por lactosa ", lactosa);
+        LOGGER.log(Level.INFO, "Consultando cliente por lactosa {0}", lactosa);
         // Se crea un query para buscar clientes con el lactosa que recibe el método como argumento. ":lactosa" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.lactosa = :lactosa", ClienteEntity.class);
         // Se remplaza el placeholder ":lactosa" con el valor del argumento 
@@ -171,13 +171,13 @@ public class ClientePersistence
         {
             result = sameLactosa.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por lactosa ", lactosa);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por lactosa {0}", lactosa);
         return result; 
     }
         
         public ClienteEntity findByNombre(String nombre) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por nombreName ", nombre);
+        LOGGER.log(Level.INFO, "Consultando cliente por nombreName {0}", nombre);
         // Se crea un query para buscar clientes con el nombre que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.nombre = :nombre", ClienteEntity.class);
         // Se remplaza el placeholder ":nombre" con el valor del argumento 
@@ -195,13 +195,13 @@ public class ClientePersistence
         {
             result = sameNombre.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por nombre ", nombre);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por nombre {0}", nombre);
         return result; 
     }
            
         public ClienteEntity findByObjetivos(String objetivos) 
     {
-        LOGGER.log(Level.INFO, "Consultando cliente por objetivosName ", objetivos);
+        LOGGER.log(Level.INFO, "Consultando cliente por objetivosName {0}", objetivos);
         // Se crea un query para buscar clientes con el objetivos que recibe el método como argumento. ":objetivos" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.objetivos = :objetivos", ClienteEntity.class);
         // Se remplaza el placeholder ":objetivos" con el valor del argumento 
@@ -219,7 +219,7 @@ public class ClientePersistence
         {
             result = sameObjetivos.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por objetivos ", objetivos);
+        LOGGER.log(Level.INFO, "Saliendo de consultar clientes por objetivos {0}", objetivos);
         return result; 
     }
     

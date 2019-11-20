@@ -78,11 +78,11 @@ public class ClienteDomiciliosLogic
      * cliente
      */
     public DomicilioEntity getDomicilio(Long clientesId, Long domiciliosId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el domicilio con id = {0} de la cliente con id = " + clientesId, domiciliosId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el domicilio con id = {1} de la cliente con id = {0}", new Object[]{clientesId, domiciliosId});
         List<DomicilioEntity> domicilios = clientePersistence.find(clientesId).getDomicilios();
         DomicilioEntity domicilioEntity = domicilioPersistence.find(domiciliosId);
         int index = domicilios.indexOf(domicilioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el domicilio con id = {0} de la cliente con id = " + clientesId, domiciliosId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el domicilio con id = {1} de la cliente con id = {0}", new Object[]{clientesId, domiciliosId});
         if (index >= 0) {
             return domicilios.get(index);
         }
