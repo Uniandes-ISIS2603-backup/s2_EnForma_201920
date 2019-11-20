@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.enforma.resources;
 
 import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
 import co.edu.uniandes.csw.enforma.ejb.DietaTipoClientesLogic;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
