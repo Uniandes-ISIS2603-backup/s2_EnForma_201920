@@ -131,7 +131,7 @@ public class QuejasYReclamosPersistence
      */
     public QuejasYReclamosEntity findByFecha(Date fecha) 
     {
-        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por fecha ", fecha);
+        LOGGER.log(Level.INFO, "Consultando quejas y reclamos por fecha {0}", fecha);
         // Se crea un query para buscar quejas y reclamos por la fecha que recibe el método como argumento. ":fecha" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From QuejasYReclamosEntity e where e.fecha = :fecha", QuejasYReclamosEntity.class);
         // Se remplaza el placeholder ":fecha" con el valor del argumento 
@@ -151,7 +151,7 @@ public class QuejasYReclamosPersistence
         {
             result = sameDate.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por fecha ", fecha);
+        LOGGER.log(Level.INFO, "Saliendo de consultar las quejas y reclamos por fecha {0}", fecha);
         return result;
     }
     
