@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.enforma.ejb;
 
 import co.edu.uniandes.csw.enforma.entities.DomicilioEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
+//import co.edu.uniandes.csw.enforma.persistence.ClientePersistence;
 import co.edu.uniandes.csw.enforma.persistence.DomicilioPersistence;
 import java.util.Date;
 import java.util.List;
@@ -121,7 +121,11 @@ public class DomicilioLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el domicilio con id = {0}", dId);
         DomicilioEntity dp = getDomicilio(dId);
-
+        if(dp==null)
+        {
+            throw new BusinessLogicException("El domicilio no existe");
+        }
+        
         persistence.delete(dId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el domicilio con id = {0}", dId);
     }
@@ -146,7 +150,7 @@ public class DomicilioLogic
      */
     private boolean validatePRECIO(double precio) 
     {
-        return !(precio < 0);
+        return (precio >= 0);
     }
     
      /**

@@ -31,7 +31,7 @@ public class TarjetaPrepagoEntity extends BaseEntity implements Serializable
     
     @PodamExclude
     @OneToMany(mappedBy="tarjetaPrepago")
-    private List<PagoEntity> pagos= new ArrayList<PagoEntity>();
+    private List<PagoEntity> pagos= new ArrayList<>();
     
     @PodamExclude
     @OneToOne

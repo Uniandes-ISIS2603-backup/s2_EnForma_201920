@@ -110,7 +110,7 @@ public class TarjetaPrepagoPersistence
      * existe alguno devuelve el primero.
      */
     public TarjetaPrepagoEntity findByIdTarjetaPrepago(String idTP) {
-        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por idTarjetaPrepago ", idTP);
+        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por idTarjetaPrepago {0}", idTP);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":idD" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From TarjetaPrepagoEntity e where e.numTarjetaPrepago = :idTP", TarjetaPrepagoEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
@@ -125,7 +125,7 @@ public class TarjetaPrepagoPersistence
         } else {
             result = sameIdTP.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por id ", idTP);
+        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por id {0}", idTP);
         return result;
     }
     
@@ -137,7 +137,7 @@ public class TarjetaPrepagoPersistence
      * existe alguno devuelve el primero.
      */
     public TarjetaPrepagoEntity findBySaldo(double saldo) {
-        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por saldo ", saldo);
+        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por saldo {0}", saldo);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":date" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From TarjetaPrepagoEntity e where e.saldo = :saldo", TarjetaPrepagoEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
@@ -152,7 +152,7 @@ public class TarjetaPrepagoPersistence
         } else {
             result = sameSaldo.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por saldo ", saldo);
+        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por saldo {0}", saldo);
         return result;
     }
     
@@ -164,7 +164,7 @@ public class TarjetaPrepagoPersistence
      * existe alguno devuelve el primero.
      */
     public TarjetaPrepagoEntity findByPoints(double puntos) {
-        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por puntos ", puntos);
+        LOGGER.log(Level.INFO, "Consultando tarjetas prepago por puntos {0}", puntos);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":date" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From TarjetaPrepagoEntity e where e.puntos = :puntos", TarjetaPrepagoEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
@@ -179,7 +179,7 @@ public class TarjetaPrepagoPersistence
         } else {
             result = sameSaldo.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por puntos ", puntos);
+        LOGGER.log(Level.INFO, "Saliendo de consultar tarjetas prepago por puntos {0}", puntos);
         return result;
     }
 
