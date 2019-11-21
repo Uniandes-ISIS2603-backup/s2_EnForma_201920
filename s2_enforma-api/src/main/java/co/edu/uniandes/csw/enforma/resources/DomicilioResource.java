@@ -129,7 +129,7 @@ public class DomicilioResource
         DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
+            throw new WebApplicationException("El domicilio no existe", 404);
 
         }
         DomicilioDTO domicilioDTO = new DomicilioDTO(domicilioLogic.updateDomicilio(domiciliosId, domicilio.toEntity())); 
@@ -154,7 +154,7 @@ public class DomicilioResource
         DomicilioEntity entity = domicilioLogic.getDomicilio(domiciliosId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + " no existe.", 404);
+            throw new WebApplicationException("No se puede eliminar el domicilio ya que no existe", 404);
         }
         domicilioLogic.deleteDomicilio(domiciliosId);
     }
@@ -164,7 +164,7 @@ public class DomicilioResource
     {
         if(domicilioLogic.getDomicilio(domiciliosId) == null)
         {
-            throw new WebApplicationException("El recurso /domicilio/" + domiciliosId + "/pagos no existe.", 404);
+            throw new WebApplicationException("El domicilio no existe", 404);
         }
         return PagoResource.class;
     }
