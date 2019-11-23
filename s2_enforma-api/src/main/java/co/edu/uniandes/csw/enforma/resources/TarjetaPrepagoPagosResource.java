@@ -106,7 +106,7 @@ public class TarjetaPrepagoPagosResource
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: input: tarjetasId: {0} , pagosId: {1}", new Object[]{tarjetasId, pagosId});
         if (pagoLogic.getPago(pagosId) == null) 
         {
-            throw new WebApplicationException("El recurso /tarjetas/" + tarjetasId + "/pagos/" + pagosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso tarjeta no existe por ello se no se encuentra el pago", 404);
         }
         PagoDTO pagoDTO = new PagoDTO(tarjetaPrepagoPagosLogic.getPago(tarjetasId, pagosId));
         LOGGER.log(Level.INFO, "TarjetaPrepagoPagosResource getPago: output: {0}", pagoDTO);
@@ -132,7 +132,7 @@ public class TarjetaPrepagoPagosResource
         {
             if (pagoLogic.getPago(pago.getId()) == null) 
             {
-                throw new WebApplicationException("El recurso /pagos/" + pago.getId() + " no existe.", 404);
+                throw new WebApplicationException("No se puede actualizar ya que el recurso no existe", 404);
             }
         }
         List<PagoDTO> listaDTOs = pagosListEntity2DTO(tarjetaPrepagoPagosLogic.replacePagos(tarjetasId, pagosListDTO2Entity(pagos)));

@@ -276,7 +276,7 @@
 						"id": "6bee52c3-4a41-4255-88d6-2b15cb290dcb",
 						"exec": [
 							"tests[\"No se deberia actualizar un cliente con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /clientes/0 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No se puede actualizar ya que el recurso no existe\");"
 						],
 						"type": "text/javascript"
 					}
@@ -327,7 +327,7 @@
 						"id": "cde002b0-eef3-4c47-be48-59e6e381754d",
 						"exec": [
 							"tests[\"No se deberia borrar un cliente con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /clientes/0 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No se puede eliminar el cliente ya que no existe\");"
 						],
 						"type": "text/javascript"
 					}

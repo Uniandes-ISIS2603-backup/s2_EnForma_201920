@@ -100,7 +100,7 @@ public class CalificacionPersistence
      * existe alguno devuelve el primero.
      */
     public CalificacionEntity findByPuntaje(int puntaje) {
-        LOGGER.log(Level.INFO, "Consultando calificaciones por puntaje", puntaje);
+        LOGGER.log(Level.INFO, "Consultando calificaciones por puntaje {0}", puntaje);
         // Se crea un query para buscar calificaciones con el puntjae que recibe el método como argumento. ":puntjae" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From CalificacionEntity e where e.puntaje = :puntaje", CalificacionEntity.class);
         // Se remplaza el placeholder ":puntjae" con el valor del argumento 
@@ -120,7 +120,7 @@ public class CalificacionPersistence
         {
             result = samePuntaje.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar puntajeCalificacion por calificacion ", puntaje);
+        LOGGER.log(Level.INFO, "Saliendo de consultar puntajeCalificacion por calificacion {0}", puntaje);
         return result;
     }
     
@@ -132,7 +132,7 @@ public class CalificacionPersistence
      * existe alguno devuelve el primero.
      */
     public CalificacionEntity findByFecha(Date fecha) {
-        LOGGER.log(Level.INFO, "Consultando calificaciones por fecha ", fecha);
+        LOGGER.log(Level.INFO, "Consultando calificaciones por fecha {0}", fecha);
         // Se crea un query para buscar calificaciones por la fecha que recibe el método como argumento. ":fecha" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From CalificacionEntity e where e.fecha = :fecha", CalificacionEntity.class);
         // Se remplaza el placeholder ":fecha" con el valor del argumento 
@@ -152,7 +152,7 @@ public class CalificacionPersistence
         {
             result = sameDate.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar las calificaciones por fecha ", fecha);
+        LOGGER.log(Level.INFO, "Saliendo de consultar las calificaciones por fecha {0}", fecha);
         return result;
     }
     

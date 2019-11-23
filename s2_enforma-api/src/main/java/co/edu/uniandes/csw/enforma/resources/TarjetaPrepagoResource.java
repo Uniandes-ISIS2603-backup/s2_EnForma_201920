@@ -128,7 +128,7 @@ public class TarjetaPrepagoResource
         tarjeta.setId(tarjetasprepagoId);
         if (tarjetaPrepagoLogic.getTarjetaPrepago(tarjetasprepagoId) == null)
         {
-            throw new WebApplicationException("El recurso /tarjetasprepago/" + tarjetasprepagoId + " no existe.", 404);
+            throw new WebApplicationException("No se puede actualizar la tarjeta ya que no existe", 404);
         }
         TarjetaPrepagoDetailDTO detailDTO = new TarjetaPrepagoDetailDTO(tarjetaPrepagoLogic.updateTarjetaPrepago(tarjetasprepagoId, tarjeta.toEntity()));
         LOGGER.log(Level.INFO, "TarjetaPrepagoResource updateTarjetaPrepago: output: {0}", detailDTO);
@@ -153,7 +153,7 @@ public class TarjetaPrepagoResource
         LOGGER.log(Level.INFO, "TarjetaPrepagoResource deleteTarjetaPrepago: input: {0}", tarjetasprepagoId);
         if (tarjetaPrepagoLogic.getTarjetaPrepago(tarjetasprepagoId) == null)
         {
-            throw new WebApplicationException("El recurso /tarjetasprepago/" + tarjetasprepagoId + " no existe.", 404);
+            throw new WebApplicationException("No se puede eliminar la tarjeta ya que no existe", 404);
         }
         tarjetaPrepagoLogic.deleteTarjetaPrepago(tarjetasprepagoId);
         LOGGER.info("TarjetaPrepagoResource deleteTarjetaPrepago: output: void");
@@ -168,7 +168,7 @@ public class TarjetaPrepagoResource
     {
         if(tarjetaPrepagoLogic.getTarjetaPrepago(tarjetasId) == null)
         {
-            throw new WebApplicationException("El recurso /tarjetaPrepago/" + tarjetasId + "/pagos no existe.", 404);
+            throw new WebApplicationException("La tarjeta prepago no existe", 404);
         }
         return TarjetaPrepagoPagosResource.class;
     }
@@ -184,7 +184,7 @@ public class TarjetaPrepagoResource
      * @return la lista de tarjetas prepago en forma DTO (json)
      */
     private List<TarjetaPrepagoDetailDTO> listEntity2DetailDTO(List<TarjetaPrepagoEntity> entityList) {
-        List<TarjetaPrepagoDetailDTO> list = new ArrayList<TarjetaPrepagoDetailDTO>();
+        List<TarjetaPrepagoDetailDTO> list = new ArrayList<>();
         for (TarjetaPrepagoEntity entity : entityList) {
             list.add(new TarjetaPrepagoDetailDTO(entity));
         }

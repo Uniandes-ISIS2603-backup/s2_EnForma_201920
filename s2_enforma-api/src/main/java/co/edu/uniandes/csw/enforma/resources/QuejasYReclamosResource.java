@@ -168,7 +168,7 @@ public class QuejasYReclamosResource
      */
     private List<QuejasYReclamosDTO> listEntity2DTO(List<QuejasYReclamosEntity> entityList)
     {
-        List<QuejasYReclamosDTO> list = new ArrayList<QuejasYReclamosDTO>();
+        List<QuejasYReclamosDTO> list = new ArrayList<>();
         for(QuejasYReclamosEntity entity: entityList)
         {
             list.add(new QuejasYReclamosDTO(entity));

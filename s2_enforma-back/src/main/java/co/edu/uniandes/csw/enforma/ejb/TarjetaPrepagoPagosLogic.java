@@ -72,11 +72,11 @@ public class TarjetaPrepagoPagosLogic
      */
     public PagoEntity getPago(Long tarjetasId, Long pagosId) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el pago con id = {0} de la tarjeta con id = " + tarjetasId, pagosId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el pago con id = {1} de la tarjeta con id = {0} ", new Object[]{tarjetasId, pagosId});
         List<PagoEntity> pagos = tarjetaPrepagoPersistence.find(tarjetasId).getPagos();
         PagoEntity pagoEntity = pagoPersistence.find(pagosId);
         int index = pagos.indexOf(pagoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el pago con id = {0} de la tarjeta con id = " + tarjetasId, pagosId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el pago con id = {1} de la tarjeta con id = {0} ", new Object[]{tarjetasId, pagosId});
         if (index >= 0) 
         {
             return pagos.get(index);

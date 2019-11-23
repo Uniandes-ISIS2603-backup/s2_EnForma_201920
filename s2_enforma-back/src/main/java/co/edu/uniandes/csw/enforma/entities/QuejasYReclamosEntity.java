@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.enforma.entities;
 import co.edu.uniandes.csw.enforma.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;

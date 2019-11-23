@@ -111,7 +111,7 @@ public class DomicilioPersistence
      * existe alguno devuelve el primero.
      */
     public DomicilioEntity findByIdDomicilio(Long idD) {
-        LOGGER.log(Level.INFO, "Consultando domicilios por idDomicilio ", idD);
+        LOGGER.log(Level.INFO, "Consultando domicilios por idDomicilio {0}", idD);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":idD" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From DomicilioEntity e where e.id = :idD", DomicilioEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
@@ -126,7 +126,7 @@ public class DomicilioPersistence
         } else {
             result = sameIdD.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar domicilios por id ", idD);
+        LOGGER.log(Level.INFO, "Saliendo de consultar domicilios por id {0}", idD);
         return result;
     }
     
@@ -138,7 +138,7 @@ public class DomicilioPersistence
      * existe alguno devuelve el primero.
      */
     public DomicilioEntity findByDate(Date date) {
-        LOGGER.log(Level.INFO, "Consultando domicilios por fecha ", date);
+        LOGGER.log(Level.INFO, "Consultando domicilios por fecha {0}", date);
         // Se crea un query para buscar domicilios con el id que recibe el método como argumento. ":date" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From DomicilioEntity e where e.fecha = :date", DomicilioEntity.class);
         // Se remplaza el placeholder ":idD" con el valor del argumento 
@@ -153,7 +153,7 @@ public class DomicilioPersistence
         } else {
             result = sameDate.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar los domicilios por fecha ", date);
+        LOGGER.log(Level.INFO, "Saliendo de consultar los domicilios por fecha {0}", date);
         return result;
     }
    

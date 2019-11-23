@@ -140,7 +140,7 @@ public class TarjetaPrepagoLogic
      */
     private boolean validateSALDO(double saldo) 
     {
-        return !(saldo < 0);
+        return (saldo >= 0);
     }
     
      /**
@@ -151,7 +151,7 @@ public class TarjetaPrepagoLogic
      */
     private boolean validatePUNTOS(double puntos) 
     {
-        return !(puntos < 0);
+        return (puntos >= 0);
     }
     
     /**
