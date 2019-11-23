@@ -154,7 +154,7 @@ public class ClienteResource
         LOGGER.info("ClienteResource deleteCliente: output: void");
     }
     
-    @Path("{clienteId: \\d+}/quejas")
+    @Path("{clienteId: \\d+}/quejasyreclamos")
     public Class<ClienteQuejasResource > getClienteQuejasResource (@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId)==null) {
             throw new WebApplicationException("No se encuentra el cliente", 404);
