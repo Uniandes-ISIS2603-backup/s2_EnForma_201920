@@ -75,7 +75,7 @@ public class ClienteQuejasResource
      * cliente. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<QuejasYReclamosDTO> getQuejas(@PathParam("clientesId") Long clientesId) {
+    public List<QuejasYReclamosDTO> getQuejas(@PathParam("clienteId") Long clientesId) {
         LOGGER.log(Level.INFO, "ClienteQuejasResource getQuejas: input: {0}", clientesId);
         List<QuejasYReclamosDTO> listaDTOs = (List<QuejasYReclamosDTO>) quejasListEntity2DTO(clienteQuejasLogic.getQuejas(clientesId));
         LOGGER.log(Level.INFO, "ClienteQuejassResource getQuejas: output: {0}", listaDTOs);
@@ -98,7 +98,7 @@ public class ClienteQuejasResource
      */
     @GET
     @Path("{quejasId: \\d+}")
-    public QuejasYReclamosDTO getQueja(@PathParam("clientesId") Long clientesId, @PathParam("quejasId") Long quejasId) throws BusinessLogicException {
+    public QuejasYReclamosDTO getQueja(@PathParam("clienteId") Long clientesId, @PathParam("quejasId") Long quejasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ClienteQuejassResource getQuejas: input: clientesID: {0} , quejasId: {1}", new Object[]{clientesId, quejasId});
         if (quejasLogic.getQuejaOReclamo(quejasId) == null) 
         {
