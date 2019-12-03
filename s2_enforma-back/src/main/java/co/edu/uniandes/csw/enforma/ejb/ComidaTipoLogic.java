@@ -9,13 +9,13 @@ import co.edu.uniandes.csw.enforma.entities.ComidaTipoEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.enforma.persistence.AdministradorPersistence;
 import co.edu.uniandes.csw.enforma.persistence.ComidaTipoPersistence;
-//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-//import org.springframework.integration.handler.LoggingHandler;
+
 
 /**
  *
