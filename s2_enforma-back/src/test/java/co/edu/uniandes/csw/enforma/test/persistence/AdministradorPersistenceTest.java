@@ -165,4 +165,16 @@ public class AdministradorPersistenceTest {
     }
     
     
+     @Test
+    public void findAdministradorByUserNameTest() 
+    {
+        AdministradorEntity entity = data.get(0);
+        AdministradorEntity newEntity = pp.findByUserName(entity.getUsername());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getUsername(), newEntity.getUsername());
+
+        newEntity = pp.findByUserName(null);
+        Assert.assertNull(newEntity);
+    }
+    
 }

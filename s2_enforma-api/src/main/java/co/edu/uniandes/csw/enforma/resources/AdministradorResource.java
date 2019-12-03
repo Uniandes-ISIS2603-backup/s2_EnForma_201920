@@ -81,6 +81,29 @@ public class AdministradorResource {
         LOGGER.log(Level.INFO, "AdministradorResource getAdministradors: output: {0}", listaAdministradors);
         return listaAdministradors;
     }
+    
+    
+     /**
+     * Busca el administrador con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param administradorUsername Identificador del administrador que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link AdministradorDetailDTO} - El administrador buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el administrador.
+     */
+    @GET
+    @Path("{administradorUsername: [a-zA-Z][a-zA-Z_0-9]+}")
+    public AdministradorDetailDTO getAdministradorByUserName(@PathParam("administradorUsername") String administradorUsername) {
+        LOGGER.log(Level.INFO, "AdministradorResource getAdministradorByUserName: input: {0}", administradorUsername);
+        AdministradorEntity administradorEntity = administradorLogic.getAdministradorByUsername(administradorUsername);
+        if (administradorEntity == null) {
+            throw new WebApplicationException("El recurso /administradors/" + administradorUsername + " no existe.", 404);
+        }
+       AdministradorDetailDTO administradorDetailDTO = new AdministradorDetailDTO(administradorEntity);
+      LOGGER.log(Level.INFO, "AdministradorResource getAdministradorByUserName: output: {0}", administradorDetailDTO);
+        return administradorDetailDTO;
+    }
 
     /**
      * Busca el autor con el id asociado recibido en la URL y lo devuelve.

@@ -57,5 +57,26 @@ public class AdministradorPersistence {
         em.remove(d);
     }
     
+    public AdministradorEntity findByUserName(String user) 
+    {
+        // Se crea un query para buscar clientes con el user que recibe el método como argumento. ":user" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From AdministradorEntity e where e.username = :user", AdministradorEntity.class);
+        // Se remplaza el placeholder ":user" con el valor del argumento 
+        query = query.setParameter("user", user);
+        // Se invoca el query se obtiene la lista resultado
+        List<AdministradorEntity> sameUser = query.getResultList();
+        AdministradorEntity result;
+        if (sameUser == null)
+        {
+            result = null;
+        } else if (sameUser.isEmpty()) 
+        {
+            result = null;
+        } else 
+        {
+            result = sameUser.get(0);
+        }
+        return result; 
+    }
     
 }

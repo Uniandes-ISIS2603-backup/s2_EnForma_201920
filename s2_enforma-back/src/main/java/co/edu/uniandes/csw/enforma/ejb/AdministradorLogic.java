@@ -116,4 +116,17 @@ public class AdministradorLogic {
     }
     
     
+    public AdministradorEntity getAdministradorByUsername(String pUsername)
+    {
+         LOGGER.log(Level.INFO, "Inicia proceso de consultar el administrador con username = {0}", pUsername);
+        AdministradorEntity administradorEntity = persistence.findByUserName(pUsername);
+        if (administradorEntity == null) 
+        {
+            LOGGER.log(Level.SEVERE, "El administrador con el username = {0} no existe", pUsername);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el administrador con username = {0}",pUsername);
+        return administradorEntity;
+    }
+    
+    
 }
