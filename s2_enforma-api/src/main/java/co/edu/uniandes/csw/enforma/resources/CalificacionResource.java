@@ -85,43 +85,6 @@ public class CalificacionResource
         return calificacionDTO;
     }
     
-    /**
-     * Busca y devuelve todas las calificaciones que existen 
-     * @return JSONArray {@link CalificacionDetailDTO} - Las calificaciones encontradas. Si no hay ninguna retorna una lista vacia
-     */
-//    @GET
-//    @Path("{dietastipoId: \\d+}")       
-//    public CalificacionDTO getCalificacionesByDiettasTipoId(@PathParam("dietastipoId") Long dietaId)
-//    {
-//        LOGGER.log(Level.INFO, "CalificacionResource getCalificacionesByDietaTipoId: input: {0}", dietaId);
-//        CalificacionDTO listaCalificaciones = new CalificacionDTO(calificacionLogic.getCalificacionesByDietaId(dietaId));
-//        LOGGER.log(Level.INFO, "CalificacionResource getCalificacionesByDietaTipoId: output: {0}", listaCalificaciones);
-//        return listaCalificaciones;
-//    }
-    
-    /**
-     * Busca la calificacion con el id asociado en la URL y lo devuelve 
-     * @param calificacionesId Identificador del la calificacion que se esta buscando. 
-     * Este debe ser una cadena de digitos 
-     * @return JSON {@link CalificacionDetailDTO} - La calificacion que se esta buscando
-     * @throws WebApplicationException  {@link WebApplicationExceptionMapper} - Error de la logica 
-     * que se genera cuando no se encuentra la calificacion 
-     */
-//    @GET
-//    @Path("{calificacionesId: \\d+}")
-//    public CalificacionDTO getCalificacionByClienteIdYDietaTipoId(@PathParam("clientesId") Long clienteId, @PathParam("dietastipoId") Long dietaId, @PathParam("calificacionesId") Long calificacionesId)
-//    {
-//        LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: input: {0}", calificacionesId);
-//        CalificacionEntity calificacionEntity = calificacionLogic.getCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacionesId);
-//        if(calificacionEntity == null)
-//        {
-//            throw new WebApplicationException("El recurso /clientes/"+ clienteId + "/dietastipo/" + dietaId +"/calificaciones/" + calificacionesId + " no existe.", 404);
-//        }
-//        CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionEntity);
-//        LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: output: {0}", calificacionDTO);
-//        return calificacionDTO;
-//    }
-    
     @PUT
     @Path("{calificacionesId: \\d+}")
     public void updateCalificacion(@PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion)
@@ -137,36 +100,6 @@ public class CalificacionResource
         
     }
     
-    /**
-     * ACtualiza la calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la peticion
-     * @param calificacionesId Identificador de la calificacion que se desea actualizar. Este debe ser una cadena de digitos
-     * @param calificacion {@link CalificacionDTO} La calificacion que se desea guardar
-     * @return JSON {@link CalificacionDetailDTO) - La calificacion que guarda
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} - 
-     * Error de logica que se genera cuando no se encuentra la calificacion a actualizar
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - 
-     * Error de logica que se genera cuando no se puede actualizar el libro.
-     */
-//    @PUT
-//    @Path("{calificacionesId: \\d+}")
-//    public CalificacionDTO updateCalificacionByClienteIdYDietaTipoId(@PathParam("clientesId") Long clienteId, @PathParam("dietastipoId") Long dietaId , @PathParam("calificacionesId") Long calificacionId, CalificacionDTO calificacion) throws BusinessLogicException
-//    {
-//        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacionByClienteIdYDietaTipoId: input: clientesId: {0}, dietastipoId: {1}, calificacionesId: {2}, calificacion {3}", new Object[]{clienteId, dietaId, calificacionId, calificacion});
-//        
-//        if(calificacionId.equals(calificacion.getId()))
-//        {
-//            throw new BusinessLogicException("Los ids de la calificacion coinciden");
-//        }
-//        CalificacionEntity entity = calificacionLogic.getCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacionId);
-//        if(entity == null)
-//        {
-//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/dietastipoId/" + dietaId + "/calificacionesId/" + calificacionId + " no existe.", 404);
-//        }
-//        CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionLogic.updateCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacion.toEntity()));
-//        LOGGER.log(Level.INFO, "CalificacionResource updateCalificacionByClienteIdYDietaTipoId: output: {0}", calificacionDTO);
-//        return calificacionDTO;
-//    }
-    
     @DELETE
     @Path("{calificacionesId: \\d+}")
     public void deleteCalificacion(@PathParam("calificacionesId") Long calificacionId) throws BusinessLogicException
@@ -179,21 +112,6 @@ public class CalificacionResource
         calificacionLogic.deleteCalificacion(calificacionId);
         LOGGER.info("CalificacionResource deleteCalificacion: output: void");
     }
-    
-//    @DELETE
-//    @Path("{calificacionesId: \\d+}")
-//    public void deleteCalificacionByClienteIdYDietaTipoId(@PathParam("clientesId") Long clienteId, @PathParam("dietastipoId") Long dietaId, @PathParam("calificacionesId") Long calificacionesId) throws BusinessLogicException
-//    {
-//        LOGGER.log(Level.INFO, "CalificacionResource deleteCalificacionByClienteIdYDietaTipoId: input: {0}", calificacionesId);
-//        CalificacionEntity entity = calificacionLogic.getCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacionesId);
-//        if(entity == null)
-//        {
-//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/dietastipo/" + dietaId + "/calificaciones/" + calificacionesId + " no existe.", 404);
-//        }
-//        calificacionLogic.deleteCalificacionByClienteIdYDietaTipoId(clienteId, dietaId, calificacionesId);
-//        LOGGER.info("CalificacionResource deleteCalificacionByClienteIdYDietaTipoId: output: void");
-//    }
-    
     
     /**
      * Convierte una lista de entidades a DTO

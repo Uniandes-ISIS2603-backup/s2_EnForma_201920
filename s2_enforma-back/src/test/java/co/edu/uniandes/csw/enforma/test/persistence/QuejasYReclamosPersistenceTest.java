@@ -44,11 +44,11 @@ public class QuejasYReclamosPersistenceTest
     @Inject
     UserTransaction utx;
     
-    private List<QuejasYReclamosEntity> data = new ArrayList<QuejasYReclamosEntity>();
+    private List<QuejasYReclamosEntity> data = new ArrayList<>();
     
-    private List<ClienteEntity> dataCliente = new ArrayList<ClienteEntity>();
+    private List<ClienteEntity> dataCliente = new ArrayList<>();
     
-    private List<DomicilioEntity> dataDomicilios = new ArrayList<DomicilioEntity>();
+    private List<DomicilioEntity> dataDomicilios = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -180,22 +180,7 @@ public class QuejasYReclamosPersistenceTest
         Assert.assertEquals(entity.getAsunto(), newEntity.getAsunto());
         Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
     }
-    
-    /**
-     * Prueba para consultar una queja o reclamo
-     */
-//    @Test
-//    public void getQuejaOReclamoByClienteIdYDomicilioIdTest()
-//    {
-//        QuejasYReclamosEntity entity = data.get(0);
-//        ClienteEntity clienteEntity = dataCliente.get(0);
-//        DomicilioEntity domicilioEntity = dataDomicilios.get(0);
-//        QuejasYReclamosEntity newEntity = qrp.findByClienteIdYDomicilioId(clienteEntity.getId(), domicilioEntity.getId(),entity.getId());
-//        Assert.assertNotNull(newEntity);
-//        Assert.assertEquals(entity.getId(), newEntity.getId());
-//        Assert.assertEquals(entity.getAsunto(), newEntity.getAsunto());
-//        Assert.assertEquals(entity.getDescripcion(), newEntity.getDescripcion());
-//    }
+
     
     /**
      * Prueba para actualizar una queja o reclamo
@@ -258,34 +243,5 @@ public class QuejasYReclamosPersistenceTest
         Assert.assertNull(newEntity);
     }
     
-    /**
-     * Prueba para consultar una calificacion por el id del cliente al que pertenece
-     */
-//    @Test
-//    public void findCalificacionByClienteIdTest()
-//    {
-//        QuejasYReclamosEntity entity = data.get(0);
-//        QuejasYReclamosEntity newEntity = qrp.findByClienteId(entity.getCliente().getId());
-//        Assert.assertNotNull(newEntity);
-//        Assert.assertEquals(entity.getCliente(), newEntity.getCliente());
-//        
-//        newEntity = qrp.findByClienteId(null);
-//        Assert.assertNull(newEntity);
-//    }
-    
-    /**
-     * Prueba para consultar una calificacion por el id del domicilio al que pertenece
-     */
-//    @Test
-//    public void findCalificacionByDomicilioIdTest()
-//    {
-//        QuejasYReclamosEntity entity = data.get(0);
-//        QuejasYReclamosEntity newEntity = qrp.findByDomicilioId(entity.getDomicilio().getId());
-//        Assert.assertNotNull(newEntity);
-//        Assert.assertEquals(entity.getDomicilio(), newEntity.getDomicilio());
-//        
-//        newEntity = qrp.findByDomicilioId(null);
-//        Assert.assertNull(newEntity);
-//    }
     
 }

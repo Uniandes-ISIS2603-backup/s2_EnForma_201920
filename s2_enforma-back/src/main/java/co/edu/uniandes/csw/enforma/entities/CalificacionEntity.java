@@ -89,6 +89,20 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     public void setfecha(Date fecha) {
         this.fecha = fecha;
     }
+    
+    /**
+     * @return the dietaTipo
+     */
+    public DietaTipoEntity getDietaTipo() {
+        return dietaTipo;
+    }
+
+    /**
+     * @param dietaTipo the dietaTipo to set
+     */
+    public void setDietaTipo(DietaTipoEntity dietaTipo) {
+        this.dietaTipo = dietaTipo;
+    }
 
     /**
      * @return the cliente
@@ -104,17 +118,5 @@ public class CalificacionEntity extends BaseEntity implements Serializable
         this.cliente = cliente;
     }
 
-    /**
-     * @return the dietaTipo
-     */
-    public DietaTipoEntity getDietaTipo() {
-        return dietaTipo;
-    }
-
-    /**
-     * @param dietaTipo the dietaTipo to set
-     */
-    public void setDietaTipo(DietaTipoEntity dietaTipo) {
-        this.dietaTipo = dietaTipo;
-    }
+    
 }

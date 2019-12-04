@@ -6,10 +6,7 @@
 package co.edu.uniandes.csw.enforma.resources;
 
 import co.edu.uniandes.csw.enforma.dtos.QuejasYReclamosDTO;
-import co.edu.uniandes.csw.enforma.ejb.ClienteLogic;
-import co.edu.uniandes.csw.enforma.ejb.DomicilioLogic;
 import co.edu.uniandes.csw.enforma.ejb.QuejasYReclamosLogic;
-import co.edu.uniandes.csw.enforma.entities.ClienteEntity;
 import co.edu.uniandes.csw.enforma.entities.QuejasYReclamosEntity;
 import co.edu.uniandes.csw.enforma.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -53,15 +50,6 @@ public class QuejasYReclamosResource
         return nuevaQuejaYReclamoDTO;
     }
     
-//    @POST
-//    public QuejasYReclamosDTO createQuejasYReclamosByClienteYDomicilioId(@PathParam ("clientesId") Long clienteId, @PathParam("domiciliosId")Long domicilioId, QuejasYReclamosDTO quejasYReclamos) throws BusinessLogicException
-//    {
-//        LOGGER.log(Level.INFO, "QuejasYReclamosResource createQuejasYReclamos: input: {0}", quejasYReclamos);
-//        QuejasYReclamosDTO nuevaQuejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.createQuejasYReclamos(clienteId, domicilioId, quejasYReclamos.toEntity()));
-//        LOGGER.log(Level.INFO, "CalificacionResource createCalificacion: output: {0}", nuevaQuejasYReclamosDTO);
-//        return nuevaQuejasYReclamosDTO;
-//    }
-    
     @GET
     public List<QuejasYReclamosDTO> getQuejasYReclamos()
     {
@@ -86,22 +74,6 @@ public class QuejasYReclamosResource
         return quejasYReclamosDTO;
     }
     
-    
-//    @GET
-//    @Path("{quejasyreclamosId: \\d+}")
-//    public QuejasYReclamosDTO getQuejaOReclamoByClienteIdYDomicilioId(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId)
-//    {
-//        LOGGER.log(Level.INFO, "CalificacionResource getQuejaOReclamo: input: {0}", quejasYReclamosId);
-//        QuejasYReclamosEntity quejasYReclamosEntity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
-//        if(quejasYReclamosEntity == null)
-//        {
-//            throw new WebApplicationException("El recurso /quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-//        }
-//        QuejasYReclamosDTO quejasYReclamosDetailDTO = new QuejasYReclamosDTO(quejasYReclamosEntity);
-//        LOGGER.log(Level.INFO, "QuejasYReclamosResource getQuejaOReclamo: output: {0}", quejasYReclamosId);
-//        return quejasYReclamosDetailDTO;
-//    }
-    
     @PUT
     @Path("{quejareclamoId: \\d+}")
     public void updateQuejasYReclamos(@PathParam("quejareclamoId") Long quejasYReclamosId, QuejasYReclamosDTO quejasYReclamos)
@@ -117,21 +89,6 @@ public class QuejasYReclamosResource
         
     }
     
-//    @PUT
-//    @Path("{quejasyreclamosId: \\d+}")
-//    public QuejasYReclamosDTO updateQuejasYReclamosByClienteIdYDomicilioId(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId, QuejasYReclamosDTO quejasYReclamos) throws BusinessLogicException
-//    {
-//        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: input: id: {0}, quejasYReclamos: {1}", new Object[]{quejasYReclamosId, quejasYReclamos});
-//        quejasYReclamos.setId(quejasYReclamosId);
-//        if(quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId) == null)
-//        {
-//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-//        }
-//        QuejasYReclamosDTO quejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamosLogic.updateQuejasYReclamos(clienteId, domicilioId, quejasYReclamos.toEntity()));
-//        LOGGER.log(Level.INFO, "QuejasYReclamosResource updateQuejasYReclamos: output: {0}", quejasYReclamosDTO);
-//        return quejasYReclamosDTO;
-//    }
-    
     @DELETE
     @Path("{quejareclamoId: \\d+}")
     public void deleteQuejasYReclamos(@PathParam("quejareclamoId") Long quejasYReclamosId) throws BusinessLogicException
@@ -144,22 +101,6 @@ public class QuejasYReclamosResource
         quejasYReclamosLogic.deleteQuejasYReclamos(quejasYReclamosId);
         LOGGER.info("CalificacionResource deleteCalificacion: output: void");
     }
-    
-    
-//    @DELETE
-//    @Path("{quejasyreclamosId: \\d+}")
-//    public void deleteQuejasYReclamosByClienteIdYDomicilioId(@PathParam("clientesId") Long clienteId, @PathParam("domiciliosId") Long domicilioId, @PathParam("quejasyreclamosId") Long quejasYReclamosId) throws BusinessLogicException
-//    {
-//        LOGGER.log(Level.INFO, "QuejasYReclamosResource deleteQuejasYReclamos: input: {0}", quejasYReclamosId);
-//        QuejasYReclamosEntity entity = quejasYReclamosLogic.getQuejaOReclamo(clienteId, domicilioId, quejasYReclamosId);
-//        if(entity == null)
-//        {
-//            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/domicilios/" + domicilioId + "/quejasyreclamos/" + quejasYReclamosId + " no existe." + 404);
-//        }
-//        quejasYReclamosLogic.deleteQuejasYReclamos(clienteId, domicilioId, quejasYReclamosId);
-//        LOGGER.info("CalificacionResource deleteCalificacion: output: void");
-//    }
-    
     
     /**
      * Convierte una lista de entidades a DTO
