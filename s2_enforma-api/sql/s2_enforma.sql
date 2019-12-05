@@ -67,3 +67,24 @@ insert into CalificacionEntity(id, puntaje, comentario, fecha, cliente_id, dieta
 insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha, cliente_id) values (100, 'Demora en la entrega', 'Se demoro bastante', '2019-10-10 05:31:02', 100);
 insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha, cliente_id) values (200, 'Comida fria', 'Ya no tenia ni sabor', '2019-10-10 05:32:02', 200);
 -- insert into QuejasYReclamosEntity(id, asunto, descripcion, fecha) values (300, 'Lo pedi sin un ingrediente que traia', 'Especifique que sin salsa y me lo trajeron con salsa', '2019-10-10 05:33:02');
+
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo, cliente_id, comidaTipo_id) values (896, '2019-01-29 19:27:39', 'b', 356.6, 400, 200 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo, cliente_id, comidaTipo_id) values (45, '2019-01-29 19:27:39', 'b', 356.6, 300, 100 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo, cliente_id, comidaTipo_id) values (36, '2019-01-29 19:27:39', 'b', 356.6, 500, 200 );
+insert into DomicilioEntity (id, fecha, lugarEntrega, costo, cliente_id, comidaTipo_id) values (786, '2019-01-29 19:27:39', 'b', 356.6, 200, 100 );
+
+insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (56, 2, 0, 'Ok',896);
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (87, 4,1234, 1, 'Ok',45);
+insert into PagoEntity (id, monto, esprepago, estadopago, orden_id) values (657, 2, 0, 'Ok',36);
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, orden_id) values (456, 4,1234, 1, 'Ok',786);
+
+
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos, cliente_id) values (6556, '12345', 12.12, 200.2, 200 );
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos, cliente_id) values (2074470, '54321', 21.21, 300.2, 300 );
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos, cliente_id) values (65533, '12345', 12.12, 200.2, 400 );
+insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos, cliente_id) values (87470, '54321', 21.21, 300.2, 500 );
+
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, tarjetaprepago_id) values (56387, 4,1234, 1, 'Ok',6556);
+insert into PagoEntity (id, monto, esprepago, estadopago, tarjetaprepago_id) values (465, 2, 0, 'Ok',2074470);
+insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago, tarjetaprepago_id) values (3567, 4,1234, 1, 'Ok',2074470);
+
