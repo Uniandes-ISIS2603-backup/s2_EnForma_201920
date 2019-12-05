@@ -78,7 +78,7 @@ public class CalificacionResource
         CalificacionEntity calificacionEntity = calificacionLogic.getCalificacion(calificacionId);
         if(calificacionEntity == null)
         {
-            throw new WebApplicationException("El recurso /calificaciones/"+ calificacionId + " no exite", 404 );
+            throw new WebApplicationException("El recurso /calificaciones/"+ calificacionId + " no exitee", 404 );
         }
         CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionEntity);
         LOGGER.log(Level.INFO, "CalificacionResource getCalificacion: input: {0}", calificacionDTO);
@@ -93,9 +93,8 @@ public class CalificacionResource
         calificacion.setId(calificacionesId);
         if(calificacionLogic.getCalificacion(calificacionesId) == null)
         {
-            throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
+            throw new WebApplicationException("El recursoo calificaciones/" + calificacionesId + " no existe.", 404);
         }
-        CalificacionDTO calificacionDTO = new CalificacionDTO(calificacion.toEntity());
         LOGGER.info("CalificacionResource updateCalificacion: output: void");
         
     }
@@ -107,7 +106,7 @@ public class CalificacionResource
         LOGGER.log(Level.INFO, "CalificacionResource deleteCalificacion: input: {0}", calificacionId);
         if(calificacionLogic.getCalificacion(calificacionId) == null)
         {
-            throw new WebApplicationException("El recurso /calificaciones/" + calificacionId + " no existe.", 404);
+            throw new WebApplicationException("El recurso calificaciones" + calificacionId + " no existe.", 404);
         }
         calificacionLogic.deleteCalificacion(calificacionId);
         LOGGER.info("CalificacionResource deleteCalificacion: output: void");
@@ -120,7 +119,7 @@ public class CalificacionResource
      */
     private List<CalificacionDTO> listEntity2DTO(List<CalificacionEntity> entityList)
     {
-        List<CalificacionDTO> list = new ArrayList<CalificacionDTO>();
+        List<CalificacionDTO> list = new ArrayList<>();
         for(CalificacionEntity entity: entityList)
         {
             list.add(new CalificacionDTO(entity));
