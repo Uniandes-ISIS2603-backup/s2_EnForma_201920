@@ -14,13 +14,13 @@ delete from QuejasYReclamosEntity;
 --delete from DietaTipoEntity_ComidaTipoEntity;
 -- delete from TarjetaPrepagoEntity_PagoEntity;
 delete from CalificacionEntity;
-delete from ComidaTipoEntity;
 delete from PagoEntity;
-delete from ClienteEntity;
 delete from DietaTipoEntity;
 delete from DomicilioEntity;
 delete from TarjetaPrepagoEntity;
 delete from AdministradorEntity;
+delete from ComidaTipoEntity;
+delete from ClienteEntity;
 
 
 
