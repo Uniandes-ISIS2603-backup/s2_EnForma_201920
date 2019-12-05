@@ -56,6 +56,8 @@ public class TarjetaPrepagoResource
     @POST
     public TarjetaPrepagoDTO createTarjetaPrepago(TarjetaPrepagoDTO tarjeta) throws BusinessLogicException 
     {
+        if(tarjeta.getPuntos()==null) tarjeta.setPuntos(0.0);
+   //     tarjeta.setNumTarjetaPrepago(tarjeta.getId()+"");
         LOGGER.log(Level.INFO, "TarjetaPrepagoResource createTarjetaPrepago: input: {0}", tarjeta);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         TarjetaPrepagoEntity tarjetaPrepagoEntity = tarjeta.toEntity();
