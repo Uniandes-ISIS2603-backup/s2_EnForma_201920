@@ -29,6 +29,7 @@ public class TarjetaPrepagoDTO implements Serializable
      */
     private ClienteDTO cliente;
     
+    
     /**
      * constructor por defecto
      */
