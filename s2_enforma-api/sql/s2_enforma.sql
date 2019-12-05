@@ -49,8 +49,8 @@ insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) value
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (200,'Reto', 'Almuerzo', 400 , 'buriitoooototototototo' );
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (37,'LA COSOTA', 'Desayuno', 350 , 'choizoooo' );
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (38,'E PESTU A LA RUBBY', 'Almuerzo', 300 , 'E LU TRae TUDU' );
-insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (1,'LOLA', 'Desayuno', 300 , 'Chiguiro' );
-insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (2,'ROSA', 'Almuerzo', 450 , 'pan' );
+insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (300,'LOLA', 'Desayuno', 300 , 'Chiguiro' );
+insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (400,'ROSA', 'Almuerzo', 450 , 'pan' );
 
 insert into AdministradorEntity (id, nombre, contrasena, username) values (100, 'Arri Ondricek', 'contraseña1', 'AdminJuanse');
 insert into AdministradorEntity (id, nombre, contrasena, username) values (200, 'Brandise Nary', 'contraseña2', 'AdminPanis');
