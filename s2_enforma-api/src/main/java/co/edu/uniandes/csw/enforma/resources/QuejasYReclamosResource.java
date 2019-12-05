@@ -96,7 +96,7 @@ public class QuejasYReclamosResource
         LOGGER.log(Level.INFO, "QuejasYReclamosResource deleteQuejasYReclamos: input: {0}", quejasYReclamosId);
         if(quejasYReclamosLogic.getQuejaOReclamo(quejasYReclamosId) == null)
         {
-            throw new WebApplicationException("El recurso quejasyreclamos" + quejasYReclamosId + " no existe.", 404);
+            throw new WebApplicationException("El recursoo quejasyreclamos" + quejasYReclamosId + " no existe.", 404);
         }
         quejasYReclamosLogic.deleteQuejasYReclamos(quejasYReclamosId);
         LOGGER.info("CalificacionResource deleteCalificacion: output: void");
