@@ -39,7 +39,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable
     private QuejasYReclamosEntity quejasYReclamos;
     
     @PodamExclude
-    @OneToOne(mappedBy = "orden")
+    @OneToOne
     private PagoEntity pago;
     
     @PodamExclude

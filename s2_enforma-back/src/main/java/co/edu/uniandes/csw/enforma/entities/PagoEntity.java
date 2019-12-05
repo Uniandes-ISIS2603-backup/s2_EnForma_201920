@@ -37,7 +37,7 @@ public class PagoEntity extends BaseEntity implements Serializable
     private TarjetaPrepagoEntity tarjetaPrepago;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy="pago")
     private DomicilioEntity orden;
  
     

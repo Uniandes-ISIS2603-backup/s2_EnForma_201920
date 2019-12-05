@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5280cc64-c613-4270-b72d-421bb5c38bed",
+		"_postman_id": "d551d5c5-543e-4cd3-8660-ae27ee904ebc",
 		"name": "PagoResourceTest",
 		"description": "Pago Resource Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -80,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"domicilio\": {\"id\":{{domi1}} },\r\n    \"esPrepago\": false,\r\n    \"estadoPago\": \"Ok\",\r\n    \"numeroTarjeta\": 12342,\r\n    \"monto\": 23000.0\r\n}"
+					"raw": "{\r\n\t\"orden\": {\"id\":{{domi1}} },\r\n    \"esPrepago\": false,\r\n    \"estadoPago\": \"Ok\",\r\n    \"numeroTarjeta\": 12342,\r\n    \"monto\": 23000.0\r\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s2_enforma-api/api/pagos",
