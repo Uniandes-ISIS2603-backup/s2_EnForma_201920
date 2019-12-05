@@ -7,12 +7,12 @@
 --delete from TarjetaPrepagoEntity_PagoEntity;
 delete from CalificacionEntity;
 
-delete from ClienteEntity_QuejasYReclamosEntity;
+-- delete from ClienteEntity_QuejasYReclamosEntity;
 delete from QuejasYReclamosEntity;
-delete from DietaTipoEntity_ClienteEntity;
-delete from DietaTipoEntity_CalificacionEntity;
-delete from DietaTipoEntity_ComidaTipoEntity;
-delete from TarjetaPrepagoEntity_PagoEntity;
+--delete from DietaTipoEntity_ClienteEntity;
+--delete from DietaTipoEntity_CalificacionEntity;
+--delete from DietaTipoEntity_ComidaTipoEntity;
+-- delete from TarjetaPrepagoEntity_PagoEntity;
 delete from CalificacionEntity;
 delete from ComidaTipoEntity;
 delete from PagoEntity;
@@ -34,8 +34,12 @@ insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (
 insert into TarjetaPrepagoEntity (id, numTarjetaPrepago, saldo, puntos) values (200, '54321', 21.21, 300.2 );
 
 
-insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (100, 'Juan', 25, 86.5, 'Tonificar', 0, 1, 'Jjuan', '987654321');
-insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (200, 'María', 20, 62.5, 'bajar de peso', 0, 0, 'mmaria', '123456789'); 
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (100, 'Juanse', 25, 86.5, 'Tonificar', 0, 1, 'Juanse', 'contraseña1');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (200, 'Panis', 20, 62.5, 'bajar de peso', 0, 0, 'Panis', 'contraseña2');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (300, 'Sofi', 25, 86.5, 'Tonificar', 0, 1, 'Sofi', 'contraseña3');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (400, 'Nacho', 20, 62.5, 'bajar de peso', 0, 0, 'Nacho', 'contraseña4');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (500, 'Jimmy', 25, 86.5, 'Tonificar', 0, 1, 'Jimmy', 'contraseña5');
+insert into ClienteEntity (id, nombre, edad, peso, objetivos, gluten, lactosa, userName, contrasenia) values (600, 'Julio', 20, 62.5, 'bajar de peso', 0, 0, 'Julio', 'contraseña6'); 
 
 
 insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa, cantidadAzucar, cantidadFibra, tieneGluten, tieneLactosa) values (100, 'Detox', 25, 20, 50, 50, 50, 1, 0);
@@ -44,9 +48,12 @@ insert into DietaTipoEntity (id, nombre, caloriasMax, caloriasMin, cantidadGrasa
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (100,'Fusion', 'Desayuno', 300 , 'huevo,arepa,queso y chocolate' );
 insert into ComidaTipoEntity (id, nombre, momentoDelDia,  calorias , menu) values (200,'Reto', 'Almuerzo', 400 , 'buriitoooototototototo' );
 
-insert into AdministradorEntity (id, nombre, contrasena, username) values (100, 'Arri Ondricek', '09231yb370', 'Arri');
-insert into AdministradorEntity (id, nombre, contrasena, username) values (200, 'Brandise Nary', '16144yv107', 'Brandise');
-insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 'Karel Tellenbrook', '97237ke365', 'Karel');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (100, 'Arri Ondricek', 'contraseña1', 'AdminJuanse');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (200, 'Brandise Nary', 'contraseña2', 'AdminPanis');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (300, 'Karel Tellenbrook', 'contraseña3', 'AdminSofi');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (400, 'Arri Ondricek', 'contraseña4', 'AdminNacho');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (500, 'Brandise Nary', 'contraseña5', 'AdminJimmy');
+insert into AdministradorEntity (id, nombre, contrasena, username) values (600, 'Karel Tellenbrook', 'contraseña6', 'AdminJulio');
 
 insert into PagoEntity (id, monto, esprepago, estadopago) values (100, 2, 0, 'Ok');
 insert into PagoEntity (id, monto,numerotarjeta, esprepago, estadopago) values (200, 4,1234, 1, 'Ok');
