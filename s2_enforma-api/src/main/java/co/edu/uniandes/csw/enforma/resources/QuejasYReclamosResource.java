@@ -67,7 +67,7 @@ public class QuejasYReclamosResource
         QuejasYReclamosEntity quejasYReclamosEntity = quejasYReclamosLogic.getQuejaOReclamo(quejasYReclamosId);
         if(quejasYReclamosEntity == null)
         {
-            throw new WebApplicationException("El recurso /quejasyreclamos/"+ quejasYReclamosId + " no exite", 404 );
+            throw new WebApplicationException("El recurso /quejasyreclamos/"+ quejasYReclamosId + " no exite!!", 404 );
         }
         QuejasYReclamosDTO quejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamosEntity);
         LOGGER.log(Level.INFO, "QuejasYReclamosResource getQuejaOReclamo: input: {0}", quejasYReclamosDTO);
@@ -82,9 +82,9 @@ public class QuejasYReclamosResource
         quejasYReclamos.setId(quejasYReclamosId);
         if(quejasYReclamosLogic.getQuejaOReclamo(quejasYReclamosId) == null)
         {
-            throw new WebApplicationException("El recurso /quejasyreclamos/" + quejasYReclamosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso quejasyreclamos/" + quejasYReclamosId + " no existe.", 404);
         }
-        QuejasYReclamosDTO quejasYReclamosDTO = new QuejasYReclamosDTO(quejasYReclamos.toEntity());
+
         LOGGER.info("QuejasYReclamosResource updateQuejasYReclamos: output: void");
         
     }
@@ -96,7 +96,7 @@ public class QuejasYReclamosResource
         LOGGER.log(Level.INFO, "QuejasYReclamosResource deleteQuejasYReclamos: input: {0}", quejasYReclamosId);
         if(quejasYReclamosLogic.getQuejaOReclamo(quejasYReclamosId) == null)
         {
-            throw new WebApplicationException("El recurso /quejasyreclamos/" + quejasYReclamosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso quejasyreclamos" + quejasYReclamosId + " no existe.", 404);
         }
         quejasYReclamosLogic.deleteQuejasYReclamos(quejasYReclamosId);
         LOGGER.info("CalificacionResource deleteCalificacion: output: void");
